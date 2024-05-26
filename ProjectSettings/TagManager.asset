@@ -41,3 +41,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 958766841
+    locked: 0
+  - name: Agent
+    uniqueID: 3446547173
+    locked: 0
+  - name: BackgroundMask
+    uniqueID: 2151165469
+    locked: 0
