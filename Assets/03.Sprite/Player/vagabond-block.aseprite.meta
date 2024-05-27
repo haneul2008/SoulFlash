@@ -40,7 +40,7 @@ ScriptedImporter:
     spriteMeshType: 1
     alignment: 0
     spritePivot: {x: 0.5, y: 0.5}
-    spritePixelsToUnits: 32
+    spritePixelsToUnits: 48
     spriteBorder: {x: 0, y: 0, z: 0, w: 0}
     spriteGenerateFallbackPhysicsShape: 0
     generateCubemap: 6
@@ -76,11 +76,11 @@ ScriptedImporter:
     textureFormatSet: 0
     applyGammaDecoding: 0
   previousAsepriteImporterSettings:
-    fileImportMode: 1
+    fileImportMode: 0
     importHiddenLayers: 0
     layerImportMode: 1
     defaultPivotSpace: 0
-    defaultPivotAlignment: 7
+    defaultPivotAlignment: 4
     customPivotPosition: {x: 0.5, y: 0.5}
     mosaicPadding: 4
     spritePadding: 0
@@ -89,11 +89,11 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   asepriteImporterSettings:
-    fileImportMode: 1
+    fileImportMode: 0
     importHiddenLayers: 0
     layerImportMode: 1
     defaultPivotSpace: 0
-    defaultPivotAlignment: 7
+    defaultPivotAlignment: 4
     customPivotPosition: {x: 0.5, y: 0.5}
     mosaicPadding: 4
     spritePadding: 0
@@ -102,7 +102,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 638523653551668446
+  platformSettingsDirtyTick: 638524146342548617
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -128,7 +128,7 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: vagabond-block_Frame_0
     originalName: 
-    pivot: {x: 0.2, y: 0}
+    pivot: {x: -1.4, y: 1.6842105}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -148,7 +148,7 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 4}
   - name: vagabond-block_Frame_1
     originalName: 
-    pivot: {x: 0.2, y: 0}
+    pivot: {x: -1.4, y: 1.7777778}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -166,7 +166,47 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 31}
-  spriteSheetImportData: []
+  spriteSheetImportData:
+  - name: vagabond-block_0
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 31
+      width: 20
+      height: 18
+    spriteID: 390486418f326124d8f84b659eb9d017
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: vagabond-block_1
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 20
+      height: 19
+    spriteID: 0e799d4644340f0408978f65e947cc68
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
   asepriteLayers:
   - layerIndex: 0
     guid: 538991034

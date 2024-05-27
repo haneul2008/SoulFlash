@@ -40,7 +40,7 @@ ScriptedImporter:
     spriteMeshType: 1
     alignment: 0
     spritePivot: {x: 0.5, y: 0.5}
-    spritePixelsToUnits: 32
+    spritePixelsToUnits: 48
     spriteBorder: {x: 0, y: 0, z: 0, w: 0}
     spriteGenerateFallbackPhysicsShape: 0
     generateCubemap: 6
@@ -76,11 +76,11 @@ ScriptedImporter:
     textureFormatSet: 0
     applyGammaDecoding: 0
   previousAsepriteImporterSettings:
-    fileImportMode: 1
+    fileImportMode: 0
     importHiddenLayers: 0
     layerImportMode: 1
     defaultPivotSpace: 0
-    defaultPivotAlignment: 7
+    defaultPivotAlignment: 4
     customPivotPosition: {x: 0.5, y: 0.5}
     mosaicPadding: 4
     spritePadding: 0
@@ -89,11 +89,11 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   asepriteImporterSettings:
-    fileImportMode: 1
+    fileImportMode: 0
     importHiddenLayers: 0
     layerImportMode: 1
     defaultPivotSpace: 0
-    defaultPivotAlignment: 7
+    defaultPivotAlignment: 4
     customPivotPosition: {x: 0.5, y: 0.5}
     mosaicPadding: 4
     spritePadding: 0
@@ -102,7 +102,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 638523654192031714
+  platformSettingsDirtyTick: 638524250513937343
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -128,7 +128,7 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: vagabond-run-end_Frame_0
     originalName: 
-    pivot: {x: 0.6363636, y: 0}
+    pivot: {x: -2.2727273, y: 1.6}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -148,7 +148,7 @@ ScriptedImporter:
     uvTransform: {x: 44, y: 4}
   - name: vagabond-run-end_Frame_1
     originalName: 
-    pivot: {x: 0.5, y: 0}
+    pivot: {x: -2.1666667, y: 1.5238096}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -168,7 +168,7 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 4}
   - name: vagabond-run-end_Frame_2
     originalName: 
-    pivot: {x: 0.6666667, y: 0}
+    pivot: {x: -2, y: 1.5238096}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -188,7 +188,7 @@ ScriptedImporter:
     uvTransform: {x: 24, y: 4}
   - name: vagabond-run-end_Frame_3
     originalName: 
-    pivot: {x: 0.6, y: 0}
+    pivot: {x: -2.6000001, y: 1.5238096}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -206,7 +206,87 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 33}
-  spriteSheetImportData: []
+  spriteSheetImportData:
+  - name: vagabond-run-end_0
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 33
+      width: 10
+      height: 21
+    spriteID: 17f66b97569cbc240a91db7ec03de4d8
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: vagabond-run-end_1
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 12
+      height: 21
+    spriteID: fa394b433dfccd647944638ed966d8ad
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: vagabond-run-end_2
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 24
+      y: 4
+      width: 12
+      height: 21
+    spriteID: c932fb9dd9da6974c811db4f505147de
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: vagabond-run-end_3
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 44
+      y: 4
+      width: 11
+      height: 20
+    spriteID: c52fc959785ae5547b2bd550fb2bebde
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
   asepriteLayers:
   - layerIndex: 0
     guid: -764763398

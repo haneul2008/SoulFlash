@@ -40,7 +40,7 @@ ScriptedImporter:
     spriteMeshType: 1
     alignment: 0
     spritePivot: {x: 0.5, y: 0.5}
-    spritePixelsToUnits: 32
+    spritePixelsToUnits: 48
     spriteBorder: {x: 0, y: 0, z: 0, w: 0}
     spriteGenerateFallbackPhysicsShape: 0
     generateCubemap: 6
@@ -76,11 +76,11 @@ ScriptedImporter:
     textureFormatSet: 0
     applyGammaDecoding: 0
   previousAsepriteImporterSettings:
-    fileImportMode: 1
+    fileImportMode: 0
     importHiddenLayers: 0
     layerImportMode: 1
     defaultPivotSpace: 0
-    defaultPivotAlignment: 7
+    defaultPivotAlignment: 4
     customPivotPosition: {x: 0.5, y: 0.5}
     mosaicPadding: 4
     spritePadding: 0
@@ -89,11 +89,11 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   asepriteImporterSettings:
-    fileImportMode: 1
+    fileImportMode: 0
     importHiddenLayers: 0
     layerImportMode: 1
     defaultPivotSpace: 0
-    defaultPivotAlignment: 7
+    defaultPivotAlignment: 4
     customPivotPosition: {x: 0.5, y: 0.5}
     mosaicPadding: 4
     spritePadding: 0
@@ -102,7 +102,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 638523653409428987
+  platformSettingsDirtyTick: 638524146342538171
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -128,7 +128,7 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: vagabond-air-dash_Frame_0
     originalName: 
-    pivot: {x: 0.6363636, y: -1.3529412}
+    pivot: {x: -2.2727273, y: 0.5294118}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -148,7 +148,7 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 27}
   - name: vagabond-air-dash_Frame_1
     originalName: 
-    pivot: {x: 0.65000004, y: -1.6000001}
+    pivot: {x: -0.95, y: 0.53333336}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -168,7 +168,7 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 4}
   - name: vagabond-air-dash_Frame_2
     originalName: 
-    pivot: {x: 0.7, y: -1.6000001}
+    pivot: {x: -2.5, y: 0.53333336}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -188,7 +188,7 @@ ScriptedImporter:
     uvTransform: {x: 32, y: 4}
   - name: vagabond-air-dash_Frame_3
     originalName: 
-    pivot: {x: 0.8, y: -1.3529412}
+    pivot: {x: -2.4, y: 0.5294118}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -206,7 +206,87 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 23, y: 27}
-  spriteSheetImportData: []
+  spriteSheetImportData:
+  - name: vagabond-air-dash_0
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 27
+      width: 11
+      height: 17
+    spriteID: fc8110f784b5648439d39a183a6c8f40
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: vagabond-air-dash_1
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 23
+      y: 27
+      width: 10
+      height: 17
+    spriteID: 09cacfcef8fb7c345932a44a016cd961
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: vagabond-air-dash_2
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 20
+      height: 15
+    spriteID: 4c6fae79fc8cb2b4c8ee634b9785f716
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: vagabond-air-dash_3
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 32
+      y: 4
+      width: 10
+      height: 15
+    spriteID: 127678e4c6baa054082615406f63a8e9
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
   asepriteLayers:
   - layerIndex: 0
     guid: 1938324482
