@@ -30,6 +30,7 @@ public class PlayerAirAttack : AnimationPlayer
 
     private void AirAttack()
     {
+        if (!_player.CanStateChageable) return;
         if (!InAir || _currentTime < _cooltime) return;
 
         _attack = true;

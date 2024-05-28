@@ -9,7 +9,7 @@ public class InputReader : ScriptableObject, IPlayerActions
     private Controls _controls;
 
     public Action JumpEvent;
-    public event Action OnRollEvent;
+    public event Action OnLeftShiftEvent;
     public event Action OnLeftMousePressed;
     public Vector2 Movement { get; private set; }
     public Vector2 MousePosition { get; private set; }
@@ -43,7 +43,7 @@ public class InputReader : ScriptableObject, IPlayerActions
     public void OnRolls(InputAction.CallbackContext context)
     {
         if (context.performed && Mathf.Abs(Movement.x) > 0.1f)
-            OnRollEvent?.Invoke();
+            OnLeftShiftEvent?.Invoke();
     }
 
     public void OnAttack(InputAction.CallbackContext context)

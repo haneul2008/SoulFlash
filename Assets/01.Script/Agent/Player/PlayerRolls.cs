@@ -16,14 +16,14 @@ public class PlayerRolls : AnimationPlayer
     private void Awake()
     {
         _player = GetComponent<Player>();
-        _player.PlayerInput.OnRollEvent += Roll;
+        _player.PlayerInput.OnLeftShiftEvent += Roll;
         _collider = GetComponent<CapsuleCollider2D>();
         _sizeChanger = new();
         //0.78, 0.78
     }
     private void OnDisable()
     {
-        _player.PlayerInput.OnRollEvent -= Roll;
+        _player.PlayerInput.OnLeftShiftEvent -= Roll;
     }
 
     private void Roll()
