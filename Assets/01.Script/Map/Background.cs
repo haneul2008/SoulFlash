@@ -29,13 +29,9 @@ public class Background : MonoBehaviour
     {
         PlayerX.Value = _playerTrm.position.x;
 
-        /*if (_playerTrm.transform.position.x > transform.position.x)
-        {
-            transform.position = new Vector3(0, transform.position.x + 31.5f, 0);
-        }
-        else
-        {
-            transform.position = new Vector3(0, transform.position.x - 31.5f, 0);
-        }*/
+        if (_playerTrm.position.x > transform.position.x + 31.5)
+            transform.position = new Vector3(transform.position.x + 63, transform.position.y, 0);
+        else if(_playerTrm.position.x < transform.position.x - 31.5)
+            transform.position = new Vector3(transform.position.x - 63, transform.position.y, 0);
     }
 }

@@ -11,8 +11,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Ground
+  - Enemy
   - 
   - 
   - 
@@ -49,4 +49,7 @@ TagManager:
     locked: 0
   - name: BackgroundMask
     uniqueID: 2151165469
+    locked: 0
+  - name: Ground
+    uniqueID: 970287513
     locked: 0

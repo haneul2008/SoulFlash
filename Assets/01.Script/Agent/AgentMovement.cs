@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
-public class AgentMovement : MonoBehaviour
+public class AgentMovement : AnimationPlayer
 {
+
     [Header("Reference")]
     [SerializeField] private Transform _groundCheckerTrm;
 
@@ -22,7 +24,7 @@ public class AgentMovement : MonoBehaviour
 
     protected float _xMove;
     private float _timeInAir;
-    protected bool _canMove = true;
+    public bool canMove = true;
     protected Coroutine _kbCoroutine;
 
     private Agent _owner;
@@ -31,6 +33,7 @@ public class AgentMovement : MonoBehaviour
         _owner = agent;
         rbCompo = GetComponent<Rigidbody2D>();
     }
+
     public void JumpTo(Vector2 force)
     {
         SetMovement(force.x);
@@ -39,6 +42,11 @@ public class AgentMovement : MonoBehaviour
     public void SetMovement(float xMove)
     {
         _xMove = xMove;
+
+        if (Mathf.Abs(_xMove) > 0.1f)
+            PlayAnimation();
+        else
+            EndAnimation();
     }
     public void StopImmediately(bool isYStop = false)
     {
@@ -70,7 +78,7 @@ public class AgentMovement : MonoBehaviour
     }
     private void ApplyXMove()
     {
-        if (!_canMove) return;
+        if (!canMove) return;
         rbCompo.velocity = new Vector2(_xMove * moveSpeed, rbCompo.velocity.y);
     }
     public void CheckGrounded()
@@ -109,15 +117,15 @@ public class AgentMovement : MonoBehaviour
 
     private IEnumerator knockbackCoroutine()
     {
-        _canMove = false;
+        canMove = false;
         yield return new WaitForSeconds(knockbackTime);
         rbCompo.velocity = Vector2.zero;
-        _canMove = true;
+        canMove = true;
     }
     public void ClearKnockback()
     {
         rbCompo.velocity = Vector2.zero;
-        _canMove = true;
+        canMove = true;
     }
     #endregion
 
