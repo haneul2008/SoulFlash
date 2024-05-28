@@ -5,7 +5,6 @@ using UnityEngine.Events;
 public class Player : Agent
 {
     public UnityEvent JumpEvent;
-    private NotifyValue<Sprite> SpriteChage = new();
     [field: SerializeField] public InputReader PlayerInput { get; private set; }
 
     private bool _canDoubleJump;
@@ -25,8 +24,6 @@ public class Player : Agent
         _spriteRenderer = transform.Find("Visual").GetComponent<SpriteRenderer>();
         _jumpAnimation = GetComponent<PlayerJumpAnimation>();
         _airAttack = GetComponent<PlayerAirAttack>();
-
-        SpriteChage.OnValueChanged += HandleSpriteChangeEvent;
 
         InitPlayerActions();
     }
@@ -48,16 +45,10 @@ public class Player : Agent
         actionList.ForEach(action => action.Initialize(this));
     }
 
-    private void HandleSpriteChangeEvent(Sprite prev, Sprite next)
-    {
-        _spriteNask.sprite = prev;
-    }
-
     private void Update()
     {
         MovementCompo.SetMovement(PlayerInput.Movement.x);
         Flip();
-        SpriteChage.Value = _spriteRenderer.sprite;
         _airAttack.SetAirState(!MovementCompo.isGround.Value);
     }
 
@@ -74,6 +65,7 @@ public class Player : Agent
     }
     private void JumpProcess(bool canDoubleJump)
     {
+        if (!CanStateChageable) return;
         _canDoubleJump = canDoubleJump;
         JumpEvent?.Invoke();
         MovementCompo.Jump();

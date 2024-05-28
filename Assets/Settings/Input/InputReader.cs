@@ -31,7 +31,6 @@ public class InputReader : ScriptableObject, IPlayerActions
     public void OnMovement(InputAction.CallbackContext context)
     {
         Movement = context.ReadValue<Vector2>();
-        Debug.Log(Movement);
     }
 
     public void OnMousePosition(InputAction.CallbackContext context)

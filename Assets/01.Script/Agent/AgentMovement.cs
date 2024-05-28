@@ -89,6 +89,7 @@ public class AgentMovement : AnimationPlayer
     }
     private void CalculateInAirTime()
     {
+        if (!canMove) return;
         if (!isGround.Value)
         {
             _timeInAir += Time.deltaTime;
@@ -100,6 +101,7 @@ public class AgentMovement : AnimationPlayer
     }
     private void ApplyExtraGravity()
     {
+        if(!canMove) return;
         if (_timeInAir > gravityDelay)
             rbCompo.AddForce(new Vector2(0, -extraGravity));
     }

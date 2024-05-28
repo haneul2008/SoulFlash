@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26c4fc2a52831cf428babfd39a67827b, type: 3}
-  m_Name: List
+  m_Script: {fileID: 11500000, guid: e5aa236af49cc0d4aab806c58f029ccf, type: 3}
+  m_Name: Slash
   m_EditorClassIdentifier: 
-  list:
-  - {fileID: 11400000, guid: 2993cf85238183f48b90530334fe2623, type: 2}
-  - {fileID: 11400000, guid: 6b5707d8bb0d14c46baed31acf973578, type: 2}
+  poolName: Slash
+  prefab: {fileID: 207980933030908661, guid: 9d09ada1fcf182e41aca61456ab8ad11, type: 3}
+  count: 3
