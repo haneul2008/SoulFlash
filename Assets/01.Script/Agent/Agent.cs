@@ -6,6 +6,7 @@ public abstract class Agent : MonoBehaviour
     public AgentMovement MovementCompo { get; protected set; }
     public Animator AnimatorCompo { get; protected set; }
     public Health HealthCompo { get; protected set; }
+    public SpriteRenderer SpriteRendererCompo { get; protected set; }
     #endregion
 
     public bool IsDead { get; protected set; }
@@ -16,6 +17,7 @@ public abstract class Agent : MonoBehaviour
         MovementCompo = GetComponent<AgentMovement>();
         MovementCompo.Initalize(this);
         AnimatorCompo = transform.Find("Visual").GetComponent<Animator>();
+        SpriteRendererCompo = transform.Find("Visual").GetComponent<SpriteRenderer>();
 
         HealthCompo = GetComponent<Health>();
         HealthCompo.Initialize(this);
@@ -28,15 +30,21 @@ public abstract class Agent : MonoBehaviour
     {
         return Mathf.Approximately(transform.eulerAngles.y, 0);
     }
-    public void HandleSpriteFlip(Vector3 targetPosition)
+    public void HandleSpriteFlip(Vector3 targetPosition, bool flip = false)
     {
         if (targetPosition.x < transform.position.x)
         {
-            transform.eulerAngles = new Vector3(0, -180f, 0);
+            if(flip)
+                transform.eulerAngles = Vector3.zero;
+            else
+                transform.eulerAngles = new Vector3(0, -180f, 0);
         }
         else if (targetPosition.x > transform.position.x)
         {
-            transform.eulerAngles = Vector3.zero;
+            if (!flip)
+                transform.eulerAngles = Vector3.zero;
+            else
+                transform.eulerAngles = new Vector3(0, -180f, 0);
         }
     }
     #endregion

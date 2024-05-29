@@ -4,9 +4,17 @@ using UnityEngine;
 
 public class Slash : MonoBehaviour, IPoolable
 {
+    [Header("Setting")]
+    [SerializeField] private DamageCaster _damageCaster;
     [SerializeField] private float _slashSpeed;
     [SerializeField] private float _slashLifeTime;
     [SerializeField] private string _poolName;
+
+    [Header("AttackSetting")]
+    [SerializeField] private int _damage;
+    [SerializeField] private float _knockbackPower;
+    [SerializeField] private float _hpReTakeTime;
+
     public string PoolName => _poolName;
 
     public GameObject ObjectPrefab => gameObject;
@@ -26,5 +34,6 @@ public class Slash : MonoBehaviour, IPoolable
     private void Update()
     {
         transform.position += new Vector3(Dir, 0, 0) * _slashSpeed * Time.deltaTime;
+        _damageCaster.CastDamage(_damage, _knockbackPower, _hpReTakeTime);
     }
 }

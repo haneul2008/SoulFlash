@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 9135081307638076690}
   - component: {fileID: 7307086151933511504}
   - component: {fileID: 2643261731509392150}
-  - component: {fileID: 7454238347657218645}
   m_Layer: 0
   m_Name: Slash
   m_TagString: Untagged
@@ -48,9 +47,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb9a830e4e96bf449a9f2a755581a39b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _damageCaster: {fileID: 7998197903528692626}
   _slashSpeed: 15
   _slashLifeTime: 1
   _poolName: Slash
+  _damage: 8
+  _knockbackPower: 2
+  _hpReTakeTime: 0.25
 --- !u!50 &2643261731509392150
 Rigidbody2D:
   serializedVersion: 4
@@ -78,41 +81,67 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!70 &7454238347657218645
-CapsuleCollider2D:
+--- !u!1 &1264130220488762695
+GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 207980933030908661}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 666961106605430127}
+  - component: {fileID: 7998197903528692626}
+  m_Layer: 0
+  m_Name: DamageCaster
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &666961106605430127
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1264130220488762695}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9135081307638076690}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7998197903528692626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1264130220488762695}
   m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.014885902, y: 0.005954385}
-  m_Size: {x: 0.6012249, y: 0.98809123}
-  m_Direction: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7801ee440e738f4a889eb5448303bb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _poolName: DamageCaster
+  filter:
+    useTriggers: 0
+    useLayerMask: 1
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 128
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
+  damageRadius: 0.4
+  detectCount: 1
 --- !u!1 &2724493107077954941
 GameObject:
   m_ObjectHideFlags: 0
@@ -197,69 +226,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1001 &1802256307295484616
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 9135081307638076690}
-    m_Modifications:
-    - target: {fileID: 615287999296200591, guid: c01e950612cd1414a8cf0402f42484bc, type: 3}
-      propertyPath: m_Name
-      value: DamageCaster
-      objectReference: {fileID: 0}
-    - target: {fileID: 1171889212727373735, guid: c01e950612cd1414a8cf0402f42484bc, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1171889212727373735, guid: c01e950612cd1414a8cf0402f42484bc, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1171889212727373735, guid: c01e950612cd1414a8cf0402f42484bc, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1171889212727373735, guid: c01e950612cd1414a8cf0402f42484bc, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1171889212727373735, guid: c01e950612cd1414a8cf0402f42484bc, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1171889212727373735, guid: c01e950612cd1414a8cf0402f42484bc, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1171889212727373735, guid: c01e950612cd1414a8cf0402f42484bc, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1171889212727373735, guid: c01e950612cd1414a8cf0402f42484bc, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1171889212727373735, guid: c01e950612cd1414a8cf0402f42484bc, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1171889212727373735, guid: c01e950612cd1414a8cf0402f42484bc, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8646251637663854938, guid: c01e950612cd1414a8cf0402f42484bc, type: 3}
-      propertyPath: damageRadius
-      value: 0.4
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: c01e950612cd1414a8cf0402f42484bc, type: 3}
---- !u!4 &666961106605430127 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1171889212727373735, guid: c01e950612cd1414a8cf0402f42484bc, type: 3}
-  m_PrefabInstance: {fileID: 1802256307295484616}
-  m_PrefabAsset: {fileID: 0}

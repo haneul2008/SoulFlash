@@ -35,7 +35,7 @@ public class PlayerBlock : AnimationPlayer
         _isBlock = true;
         _currentTime = 0;
 
-        _player.HealthCompo.ChangeCanTakeHp(false);
+        StartCoroutine(_player.HealthCompo.CanTakeHpCoroutine(false));
 
         _player.CanStateChageable = false;
         _player.MovementCompo.canMove = false;
@@ -47,7 +47,7 @@ public class PlayerBlock : AnimationPlayer
     {
         EndAnimation();
 
-        _player.HealthCompo.ChangeCanTakeHp(true);
+        StartCoroutine(_player.HealthCompo.CanTakeHpCoroutine(true));
 
         _player.CanStateChageable = true;
         _player.MovementCompo.canMove = true;

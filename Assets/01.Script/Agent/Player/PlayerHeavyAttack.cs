@@ -5,19 +5,26 @@ using UnityEngine;
 public class PlayerHeavyAttack : AnimationPlayer
 {
     [Header("Setting")]
-    [SerializeField] private GameObject _damageCaster;
+    [SerializeField] private DamageCaster _damageCaster;
     [SerializeField] private Vector2 _damageCasterPos;
     [SerializeField] private float _attackTime;
     [SerializeField] private float _damageCasterRadius;
+    [SerializeField] private float _damageCastTime;
     [SerializeField] private float _cooltime;
 
     [Header("Particle")]
     [SerializeField] private ParticleSystem _particle;
     [SerializeField] private float _particleStartTime;
 
+    [Header("AttackSetting")]
+    [SerializeField] private int _damage;
+    [SerializeField] private float _knockbackPower;
+    [SerializeField] private float _hpReTakeTime;
+
     private Player _player;
     private float _currentTime;
     private bool _attack;
+    private bool _isDamageCast;
     private void Awake()
     {
         _player = GetComponent<Player>();
@@ -30,8 +37,12 @@ public class PlayerHeavyAttack : AnimationPlayer
     }
     private void Update()
     {
-        if (_attack) return;
-        _currentTime += Time.deltaTime;
+        if (!_attack)
+        {
+            _currentTime += Time.deltaTime;
+        }
+        else if(_isDamageCast)
+            _damageCaster.CastDamage(_damage, _knockbackPower, _hpReTakeTime);
     }
     private void HandleHeavyAttack()
     {
@@ -59,9 +70,8 @@ public class PlayerHeavyAttack : AnimationPlayer
         StartCoroutine(DamageCastCoroutine(dir));
         StartCoroutine(ParticleCoroutine(dir));
     }
-    private void EndAttack(DamageCaster damageCaster)
+    private void EndAttack()
     {
-        PoolManager.instance.Push(damageCaster);
         EndAnimation();
 
         _player.CanStateChageable = true;
@@ -71,16 +81,17 @@ public class PlayerHeavyAttack : AnimationPlayer
     }
     private IEnumerator DamageCastCoroutine(float dir)
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(_damageCastTime);
 
-        DamageCaster damageCaster = PoolManager.instance.Pop("DamageCaster") as DamageCaster;
+        _isDamageCast = true;
 
-        damageCaster.gameObject.transform.position = new Vector3(transform.position.x + dir * _damageCasterPos.x, _damageCasterPos.y);
-        damageCaster.damageRadius = _damageCasterRadius;
+        _damageCaster.gameObject.transform.position = new Vector3(transform.position.x + dir * _damageCasterPos.x, _damageCasterPos.y);
+        _damageCaster.damageRadius = _damageCasterRadius;
 
         yield return new WaitForSeconds(_attackTime - 0.1f);
-
-        EndAttack(damageCaster);
+        
+        _isDamageCast = false;
+        EndAttack();
     }
     private IEnumerator ParticleCoroutine(float dir)
     {

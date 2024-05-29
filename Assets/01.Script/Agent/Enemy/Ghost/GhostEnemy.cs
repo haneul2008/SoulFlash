@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum EnemyEnum
 {
-    Apear,
+    Appear,
     Idle,
     Chase,
     Attack,
@@ -26,28 +26,30 @@ public class GhostEnemy : Enemy, IPoolable
         stateMachine = new EnemyStateMachine();
 
         //시작 상태 추가
-        /*stateMachine.AddState(EnemyEnum.Apear, new ZombieApearState(this, stateMachine, "Air"));
-        stateMachine.AddState(EnemyEnum.Idle, new ZombieIdleState(this, stateMachine, "Idle"));
-        stateMachine.AddState(EnemyEnum.Chase, new ZombieChaseState(this, stateMachine, "Chase"));
+        stateMachine.AddState(EnemyEnum.Appear, new GhostAppearState(this, stateMachine, "Appear"));
+        stateMachine.AddState(EnemyEnum.Idle, new GhostIdleState(this, stateMachine, "Idle"));
+        /*stateMachine.AddState(EnemyEnum.Chase, new ZombieChaseState(this, stateMachine, "Chase"));
         stateMachine.AddState(EnemyEnum.Attack, new ZombieAttackState(this, stateMachine, "Attack"));
         stateMachine.AddState(EnemyEnum.Dead, new ZombieDeadState(this, stateMachine, "Dead"));*/
 
         //시작상태를 설정해서 준비
-        stateMachine.Initialize(EnemyEnum.Apear, this);
+        stateMachine.Initialize(EnemyEnum.Appear, this);
     }
     private void Update()
     {
         stateMachine.CurrentState.UpdateState();
 
         if (targetTrm != null && IsDead == false)
-            HandleSpriteFlip(targetTrm.position);
+            HandleSpriteFlip(targetTrm.position, true);
     }
     public override void AnimationEndTrigger()
     {
+        stateMachine.CurrentState.AnimationEndTrigger();
     }
 
     public void ResetItem()
     {
+        SpriteRendererCompo.color = new Color(1, 1, 1, 0);
     }
 
     public override void SetDeadState()

@@ -5,6 +5,7 @@ using UnityEngine.Events;
 public class Player : Agent
 {
     public UnityEvent JumpEvent;
+
     [field: SerializeField] public InputReader PlayerInput { get; private set; }
 
     private bool _canDoubleJump;

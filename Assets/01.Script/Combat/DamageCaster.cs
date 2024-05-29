@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DamageCaster : MonoBehaviour, IPoolable
+public class DamageCaster : MonoBehaviour
 {
     [SerializeField] private string _poolName;
 
@@ -10,15 +10,11 @@ public class DamageCaster : MonoBehaviour, IPoolable
 
     private Collider2D[] _colliders;
 
-    public string PoolName => _poolName;
-
-    public GameObject ObjectPrefab => gameObject;
-
     private void Awake()
     {
         _colliders = new Collider2D[detectCount];
     }
-    public bool CastDamage(int damage, float knockbackPower)
+    public bool CastDamage(int damage, float knockbackPower, float hpRetakeTime)
     {
         int cnt = Physics2D.OverlapCircle(transform.position, damageRadius, filter, _colliders);
 
@@ -31,7 +27,7 @@ public class DamageCaster : MonoBehaviour, IPoolable
                 RaycastHit2D hit = Physics2D.Raycast(transform.position, direction.normalized,
                     direction.magnitude, filter.layerMask);
 
-                health.TakeDamage(damage, hit.normal, hit.point, knockbackPower);
+                health.TakeDamage(damage, hit.normal, hit.point, knockbackPower, hpRetakeTime);
             }
         }
 
@@ -43,11 +39,6 @@ public class DamageCaster : MonoBehaviour, IPoolable
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, damageRadius);
         Gizmos.color = Color.white;
-    }
-
-    public void ResetItem()
-    {
-        
     }
 #endif
 }

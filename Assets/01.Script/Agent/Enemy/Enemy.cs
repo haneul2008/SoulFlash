@@ -45,7 +45,7 @@ public abstract class Enemy : Agent
     //상속받은 다른 적들이 공격방식을 다르게 만들 수도 있으니
     public virtual void Attack()
     {
-        DamageCasterCompo.CastDamage(attackDamage, knokbackPower);
+        DamageCasterCompo.CastDamage(attackDamage, knokbackPower, 0.1f);
     }
 #if UNITY_EDITOR
     protected virtual void OnDrawGizmosSelected()
