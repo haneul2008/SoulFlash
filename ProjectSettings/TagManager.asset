@@ -13,7 +13,7 @@ TagManager:
   - UI
   - Ground
   - Enemy
-  - 
+  - Player
   - 
   - 
   - 
@@ -52,4 +52,7 @@ TagManager:
     locked: 0
   - name: Ground
     uniqueID: 970287513
+    locked: 0
+  - name: VFX
+    uniqueID: 1946333711
     locked: 0

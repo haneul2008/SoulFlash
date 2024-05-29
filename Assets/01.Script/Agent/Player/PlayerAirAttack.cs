@@ -18,7 +18,7 @@ public class PlayerAirAttack : AnimationPlayer
     private void Awake()
     {
         _player = GetComponent<Player>();
-        _player.PlayerInput.OnLeftMousePressed += AirAttack;
+        _player.PlayerInput.OnEKeyPressed += AirAttack;
 
         _currentTime = _cooltime;
     }
@@ -78,6 +78,7 @@ public class PlayerAirAttack : AnimationPlayer
 
         _player.MovementCompo.canMove = true;
         _player.CanStateChageable = true;
+        _player.MovementCompo.rbCompo.gravityScale = 1;
 
         _attack = false;
     }

@@ -509,8 +509,8 @@ ScriptedImporter:
     uvTransform: {x: 0, y: 0}
   - name: vagabond-heavy-attack_6
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
+    pivot: {x: 0, y: 0.5}
+    alignment: 4
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -549,8 +549,8 @@ ScriptedImporter:
     uvTransform: {x: 0, y: 0}
   - name: vagabond-heavy-attack_8
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
+    pivot: {x: 0, y: 0.5}
+    alignment: 4
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -589,8 +589,8 @@ ScriptedImporter:
     uvTransform: {x: 0, y: 0}
   - name: vagabond-heavy-attack_10
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
+    pivot: {x: 0, y: 0.5}
+    alignment: 4
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -609,8 +609,8 @@ ScriptedImporter:
     uvTransform: {x: 0, y: 0}
   - name: vagabond-heavy-attack_11
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
+    pivot: {x: 0, y: 0.5}
+    alignment: 4
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -629,8 +629,8 @@ ScriptedImporter:
     uvTransform: {x: 0, y: 0}
   - name: vagabond-heavy-attack_12
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
+    pivot: {x: 0, y: 0.5}
+    alignment: 4
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2

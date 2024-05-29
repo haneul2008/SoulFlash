@@ -11,6 +11,9 @@ public class InputReader : ScriptableObject, IPlayerActions
     public Action JumpEvent;
     public event Action OnLeftShiftEvent;
     public event Action OnLeftMousePressed;
+    public event Action OnEKeyPressed;
+    public event Action OnFKeyPressed;
+    public event Action OnFKeyWasUp;
     public Vector2 Movement { get; private set; }
     public Vector2 MousePosition { get; private set; }
     private bool _stopReadmovement;
@@ -50,5 +53,19 @@ public class InputReader : ScriptableObject, IPlayerActions
     {
         if (context.performed)
             OnLeftMousePressed?.Invoke();
+    }
+
+    public void OnHeavyAttack(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            OnEKeyPressed?.Invoke();
+    }
+
+    public void OnBlock(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            OnFKeyPressed?.Invoke();
+        if (context.canceled)
+            OnFKeyWasUp?.Invoke();
     }
 }

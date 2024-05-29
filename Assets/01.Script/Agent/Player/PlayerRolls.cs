@@ -19,7 +19,7 @@ public class PlayerRolls : AnimationPlayer
         _player.PlayerInput.OnLeftShiftEvent += Roll;
         _collider = GetComponent<CapsuleCollider2D>();
         _sizeChanger = new();
-        //0.78, 0.78
+        //0.7, 0.7
     }
     private void OnDisable()
     {
@@ -34,7 +34,7 @@ public class PlayerRolls : AnimationPlayer
 
         _player.CanStateChageable = false;
 
-        _collider.size = _sizeChanger.ChangeSize(_collider.size, new Vector2(0.76f, 0.76f));
+        _collider.size = _sizeChanger.ChangeSize(_collider.size, new Vector2(0.7f, 0.7f));
 
         _dir = _player.PlayerInput.Movement.x;
         _player.MovementCompo.canMove = false;
