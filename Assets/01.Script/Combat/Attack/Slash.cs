@@ -13,7 +13,7 @@ public class Slash : MonoBehaviour, IPoolable
     [Header("AttackSetting")]
     [SerializeField] private int _damage;
     [SerializeField] private float _knockbackPower;
-    [SerializeField] private float _hpReTakeTime;
+    [SerializeField] private float _hpRetakeTime;
 
     public string PoolName => _poolName;
 
@@ -34,6 +34,6 @@ public class Slash : MonoBehaviour, IPoolable
     private void Update()
     {
         transform.position += new Vector3(Dir, 0, 0) * _slashSpeed * Time.deltaTime;
-        _damageCaster.CastDamage(_damage, _knockbackPower, _hpReTakeTime);
+        _damageCaster.CastDamage(_damage, _knockbackPower, _hpRetakeTime, false);
     }
 }

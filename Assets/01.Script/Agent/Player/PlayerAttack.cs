@@ -8,35 +8,44 @@ public class PlayerAttack : AnimationPlayer
     [SerializeField] private Vector2 _damageCasterPos;
     [SerializeField] private float _attackTime;
     [SerializeField] private float _damageCasterRadius;
+    [SerializeField] private float _cooltime;
 
     [Header("AttackSetting")]
     [SerializeField] private int _damage;
     [SerializeField] private float _knockbackPower;
-    [SerializeField] private float _hpReTakeTime;
+    [SerializeField] private float _hpRetakeTime;
 
     private Player _player;
     private Collider2D[] _colliders;
     private bool _isAttack;
+    private float _currentTime;
     private void Awake()
     {
         _player = GetComponent<Player>();
         _player.PlayerInput.OnLeftMousePressed += HandleAttack;
+        _player.MovementCompo.OnKnockbackAction += EndAttack;
         _colliders = new Collider2D[1];
     }
     private void OnDisable()
     {
         _player.PlayerInput.OnLeftMousePressed -= HandleAttack;
+        _player.MovementCompo.OnKnockbackAction -= EndAttack;
     }
     private void Update()
     {
-        if (!_isAttack) return;
-        _damageCaster.CastDamage(_damage, _knockbackPower, _hpReTakeTime);
+        if (_isAttack)
+        {
+            _damageCaster.CastDamage(_damage, _knockbackPower, _hpRetakeTime, false);
+        }
+        else
+            _currentTime += Time.deltaTime;
     }
     private void HandleAttack()
     {
         if (!_player.MovementCompo.isGround.Value) return;
-        if (!_player.CanStateChageable) return;
+        if (!_player.CanStateChageable || _currentTime < _cooltime) return;
 
+        _currentTime = 0;
         _isAttack = true;
 
         _player.CanStateChageable = false;

@@ -16,7 +16,7 @@ public class Health : MonoBehaviour
 
     public int CurrentHealth { get; private set; }
     private Agent _owner;
-
+    
     public void Initialize(Agent owner)
     {
         _owner = owner;
@@ -31,6 +31,7 @@ public class Health : MonoBehaviour
     {
         if (!IsCanTakeHp) return;
 
+        print($"{_owner}takeDamage");
         OnHitAction?.Invoke();
 
         IsCanTakeHp = false;
@@ -38,7 +39,6 @@ public class Health : MonoBehaviour
 
         CurrentHealth -= amount;
         OnHitEvent?.Invoke();
-        //normal과 point, 넉백 등은 차후에 여기서 사용합니다.
 
         if (knockbackPower > 0)
             _owner.MovementCompo.GetKnockback(normal * -1, knockbackPower);

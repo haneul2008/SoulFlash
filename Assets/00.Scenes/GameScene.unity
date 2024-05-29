@@ -5729,7 +5729,7 @@ Transform:
   m_GameObject: {fileID: 740689233}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 22.88, y: -2.67, z: 0.014831136}
+  m_LocalPosition: {x: 22.88, y: -2.67, z: 0}
   m_LocalScale: {x: 4, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5789,10 +5789,10 @@ MonoBehaviour:
   FinalDeadEvent:
     m_PersistentCalls:
       m_Calls: []
-  detectRadius: 1
+  detectRadius: 6
   attackRadius: 1.5
   attackCooldown: 4
-  knokbackPower: 3
+  knokbackPower: 11
   attackDamage: 10
   contactFilter:
     useTriggers: 0
@@ -5844,6 +5844,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _parameterName: 
   _isTriggerAnim: 0
+  _isHaveMoveAnim: 0
   _groundCheckerTrm: {fileID: 17981646}
   moveSpeed: 3
   jumpPower: 6
@@ -5857,6 +5858,7 @@ MonoBehaviour:
   isGround:
     _value: 0
   canMove: 1
+  canKnockback: 1
 --- !u!50 &740689239
 Rigidbody2D:
   serializedVersion: 4
@@ -5905,6 +5907,7 @@ GameObject:
   - component: {fileID: 838797297}
   - component: {fileID: 838797298}
   - component: {fileID: 838797299}
+  - component: {fileID: 838797300}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -6026,12 +6029,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _parameterName: run
   _isTriggerAnim: 0
+  _isHaveMoveAnim: 1
   _groundCheckerTrm: {fileID: 1044618158}
   moveSpeed: 6
   jumpPower: 7
   extraGravity: 30
   gravityDelay: 0.15
-  knockbackTime: 0.2
+  knockbackTime: 0.3
   _whatIsGround:
     serializedVersion: 2
     m_Bits: 64
@@ -6039,6 +6043,7 @@ MonoBehaviour:
   isGround:
     _value: 0
   canMove: 1
+  canKnockback: 1
 --- !u!114 &838797292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6069,6 +6074,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _parameterName: jump
   _isTriggerAnim: 0
+  _isHaveMoveAnim: 1
 --- !u!114 &838797294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6083,6 +6089,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _parameterName: roll
   _isTriggerAnim: 0
+  _isHaveMoveAnim: 1
   _rollSpeed: 6
   _rollTime: 0.4
   _coolTime: 1.235
@@ -6100,13 +6107,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _parameterName: attack
   _isTriggerAnim: 0
+  _isHaveMoveAnim: 1
   _damageCaster: {fileID: 8646251635966941549}
   _damageCasterPos: {x: 0.75, y: -3.5}
   _attackTime: 0.4
-  _damageCasterRadius: 0.6
+  _damageCasterRadius: 0.4
+  _cooltime: 0.2
   _damage: 10
   _knockbackPower: 3
-  _hpReTakeTime: 0.3
+  _hpRetakeTime: 0.5
 --- !u!114 &838797296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6121,6 +6130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _parameterName: airAttack
   _isTriggerAnim: 0
+  _isHaveMoveAnim: 1
   _slashSpawnX: 0.5
   _attackTime: 1.1
   _cooltime: 4
@@ -6146,6 +6156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _parameterName: airDash
   _isTriggerAnim: 0
+  _isHaveMoveAnim: 1
   _dashSpeed: 8.5
   _dashTime: 0.4
   _coolTime: 1.5
@@ -6163,9 +6174,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _parameterName: heavyAttack
   _isTriggerAnim: 0
+  _isHaveMoveAnim: 1
   _damageCaster: {fileID: 8646251635966941549}
   _damageCasterPos: {x: 1.65, y: -3.5}
-  _attackTime: 1.35
+  _attackTime: 0.8
   _damageCasterRadius: 0.95
   _damageCastTime: 0.8
   _cooltime: 5
@@ -6173,7 +6185,7 @@ MonoBehaviour:
   _particleStartTime: 0.9
   _damage: 30
   _knockbackPower: 5
-  _hpReTakeTime: 0.5
+  _hpRetakeTime: 0.7
 --- !u!114 &838797299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6188,8 +6200,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _parameterName: block
   _isTriggerAnim: 0
+  _isHaveMoveAnim: 1
   _cooltime: 3
   _blockTime: 0.5
+--- !u!114 &838797300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 838797286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 900fb9c228187504c9c3e8664062aab4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parameterName: knockback
+  _isTriggerAnim: 0
+  _isHaveMoveAnim: 1
 --- !u!1 &972063287
 GameObject:
   m_ObjectHideFlags: 0
@@ -6559,7 +6587,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -848420123
   m_SortingLayer: 2
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: -1407612548, guid: 1276096d626138d4080565f5cb867cd5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
@@ -10526,7 +10554,7 @@ MonoBehaviour:
     useOutsideNormalAngle: 0
     layerMask:
       serializedVersion: 2
-      m_Bits: 128
+      m_Bits: 256
     minDepth: 0
     maxDepth: 0
     minNormalAngle: 0

@@ -19,7 +19,7 @@ public class PlayerHeavyAttack : AnimationPlayer
     [Header("AttackSetting")]
     [SerializeField] private int _damage;
     [SerializeField] private float _knockbackPower;
-    [SerializeField] private float _hpReTakeTime;
+    [SerializeField] private float _hpRetakeTime;
 
     private Player _player;
     private float _currentTime;
@@ -29,11 +29,13 @@ public class PlayerHeavyAttack : AnimationPlayer
     {
         _player = GetComponent<Player>();
         _player.PlayerInput.OnEKeyPressed += HandleHeavyAttack;
+        _player.MovementCompo.OnKnockbackAction += EndAttack;
         _currentTime = _cooltime;
     }
     private void OnDisable()
     {
         _player.PlayerInput.OnEKeyPressed -= HandleHeavyAttack;
+        _player.MovementCompo.OnKnockbackAction -= EndAttack;
     }
     private void Update()
     {
@@ -42,7 +44,7 @@ public class PlayerHeavyAttack : AnimationPlayer
             _currentTime += Time.deltaTime;
         }
         else if(_isDamageCast)
-            _damageCaster.CastDamage(_damage, _knockbackPower, _hpReTakeTime);
+            _damageCaster.CastDamage(_damage, _knockbackPower, _hpRetakeTime, false);
     }
     private void HandleHeavyAttack()
     {
@@ -76,6 +78,7 @@ public class PlayerHeavyAttack : AnimationPlayer
 
         _player.CanStateChageable = true;
         _player.MovementCompo.canMove = true;
+        _damageCaster.damageRadius = 0;
 
         _attack = false;
     }

@@ -19,8 +19,13 @@ public class PlayerAirAttack : AnimationPlayer
     {
         _player = GetComponent<Player>();
         _player.PlayerInput.OnEKeyPressed += AirAttack;
+        _player.MovementCompo.OnKnockbackAction += EndAttack;
 
         _currentTime = _cooltime;
+    }
+    private void OnDisable()
+    {
+        _player.MovementCompo.OnKnockbackAction -= EndAttack;
     }
     private void Update()
     {

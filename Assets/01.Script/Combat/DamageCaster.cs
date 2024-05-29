@@ -14,7 +14,7 @@ public class DamageCaster : MonoBehaviour
     {
         _colliders = new Collider2D[detectCount];
     }
-    public bool CastDamage(int damage, float knockbackPower, float hpRetakeTime)
+    public bool CastDamage(int damage, float knockbackPower, float hpRetakeTime, bool useHitDir = true, bool enemy = false)
     {
         int cnt = Physics2D.OverlapCircle(transform.position, damageRadius, filter, _colliders);
 
@@ -22,12 +22,34 @@ public class DamageCaster : MonoBehaviour
         {
             if (_colliders[i].TryGetComponent(out Health health))
             {
-                Vector2 direction = _colliders[i].transform.position - transform.position;
+                Vector2 direction;
+                RaycastHit2D hit;
 
-                RaycastHit2D hit = Physics2D.Raycast(transform.position, direction.normalized,
-                    direction.magnitude, filter.layerMask);
+                Vector2 knockbackDir;
+                Vector3 hitPoint;
+                if (useHitDir)
+                {
+                    direction = _colliders[i].transform.position - transform.position;
 
-                health.TakeDamage(damage, hit.normal, hit.point, knockbackPower, hpRetakeTime);
+                    hit = Physics2D.Raycast(transform.position, direction.normalized,
+                        direction.magnitude, filter.layerMask);
+
+                    knockbackDir = hit.normal;
+                    hitPoint = hit.point;
+                }
+                else
+                {
+                    float x = transform.rotation.eulerAngles.y == 0f ? -1 : 1;
+
+                    if (enemy) x = -x;
+
+                    direction = new Vector2(x, 0);
+
+                    knockbackDir = direction;
+                    hitPoint = Vector3.zero;
+                }
+
+                health.TakeDamage(damage, knockbackDir, hitPoint, knockbackPower, hpRetakeTime);
             }
         }
 

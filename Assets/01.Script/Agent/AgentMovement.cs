@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class AgentMovement : AnimationPlayer
 {
+    public Action OnKnockbackAction;
 
     [Header("Reference")]
     [SerializeField] private Transform _groundCheckerTrm;
@@ -25,6 +27,7 @@ public class AgentMovement : AnimationPlayer
     protected float _xMove;
     private float _timeInAir;
     public bool canMove = true;
+    public bool canKnockback = true;
     protected Coroutine _kbCoroutine;
 
     private Agent _owner;
@@ -69,6 +72,7 @@ public class AgentMovement : AnimationPlayer
     private void Update()
     {
         CalculateInAirTime();
+        print($"{_agent} : {canMove}");
     }
     private void FixedUpdate()
     {
@@ -108,6 +112,17 @@ public class AgentMovement : AnimationPlayer
     #region knockvack region
     public void GetKnockback(Vector3 direction, float power)
     {
+        if (!canKnockback) return;
+
+        OnKnockbackAction?.Invoke();
+        Player player = GetComponent<Player>();
+        if (player != null)
+        {
+            player.CanStateChageable = false;
+        }
+        StopImmediately();
+        rbCompo.velocity = Vector2.zero;
+
         Vector3 difference = direction * power * rbCompo.mass;
         rbCompo.AddForce(difference, ForceMode2D.Impulse);
 

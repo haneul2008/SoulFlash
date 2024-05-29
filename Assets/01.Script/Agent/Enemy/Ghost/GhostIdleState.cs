@@ -31,7 +31,6 @@ public class GhostIdleState : EnemyState
     }
     private void ChangeChaseState()
     {
-        Debug.Log("Chase");
         _enemy.targetTrm = GameManager.instance.Player.transform;
         _stateMachine.ChangeState(EnemyEnum.Chase);
     }

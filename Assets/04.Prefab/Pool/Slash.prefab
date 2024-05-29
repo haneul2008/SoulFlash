@@ -49,11 +49,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damageCaster: {fileID: 7998197903528692626}
   _slashSpeed: 15
-  _slashLifeTime: 1
+  _slashLifeTime: 0.5
   _poolName: Slash
   _damage: 8
   _knockbackPower: 2
-  _hpReTakeTime: 0.25
+  _hpRetakeTime: 0.25
 --- !u!50 &2643261731509392150
 Rigidbody2D:
   serializedVersion: 4
