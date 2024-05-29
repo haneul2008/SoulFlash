@@ -42,6 +42,7 @@ public class AgentMovement : AnimationPlayer
         SetMovement(force.x);
         rbCompo.AddForce(force, ForceMode2D.Impulse);
     }
+
     public void SetMovement(float xMove)
     {
         _xMove = xMove;
@@ -51,6 +52,7 @@ public class AgentMovement : AnimationPlayer
         else
             EndAnimation();
     }
+
     public void StopImmediately(bool isYStop = false)
     {
         _xMove = 0;
@@ -63,34 +65,39 @@ public class AgentMovement : AnimationPlayer
             rbCompo.velocity = new Vector2(_xMove, rbCompo.velocity.y);
         }
     }
+
     public void Jump(float multiplier = 1f)
     {
         _timeInAir = 0;
         rbCompo.velocity = Vector2.zero;
         rbCompo.AddForce(Vector2.up * jumpPower * multiplier, ForceMode2D.Impulse);
     }
+
     private void Update()
     {
         CalculateInAirTime();
-        print($"{_agent} : {canMove}");
     }
+
     private void FixedUpdate()
     {
         CheckGrounded();
         ApplyExtraGravity();
         ApplyXMove();
     }
+
     private void ApplyXMove()
     {
         if (!canMove) return;
         rbCompo.velocity = new Vector2(_xMove * moveSpeed, rbCompo.velocity.y);
     }
+
     public void CheckGrounded()
     {
         Collider2D collider = Physics2D.OverlapBox(_groundCheckerTrm.position, _groundCheckerSize, 0, _whatIsGround);
 
         isGround.Value = collider != null;
     }
+
     private void CalculateInAirTime()
     {
         if (!canMove) return;
@@ -103,24 +110,28 @@ public class AgentMovement : AnimationPlayer
             _timeInAir = 0;
         }
     }
+
     private void ApplyExtraGravity()
     {
         if(!canMove) return;
         if (_timeInAir > gravityDelay)
             rbCompo.AddForce(new Vector2(0, -extraGravity));
     }
-    #region knockvack region
+
+    #region knockback region
     public void GetKnockback(Vector3 direction, float power)
     {
         if (!canKnockback) return;
 
         OnKnockbackAction?.Invoke();
+        canMove = false;
+
         Player player = GetComponent<Player>();
         if (player != null)
         {
             player.CanStateChageable = false;
         }
-        StopImmediately();
+
         rbCompo.velocity = Vector2.zero;
 
         Vector3 difference = direction * power * rbCompo.mass;
@@ -134,7 +145,6 @@ public class AgentMovement : AnimationPlayer
 
     private IEnumerator knockbackCoroutine()
     {
-        canMove = false;
         yield return new WaitForSeconds(knockbackTime);
         rbCompo.velocity = Vector2.zero;
         canMove = true;
