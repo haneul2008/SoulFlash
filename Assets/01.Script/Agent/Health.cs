@@ -31,7 +31,6 @@ public class Health : MonoBehaviour
     {
         if (!IsCanTakeHp) return;
 
-        print($"{_owner}takeDamage");
         OnHitAction?.Invoke();
 
         IsCanTakeHp = false;

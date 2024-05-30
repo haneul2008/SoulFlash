@@ -132,10 +132,11 @@ public class AgentMovement : AnimationPlayer
             player.CanStateChageable = false;
         }
 
-        rbCompo.velocity = Vector2.zero;
+        StopImmediately();
 
         Vector3 difference = direction * power * rbCompo.mass;
         rbCompo.AddForce(difference, ForceMode2D.Impulse);
+        print(rbCompo.velocity);
 
         if (_kbCoroutine != null)
             StopCoroutine(_kbCoroutine);

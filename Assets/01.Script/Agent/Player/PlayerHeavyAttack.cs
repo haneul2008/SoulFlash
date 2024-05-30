@@ -25,6 +25,7 @@ public class PlayerHeavyAttack : AnimationPlayer
     private float _currentTime;
     private bool _attack;
     private bool _isDamageCast;
+    private Coroutine _particleCorou;
     private void Awake()
     {
         _player = GetComponent<Player>();
@@ -70,7 +71,7 @@ public class PlayerHeavyAttack : AnimationPlayer
             dir = _player.PlayerInput.MousePosition.x > transform.position.x ? 1f : -1f;
         }
         StartCoroutine(DamageCastCoroutine(dir));
-        StartCoroutine(ParticleCoroutine(dir));
+        _particleCorou = StartCoroutine(ParticleCoroutine(dir));
     }
     private void EndAttack()
     {
@@ -81,6 +82,8 @@ public class PlayerHeavyAttack : AnimationPlayer
         _damageCaster.damageRadius = 0;
 
         _attack = false;
+        if(_particleCorou != null)
+            StopCoroutine(_particleCorou);
     }
     private IEnumerator DamageCastCoroutine(float dir)
     {
