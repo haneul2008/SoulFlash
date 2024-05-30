@@ -1,10 +1,13 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
 public abstract class Enemy : Agent
 {
     public UnityEvent FinalDeadEvent;
+
+    [SerializeField] private float _crystalSpawnTime;
 
     [Header("Attack Setting")]
     public float detectRadius;
@@ -42,6 +45,11 @@ public abstract class Enemy : Agent
     {
         IsDead = value;
         CanStateChageable = !value;
+    }
+    public void SpawnCrystal()
+    {
+        Crystal crystal = PoolManager.instance.Pop("Crystal") as Crystal;
+        crystal.gameObject.transform.position = transform.position;
     }
     
     public virtual void Attack()

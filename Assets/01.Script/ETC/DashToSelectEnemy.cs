@@ -3,10 +3,12 @@ using DG.Tweening;
 using Cinemachine;
 using System.Collections;
 using UnityEngine.Events;
+using System;
 
 public class DashToSelectEnemy : MonoBehaviour
 {
     public UnityEvent OnDashFinishEvent;
+    public Action OnDashFinishAction;
 
     NotifyValue<Collider2D> EnemyCollider = new NotifyValue<Collider2D>();
 
@@ -18,16 +20,16 @@ public class DashToSelectEnemy : MonoBehaviour
     [SerializeField] private float _canTakeAttackTime; //대쉬가 끝난 후 몇초간 넉백과 체력을 무시할지
     [SerializeField] private MouseDetecter _mouseDeteter;
     [SerializeField] private CinemachineVirtualCamera _cam;
+    public Collider2D NowEnemyCollider { get; private set; }
 
     private bool _isSeleting;
     private bool _isFalseBlink;
     private Collider2D[] _enemyDetectCollider;
-    private Collider2D _enemyCollider;
     private SpriteRenderer _enemyRenderer;
     private Material _enemyMat;
 
     private readonly int _isHitHash = Shader.PropertyToID("_IsHit");
-    private void Start()
+    private void OnEnable()
     {
         _enemyDetectCollider = new Collider2D[1];
 
@@ -60,7 +62,7 @@ public class DashToSelectEnemy : MonoBehaviour
 
     private void HandleSelectEnemy()
     {
-        _enemyCollider = null;
+        NowEnemyCollider = null;
         _enemyRenderer = null;
         _enemyMat = null;
         Time.timeScale = 0.2f;
@@ -84,17 +86,20 @@ public class DashToSelectEnemy : MonoBehaviour
 
     private void ToDoEnemy()
     {
-        _enemyCollider = _mouseDeteter.DetectEnemy();
-        if (!_isFalseBlink && _enemyMat != null && _enemyCollider == null)
+        NowEnemyCollider = _mouseDeteter.DetectEnemy();
+        if (!_isFalseBlink && _enemyMat != null && NowEnemyCollider == null)
         {
             _isFalseBlink = true;
             _enemyMat.SetInt(_isHitHash, 0);
         }
 
-        if (_enemyCollider == null) return;
+        if (NowEnemyCollider == null) return;
 
         _isFalseBlink = false;
         EnemyCollider.Value = _mouseDeteter.DetectEnemy();
+
+        if(_enemyMat == null) return;
+        _enemyMat.SetInt(_isHitHash, 1);
     }
     private void HandleGetRenderer(Collider2D prev, Collider2D next)
     {
@@ -103,16 +108,15 @@ public class DashToSelectEnemy : MonoBehaviour
 
         _enemyRenderer = next.gameObject.transform.Find("Visual").GetComponent<SpriteRenderer>();
         _enemyMat = _enemyRenderer.material;
-        _enemyMat.SetInt(_isHitHash, 1);
     }
     private void DashToEnemy()
     {
-        if (_enemyCollider == null || !_isSeleting) return;
+        if (NowEnemyCollider == null || !_isSeleting) return;
 
         ResetValue(false, false);
 
-        float distance = Vector2.Distance(transform.position, _enemyCollider.gameObject.transform.position);
-        transform.DOMove(new Vector2(_enemyCollider.gameObject.transform.position.x, transform.position.y), _dashTime / distance)
+        float distance = Vector2.Distance(transform.position, NowEnemyCollider.gameObject.transform.position);
+        transform.DOMove(new Vector2(NowEnemyCollider.gameObject.transform.position.x, transform.position.y), _dashTime / distance)
             .OnComplete(() =>
             {
                 _player.MovementCompo.canMove = true;
@@ -134,6 +138,7 @@ public class DashToSelectEnemy : MonoBehaviour
         _cam.m_Lens.OrthographicSize = 5f;
 
         OnDashFinishEvent?.Invoke();
+        OnDashFinishAction?.Invoke();
 
         if (_enemyMat == null) return;
             _enemyMat.SetInt(_isHitHash, 0);
