@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering;
 
 public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
 {
+    public event Action OnDestroySingleton;
+
     private static T _instance = null;
     private static bool IsDestroyed = false;
     public static T instance
@@ -27,6 +30,7 @@ public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
     }
     private void OnDisable()
     {
+        OnDestroySingleton?.Invoke();
         IsDestroyed = true;
     }
 }

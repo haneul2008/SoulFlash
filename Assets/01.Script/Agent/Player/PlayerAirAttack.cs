@@ -43,15 +43,7 @@ public class PlayerAirAttack : AnimationPlayer
         _attack = true;
         _currentTime = 0;
 
-        float dir;
-        if (Mathf.Abs(_player.PlayerInput.Movement.x) > 0.1f)
-        {
-            dir = Mathf.Sign(_player.PlayerInput.Movement.x);
-        }
-        else
-        {
-            dir = _player.PlayerInput.MousePosition.x > transform.position.x ? 1f : -1f;
-        }
+        float dir = transform.rotation.eulerAngles.y == 0f ? 1 : -1;
 
         _player.MovementCompo.canMove = false;
         _player.CanStateChageable = false;
