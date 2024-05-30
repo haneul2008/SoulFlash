@@ -39,5 +39,6 @@ public class GhostDeadState : EnemyState
         {
             GameObject.Destroy(_enemy.gameObject);
         }
+        GameManager.instance.OnEnemyDeadAction?.Invoke();
     }
 }

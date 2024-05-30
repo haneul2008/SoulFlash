@@ -33,7 +33,7 @@ public class Player : Agent
         if (!MovementCompo.canMove) return;
         if (Mathf.Abs(PlayerInput.Movement.x) > 0.1f)
         {
-            float rotationY = PlayerInput.Movement.x > 0.1f ? 0 : 180;
+            float rotationY = PlayerInput.Movement.x > 0.1f ? 0 : -180f;
             transform.eulerAngles = new Vector3(0, rotationY, 0);
         }
         else

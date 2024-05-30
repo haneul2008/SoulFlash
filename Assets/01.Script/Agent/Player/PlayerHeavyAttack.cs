@@ -61,15 +61,8 @@ public class PlayerHeavyAttack : AnimationPlayer
 
         PlayAnimation();
 
-        float dir;
-        if (Mathf.Abs(_player.PlayerInput.Movement.x) > 0.1f)
-        {
-            dir = Mathf.Sign(_player.PlayerInput.Movement.x);
-        }
-        else
-        {
-            dir = _player.PlayerInput.MousePosition.x > transform.position.x ? 1f : -1f;
-        }
+        float dir = transform.rotation.eulerAngles.y == 0f ? 1 : -1;
+
         StartCoroutine(DamageCastCoroutine(dir));
         _particleCorou = StartCoroutine(ParticleCoroutine(dir));
     }

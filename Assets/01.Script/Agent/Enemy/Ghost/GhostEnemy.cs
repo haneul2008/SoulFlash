@@ -41,7 +41,6 @@ public class GhostEnemy : Enemy, IPoolable
     }
     private void Update()
     {
-        print(stateMachine.CurrentState);
         stateMachine.CurrentState.UpdateState();
 
         if (targetTrm != null && IsDead == false)

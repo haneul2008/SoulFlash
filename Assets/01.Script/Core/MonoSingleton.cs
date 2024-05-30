@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
 {
