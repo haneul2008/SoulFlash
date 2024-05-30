@@ -32,7 +32,7 @@ public class GhostEnemy : Enemy, IPoolable
         stateMachine.AddState(EnemyEnum.Idle, new GhostIdleState(this, stateMachine, "Idle"));
         stateMachine.AddState(EnemyEnum.Chase, new GhostChaseState(this, stateMachine, "Idle"));
         stateMachine.AddState(EnemyEnum.Attack, new GhostAttackState(this, stateMachine, "Attack"));
-        //stateMachine.AddState(EnemyEnum.Dead, new ZombieDeadState(this, stateMachine, "Dead"));
+        stateMachine.AddState(EnemyEnum.Dead, new GhostDeadState(this, stateMachine, "Dead"));
 
         //시작상태를 설정해서 준비
         stateMachine.Initialize(EnemyEnum.Appear, this);
@@ -41,6 +41,7 @@ public class GhostEnemy : Enemy, IPoolable
     }
     private void Update()
     {
+        print(stateMachine.CurrentState);
         stateMachine.CurrentState.UpdateState();
 
         if (targetTrm != null && IsDead == false)
@@ -56,7 +57,13 @@ public class GhostEnemy : Enemy, IPoolable
 
     public void ResetItem()
     {
+        HealthCompo.ResetHealth();
+        SetDead(false);
+        
         SpriteRendererCompo.color = new Color(1, 1, 1, 0);
+        stateMachine.Initialize(EnemyEnum.Appear, this);
+
+        lastAttackTime = -9999f;
     }
     public override void Attack()
     {
@@ -71,5 +78,6 @@ public class GhostEnemy : Enemy, IPoolable
     }
     public override void SetDeadState()
     {
+        stateMachine.ChangeState(EnemyEnum.Dead);
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class PlayerAirAttack : AnimationPlayer
 {
@@ -15,6 +16,7 @@ public class PlayerAirAttack : AnimationPlayer
     private Player _player;
     private float _currentTime;
     private bool _attack;
+    private Coroutine _slashSpawnCorou;
     private void Awake()
     {
         _player = GetComponent<Player>();
@@ -59,9 +61,8 @@ public class PlayerAirAttack : AnimationPlayer
         PlayAnimation();
         Invoke("EndAttack", _attackTime);
 
-        StartCoroutine(SpawnSlash(dir));
+        _slashSpawnCorou = StartCoroutine(SpawnSlash(dir));
     }
-
     private IEnumerator SpawnSlash(float dir)
     {
         for(int i = 0; i < _slashSpawnTime.Length; i++)
@@ -86,6 +87,9 @@ public class PlayerAirAttack : AnimationPlayer
         _player.MovementCompo.rbCompo.gravityScale = 1;
 
         _attack = false;
+
+        if (_slashSpawnCorou != null)
+            StopCoroutine(_slashSpawnCorou);
     }
 
     public void SetAirState(bool isInAir)

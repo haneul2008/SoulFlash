@@ -51,6 +51,9 @@ public class Player : Agent
         MovementCompo.SetMovement(PlayerInput.Movement.x);
         Flip();
         _airAttack.SetAirState(!MovementCompo.isGround.Value);
+
+        if (Input.GetKeyDown(KeyCode.P))
+            PoolManager.instance.Pop("Ghost");
     }
 
     private void HandleJumpKeyEvent()

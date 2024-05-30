@@ -26,6 +26,7 @@ public class Health : MonoBehaviour
     public void ResetHealth()
     {
         CurrentHealth = _maxHealth;
+        IsCanTakeHp = true;
     }
     public void TakeDamage(int amount, Vector2 normal, Vector2 point, float knockbackPower, float hpRetakeTime)
     {
