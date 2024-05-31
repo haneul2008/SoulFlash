@@ -62,9 +62,18 @@ public class DashToSelectEnemy : MonoBehaviour
 
     private void HandleSelectEnemy()
     {
-        NowEnemyCollider = null;
-        _enemyRenderer = null;
-        _enemyMat = null;
+        NowEnemyCollider = _mouseDeteter.DetectEnemy();
+        _enemyRenderer = NowEnemyCollider == null ? null : NowEnemyCollider.gameObject.transform.Find("Visual")
+            .GetComponent<SpriteRenderer>();
+        _enemyMat = _enemyRenderer == null ? null : _enemyRenderer.material;
+
+        print(_enemyMat);
+        if (_enemyMat != null )
+        {
+            _enemyMat.SetInt(_isHitHash, 1);
+            print("Blink");
+        }
+
         Time.timeScale = 0.2f;
 
         _isSeleting = true;
@@ -96,7 +105,7 @@ public class DashToSelectEnemy : MonoBehaviour
         if (NowEnemyCollider == null) return;
 
         _isFalseBlink = false;
-        EnemyCollider.Value = _mouseDeteter.DetectEnemy();
+        EnemyCollider.Value = NowEnemyCollider;
 
         if(_enemyMat == null) return;
         _enemyMat.SetInt(_isHitHash, 1);
