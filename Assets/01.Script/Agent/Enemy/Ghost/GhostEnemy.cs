@@ -2,14 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EnemyEnum
-{
-    Appear,
-    Idle,
-    Chase,
-    Attack,
-    Dead
-}
 public class GhostEnemy : Enemy, IPoolable
 {
     [SerializeField] private GameObject _attackObj;

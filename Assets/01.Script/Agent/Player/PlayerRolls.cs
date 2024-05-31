@@ -33,6 +33,8 @@ public class PlayerRolls : AnimationPlayer
         if (!_player.CanStateChageable) return;
 
         _player.CanStateChageable = false;
+        StartCoroutine(_player.HealthCompo.CanTakeHpCoroutine(false));
+        _player.MovementCompo.canKnockback = false;
 
         _collider.size = _sizeChanger.ChangeSize(_collider.size, new Vector2(0.7f, 0.7f));
 
@@ -61,6 +63,9 @@ public class PlayerRolls : AnimationPlayer
         _sizeChanger.GetSaveSize();
         _player.MovementCompo.canMove = true;
         _currentTime = 0;
+
         _player.CanStateChageable = true;
+        StartCoroutine(_player.HealthCompo.CanTakeHpCoroutine(true));
+        _player.MovementCompo.canKnockback = true;
     }
 }

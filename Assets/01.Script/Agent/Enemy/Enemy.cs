@@ -3,6 +3,14 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
+public enum EnemyEnum
+{
+    Appear,
+    Idle,
+    Chase,
+    Attack,
+    Dead
+}
 public abstract class Enemy : Agent
 {
     public UnityEvent FinalDeadEvent;
