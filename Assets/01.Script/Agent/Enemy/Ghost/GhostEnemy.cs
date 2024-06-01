@@ -53,6 +53,7 @@ public class GhostEnemy : Enemy, IPoolable
         
         SpriteRendererCompo.color = new Color(1, 1, 1, 0);
         stateMachine.Initialize(EnemyEnum.Appear, this);
+        MovementCompo.canKnockback = true;
 
         lastAttackTime = -9999f;
     }

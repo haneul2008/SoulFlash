@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class GhostAttackState : EnemyState
+public class DemonAttackState : EnemyState
 {
-    public GhostAttackState(Enemy enemy, EnemyStateMachine stateMachine, string animBoolName) : base(enemy, stateMachine, animBoolName)
+    public DemonAttackState(Enemy enemy, EnemyStateMachine stateMachine, string animBoolName) : base(enemy, stateMachine, animBoolName)
     {
     }
 
@@ -12,13 +10,19 @@ public class GhostAttackState : EnemyState
     {
         base.Enter();
 
+        _enemy.MovementCompo.rbCompo.gravityScale = 0;
+        _enemy.transform.position = new Vector2(_enemy.transform.position.x, _enemy.transform.position.y + 0.4f);
+
+        _enemy.MovementCompo.StopImmediately(false);
         _enemy.MovementCompo.canMove = false;
         _enemy.MovementCompo.canKnockback = false;
     }
-
     public override void Exit()
     {
+        _enemy.MovementCompo.rbCompo.gravityScale = 1;
+
         _enemy.lastAttackTime = Time.time;
+
         _enemy.MovementCompo.canKnockback = true;
         _enemy.MovementCompo.canMove = true;
 

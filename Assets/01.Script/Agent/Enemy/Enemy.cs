@@ -21,7 +21,6 @@ public abstract class Enemy : Agent
     public float detectRadius;
     public float attackRadius, attackCooldown, knokbackPower;
     public int attackDamage;
-    //public LayerMask whatIsPlayer;
     public ContactFilter2D contactFilter;
 
     [HideInInspector] public float lastAttackTime;
@@ -58,6 +57,7 @@ public abstract class Enemy : Agent
     {
         Crystal crystal = PoolManager.instance.Pop("Crystal") as Crystal;
         crystal.gameObject.transform.position = transform.position;
+        crystal.SetCrystalSpawnTime(_crystalSpawnTime);
     }
     
     public virtual void Attack()

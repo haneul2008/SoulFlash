@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerHeavyAttack : AnimationPlayer
 {
+    public UnityEvent OnHeavyAttackEvent;
+
     [Header("Setting")]
     [SerializeField] private DamageCaster _damageCaster;
     [SerializeField] private Vector2 _damageCasterPos;
@@ -24,7 +27,6 @@ public class PlayerHeavyAttack : AnimationPlayer
     private Player _player;
     private float _currentTime;
     private bool _attack;
-    private bool _isDamageCast;
     private Coroutine _particleCorou;
     private void Awake()
     {
@@ -40,12 +42,8 @@ public class PlayerHeavyAttack : AnimationPlayer
     }
     private void Update()
     {
-        if (!_attack)
-        {
-            _currentTime += Time.deltaTime;
-        }
-        else if(_isDamageCast)
-            _damageCaster.CastDamage(_damage, _knockbackPower, _hpRetakeTime, false);
+        if (_attack) return;
+        _currentTime += Time.deltaTime;
     }
     private void HandleHeavyAttack()
     {
@@ -82,14 +80,13 @@ public class PlayerHeavyAttack : AnimationPlayer
     {
         yield return new WaitForSeconds(_damageCastTime);
 
-        _isDamageCast = true;
-
         _damageCaster.gameObject.transform.position = new Vector3(transform.position.x + dir * _damageCasterPos.x, _damageCasterPos.y);
         _damageCaster.damageRadius = _damageCasterRadius;
 
+        _damageCaster.CastDamage(_damage, _knockbackPower, _hpRetakeTime, false);
+        OnHeavyAttackEvent?.Invoke();
+
         yield return new WaitForSeconds(_attackTime - 0.1f);
-        
-        _isDamageCast = false;
         EndAttack();
     }
     private IEnumerator ParticleCoroutine(float dir)

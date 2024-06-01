@@ -29,7 +29,16 @@ public class Crystal : MonoBehaviour, IPoolable
 
         _collider = GetComponent<Collider2D>();
     }
-    private void OnEnable()
+    public void SetCrystalSpawnTime(float delay)
+    {
+        _corou = StartCoroutine(SpawnCrystalCoroutine(delay));
+    }
+    private IEnumerator SpawnCrystalCoroutine(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Init();
+    }
+    private void Init()
     {
         _renderer.DOFade(1, 0.5f);
         _corou = StartCoroutine(PushCoroutine());
@@ -37,7 +46,10 @@ public class Crystal : MonoBehaviour, IPoolable
     private void OnDestroy()
     {
         _dashToSelectEnemy.OnDashFinishAction -= DestroyCrystal;
-        StopCoroutine(_corou);
+        if(_corou != null)
+        {
+            StopCoroutine(_corou);
+        }
     }
     private void DestroyCrystal()
     {

@@ -10,7 +10,7 @@ public class PlayerRolls : AnimationPlayer
     private Player _player;
     private bool _roll;
     private float _dir;
-    private float _currentTime = 2f;
+    private float _currentTime = 999f;
     private CapsuleCollider2D _collider;
     private SizeChanger _sizeChanger;
     private void Awake()
@@ -33,7 +33,7 @@ public class PlayerRolls : AnimationPlayer
         if (!_player.CanStateChageable) return;
 
         _player.CanStateChageable = false;
-        StartCoroutine(_player.HealthCompo.CanTakeHpCoroutine(false));
+        _player.HealthCompo.CanTakeHp(false);
         _player.MovementCompo.canKnockback = false;
 
         _collider.size = _sizeChanger.ChangeSize(_collider.size, new Vector2(0.7f, 0.7f));
@@ -65,7 +65,7 @@ public class PlayerRolls : AnimationPlayer
         _currentTime = 0;
 
         _player.CanStateChageable = true;
-        StartCoroutine(_player.HealthCompo.CanTakeHpCoroutine(true));
+        _player.HealthCompo.CanTakeHp(true);
         _player.MovementCompo.canKnockback = true;
     }
 }

@@ -16,7 +16,7 @@ public class ImpulseFeedback : Feedback
 
     public override void PlayFeedBack()
     {
-            _source.GenerateImpulse(_impulsePower);
+        _source.GenerateImpulse(_impulsePower);
     }
 
     public override void StopFeedBack()

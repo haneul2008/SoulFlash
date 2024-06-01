@@ -67,11 +67,9 @@ public class DashToSelectEnemy : MonoBehaviour
             .GetComponent<SpriteRenderer>();
         _enemyMat = _enemyRenderer == null ? null : _enemyRenderer.material;
 
-        print(_enemyMat);
         if (_enemyMat != null )
         {
             _enemyMat.SetInt(_isHitHash, 1);
-            print("Blink");
         }
 
         Time.timeScale = 0.2f;
@@ -141,7 +139,7 @@ public class DashToSelectEnemy : MonoBehaviour
         _isSeleting = isSelecting;
         _player.MovementCompo.canMove = canMove;
 
-        StartCoroutine(_player.HealthCompo.CanTakeHpCoroutine(false));
+        _player.HealthCompo.CanTakeHp(false);
         _player.MovementCompo.canKnockback = false;
 
         _cam.m_Lens.OrthographicSize = 5f;
@@ -156,7 +154,7 @@ public class DashToSelectEnemy : MonoBehaviour
     {
         yield return new WaitForSeconds(_canTakeAttackTime);
 
-        StartCoroutine(_player.HealthCompo.CanTakeHpCoroutine(true));
+        _player.HealthCompo.CanTakeHp(true);
         _player.MovementCompo.canKnockback = true;
     }
 }

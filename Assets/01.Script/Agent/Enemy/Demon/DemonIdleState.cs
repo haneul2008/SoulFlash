@@ -37,6 +37,6 @@ public class DemonIdleState : EnemyState
     private void ChangeChaseState()
     {
         _enemy.targetTrm = GameManager.instance.Player.transform;
-        //_stateMachine.ChangeState(EnemyEnum.Chase);
+        _stateMachine.ChangeState(EnemyEnum.Chase);
     }
 }

@@ -48,7 +48,11 @@ public class Health : MonoBehaviour
             OnDeadEvent?.Invoke();
         }
     }
-    public IEnumerator CanTakeHpCoroutine(bool value, float time = 0)
+    public void CanTakeHp(bool value, float time = 0)
+    {
+        StartCoroutine(CanTakeHpCoroutine(value, time));
+    }
+    private IEnumerator CanTakeHpCoroutine(bool value, float time)
     {
         yield return new WaitForSeconds(time);
         IsCanTakeHp = value;

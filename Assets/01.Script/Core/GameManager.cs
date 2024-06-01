@@ -7,4 +7,12 @@ public class GameManager : MonoSingleton<GameManager>
 {
     [field : SerializeField] public GameObject Player { get; private set; }
     public Action OnEnemyDeadAction;
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+            PoolManager.instance.Pop("Ghost");
+        if (Input.GetKeyDown(KeyCode.O))
+            PoolManager.instance.Pop("Demon");
+    }
 }
