@@ -18,10 +18,8 @@ public class ImpulseFeedback : Feedback
     {
         _source.GenerateImpulse(_impulsePower);
     }
-
     public override void StopFeedBack()
     {
-
     }
 
 

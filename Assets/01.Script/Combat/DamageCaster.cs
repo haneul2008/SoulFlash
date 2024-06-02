@@ -7,6 +7,7 @@ public class DamageCaster : MonoBehaviour
     public ContactFilter2D filter;
     public float damageRadius;
     public int detectCount = 1;
+    public bool isDamageCast;
 
     private Collider2D[] _colliders;
 
@@ -49,6 +50,7 @@ public class DamageCaster : MonoBehaviour
                     hitPoint = Vector3.zero;
                 }
 
+                isDamageCast = true;
                 health.TakeDamage(damage, knockbackDir, hitPoint, knockbackPower, hpRetakeTime);
             }
         }

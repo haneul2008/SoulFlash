@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 4, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1180358123563179823}
@@ -155,8 +155,8 @@ Transform:
   m_GameObject: {fileID: 1466472664259319715}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 1}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6500599145304695130}
@@ -200,8 +200,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.00586915, y: 0.000929296}
-  m_Size: {x: 0.30045557, y: 0.55210197}
+  m_Offset: {x: -0.027722001, y: 0.0051943064}
+  m_Size: {x: 1.1527143, y: 2.1825306}
   m_Direction: 0
 --- !u!50 &8031306438051560653
 Rigidbody2D:
@@ -353,7 +353,7 @@ MonoBehaviour:
   _isTriggerAnim: 0
   _isHaveMoveAnim: 0
   _groundCheckerTrm: {fileID: 4779873653388821235}
-  moveSpeed: 3
+  moveSpeed: 2
   jumpPower: 6
   extraGravity: 30
   gravityDelay: 0.15
@@ -361,7 +361,7 @@ MonoBehaviour:
   _whatIsGround:
     serializedVersion: 2
     m_Bits: 64
-  _groundCheckerSize: {x: 0.6, y: 0.9}
+  _groundCheckerSize: {x: 0.6, y: 0.2}
   isGround:
     _value: 0
   canMove: 1
@@ -482,7 +482,7 @@ Transform:
   m_GameObject: {fileID: 4781620267932200740}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.19, z: 0}
+  m_LocalPosition: {x: 0, y: -0.99, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -517,7 +517,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 4, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4034258770910457876}
@@ -563,8 +563,8 @@ SpriteRenderer:
   m_SortingLayerID: -848420123
   m_SortingLayer: 2
   m_SortingOrder: -1
-  m_Sprite: {fileID: -1407612548, guid: 1276096d626138d4080565f5cb867cd5, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Sprite: {fileID: 2123769599, guid: 595ee3320734f4f4293c99ecb90ae33a, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

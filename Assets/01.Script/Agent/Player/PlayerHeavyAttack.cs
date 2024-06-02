@@ -80,6 +80,8 @@ public class PlayerHeavyAttack : AnimationPlayer
     {
         yield return new WaitForSeconds(_damageCastTime);
 
+        if (!_attack) yield break;
+
         _damageCaster.gameObject.transform.position = new Vector3(transform.position.x + dir * _damageCasterPos.x, _damageCasterPos.y);
         _damageCaster.damageRadius = _damageCasterRadius;
 

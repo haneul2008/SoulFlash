@@ -27,6 +27,7 @@ public abstract class Enemy : Agent
     [HideInInspector] public Transform targetTrm;
 
     protected int _enemyLayer;
+    protected int _deadLayer;
     public bool CanStateChageable { get; protected set; } = true;
     public DamageCaster DamageCasterCompo { get; protected set; }
 
@@ -36,6 +37,7 @@ public abstract class Enemy : Agent
         base.Awake();
         DamageCasterCompo = transform.Find("DamageCaster").GetComponent<DamageCaster>();
         _enemyLayer = LayerMask.NameToLayer("Enemy");
+        _deadLayer = LayerMask.NameToLayer("DeathEnemy");
         _colliders = new Collider2D[1];
     }
     public Collider2D GetPlayerInRange()
@@ -60,9 +62,10 @@ public abstract class Enemy : Agent
         crystal.SetCrystalSpawnTime(_crystalSpawnTime);
     }
     
-    public virtual void Attack()
+    public virtual void Attack(bool castDamage = true)
     {
-        DamageCasterCompo.CastDamage(attackDamage, knokbackPower, 0.1f, false, true);
+        if (!castDamage) return;
+            DamageCasterCompo.CastDamage(attackDamage, knokbackPower, 0.1f, false, true);
     }
 #if UNITY_EDITOR
     protected virtual void OnDrawGizmosSelected()

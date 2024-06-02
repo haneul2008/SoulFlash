@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class DemonEnemy : Enemy, IPoolable
+public class NightmareEnemy : Enemy, IPoolable
 {
+    public UnityEvent OnDamageCastEvent;
+
     [SerializeField] private string _poolName;
 
     public EnemyStateMachine stateMachine;
@@ -18,10 +21,10 @@ public class DemonEnemy : Enemy, IPoolable
 
         stateMachine = new EnemyStateMachine();
 
-        stateMachine.AddState(EnemyEnum.Idle, new DemonIdleState(this, stateMachine, "Idle"));
-        stateMachine.AddState(EnemyEnum.Chase, new DemonChaseState(this, stateMachine, "Idle"));
-        stateMachine.AddState(EnemyEnum.Attack, new DemonAttackState(this, stateMachine, "Attack"));
-        stateMachine.AddState(EnemyEnum.Dead, new DemonDeadState(this, stateMachine, "Dead"));
+        stateMachine.AddState(EnemyEnum.Idle, new NightmareIdleState(this, stateMachine, "Idle"));
+        stateMachine.AddState(EnemyEnum.Chase, new NightmareChaseState(this, stateMachine, "Attack"));
+        stateMachine.AddState(EnemyEnum.Attack, new NightmareAttackState(this, stateMachine, "Attack"));
+        stateMachine.AddState(EnemyEnum.Dead, new NightmareDeadState(this, stateMachine, "Dead"));
 
         stateMachine.Initialize(EnemyEnum.Idle, this);
 
@@ -47,6 +50,11 @@ public class DemonEnemy : Enemy, IPoolable
         gameObject.layer = _deadLayer;
         stateMachine.ChangeState(EnemyEnum.Dead);
     }
+    public override void Attack(bool castDamage = true)
+    {
+        base.Attack(castDamage);
+        OnDamageCastEvent?.Invoke();
+    }
 
     public void ResetItem()
     {
@@ -61,7 +69,7 @@ public class DemonEnemy : Enemy, IPoolable
         stateMachine.Initialize(EnemyEnum.Idle, this);
 
         lastAttackTime = -9999f;
-        
+
         gameObject.layer = _enemyLayer;
     }
 }

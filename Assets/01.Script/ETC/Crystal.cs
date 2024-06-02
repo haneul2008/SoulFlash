@@ -16,8 +16,14 @@ public class Crystal : MonoBehaviour, IPoolable
 
     private SpriteRenderer _renderer;
     private Coroutine _corou;
+
+    private bool _init;
+    private int _enemyDeadLayer;
+    private int _enemyLayer;
     public void ResetItem()
     {
+        gameObject.layer = _enemyDeadLayer;
+        _init = false;
     }
 
     private void Awake()
@@ -28,6 +34,9 @@ public class Crystal : MonoBehaviour, IPoolable
         _renderer = transform.Find("Visual").GetComponent<SpriteRenderer>();
 
         _collider = GetComponent<Collider2D>();
+
+        _enemyDeadLayer = LayerMask.NameToLayer("DeathEnemy");
+        _enemyLayer = LayerMask.NameToLayer("Enemy");
     }
     public void SetCrystalSpawnTime(float delay)
     {
@@ -40,6 +49,9 @@ public class Crystal : MonoBehaviour, IPoolable
     }
     private void Init()
     {
+        _init = true;
+        gameObject.layer = _enemyLayer;
+
         _renderer.DOFade(1, 0.5f);
         _corou = StartCoroutine(PushCoroutine());
     }
@@ -53,6 +65,7 @@ public class Crystal : MonoBehaviour, IPoolable
     }
     private void DestroyCrystal()
     {
+        if(!_init) return;
         if (_dashToSelectEnemy.NowEnemyCollider == _collider)
             PushCrystal();
     }

@@ -37,7 +37,7 @@ public class GhostEnemy : Enemy, IPoolable
 
         if (targetTrm != null && IsDead == false)
         {
-            if(Vector2.Distance(targetTrm.position, transform.position) > 0.8f)
+            if (Vector2.Distance(new Vector2(targetTrm.position.x, 0), new Vector2(transform.position.x, 0)) > 0.1f)
                 HandleSpriteFlip(targetTrm.position, true);
         }
     }
@@ -56,13 +56,15 @@ public class GhostEnemy : Enemy, IPoolable
         MovementCompo.canKnockback = true;
 
         lastAttackTime = -9999f;
+
+        gameObject.layer = _enemyLayer;
     }
-    public override void Attack()
+    public override void Attack(bool castDamage = true)
     {
         _damageCaster.transform.position = new Vector2(targetTrm.position.x, transform.position.y);
         if (Vector2.Distance(transform.position, targetTrm.position) > attackRadius)
             _damageCaster.transform.localPosition = new Vector2(-0.472f, 0);
-        base.Attack();
+        base.Attack(castDamage);
 
         _attackObj.transform.SetParent(null);
         _attackObj.transform.position = new Vector3(_damageCaster.transform.position.x, -2f);
@@ -70,6 +72,7 @@ public class GhostEnemy : Enemy, IPoolable
     }
     public override void SetDeadState()
     {
+        gameObject.layer = _deadLayer;
         stateMachine.ChangeState(EnemyEnum.Dead);
     }
 }

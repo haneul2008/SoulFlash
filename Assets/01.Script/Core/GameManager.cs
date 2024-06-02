@@ -14,5 +14,7 @@ public class GameManager : MonoSingleton<GameManager>
             PoolManager.instance.Pop("Ghost");
         if (Input.GetKeyDown(KeyCode.O))
             PoolManager.instance.Pop("Demon");
+        if (Input.GetKeyDown(KeyCode.I))
+            PoolManager.instance.Pop("Nightmare");
     }
 }

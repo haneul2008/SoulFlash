@@ -8,6 +8,7 @@ public class ChangeColorFeedback : Feedback
     [Header("Setting")]
     [SerializeField] private bool _useBlinkMat;
     [SerializeField] private bool _pingPong; //색이 바뀌고 돌아올지 아니면 바뀐채로 유지할지
+    [SerializeField] private bool _useTween; //핑퐁을 체크했을 때 돌아오는 트윈을 사용할지
     [SerializeField] private bool _push; //피드백이 끝난 후 풀에 넣을건지
     [SerializeField] private float _pushDelay;
 
@@ -22,29 +23,43 @@ public class ChangeColorFeedback : Feedback
 
     private readonly int _isMatColor = Shader.PropertyToID("_HitColor");
     private readonly int _isHitHash = Shader.PropertyToID("_IsHit");
+    private void Awake()
+    {
+        _saveColor = _targetRenderer.color;
+    }
     public override void PlayFeedBack()
     {
         if (!_useBlinkMat)
         {
-            _saveColor = _targetRenderer.color;
             _tween = _targetRenderer.DOColor(_targetColor, _changeTime)
                 .SetEase(_ease)
                 .OnComplete(()=>
                 {
                     if (!_pingPong)
                     {
+                        //if(!_stop) _targetRenderer.color = _saveColor;
+
                         if (!_push) return;
                         StartCoroutine("PushPool");
                     }
                     else
                     {
                         //핑퐁을 체크했을 때 다시 원래 색으로 돌아오는 트윈
-                        _tween = _targetRenderer.DOColor(_saveColor, _changeTime)
-                        .OnComplete(() =>
+                        if(_useTween)
                         {
+                            _tween = _targetRenderer.DOColor(_saveColor, _changeTime)
+                            .OnComplete(() =>
+                            {
+                               if (!_push) return;
+                               StartCoroutine("PushPool");
+                            });
+                        }
+                        else
+                        {
+                            _targetRenderer.color = _saveColor;
                             if (!_push) return;
                             StartCoroutine("PushPool");
-                        });
+                        }
                     }
                 });
         }
@@ -60,8 +75,40 @@ public class ChangeColorFeedback : Feedback
                 })
                 .OnComplete(()=>
                 {
-                    if (!_push) return;
-                    StartCoroutine("PushPool");
+                    if(!_pingPong)
+                    {
+                        if (!_push) return;
+                        StartCoroutine("PushPool");
+                    }
+                    else
+                    {
+                        if( _useTween)
+                        {
+                            //핑퐁을 체크했을 때 다시 원래 색으로 돌아오는 트윈
+                            _tween = _targetRenderer.DOColor(_saveColor, _changeTime)
+                            .SetEase(_ease)
+                            .OnUpdate(() =>
+                            {
+                                mat.SetColor(_isMatColor, _targetRenderer.color);
+                            })
+                            .OnComplete(() =>
+                            {
+                                mat.SetInt(_isHitHash, 0);
+
+                                if (!_push) return;
+                                StartCoroutine("PushPool");
+                            });
+                        }
+                        else
+                        {
+                            _targetRenderer.color = _saveColor;
+                            mat.SetColor(_isMatColor, _saveColor);
+                            mat.SetInt(_isHitHash, 0);
+
+                            if (!_push) return;
+                            StartCoroutine("PushPool");
+                        }
+                    }
                 });
         }
     }

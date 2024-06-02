@@ -65,5 +65,6 @@ public class PlayerAirDash : AnimationPlayer
         _player.MovementCompo.canMove = true;
         _player.CanStateChageable = true;
         _currentTime = 0;
+        _player.MovementCompo.rbCompo.gravityScale = 1;
     }
 }

@@ -27,6 +27,7 @@ public class DashToSelectEnemy : MonoBehaviour
     private Collider2D[] _enemyDetectCollider;
     private SpriteRenderer _enemyRenderer;
     private Material _enemyMat;
+    private bool _actionTrigger;
 
     private readonly int _isHitHash = Shader.PropertyToID("_IsHit");
     private void OnEnable()
@@ -62,6 +63,10 @@ public class DashToSelectEnemy : MonoBehaviour
 
     private void HandleSelectEnemy()
     {
+        if (_actionTrigger) return;
+
+        _actionTrigger = true;
+
         NowEnemyCollider = _mouseDeteter.DetectEnemy();
         _enemyRenderer = NowEnemyCollider == null ? null : NowEnemyCollider.gameObject.transform.Find("Visual")
             .GetComponent<SpriteRenderer>();
@@ -94,7 +99,8 @@ public class DashToSelectEnemy : MonoBehaviour
     private void ToDoEnemy()
     {
         NowEnemyCollider = _mouseDeteter.DetectEnemy();
-        if (!_isFalseBlink && _enemyMat != null && NowEnemyCollider == null)
+
+            if (!_isFalseBlink && _enemyMat != null && NowEnemyCollider == null)
         {
             _isFalseBlink = true;
             _enemyMat.SetInt(_isHitHash, 0);
@@ -146,6 +152,8 @@ public class DashToSelectEnemy : MonoBehaviour
 
         OnDashFinishEvent?.Invoke();
         OnDashFinishAction?.Invoke();
+
+        _actionTrigger = false;
 
         if (_enemyMat == null) return;
             _enemyMat.SetInt(_isHitHash, 0);

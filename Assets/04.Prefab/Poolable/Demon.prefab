@@ -263,7 +263,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  _crystalSpawnTime: 0.3
+  _crystalSpawnTime: 1
   detectRadius: 8
   attackRadius: 3
   attackCooldown: 5
@@ -302,7 +302,7 @@ MonoBehaviour:
   _isTriggerAnim: 0
   _isHaveMoveAnim: 0
   _groundCheckerTrm: {fileID: 4356203427722963031}
-  moveSpeed: 4
+  moveSpeed: 3
   jumpPower: 6
   extraGravity: 30
   gravityDelay: 0.15
@@ -482,7 +482,7 @@ MonoBehaviour:
   _pushDelay: 0.2
   _targetRenderer: {fileID: 3458386939066415061}
   _targetColor: {r: 1, g: 0.089129195, b: 0.066037595, a: 1}
-  _changeTime: 0.03
+  _changeTime: 0.1
   _ease: 22
 --- !u!1 &6076095807815096749
 GameObject:
