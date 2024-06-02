@@ -48,7 +48,7 @@ public class GhostEnemy : Enemy, IPoolable
 
     public void ResetItem()
     {
-        HealthCompo.ResetHealth();
+        HealthCompo.ResetHealth(HealthCompo.MaxHealth);
         SetDead(false);
         
         SpriteRendererCompo.color = new Color(1, 1, 1, 0);

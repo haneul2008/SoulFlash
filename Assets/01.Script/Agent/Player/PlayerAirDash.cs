@@ -23,9 +23,15 @@ public class PlayerAirDash : AnimationPlayer
         _sizeChanger = new();
         _currentTime = _coolTime;
     }
+    public override void Initialize(Agent agent)
+    {
+        base.Initialize(agent);
+        _agent.MovementCompo.OnKnockbackAction += DashEnd;
+    }
     private void OnDisable()
     {
         _player.PlayerInput.OnLeftShiftEvent -= HandleDash;
+        _agent.MovementCompo.OnKnockbackAction -= DashEnd;
     }
     private void Update()
     {
@@ -61,6 +67,7 @@ public class PlayerAirDash : AnimationPlayer
 
         EndAnimation();
 
+        _player.MovementCompo.StopImmediately();
         _sizeChanger.GetSaveSize();
         _player.MovementCompo.canMove = true;
         _player.CanStateChageable = true;

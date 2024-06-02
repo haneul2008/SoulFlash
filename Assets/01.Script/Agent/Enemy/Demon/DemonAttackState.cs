@@ -14,6 +14,8 @@ public class DemonAttackState : EnemyState
         _enemy.transform.position = new Vector2(_enemy.transform.position.x, _enemy.transform.position.y + 0.4f);
 
         _enemy.MovementCompo.StopImmediately(false);
+
+        _enemy.HealthCompo.CanTakeHp(false);
         _enemy.MovementCompo.canMove = false;
         _enemy.MovementCompo.canKnockback = false;
     }
@@ -25,6 +27,7 @@ public class DemonAttackState : EnemyState
 
         _enemy.MovementCompo.canKnockback = true;
         _enemy.MovementCompo.canMove = true;
+        _enemy.HealthCompo.CanTakeHp(true);
 
         base.Exit();
     }

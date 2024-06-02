@@ -20,6 +20,7 @@ public class ChangeColorFeedback : Feedback
 
     private Tween _tween;
     private Color _saveColor;
+    private Material _mat;
 
     private readonly int _isMatColor = Shader.PropertyToID("_HitColor");
     private readonly int _isHitHash = Shader.PropertyToID("_IsHit");
@@ -65,13 +66,13 @@ public class ChangeColorFeedback : Feedback
         }
         else
         {
-            Material mat = _targetRenderer.material;
-            mat.SetInt(_isHitHash, 1);
+            _mat = _targetRenderer.material;
+            _mat.SetInt(_isHitHash, 1);
             _tween = _targetRenderer.DOColor(_targetColor, _changeTime)
                 .SetEase(_ease)
                 .OnUpdate(() =>
                 {
-                    mat.SetColor(_isMatColor, _targetRenderer.color);
+                    _mat.SetColor(_isMatColor, _targetRenderer.color);
                 })
                 .OnComplete(()=>
                 {
@@ -89,11 +90,11 @@ public class ChangeColorFeedback : Feedback
                             .SetEase(_ease)
                             .OnUpdate(() =>
                             {
-                                mat.SetColor(_isMatColor, _targetRenderer.color);
+                                _mat.SetColor(_isMatColor, _targetRenderer.color);
                             })
                             .OnComplete(() =>
                             {
-                                mat.SetInt(_isHitHash, 0);
+                                _mat.SetInt(_isHitHash, 0);
 
                                 if (!_push) return;
                                 StartCoroutine("PushPool");
@@ -102,8 +103,8 @@ public class ChangeColorFeedback : Feedback
                         else
                         {
                             _targetRenderer.color = _saveColor;
-                            mat.SetColor(_isMatColor, _saveColor);
-                            mat.SetInt(_isHitHash, 0);
+                            _mat.SetColor(_isMatColor, _targetRenderer.color);
+                            _mat.SetInt(_isHitHash, 0);
 
                             if (!_push) return;
                             StartCoroutine("PushPool");
@@ -134,6 +135,9 @@ public class ChangeColorFeedback : Feedback
                 {
                     Destroy(gameObject.transform.parent.gameObject);
                 }
+
+                _targetRenderer.color = _saveColor;
+                _mat.SetColor(_isMatColor, _targetRenderer.color);
             });
     }
 }

@@ -21,9 +21,15 @@ public class PlayerRolls : AnimationPlayer
         _sizeChanger = new();
         //0.7, 0.7
     }
+    public override void Initialize(Agent agent)
+    {
+        base.Initialize(agent);
+        _agent.MovementCompo.OnKnockbackAction += RollEnd;
+    }
     private void OnDisable()
     {
         _player.PlayerInput.OnLeftShiftEvent -= Roll;
+        _agent.MovementCompo.OnKnockbackAction -= RollEnd;
     }
 
     private void Roll()
@@ -33,8 +39,6 @@ public class PlayerRolls : AnimationPlayer
         if (!_player.CanStateChageable) return;
 
         _player.CanStateChageable = false;
-        _player.HealthCompo.CanTakeHp(false);
-        _player.MovementCompo.canKnockback = false;
 
         _collider.size = _sizeChanger.ChangeSize(_collider.size, new Vector2(0.7f, 0.7f));
 
@@ -61,11 +65,10 @@ public class PlayerRolls : AnimationPlayer
         EndAnimation();
 
         _sizeChanger.GetSaveSize();
+        _player.MovementCompo.StopImmediately();
         _player.MovementCompo.canMove = true;
         _currentTime = 0;
 
         _player.CanStateChageable = true;
-        _player.HealthCompo.CanTakeHp(true);
-        _player.MovementCompo.canKnockback = true;
     }
 }

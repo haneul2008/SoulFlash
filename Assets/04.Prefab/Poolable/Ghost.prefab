@@ -272,7 +272,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  _maxHealth: 150
+  _maxHealth: 100
 --- !u!114 &8207077910258931589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -669,6 +669,7 @@ MonoBehaviour:
     maxNormalAngle: 0
   damageRadius: 0.8
   detectCount: 1
+  isDamageCast: 0
 --- !u!1 &7809624037242729284
 GameObject:
   m_ObjectHideFlags: 0

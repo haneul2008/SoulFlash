@@ -54,7 +54,7 @@ public class DemonEnemy : Enemy, IPoolable
         HealthCompo.CanTakeHp(true);
         MovementCompo.canKnockback = true;
 
-        HealthCompo.ResetHealth();
+        HealthCompo.ResetHealth(HealthCompo.MaxHealth);
         SetDead(false);
 
         SpriteRendererCompo.color = new Color(1, 1, 1, 1);

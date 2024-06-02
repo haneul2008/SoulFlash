@@ -10,7 +10,7 @@ public class Health : MonoBehaviour
 
     public Action OnHitAction;
 
-    [SerializeField] private int _maxHealth = 150;
+    [field : SerializeField] public int MaxHealth { get; private set; } = 150;
 
     public bool IsCanTakeHp { get; private set; } = true;
 
@@ -20,12 +20,12 @@ public class Health : MonoBehaviour
     public void Initialize(Agent owner)
     {
         _owner = owner;
-        ResetHealth();
+        ResetHealth(MaxHealth);
     }
 
-    public void ResetHealth()
+    public void ResetHealth(int hp)
     {
-        CurrentHealth = _maxHealth;
+        CurrentHealth = hp;
         IsCanTakeHp = true;
     }
     public void TakeDamage(int amount, Vector2 normal, Vector2 point, float knockbackPower, float hpRetakeTime)

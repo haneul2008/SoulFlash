@@ -28,7 +28,7 @@ public abstract class Enemy : Agent
 
     protected int _enemyLayer;
     protected int _deadLayer;
-    public bool CanStateChageable { get; protected set; } = true;
+    public bool CanStateChageable { get; set; } = true;
     public DamageCaster DamageCasterCompo { get; protected set; }
 
     private Collider2D[] _colliders;
