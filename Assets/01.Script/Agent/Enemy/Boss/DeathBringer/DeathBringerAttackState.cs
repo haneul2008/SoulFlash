@@ -29,6 +29,7 @@ public class DeathBringerAttackState : BossState
         _boss.HealthCompo.CanTakeHp(true);
 
         _boss.SetPatternIndex(1);
+        _boss.attackRadius = 10;
 
         base.Exit();
     }

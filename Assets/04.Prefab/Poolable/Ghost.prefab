@@ -272,7 +272,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  _maxHealth: 100
+  <MaxHealth>k__BackingField: 60
 --- !u!114 &8207077910258931589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -285,6 +285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5441f22b6f0c9c54795737eec52c386d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isSpawnAgent: 0
   FinalDeadEvent:
     m_PersistentCalls:
       m_Calls:

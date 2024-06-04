@@ -6,6 +6,7 @@ public class AgentSpawnFeedback : Feedback
 {
     [Header("Setting")]
     [SerializeField] private Transform _spawnTarget;
+    [SerializeField] private Boss _boss;
     [SerializeField] private float _spawnMaxDistance;
     [SerializeField] private int _agentHp;
     [SerializeField] private string _agentName;
@@ -42,6 +43,14 @@ public class AgentSpawnFeedback : Feedback
 
             Health agentHealth = agent.gameObject.GetComponent<Health>();
             if (agentHealth != null) agentHealth.ResetHealth(_agentHp);
+
+            agent.isSpawnAgent = true;
+
+            Enemy enemy = agent.gameObject.GetComponent<Enemy>();
+            if (enemy != null)
+            {
+                _boss.spawnEnemyList.Add(enemy);
+            }
         }
     }
 }

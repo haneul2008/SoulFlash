@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerAirDash : AnimationPlayer
 {
+    public UnityEvent OnAirDashEvent;
+
     [Header("Setting")]
     [SerializeField] private float _dashSpeed;
     [SerializeField] private float _dashTime;
@@ -51,6 +54,7 @@ public class PlayerAirDash : AnimationPlayer
 
         _player.MovementCompo.canMove = false;
         _player.CanStateChageable = false;
+
         _player.MovementCompo.rbCompo.velocity = Vector2.zero;
         _player.MovementCompo.rbCompo.gravityScale = 0;
 
@@ -63,15 +67,20 @@ public class PlayerAirDash : AnimationPlayer
     }
     private void DashEnd()
     {
+        if (_dash)
+        {
+            OnAirDashEvent?.Invoke();
+            _currentTime = 0;
+        }
         _dash = false;
 
         EndAnimation();
 
         _player.MovementCompo.StopImmediately();
         _sizeChanger.GetSaveSize();
+
         _player.MovementCompo.canMove = true;
         _player.CanStateChageable = true;
-        _currentTime = 0;
         _player.MovementCompo.rbCompo.gravityScale = 1;
     }
 }

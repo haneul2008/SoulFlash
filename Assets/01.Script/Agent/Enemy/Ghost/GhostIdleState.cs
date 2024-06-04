@@ -9,6 +9,12 @@ public class GhostIdleState : EnemyState
     {
         base.Enter();
 
+        if (_enemy.isSpawnAgent)
+        {
+            ChangeChaseState();
+            return;
+        }
+
         _enemy.HealthCompo.OnHitAction += ChangeChaseState;
         _enemy.MovementCompo.StopImmediately(false);
     }

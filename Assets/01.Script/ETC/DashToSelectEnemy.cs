@@ -132,6 +132,8 @@ public class DashToSelectEnemy : MonoBehaviour
         transform.DOMove(new Vector2(NowEnemyCollider.gameObject.transform.position.x, transform.position.y), _dashTime / distance)
             .OnComplete(() =>
             {
+                GameManager.instance.soulCount++;
+
                 _player.MovementCompo.canMove = true;
 
                 _player.CanStateChageable = true;

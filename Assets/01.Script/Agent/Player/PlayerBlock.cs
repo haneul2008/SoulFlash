@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerBlock : AnimationPlayer
 {
+    public UnityEvent OnBlockEvent;
+
     [SerializeField] private float _cooltime;
     [SerializeField] private float _blockTime;
 
@@ -33,7 +36,6 @@ public class PlayerBlock : AnimationPlayer
         if (!_player.CanStateChageable || _currentTime < _cooltime) return;
 
         _isBlock = true;
-        _currentTime = 0;
 
         _player.HealthCompo.CanTakeHp(false);
 
@@ -45,12 +47,17 @@ public class PlayerBlock : AnimationPlayer
     }
     private void EndBlock()
     {
+        if(_isBlock) _currentTime = 0;
+        if(!_isBlock && _currentTime < _cooltime) return;
+
         EndAnimation();
 
         _player.HealthCompo.CanTakeHp(true);
 
         _player.CanStateChageable = true;
         _player.MovementCompo.canMove = true;
+
+        OnBlockEvent?.Invoke();
 
         _isBlock = false;
     }

@@ -5,6 +5,7 @@ using UnityEngine.Events;
 
 public class PlayerHeavyAttack : AnimationPlayer
 {
+    public UnityEvent OnEnterHeavyAttack;
     public UnityEvent OnHeavyAttackEvent;
 
     [Header("Setting")]
@@ -27,6 +28,7 @@ public class PlayerHeavyAttack : AnimationPlayer
     private Player _player;
     private float _currentTime;
     private bool _attack;
+    private bool _cooltimeTrigger;
     private Coroutine _particleCorou;
     private void Awake()
     {
@@ -42,13 +44,15 @@ public class PlayerHeavyAttack : AnimationPlayer
     }
     private void Update()
     {
-        if (_attack) return;
+        if (_cooltimeTrigger) return;
         _currentTime += Time.deltaTime;
     }
     private void HandleHeavyAttack()
     {
         if (!_player.MovementCompo.isGround.Value) return;
         if (!_player.CanStateChageable || _currentTime < _cooltime) return;
+
+        OnEnterHeavyAttack?.Invoke();
 
         _attack = true;
         _currentTime = 0;
@@ -78,6 +82,8 @@ public class PlayerHeavyAttack : AnimationPlayer
     }
     private IEnumerator DamageCastCoroutine(float dir)
     {
+        _cooltimeTrigger = false;
+
         yield return new WaitForSeconds(_damageCastTime);
 
         if (!_attack) yield break;

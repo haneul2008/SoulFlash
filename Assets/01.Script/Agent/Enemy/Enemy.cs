@@ -57,7 +57,13 @@ public abstract class Enemy : Agent
     }
     public void SpawnCrystal()
     {
-        Crystal crystal = PoolManager.instance.Pop("Crystal") as Crystal;
+        if (isSpawnAgent)
+        {
+            isSpawnAgent = false;
+            return;
+        }
+
+            Crystal crystal = PoolManager.instance.Pop("Crystal") as Crystal;
         crystal.gameObject.transform.position = transform.position;
         crystal.SetCrystalSpawnTime(_crystalSpawnTime);
     }

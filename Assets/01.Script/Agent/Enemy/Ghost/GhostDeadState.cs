@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class GhostDeadState : EnemyState
 {
+    private bool _isSpawnAgent;
     public GhostDeadState(Enemy enemy, EnemyStateMachine stateMachine, string animBoolName) : base(enemy, stateMachine, animBoolName)
     {
     }
@@ -14,6 +15,8 @@ public class GhostDeadState : EnemyState
         base.Enter();
         _enemy.MovementCompo.StopImmediately();
         _enemy.SetDead(true);
+
+        _isSpawnAgent = _enemy.isSpawnAgent;
     }
 
     public override void UpdateState()
@@ -39,6 +42,8 @@ public class GhostDeadState : EnemyState
         {
             GameObject.Destroy(_enemy.gameObject);
         }
+
+        if (_isSpawnAgent) return;
         GameManager.instance.OnEnemyDeadAction?.Invoke();
     }
 }

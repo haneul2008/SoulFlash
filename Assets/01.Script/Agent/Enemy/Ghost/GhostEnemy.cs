@@ -63,7 +63,7 @@ public class GhostEnemy : Enemy, IPoolable
     {
         _damageCaster.transform.position = new Vector2(targetTrm.position.x, transform.position.y);
         if (Vector2.Distance(transform.position, targetTrm.position) > attackRadius)
-            _damageCaster.transform.localPosition = new Vector2(-0.472f, 0);
+            _damageCaster.transform.localPosition = new Vector2(-2f, 0);
         base.Attack(castDamage);
 
         _attackObj.transform.SetParent(null);

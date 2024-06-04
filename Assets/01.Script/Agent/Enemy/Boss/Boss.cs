@@ -22,12 +22,22 @@ public abstract class Boss : Enemy
     public UnityEvent OnPattern3Event;
     [field: SerializeField] public List<float> PatternCooltime { get; private set; }
     public int NowPattern { get; private set; }
+    public List<Enemy> spawnEnemyList = new List<Enemy>();
+
+    public bool isAppear;
     public override void AnimationEndTrigger()
     {
     }
 
     public override void SetDeadState()
     {
+        if(spawnEnemyList.Count > 0)
+        {
+            foreach(Enemy enemy in spawnEnemyList)
+            {
+                enemy.SetDeadState();
+            }
+        }
     }
     public void SetPatternIndex(int index)
     {

@@ -1,10 +1,13 @@
 using System.Collections;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
+using UnityEngine.Events;
 using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class PlayerAirAttack : AnimationPlayer
 {
+    public UnityEvent OnAirAttackEvent;
+
     [Header("Setting")]
     [SerializeField] private float _slashSpawnX;
     [SerializeField] private float _attackTime;
@@ -39,6 +42,8 @@ public class PlayerAirAttack : AnimationPlayer
     {
         if (!_player.CanStateChageable) return;
         if (!InAir || _currentTime < _cooltime) return;
+
+        OnAirAttackEvent?.Invoke();
 
         _attack = true;
         _currentTime = 0;

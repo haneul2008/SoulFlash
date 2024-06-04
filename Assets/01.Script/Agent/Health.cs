@@ -10,7 +10,7 @@ public class Health : MonoBehaviour
 
     public Action OnHitAction;
 
-    [field : SerializeField] public int MaxHealth { get; private set; } = 150;
+    [field: SerializeField] public int MaxHealth { get; private set; }
 
     public bool IsCanTakeHp { get; private set; } = true;
 

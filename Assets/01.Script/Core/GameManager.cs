@@ -8,6 +8,16 @@ public class GameManager : MonoSingleton<GameManager>
     [field : SerializeField] public GameObject Player { get; private set; }
     public Action OnEnemyDeadAction;
 
+    public int soulCount;
+    private void Awake()
+    {
+        soulCount = 0;
+    }
+    private void Start()
+    {
+        Application.targetFrameRate = 1000;
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.P))

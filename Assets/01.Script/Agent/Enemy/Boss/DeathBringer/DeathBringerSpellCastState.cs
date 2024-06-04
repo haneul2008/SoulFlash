@@ -30,6 +30,7 @@ public class DeathBringerSpellCastState : BossState
         _boss.MovementCompo.canMove = true;
 
         _boss.SetPatternIndex(0);
+        _boss.attackRadius = 7f;
 
         base.Exit();
     }

@@ -11,6 +11,7 @@ public abstract class Agent : MonoBehaviour
 
     public bool IsDead { get; protected set; }
 
+    public bool isSpawnAgent;
     protected float _timeInAir;
     protected virtual void Awake()
     {

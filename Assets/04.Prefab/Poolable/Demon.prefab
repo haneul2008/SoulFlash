@@ -236,6 +236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea3882cae7f57634ebf191bf9dfb1ad6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isSpawnAgent: 0
   FinalDeadEvent:
     m_PersistentCalls:
       m_Calls:
@@ -357,7 +358,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  _maxHealth: 150
+  <MaxHealth>k__BackingField: 80
 --- !u!1 &4021797300412935792
 GameObject:
   m_ObjectHideFlags: 0
@@ -384,7 +385,7 @@ Transform:
   m_GameObject: {fileID: 4021797300412935792}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.61, y: -0.67, z: 0}
+  m_LocalPosition: {x: -0.97, y: -0.93, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -417,8 +418,9 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
-  damageRadius: 0.8
+  damageRadius: 1
   detectCount: 1
+  isDamageCast: 0
 --- !u!1 &4930821663769889132
 GameObject:
   m_ObjectHideFlags: 0
@@ -478,6 +480,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _useBlinkMat: 1
   _pingPong: 0
+  _useTween: 0
   _push: 1
   _pushDelay: 0.2
   _targetRenderer: {fileID: 3458386939066415061}

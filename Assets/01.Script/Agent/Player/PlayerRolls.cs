@@ -1,7 +1,10 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerRolls : AnimationPlayer
 {
+    public UnityEvent OnRollsEvent;
+
     [Header("Setting")]
     [SerializeField] private float _rollSpeed;
     [SerializeField] private float _rollTime;
@@ -60,6 +63,11 @@ public class PlayerRolls : AnimationPlayer
     }
     private void RollEnd()
     {
+        if (_roll)
+        {
+            OnRollsEvent?.Invoke();
+            _currentTime = 0;
+        }
         _roll = false;
 
         EndAnimation();
@@ -67,7 +75,6 @@ public class PlayerRolls : AnimationPlayer
         _sizeChanger.GetSaveSize();
         _player.MovementCompo.StopImmediately();
         _player.MovementCompo.canMove = true;
-        _currentTime = 0;
 
         _player.CanStateChageable = true;
     }

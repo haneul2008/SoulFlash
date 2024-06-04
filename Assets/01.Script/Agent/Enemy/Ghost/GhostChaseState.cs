@@ -14,7 +14,7 @@ public class GhostChaseState : EnemyState
 
         Vector2 dir = new Vector2((_enemy.targetTrm.position - _enemy.transform.position).x, 0);
         float distance = dir.magnitude;
-        if (distance > _enemy.detectRadius + 4f)
+        if (distance > _enemy.detectRadius + 4f && !_enemy.isSpawnAgent)
         {
             _stateMachine.ChangeState(EnemyEnum.Idle);
             return;

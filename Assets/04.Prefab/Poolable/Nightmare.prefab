@@ -677,6 +677,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b34cda137cc80df4ba146f68087a2588, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isSpawnAgent: 0
   FinalDeadEvent:
     m_PersistentCalls:
       m_Calls:
@@ -813,7 +814,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  <MaxHealth>k__BackingField: 50
+  <MaxHealth>k__BackingField: 30
 --- !u!70 &336050281033311881
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
