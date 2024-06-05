@@ -28,6 +28,8 @@ public class NightmareIdleState : EnemyState
     {
         base.UpdateState();
 
+        if (_enemy.dontCheckDetect) return;
+
         _player = _enemy.GetPlayerInRange();
         if (_player != null)
         {

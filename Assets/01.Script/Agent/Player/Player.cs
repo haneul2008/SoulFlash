@@ -36,6 +36,8 @@ public class Player : Agent
         _airAttack = GetComponent<PlayerAirAttack>();
 
         InitPlayerActions();
+
+        DontDestroyOnLoad(gameObject);
     }
     private void OnDisable()
     {

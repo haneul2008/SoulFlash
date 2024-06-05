@@ -8,9 +8,11 @@ public class BossNameUI : MonoBehaviour
 {
     [SerializeField] float _startY;
     [SerializeField] float _finishY;
+    [SerializeField] float _startDelay;
     [SerializeField] float _moveDuration;
     [SerializeField] float _nameDelay;
     [SerializeField] private TMP_Text _nameText;
+    [SerializeField] private BossHpUi _bossHpUi;
 
     private RectTransform _rectTransform;
     private Tween _tween;
@@ -22,17 +24,25 @@ public class BossNameUI : MonoBehaviour
     public void SetNameAndPlay(string name)
     {
         _nameText.text = name;
-        _tween = _rectTransform.DOAnchorPosY(_finishY, _moveDuration).
+
+        _coroutine = StartCoroutine(WaitDelayCoroutine(_startDelay, _finishY, true));
+    }
+    private IEnumerator WaitDelayCoroutine(float delay, float y, bool isGoFinish)
+    {
+        yield return new WaitForSeconds(delay);
+
+        _tween = _rectTransform.DOAnchorPosY(y, _moveDuration).
             OnComplete(()=>
             {
-                _coroutine = StartCoroutine(WaitDelayCoroutine());
+                if(isGoFinish)
+                {
+                    _coroutine = StartCoroutine(WaitDelayCoroutine(_nameDelay, _startY, false));
+                }
+                else
+                {
+                    _bossHpUi.SetMoveUi(true);
+                }
             });
-    }
-    private IEnumerator WaitDelayCoroutine()
-    {
-        yield return new WaitForSeconds(_nameDelay);
-
-        _tween = _rectTransform.DOAnchorPosY(_startY, _moveDuration);
     }
     private void OnDisable()
     {

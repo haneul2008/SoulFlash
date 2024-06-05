@@ -30,14 +30,16 @@ public class Health : MonoBehaviour
     }
     public void TakeDamage(int amount, Vector2 normal, Vector2 point, float knockbackPower, float hpRetakeTime)
     {
+        print("!");
         if (!IsCanTakeHp) return;
+
+        CurrentHealth -= amount;
 
         OnHitAction?.Invoke();
 
         IsCanTakeHp = false;
         StartCoroutine(CanTakeHpCoroutine(true, hpRetakeTime));
 
-        CurrentHealth -= amount;
         OnHitEvent?.Invoke();
 
         if (knockbackPower > 0)

@@ -16,6 +16,7 @@ public enum BossEnum
 }
 public abstract class Boss : Enemy
 {
+    public UnityEvent OnAppearEvent;
     public UnityEvent OnPattern0Event;
     public UnityEvent OnPattern1Event;
     public UnityEvent OnPattern2Event;

@@ -101,7 +101,7 @@ public class PlayerHeavyAttack : AnimationPlayer
     {
         yield return new WaitForSeconds(_particleStartTime);
 
-        _particle.gameObject.transform.position = new Vector3(transform.position.x + dir * _damageCasterPos.x, _damageCasterPos.y);
+        _particle.gameObject.transform.position = new Vector3(transform.position.x + dir * _damageCasterPos.x, transform.position.y);
         _particle.Play();
     }
 }

@@ -11,7 +11,6 @@ public class DemonDeadState : EnemyState
     public override void Enter()
     {
         base.Enter();
-        Debug.Log("Dead");
         _enemy.MovementCompo.StopImmediately();
         _enemy.SetDead(true);
 
@@ -29,7 +28,6 @@ public class DemonDeadState : EnemyState
     }
     private void PlayFinalDead()
     {
-        Debug.Log(_enemy.gameObject.layer);
         _enemy.FinalDeadEvent?.Invoke();
         GameManager.instance.OnEnemyDeadAction?.Invoke();
     }

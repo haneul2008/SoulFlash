@@ -18,6 +18,9 @@ public class GhostAppearState : EnemyState
         base.UpdateState();
         if (_endTriggerCalled)
         {
+            _endTriggerCalled = false;
+
+            _enemy.OnAppearToIdleEvent?.Invoke();
             _stateMachine.ChangeState(EnemyEnum.Idle);
         }
     }

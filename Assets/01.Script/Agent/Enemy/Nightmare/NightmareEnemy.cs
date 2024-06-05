@@ -71,5 +71,7 @@ public class NightmareEnemy : Enemy, IPoolable
         lastAttackTime = -9999f;
 
         gameObject.layer = _enemyLayer;
+
+        OnAppearToIdleEvent?.Invoke();
     }
 }

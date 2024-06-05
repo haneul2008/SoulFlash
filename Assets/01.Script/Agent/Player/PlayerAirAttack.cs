@@ -43,15 +43,15 @@ public class PlayerAirAttack : AnimationPlayer
         if (!_player.CanStateChageable) return;
         if (!InAir || _currentTime < _cooltime) return;
 
-        OnAirAttackEvent?.Invoke();
+        _currentTime = 0;
 
         _attack = true;
-        _currentTime = 0;
 
         float dir = transform.rotation.eulerAngles.y == 0f ? 1 : -1;
 
         _player.MovementCompo.canMove = false;
         _player.CanStateChageable = false;
+
         _player.MovementCompo.rbCompo.velocity = Vector2.zero;
         _player.MovementCompo.rbCompo.gravityScale = 0;
 
@@ -77,11 +77,15 @@ public class PlayerAirAttack : AnimationPlayer
 
     private void EndAttack()
     {
+        if (!_attack) return;
+
         EndAnimation();
 
         _player.MovementCompo.canMove = true;
         _player.CanStateChageable = true;
         _player.MovementCompo.rbCompo.gravityScale = 1;
+
+        OnAirAttackEvent?.Invoke();
 
         _attack = false;
 

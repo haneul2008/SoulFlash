@@ -5,32 +5,22 @@ using Cinemachine;
 
 public class CameraConfiner : MonoBehaviour
 {
+    [SerializeField] private Transform _cameraPos;
     [SerializeField] private float _clampValue;
     [SerializeField] private BossNameUI _bossNameUI;
+    [SerializeField] private string _bossName;
     public float PlayerClamp { get; private set; }
 
-    private CinemachineConfiner2D _confiner;
-    private Collider2D _polygonCollider;
-    private bool test;
+    private CinemachineVirtualCamera _cam;
     private void Awake()
     {
-        _confiner = GetComponent<CinemachineConfiner2D>();
-        _polygonCollider = _confiner.m_BoundingShape2D;
-    }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            test = !test;
-            SetConfiner(test);
-        }
+        _cam = GetComponent<CinemachineVirtualCamera>();
     }
     public void SetConfiner(bool value)
     {
-        _bossNameUI.SetNameAndPlay("DeathBringer");
+        _bossNameUI.SetNameAndPlay(_bossName);
 
-        _polygonCollider.gameObject.transform.position = transform.position;
-        _confiner.enabled = value;
+        _cam.Follow = value ? null : _cameraPos;
 
         PlayerClamp = value ? _clampValue : 0;
     }

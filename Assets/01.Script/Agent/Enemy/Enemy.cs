@@ -13,9 +13,11 @@ public enum EnemyEnum
 }
 public abstract class Enemy : Agent
 {
+    public UnityEvent OnAppearToIdleEvent;
     public UnityEvent FinalDeadEvent;
 
     [SerializeField] private float _crystalSpawnTime;
+    public bool dontCheckDetect;
 
     [Header("Attack Setting")]
     public float detectRadius;
@@ -54,6 +56,7 @@ public abstract class Enemy : Agent
     {
         IsDead = value;
         CanStateChageable = !value;
+        dontCheckDetect = false;
     }
     public void SpawnCrystal()
     {

@@ -67,7 +67,7 @@ public class GhostEnemy : Enemy, IPoolable
         base.Attack(castDamage);
 
         _attackObj.transform.SetParent(null);
-        _attackObj.transform.position = new Vector3(_damageCaster.transform.position.x, -2f);
+        _attackObj.transform.position = new Vector3(_damageCaster.transform.position.x, transform.position.y + 0.9f);
         _attackObj.SetActive(true);
     }
     public override void SetDeadState()
