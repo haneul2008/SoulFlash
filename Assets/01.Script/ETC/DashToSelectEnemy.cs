@@ -128,11 +128,8 @@ public class DashToSelectEnemy : MonoBehaviour
 
         ResetValue(false, false);
 
-        float y = NowEnemyCollider.gameObject.transform.position.y > 1f ? 
-            NowEnemyCollider.gameObject.transform.position.y : transform.position.y;
-
         float distance = Vector2.Distance(transform.position, NowEnemyCollider.gameObject.transform.position);
-        transform.DOMove(new Vector2(NowEnemyCollider.gameObject.transform.position.x, y), _dashTime / distance)
+        transform.DOMove(NowEnemyCollider.gameObject.transform.position, _dashTime / distance)
             .OnComplete(() =>
             {
                 GameManager.instance.soulCount++;

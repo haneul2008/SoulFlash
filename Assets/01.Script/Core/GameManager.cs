@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class GameManager : MonoSingleton<GameManager>
 {
+    private NotifyValue<int> SoulCount = new NotifyValue<int>();
+
+    [SerializeField] private SoulUi _soulUi;
+
     [field : SerializeField] public GameObject Player { get; private set; }
     public Action OnEnemyDeadAction;
 
@@ -12,6 +16,11 @@ public class GameManager : MonoSingleton<GameManager>
     private void Awake()
     {
         soulCount = 0;
+        SoulCount.OnValueChanged += SetSoulUi;
+    }
+    private void OnDisable()
+    {
+        SoulCount.OnValueChanged -= SetSoulUi;
     }
     private void Start()
     {
@@ -20,11 +29,10 @@ public class GameManager : MonoSingleton<GameManager>
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
-            PoolManager.instance.Pop("Ghost");
-        if (Input.GetKeyDown(KeyCode.O))
-            PoolManager.instance.Pop("Demon");
-        if (Input.GetKeyDown(KeyCode.I))
-            PoolManager.instance.Pop("Nightmare");
+        SoulCount.Value = soulCount;
+    }
+    private void SetSoulUi(int prev, int next)
+    {
+        _soulUi.SetMoveUi(true);
     }
 }

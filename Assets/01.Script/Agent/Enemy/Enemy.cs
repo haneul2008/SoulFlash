@@ -16,6 +16,7 @@ public abstract class Enemy : Agent
     public UnityEvent OnAppearToIdleEvent;
     public UnityEvent FinalDeadEvent;
 
+    [SerializeField] private bool _crystalSpawn = true;
     [SerializeField] private float _crystalSpawnTime;
     public bool dontCheckDetect;
 
@@ -60,6 +61,8 @@ public abstract class Enemy : Agent
     }
     public void SpawnCrystal()
     {
+        if(!_crystalSpawn) return;
+
         if (isSpawnAgent)
         {
             isSpawnAgent = false;

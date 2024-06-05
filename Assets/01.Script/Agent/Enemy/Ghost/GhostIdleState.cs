@@ -17,6 +17,7 @@ public class GhostIdleState : EnemyState
 
         _enemy.HealthCompo.OnHitAction += ChangeChaseState;
         _enemy.MovementCompo.StopImmediately(false);
+        _player = null;
     }
 
     public override void Exit()

@@ -734,9 +734,10 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   _crystalSpawnTime: 1.2
+  dontCheckDetect: 0
   detectRadius: 4
   attackRadius: 2
-  attackCooldown: 0.5
+  attackCooldown: 0.8
   knokbackPower: 15
   attackDamage: 20
   contactFilter:
