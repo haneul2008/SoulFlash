@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -13,6 +14,7 @@ public class Player : Agent
     [SerializeField] private float _hpRetakeTime;
     [SerializeField] private float _damageCasterRadius;
     [SerializeField] private CameraConfiner _cameraConfiner;
+    [SerializeField] private PlayerSmoke _smoke;
 
     [field: SerializeField] public InputReader PlayerInput { get; private set; }
 
@@ -37,11 +39,18 @@ public class Player : Agent
 
         InitPlayerActions();
 
-        DontDestroyOnLoad(gameObject);
+        _smoke.PlayAnimation(true);
+    }
+    private void OnEnable()
+    {
+        MovementCompo.rbCompo.gravityScale = 1;
     }
     private void OnDisable()
     {
         PlayerInput.JumpEvent -= HandleJumpKeyEvent;
+
+        if(_smoke.Tween != null)
+            _smoke.Tween.Kill();
     }
     private void Flip()
     {

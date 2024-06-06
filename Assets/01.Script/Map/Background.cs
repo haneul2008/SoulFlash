@@ -8,6 +8,7 @@ public class Background : MonoBehaviour
 
     [SerializeField] private Transform _playerTrm;
     [SerializeField] private float _moveSpeed;
+    [SerializeField] private float _moveX;
 
     private void OnEnable()
     {
@@ -29,9 +30,9 @@ public class Background : MonoBehaviour
     {
         PlayerX.Value = _playerTrm.position.x;
 
-        if (_playerTrm.position.x > transform.position.x + 31.5)
-            transform.position = new Vector3(transform.position.x + 63, transform.position.y, 0);
-        else if(_playerTrm.position.x < transform.position.x - 31.5)
-            transform.position = new Vector3(transform.position.x - 63, transform.position.y, 0);
+        if (_playerTrm.position.x > transform.position.x + _moveX)
+            transform.position = new Vector3(transform.position.x + _moveX * 2, transform.position.y, 0);
+        else if(_playerTrm.position.x < transform.position.x - _moveX)
+            transform.position = new Vector3(transform.position.x - _moveX * 2, transform.position.y, 0);
     }
 }

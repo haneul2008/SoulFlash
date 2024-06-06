@@ -15,7 +15,6 @@ public class DeathBringerAttackState : BossState
         _boss.MovementCompo.StopImmediately(false);
 
         _boss.CanStateChageable = false;
-        _boss.HealthCompo.CanTakeHp(false);
 
         _boss.MovementCompo.canMove = false;
         _boss.MovementCompo.canKnockback = false;
@@ -26,7 +25,6 @@ public class DeathBringerAttackState : BossState
          
         _boss.MovementCompo.canKnockback = true;
         _boss.MovementCompo.canMove = true;
-        _boss.HealthCompo.CanTakeHp(true);
 
         _boss.SetPatternIndex(1);
         _boss.attackRadius = 10;

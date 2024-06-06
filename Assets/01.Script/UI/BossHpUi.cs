@@ -10,6 +10,8 @@ public class BossHpUi : MonoBehaviour
     [SerializeField] private float _moveDuration;
     [SerializeField] private float _startY;
     [SerializeField] private float _finishY;
+    [SerializeField] private PlayerSmoke _playerSmoke;
+    [SerializeField] private SetScene _setScene;
 
     private Health _hp;
     private bool _init;
@@ -34,7 +36,14 @@ public class BossHpUi : MonoBehaviour
     public void SetUI()
     {
         _hpBarRectTrm.localScale = new Vector3(Mathf.Clamp(_hp.CurrentHealth / (float)_hp.MaxHealth, 0, 1), 1, 1);
-        if (_hpBarRectTrm.localScale.x == 0) SetMoveUi(false);
+
+        if (_hpBarRectTrm.localScale.x == 0)
+        {
+            SetMoveUi(false);
+            StartCoroutine(_playerSmoke.WaitDelayCoroutine(false));
+
+            _setScene.SetNextScene();
+        }
     }
     public void SetMoveUi(bool isGoFinish)
     {

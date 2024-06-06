@@ -17,7 +17,7 @@ public class Crystal : MonoBehaviour, IPoolable
     private SpriteRenderer _renderer;
     private Coroutine _corou;
 
-    private bool _init;
+    public bool _init;
     private int _enemyDeadLayer;
     private int _enemyLayer;
     public void ResetItem()

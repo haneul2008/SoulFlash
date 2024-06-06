@@ -15,7 +15,6 @@ public class DemonAttackState : EnemyState
 
         _enemy.MovementCompo.StopImmediately(false);
 
-        _enemy.HealthCompo.CanTakeHp(false);
         _enemy.MovementCompo.canMove = false;
         _enemy.MovementCompo.canKnockback = false;
     }
@@ -27,7 +26,6 @@ public class DemonAttackState : EnemyState
 
         _enemy.MovementCompo.canKnockback = true;
         _enemy.MovementCompo.canMove = true;
-        _enemy.HealthCompo.CanTakeHp(true);
 
         base.Exit();
     }
