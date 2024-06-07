@@ -46,6 +46,12 @@ public class PlayerSmoke : MonoBehaviour
         Tween = _renderer.DOFade(0, 0.2f)
         .OnComplete(()=>
         {
+            if(!_isSpawn)
+            {
+                GameObject playerLight = _player.gameObject.transform.Find("PlayerLight").gameObject;
+                playerLight.SetActive(false);
+            }
+
             Tween = _playerRenderer.DOFade(endValue, 0.3f)
             .OnComplete(()=>
             {

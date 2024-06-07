@@ -34,6 +34,7 @@ public class Slash : MonoBehaviour, IPoolable
     private void Update()
     {
         transform.position += new Vector3(Dir, 0, 0) * _slashSpeed * Time.deltaTime;
-        _damageCaster.CastDamage(_damage, _knockbackPower, _hpRetakeTime, false);
+        _damageCaster.CastDamage(Mathf.RoundToInt(_damage * GameManager.instance.airDamageMultiplier)
+            , _knockbackPower, _hpRetakeTime, false);
     }
 }

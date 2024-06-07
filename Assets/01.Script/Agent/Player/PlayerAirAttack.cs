@@ -6,14 +6,13 @@ using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class PlayerAirAttack : AnimationPlayer
 {
-    public UnityEvent OnAirAttackEvent;
-
     [Header("Setting")]
     [SerializeField] private float _slashSpawnX;
     [SerializeField] private float _attackTime;
     [SerializeField] private float _cooltime;
     [SerializeField] private float[] _slashSpawnTime;
     [SerializeField] private float[] _slashRotationX;
+    [SerializeField] private PlayerSkillCootimeUI _cooltimeUi;
 
     public bool InAir { get; private set; }
     private Player _player;
@@ -41,7 +40,7 @@ public class PlayerAirAttack : AnimationPlayer
     private void AirAttack()
     {
         if (!_player.CanStateChageable) return;
-        if (!InAir || _currentTime < _cooltime) return;
+        if (!InAir || _currentTime < _cooltime * GameManager.instance.airCooldownMutiplier) return;
 
         _currentTime = 0;
 
@@ -85,7 +84,7 @@ public class PlayerAirAttack : AnimationPlayer
         _player.CanStateChageable = true;
         _player.MovementCompo.rbCompo.gravityScale = 1;
 
-        OnAirAttackEvent?.Invoke();
+        _cooltimeUi.StartText(Mathf.RoundToInt(_cooltime * GameManager.instance.airCooldownMutiplier));
 
         _attack = false;
 

@@ -11,6 +11,7 @@ public class AgentMovement : AnimationPlayer
     [SerializeField] private Transform _groundCheckerTrm;
 
     [Header("Settings")]
+    [SerializeField] private bool _isPlayer = false;
     public float moveSpeed = 6f;
     public float jumpPower = 6f;
     public float extraGravity = 30f;
@@ -88,7 +89,9 @@ public class AgentMovement : AnimationPlayer
     private void ApplyXMove()
     {
         if (!canMove) return;
-        rbCompo.velocity = new Vector2(_xMove * moveSpeed, rbCompo.velocity.y);
+
+        float finalMoveSpeed = _isPlayer ? moveSpeed * GameManager.instance.moveSpeedMutiplier : moveSpeed;
+        rbCompo.velocity = new Vector2(_xMove * finalMoveSpeed, rbCompo.velocity.y);
     }
 
     public void CheckGrounded()

@@ -11,7 +11,7 @@ public class BossHpUi : MonoBehaviour
     [SerializeField] private float _startY;
     [SerializeField] private float _finishY;
     [SerializeField] private PlayerSmoke _playerSmoke;
-    [SerializeField] private SetScene _setScene;
+    [SerializeField] private UpgradeUi _upgradeUi;
 
     private Health _hp;
     private bool _init;
@@ -42,7 +42,7 @@ public class BossHpUi : MonoBehaviour
             SetMoveUi(false);
             StartCoroutine(_playerSmoke.WaitDelayCoroutine(false));
 
-            _setScene.SetNextScene();
+            _upgradeUi.SetUpgrade();
         }
     }
     public void SetMoveUi(bool isGoFinish)

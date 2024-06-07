@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class BossSpawnTrigger : MonoBehaviour
 {
-    [SerializeField] private Transform _playerTrm;
     [SerializeField] private GameObject _bossPrefab;
     [SerializeField] private Vector2 _bossPos;
     [SerializeField] private CameraConfiner _cameraConfiner;
@@ -12,7 +11,7 @@ public class BossSpawnTrigger : MonoBehaviour
     private bool _isTrigger;
     private void Update()
     {
-        if(_playerTrm.position.x > transform.position.x && !_isTrigger)
+        if(GameManager.instance.Player.transform.position.x > transform.position.x && !_isTrigger)
         {
             _isTrigger = true;
 

@@ -5,7 +5,6 @@ using UnityEngine.Events;
 
 public class PlayerHeavyAttack : AnimationPlayer
 {
-    public UnityEvent OnEnterHeavyAttack;
     public UnityEvent OnHeavyAttackEvent;
 
     [Header("Setting")]
@@ -15,6 +14,7 @@ public class PlayerHeavyAttack : AnimationPlayer
     [SerializeField] private float _damageCasterRadius;
     [SerializeField] private float _damageCastTime;
     [SerializeField] private float _cooltime;
+    [SerializeField] private PlayerSkillCootimeUI _skillCooldownUi;
 
     [Header("Particle")]
     [SerializeField] private ParticleSystem _particle;
@@ -50,9 +50,9 @@ public class PlayerHeavyAttack : AnimationPlayer
     private void HandleHeavyAttack()
     {
         if (!_player.MovementCompo.isGround.Value) return;
-        if (!_player.CanStateChageable || _currentTime < _cooltime) return;
+        if (!_player.CanStateChageable || _currentTime < _cooltime * GameManager.instance.groundCooldownMutiplier) return;
 
-        OnEnterHeavyAttack?.Invoke();
+        _skillCooldownUi.StartText(Mathf.RoundToInt(_cooltime * GameManager.instance.groundCooldownMutiplier));
 
         _attack = true;
         _currentTime = 0;
@@ -91,7 +91,9 @@ public class PlayerHeavyAttack : AnimationPlayer
         _damageCaster.gameObject.transform.position = new Vector3(transform.position.x + dir * _damageCasterPos.x, transform.position.y);
         _damageCaster.damageRadius = _damageCasterRadius;
 
-        _damageCaster.CastDamage(_damage, _knockbackPower, _hpRetakeTime, false);
+        _damageCaster.CastDamage(Mathf.RoundToInt(_damage * GameManager.instance.groundDamageMultiplier)
+            , _knockbackPower, _hpRetakeTime, false);
+
         OnHeavyAttackEvent?.Invoke();
 
         yield return new WaitForSeconds(_attackTime - 0.1f);

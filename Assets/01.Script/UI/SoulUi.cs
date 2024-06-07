@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class SoulUi : MonoBehaviour
 {
+    private NotifyValue<int> SoulCount = new NotifyValue<int>();
+
     [SerializeField] private RectTransform _myRectTrm;
     [SerializeField] private TMP_Text _countText;
     [SerializeField] private float _moveDuration;
@@ -16,10 +18,20 @@ public class SoulUi : MonoBehaviour
     private Tween _tween;
     private Coroutine _coroutine;
     private int _currentSoul;
+    private void Awake()
+    {
+        SoulCount.OnValueChanged += SetSoulUi;
+    }
     private void OnDisable()
     {
         if (_tween != null)
             _tween.Kill();
+
+        SoulCount.OnValueChanged -= SetSoulUi;
+    }
+    private void Update()
+    {
+        SoulCount.Value = GameManager.instance.soulCount;
     }
     public void SetMoveUi(bool isGoFinish)
     {
@@ -43,5 +55,9 @@ public class SoulUi : MonoBehaviour
     {
         yield return new WaitForSeconds(_waitDelay);
         _tween = _myRectTrm.DOAnchorPosY(_startY, _moveDuration);
+    }
+    private void SetSoulUi(int prev, int next)
+    {
+        SetMoveUi(true);
     }
 }

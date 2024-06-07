@@ -36,6 +36,7 @@ public class PlayerAttack : AnimationPlayer
     }
     private void HandleAttack()
     {
+        //if (EventSystem.current.IsPointerOverGameObject()) return;
         if (!_player.MovementCompo.isGround.Value) return;
         if (!_player.CanStateChageable || _currentTime < _cooltime) return;
 
@@ -45,12 +46,15 @@ public class PlayerAttack : AnimationPlayer
         _player.MovementCompo.canMove = false;
         _player.MovementCompo.rbCompo.velocity = Vector2.zero;
 
+        _anim.speed = 1 * GameManager.instance.normalAckSpeedMultiplier;
+
         PlayAnimation();
     }
     private void EndAttack()
     {
         EndAnimation();
 
+        _anim.speed = 1;
         _player.CanStateChageable = true;
         _player.MovementCompo.canMove = true;
     }

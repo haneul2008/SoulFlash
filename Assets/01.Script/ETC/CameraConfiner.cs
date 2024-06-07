@@ -24,4 +24,12 @@ public class CameraConfiner : MonoBehaviour
 
         PlayerClamp = value ? _clampValue : 0;
     }
+    private void Update()
+    {
+        if(PlayerClamp != 0)
+        {
+            GameManager.instance.Player.gameObject.transform.position = new Vector3(Mathf.Clamp(transform.position.x,
+                Camera.main.transform.position.x - PlayerClamp, Camera.main.transform.position.x + PlayerClamp), transform.position.y, 0);
+        }
+    }
 }

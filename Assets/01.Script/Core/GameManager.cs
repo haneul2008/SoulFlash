@@ -2,37 +2,42 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoSingleton<GameManager>
 {
-    private NotifyValue<int> SoulCount = new NotifyValue<int>();
-
-    [SerializeField] private SoulUi _soulUi;
-
     [field : SerializeField] public GameObject Player { get; private set; }
     public Action OnEnemyDeadAction;
 
     public int soulCount;
+
+    #region 업그레이드 계수
+    public float normalDamageMultiplier = 1; //평타 데미지 계수
+    public float airDamageMultiplier = 1; //공중 E데미지 계수
+    public float groundDamageMultiplier = 1; //지상 E데미지 계수
+
+    public float normalAckSpeedMultiplier = 1; //평타 공속 계수
+
+    public float hpMultiplier = 1; //체력 계수
+    public float soulRandomNum = 1; //영혼 수집 계수
+    public float moveSpeedMutiplier = 1; //이속 계수
+
+    public float airCooldownMutiplier = 1; //공중 E쿨타임 감소 계수
+    public float groundCooldownMutiplier = 1; //지상 E쿨타임 감소 계수
+    #endregion
     private void Awake()
     {
         soulCount = 0;
-        SoulCount.OnValueChanged += SetSoulUi;
-    }
-    private void OnDisable()
-    {
-        SoulCount.OnValueChanged -= SetSoulUi;
     }
     private void Start()
     {
         Application.targetFrameRate = 1000;
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Update()
     {
-        SoulCount.Value = soulCount;
-    }
-    private void SetSoulUi(int prev, int next)
-    {
-        _soulUi.SetMoveUi(true);
+        if (Input.GetKeyDown(KeyCode.P))
+            SceneManager.LoadScene("Stage2");
     }
 }

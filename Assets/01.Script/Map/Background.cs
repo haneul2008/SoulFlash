@@ -6,7 +6,6 @@ public class Background : MonoBehaviour
 {
     public NotifyValue<float> PlayerX = new();
 
-    [SerializeField] private Transform _playerTrm;
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _moveX;
 
@@ -28,11 +27,11 @@ public class Background : MonoBehaviour
     }
     private void SetPosition()
     {
-        PlayerX.Value = _playerTrm.position.x;
+        PlayerX.Value = GameManager.instance.Player.transform.position.x;
 
-        if (_playerTrm.position.x > transform.position.x + _moveX)
+        if (GameManager.instance.Player.transform.position.x > transform.position.x + _moveX)
             transform.position = new Vector3(transform.position.x + _moveX * 2, transform.position.y, 0);
-        else if(_playerTrm.position.x < transform.position.x - _moveX)
+        else if(GameManager.instance.Player.transform.position.x < transform.position.x - _moveX)
             transform.position = new Vector3(transform.position.x - _moveX * 2, transform.position.y, 0);
     }
 }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using static UnityEditor.Experimental.GraphView.GraphView;
 public class Player : Agent
 {
@@ -39,12 +41,24 @@ public class Player : Agent
 
         InitPlayerActions();
 
-        _smoke.PlayAnimation(true);
+        DontDestroyOnLoad(gameObject);
+
+        SceneManager.sceneLoaded += HandleSetPlayer;
     }
-    private void OnEnable()
+
+    private void HandleSetPlayer(Scene scene, LoadSceneMode mode)
     {
+        _spriteRenderer.color = new Color(1, 1, 1, 0);
+        _smoke.PlayAnimation(true);
+
+        HealthCompo.ResetHealth(Mathf.RoundToInt(HealthCompo.MaxHealth * GameManager.instance.hpMultiplier));
+
+        GameObject light = transform.Find("PlayerLight").gameObject;
+        light.SetActive(true);
+
         MovementCompo.rbCompo.gravityScale = 1;
     }
+    
     private void OnDisable()
     {
         PlayerInput.JumpEvent -= HandleJumpKeyEvent;
@@ -73,12 +87,6 @@ public class Player : Agent
     private void Update()
     {
         MovementCompo.SetMovement(PlayerInput.Movement.x);
-
-        if(_cameraConfiner.PlayerClamp != 0)
-        {
-            transform.position = new Vector3(Mathf.Clamp(transform.position.x, Camera.main.transform.position.x - _cameraConfiner.PlayerClamp,
-                Camera.main.transform.position.x + _cameraConfiner.PlayerClamp), transform.position.y, 0);
-        }
 
         Flip();
         _airAttack.SetAirState(!MovementCompo.isGround.Value);
@@ -113,7 +121,9 @@ public class Player : Agent
 
         _damageCaster.gameObject.transform.position = new Vector3(transform.position.x + dir * _damageCasterPos.x, transform.position.y);
         _damageCaster.damageRadius = _damageCasterRadius;
-        _damageCaster.CastDamage(_damage, _knockbackPower, _hpRetakeTime, false); 
+
+        _damageCaster.CastDamage(Mathf.RoundToInt(_damage * GameManager.instance.normalDamageMultiplier)
+            , _knockbackPower, _hpRetakeTime, false); 
     }
     public void AnimationEndTrigger()
     {

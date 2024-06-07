@@ -132,7 +132,14 @@ public class DashToSelectEnemy : MonoBehaviour
         transform.DOMove(NowEnemyCollider.gameObject.transform.position, _dashTime / distance)
             .OnComplete(() =>
             {
-                GameManager.instance.soulCount++;
+                int addValue = 0;
+
+                if(GameManager.instance.soulRandomNum != 0)
+                {
+                    GetRandomValue randomValue = new GetRandomValue();
+                    addValue = Mathf.CeilToInt(randomValue.GetRandom(1, 100)) <= GameManager.instance.soulRandomNum ? 1 : 0;
+                }
+                GameManager.instance.soulCount += 1 + addValue;
 
                 _player.MovementCompo.canMove = true;
 
