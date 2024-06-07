@@ -1,9 +1,10 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class PlayerRolls : AnimationPlayer
 {
-    public UnityEvent OnRollsEvent;
+    public Action<int> OnEndRolls;
 
     [Header("Setting")]
     [SerializeField] private float _rollSpeed;
@@ -16,18 +17,17 @@ public class PlayerRolls : AnimationPlayer
     private float _currentTime = 999f;
     private CapsuleCollider2D _collider;
     private SizeChanger _sizeChanger;
-    private void Awake()
-    {
-        _player = GetComponent<Player>();
-        _player.PlayerInput.OnLeftShiftEvent += Roll;
-        _collider = GetComponent<CapsuleCollider2D>();
-        _sizeChanger = new();
-        //0.7, 0.7
-    }
     public override void Initialize(Agent agent)
     {
         base.Initialize(agent);
-        _agent.MovementCompo.OnKnockbackAction += RollEnd;
+
+        _player = agent as Player;
+
+        _player.PlayerInput.OnLeftShiftEvent += Roll;
+        _player.MovementCompo.OnKnockbackAction += RollEnd;
+
+        _collider = GetComponent<CapsuleCollider2D>();
+        _sizeChanger = new();
     }
     private void OnDisable()
     {
@@ -65,7 +65,7 @@ public class PlayerRolls : AnimationPlayer
     {
         if (_roll)
         {
-            OnRollsEvent?.Invoke();
+            OnEndRolls?.Invoke(Mathf.RoundToInt(_coolTime * GameManager.instance.airCooldownMutiplier));
             _currentTime = 0;
         }
         _roll = false;

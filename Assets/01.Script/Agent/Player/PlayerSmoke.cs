@@ -52,15 +52,13 @@ public class PlayerSmoke : MonoBehaviour
                 playerLight.SetActive(false);
             }
 
-            Tween = _playerRenderer.DOFade(endValue, 0.3f)
-            .OnComplete(()=>
+            if (_isSpawn)
             {
-                if (_isSpawn)
-                {
-                    _player.MovementCompo.canMove = true;
-                    _player.CanStateChageable = true;
-                }
-            });
+                _player.MovementCompo.canMove = true;
+                _player.CanStateChageable = true;
+            }
+
+            Tween = _playerRenderer.DOFade(endValue, 0.3f);
 
             gameObject.SetActive(false);
         });

@@ -4,14 +4,53 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum SkillType
+{
+    AirDash,
+    Rolls,
+    HeavyAttack,
+    AirAttack,
+    Block
+}
 public class PlayerSkillCootimeUI : MonoBehaviour
 {
     [SerializeField] private TMP_Text _cooltimeText;
+    [SerializeField] private SkillType _skilltype;
     private Image _image;
     private void Awake()
     {
         _image = GetComponent<Image>();
         _image.color = Color.white;
+    }
+    private void Start()
+    {
+        switch (_skilltype)
+        {
+            case SkillType.AirDash:
+                PlayerAirDash airdash = GameManager.instance.Player.gameObject.GetComponent<PlayerAirDash>();
+                airdash.OnEndAitDashAction += StartText;
+                break;
+
+            case SkillType.Block:
+                PlayerBlock block = GameManager.instance.Player.gameObject.GetComponent<PlayerBlock>();
+                block.OnEndBlockAction += StartText;
+                break;
+
+            case SkillType.AirAttack:
+                PlayerAirAttack airAttack = GameManager.instance.Player.gameObject.GetComponent<PlayerAirAttack>();
+                airAttack.OnEndAirAttackAction += StartText;
+                break;
+
+            case SkillType.HeavyAttack:
+                PlayerAirAttack heavyAttack = GameManager.instance.Player.gameObject.GetComponent<PlayerAirAttack>();
+                heavyAttack.OnEndAirAttackAction += StartText;
+                break;
+
+            case SkillType.Rolls:
+                PlayerRolls rolls = GameManager.instance.Player.gameObject.GetComponent<PlayerRolls>();
+                rolls.OnEndRolls += StartText;
+                break;
+        }
     }
     public void StartText(int cooltime)
     {

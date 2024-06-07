@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
@@ -6,22 +7,26 @@ using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class PlayerAirAttack : AnimationPlayer
 {
+    public Action<int> OnEndAirAttackAction;
+
     [Header("Setting")]
     [SerializeField] private float _slashSpawnX;
     [SerializeField] private float _attackTime;
     [SerializeField] private float _cooltime;
     [SerializeField] private float[] _slashSpawnTime;
     [SerializeField] private float[] _slashRotationX;
-    [SerializeField] private PlayerSkillCootimeUI _cooltimeUi;
 
     public bool InAir { get; private set; }
     private Player _player;
     private float _currentTime;
     private bool _attack;
     private Coroutine _slashSpawnCorou;
-    private void Awake()
+    public override void Initialize(Agent agent)
     {
-        _player = GetComponent<Player>();
+        base.Initialize(agent);
+
+        _player = agent as Player;
+
         _player.PlayerInput.OnEKeyPressed += AirAttack;
         _player.MovementCompo.OnKnockbackAction += EndAttack;
 
@@ -84,7 +89,7 @@ public class PlayerAirAttack : AnimationPlayer
         _player.CanStateChageable = true;
         _player.MovementCompo.rbCompo.gravityScale = 1;
 
-        _cooltimeUi.StartText(Mathf.RoundToInt(_cooltime * GameManager.instance.airCooldownMutiplier));
+        OnEndAirAttackAction?.Invoke(Mathf.RoundToInt(_cooltime * GameManager.instance.airCooldownMutiplier));
 
         _attack = false;
 

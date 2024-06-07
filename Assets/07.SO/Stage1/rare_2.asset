@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb9631527d963054395c0da1aad651fe, type: 3}
   m_Name: rare_2
   m_EditorClassIdentifier: 
-  sprite: {fileID: 331476662686705145, guid: d0dfa404d85ea4d459b4bbf05cce20ec, type: 3}
-  spriteSize: {x: 0.9, y: 1, z: 1}
-  color: {r: 0.42712, g: 0.7301445, b: 0.94716984, a: 1}
-  title: "\uC2E0\uC18D\uD55C \uC0AC\uB0E5\uAFBC"
-  desc: "\uC774\uB3D9\uC18D\uB3C4\uAC00 20% \uC99D\uAC00\uD569\uB2C8\uB2E4."
-  price: 3
-  upgradeType: 4
-  increaseValue: 0.2
+  sprite: {fileID: 8490674775716690970, guid: fd6216e01e5ea69499ee47f12f0a6b3d, type: 3}
+  spriteSize: {x: 1.5, y: 0.9, z: 1}
+  color: {r: 1, g: 1, b: 1, a: 1}
+  title: "\uC11C\uB450\uB978 \uACF5\uACA9"
+  desc: "\uC9C0\uC0C1 E\uC2A4\uD0AC\uC758 \uCFE8\uD0C0\uC784\uC774 1\uCD08 \uAC10\uC18C\uD569\uB2C8\uB2E4."
+  price: 4
+  upgradeType: 8
+  increaseValue: -0.2

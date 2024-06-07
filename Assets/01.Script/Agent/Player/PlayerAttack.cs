@@ -11,11 +11,15 @@ public class PlayerAttack : AnimationPlayer
     private Player _player;
     private Collider2D[] _colliders;
     private float _currentTime;
-    private void Awake()
+    public override void Initialize(Agent agent)
     {
-        _player = GetComponent<Player>();
+        base.Initialize(agent);
+
+        _player = agent as Player;
+
         _player.PlayerInput.OnLeftMousePressed += HandleAttack;
         _player.MovementCompo.OnKnockbackAction += EndAttack;
+
         _colliders = new Collider2D[1];
         _currentTime = 9999;
     }

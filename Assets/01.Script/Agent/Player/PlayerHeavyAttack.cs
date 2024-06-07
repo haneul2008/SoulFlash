@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,7 @@ using UnityEngine.Events;
 public class PlayerHeavyAttack : AnimationPlayer
 {
     public UnityEvent OnHeavyAttackEvent;
+    public Action<int> OnEndHeavyAttackAction;
 
     [Header("Setting")]
     [SerializeField] private DamageCaster _damageCaster;
@@ -14,7 +16,6 @@ public class PlayerHeavyAttack : AnimationPlayer
     [SerializeField] private float _damageCasterRadius;
     [SerializeField] private float _damageCastTime;
     [SerializeField] private float _cooltime;
-    [SerializeField] private PlayerSkillCootimeUI _skillCooldownUi;
 
     [Header("Particle")]
     [SerializeField] private ParticleSystem _particle;
@@ -30,11 +31,15 @@ public class PlayerHeavyAttack : AnimationPlayer
     private bool _attack;
     private bool _cooltimeTrigger;
     private Coroutine _particleCorou;
-    private void Awake()
+    public override void Initialize(Agent agent)
     {
-        _player = GetComponent<Player>();
+        base.Initialize(agent);
+
+        _player = agent as Player;
+
         _player.PlayerInput.OnEKeyPressed += HandleHeavyAttack;
         _player.MovementCompo.OnKnockbackAction += EndAttack;
+
         _currentTime = _cooltime;
     }
     private void OnDisable()
@@ -52,7 +57,7 @@ public class PlayerHeavyAttack : AnimationPlayer
         if (!_player.MovementCompo.isGround.Value) return;
         if (!_player.CanStateChageable || _currentTime < _cooltime * GameManager.instance.groundCooldownMutiplier) return;
 
-        _skillCooldownUi.StartText(Mathf.RoundToInt(_cooltime * GameManager.instance.groundCooldownMutiplier));
+        OnEndHeavyAttackAction?.Invoke(Mathf.RoundToInt(_cooltime * GameManager.instance.groundCooldownMutiplier));
 
         _attack = true;
         _currentTime = 0;

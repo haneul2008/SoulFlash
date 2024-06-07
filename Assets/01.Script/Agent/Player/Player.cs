@@ -15,7 +15,6 @@ public class Player : Agent
     [SerializeField] private float _knockbackPower;
     [SerializeField] private float _hpRetakeTime;
     [SerializeField] private float _damageCasterRadius;
-    [SerializeField] private CameraConfiner _cameraConfiner;
     [SerializeField] private PlayerSmoke _smoke;
 
     [field: SerializeField] public InputReader PlayerInput { get; private set; }

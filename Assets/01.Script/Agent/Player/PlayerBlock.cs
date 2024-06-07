@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,7 @@ using UnityEngine.Events;
 
 public class PlayerBlock : AnimationPlayer
 {
-    public UnityEvent OnBlockEvent;
+    public Action<int> OnEndBlockAction;
 
     [SerializeField] private float _cooltime;
     [SerializeField] private float _blockTime;
@@ -13,11 +14,15 @@ public class PlayerBlock : AnimationPlayer
     private Player _player;
     private float _currentTime;
     private bool _isBlock;
-    private void Awake()
+    public override void Initialize(Agent agent)
     {
-        _player = GetComponent<Player>();
+        base.Initialize(agent);
+
+        _player = agent as Player;
+
         _player.PlayerInput.OnFKeyPressed += Block;
         _player.PlayerInput.OnFKeyWasUp += EndBlock;
+
         _currentTime = _cooltime;
     }
     private void OnDisable()
@@ -57,7 +62,7 @@ public class PlayerBlock : AnimationPlayer
         _player.CanStateChageable = true;
         _player.MovementCompo.canMove = true;
 
-        OnBlockEvent?.Invoke();
+        OnEndBlockAction.Invoke(Mathf.RoundToInt(_cooltime * GameManager.instance.airCooldownMutiplier));
 
         _isBlock = false;
     }

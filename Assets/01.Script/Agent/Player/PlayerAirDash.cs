@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,7 @@ using UnityEngine.Events;
 
 public class PlayerAirDash : AnimationPlayer
 {
-    public UnityEvent OnAirDashEvent;
+    public Action<int> OnEndAitDashAction;
 
     [Header("Setting")]
     [SerializeField] private float _dashSpeed;
@@ -69,7 +70,7 @@ public class PlayerAirDash : AnimationPlayer
     {
         if (_dash)
         {
-            OnAirDashEvent?.Invoke();
+            OnEndAitDashAction?.Invoke(Mathf.RoundToInt(_coolTime * GameManager.instance.airCooldownMutiplier));
             _currentTime = 0;
         }
         _dash = false;
