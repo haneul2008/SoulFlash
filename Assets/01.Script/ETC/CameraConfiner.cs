@@ -15,6 +15,8 @@ public class CameraConfiner : MonoBehaviour
     private void Awake()
     {
         _cam = GetComponent<CinemachineVirtualCamera>();
+
+        DontDestroyOnLoad(gameObject);
     }
     public void SetConfiner(bool value)
     {

@@ -1,3 +1,4 @@
+using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,6 +9,8 @@ public class GameManager : MonoSingleton<GameManager>
 {
     [field : SerializeField] public GameObject Player { get; private set; }
     public Action OnEnemyDeadAction;
+    public MouseDetecter mouseDetecter;
+    public CinemachineVirtualCamera virtualCam;
 
     public int soulCount;
 

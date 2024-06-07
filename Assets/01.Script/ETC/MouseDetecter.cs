@@ -11,6 +11,8 @@ public class MouseDetecter : MonoBehaviour
     private void Awake()
     {
         _collider = new Collider2D[1];
+
+        DontDestroyOnLoad(gameObject);
     }
     public Collider2D DetectEnemy()
     {

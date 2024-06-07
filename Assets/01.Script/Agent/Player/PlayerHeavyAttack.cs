@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -20,6 +21,7 @@ public class PlayerHeavyAttack : AnimationPlayer
     [Header("Particle")]
     [SerializeField] private ParticleSystem _particle;
     [SerializeField] private float _particleStartTime;
+    [SerializeField] private float _setParentDelay;
 
     [Header("AttackSetting")]
     [SerializeField] private int _damage;
@@ -31,6 +33,7 @@ public class PlayerHeavyAttack : AnimationPlayer
     private bool _attack;
     private bool _cooltimeTrigger;
     private Coroutine _particleCorou;
+    private Tween _particleTween;
     public override void Initialize(Agent agent)
     {
         base.Initialize(agent);
@@ -46,6 +49,9 @@ public class PlayerHeavyAttack : AnimationPlayer
     {
         _player.PlayerInput.OnEKeyPressed -= HandleHeavyAttack;
         _player.MovementCompo.OnKnockbackAction -= EndAttack;
+
+        if(_particleTween != null)
+            _particleTween.Kill();
     }
     private void Update()
     {
@@ -108,7 +114,25 @@ public class PlayerHeavyAttack : AnimationPlayer
     {
         yield return new WaitForSeconds(_particleStartTime);
 
+        _particle.gameObject.transform.SetParent(null);
+
         _particle.gameObject.transform.position = new Vector3(transform.position.x + dir * _damageCasterPos.x, transform.position.y);
-        _particle.Play();
+
+        _particleTween = DOTween.Sequence()
+            .Append(DOTween.To(PlayParticle, 0, 1, _particle.main.duration))
+            .OnComplete(() =>
+            {
+                _particleCorou = StartCoroutine("SetParticleparent");
+            });
+    }
+    private void PlayParticle(float f)
+    {
+        if(!_particle.isPlaying)
+            _particle.Play();
+    }
+    private IEnumerator SetParticleparent()
+    {
+        yield return new WaitForSeconds(_setParentDelay);
+        _particle.gameObject.transform.SetParent(_player.transform);
     }
 }

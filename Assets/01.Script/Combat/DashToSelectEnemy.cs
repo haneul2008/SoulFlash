@@ -18,10 +18,10 @@ public class DashToSelectEnemy : MonoBehaviour
     [SerializeField] private float _dashTime;
     [SerializeField] private float _canDashTime;
     [SerializeField] private float _canTakeAttackTime; //대쉬가 끝난 후 몇초간 넉백과 체력을 무시할지
-    [SerializeField] private MouseDetecter _mouseDeteter;
-    [SerializeField] private CinemachineVirtualCamera _cam;
     public Collider2D NowEnemyCollider { get; private set; }
 
+    private CinemachineVirtualCamera _cam;
+    private MouseDetecter _mouseDeteter;
     private bool _isSeleting;
     private bool _isFalseBlink;
     private Collider2D[] _enemyDetectCollider;
@@ -30,6 +30,10 @@ public class DashToSelectEnemy : MonoBehaviour
     private bool _actionTrigger;
 
     private readonly int _isHitHash = Shader.PropertyToID("_IsHit");
+    private void Awake()
+    {
+        _cam = GameManager.instance.virtualCam;
+    }
     private void OnEnable()
     {
         _enemyDetectCollider = new Collider2D[1];
@@ -40,6 +44,8 @@ public class DashToSelectEnemy : MonoBehaviour
         GameManager.instance.OnDestroySingleton += UnSubscribe;
 
         _player.PlayerInput.OnLeftMousePressed += DashToEnemy;
+
+        _mouseDeteter = GameManager.instance.mouseDetecter;
     }
     private void UnSubscribe()
     {

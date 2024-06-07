@@ -69,7 +69,7 @@ public abstract class Enemy : Agent
             return;
         }
 
-            Crystal crystal = PoolManager.instance.Pop("Crystal") as Crystal;
+        Crystal crystal = PoolManager.instance.Pop("Crystal") as Crystal;
         crystal.gameObject.transform.position = transform.position;
         crystal.SetCrystalSpawnTime(_crystalSpawnTime);
     }

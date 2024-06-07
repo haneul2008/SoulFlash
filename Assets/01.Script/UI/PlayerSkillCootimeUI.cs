@@ -42,8 +42,8 @@ public class PlayerSkillCootimeUI : MonoBehaviour
                 break;
 
             case SkillType.HeavyAttack:
-                PlayerAirAttack heavyAttack = GameManager.instance.Player.gameObject.GetComponent<PlayerAirAttack>();
-                heavyAttack.OnEndAirAttackAction += StartText;
+                PlayerHeavyAttack heavyAttack = GameManager.instance.Player.gameObject.GetComponent<PlayerHeavyAttack>();
+                heavyAttack.OnEndHeavyAttackAction += StartText;
                 break;
 
             case SkillType.Rolls:

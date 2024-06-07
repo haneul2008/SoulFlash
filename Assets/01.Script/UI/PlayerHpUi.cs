@@ -5,17 +5,20 @@ using UnityEngine.UI;
 
 public class PlayerHpUi : MonoBehaviour
 {
-    [SerializeField] private Health _playerHp;
     [SerializeField] private RectTransform _hpBarTrm;
     [SerializeField] private float _flashTime;
 
     private int _currentHp;
+    private Health _playerHp;
 
     private Image _image;
 
     private void Awake()
     {
         _image = GetComponent<Image>();
+
+        _playerHp = GameManager.instance.Player.GetComponent<Health>();
+        _playerHp.OnHitAction += SetCurrentHp;
     }
     public void SetCurrentHp()
     {

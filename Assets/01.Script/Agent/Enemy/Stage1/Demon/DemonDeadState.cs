@@ -29,6 +29,7 @@ public class DemonDeadState : EnemyState
     private void PlayFinalDead()
     {
         _enemy.FinalDeadEvent?.Invoke();
+
         GameManager.instance.OnEnemyDeadAction?.Invoke();
     }
 }
