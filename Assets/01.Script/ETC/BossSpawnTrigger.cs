@@ -6,7 +6,6 @@ public class BossSpawnTrigger : MonoBehaviour
 {
     [SerializeField] private GameObject _bossPrefab;
     [SerializeField] private Vector2 _bossPos;
-    [SerializeField] private CameraConfiner _cameraConfiner;
     [SerializeField] private BossHpUi _bossHpUi;
     private bool _isTrigger;
     private void Update()
@@ -20,7 +19,8 @@ public class BossSpawnTrigger : MonoBehaviour
             Health bossHp = boss.GetComponent<Health>();
             _bossHpUi.Init(bossHp);
             
-            _cameraConfiner.SetConfiner(true);
+            CameraConfiner cameraConfiner = GameManager.instance.virtualCam.GetComponent<CameraConfiner>();
+            cameraConfiner.SetConfiner(true);
         }
     }
 }

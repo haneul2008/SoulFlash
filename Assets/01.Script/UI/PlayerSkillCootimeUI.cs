@@ -52,6 +52,36 @@ public class PlayerSkillCootimeUI : MonoBehaviour
                 break;
         }
     }
+    private void OnDisable()
+    {
+        switch (_skilltype)
+        {
+            case SkillType.AirDash:
+                PlayerAirDash airdash = GameManager.instance.Player.gameObject.GetComponent<PlayerAirDash>();
+                airdash.OnEndAitDashAction -= StartText;
+                break;
+
+            case SkillType.Block:
+                PlayerBlock block = GameManager.instance.Player.gameObject.GetComponent<PlayerBlock>();
+                block.OnEndBlockAction -= StartText;
+                break;
+
+            case SkillType.AirAttack:
+                PlayerAirAttack airAttack = GameManager.instance.Player.gameObject.GetComponent<PlayerAirAttack>();
+                airAttack.OnEndAirAttackAction -= StartText;
+                break;
+
+            case SkillType.HeavyAttack:
+                PlayerHeavyAttack heavyAttack = GameManager.instance.Player.gameObject.GetComponent<PlayerHeavyAttack>();
+                heavyAttack.OnEndHeavyAttackAction -= StartText;
+                break;
+
+            case SkillType.Rolls:
+                PlayerRolls rolls = GameManager.instance.Player.gameObject.GetComponent<PlayerRolls>();
+                rolls.OnEndRolls -= StartText;
+                break;
+        }
+    }
     public void StartText(int cooltime)
     {
         _image.color = new Color(165, 0, 0);

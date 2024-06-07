@@ -409,6 +409,7 @@ MonoBehaviour:
         m_CallState: 2
   _crystalSpawn: 1
   _crystalSpawnTime: 0
+  _crystalSpawnY: 1
   dontCheckDetect: 0
   detectRadius: 4
   attackRadius: 2.5

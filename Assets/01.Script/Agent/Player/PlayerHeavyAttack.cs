@@ -105,6 +105,8 @@ public class PlayerHeavyAttack : AnimationPlayer
         _damageCaster.CastDamage(Mathf.RoundToInt(_damage * GameManager.instance.groundDamageMultiplier)
             , _knockbackPower, _hpRetakeTime, false);
 
+        print("DamageCast");
+
         OnHeavyAttackEvent?.Invoke();
 
         yield return new WaitForSeconds(_attackTime - 0.1f);

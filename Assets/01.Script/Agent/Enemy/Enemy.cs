@@ -18,6 +18,7 @@ public abstract class Enemy : Agent
 
     [SerializeField] private bool _crystalSpawn = true;
     [SerializeField] private float _crystalSpawnTime;
+    [SerializeField] private float _crystalSpawnY;
     public bool dontCheckDetect;
 
     [Header("Attack Setting")]
@@ -70,7 +71,7 @@ public abstract class Enemy : Agent
         }
 
         Crystal crystal = PoolManager.instance.Pop("Crystal") as Crystal;
-        crystal.gameObject.transform.position = transform.position;
+        crystal.gameObject.transform.position = new Vector2(transform.position.x, transform.position.y + _crystalSpawnY);
         crystal.SetCrystalSpawnTime(_crystalSpawnTime);
     }
     

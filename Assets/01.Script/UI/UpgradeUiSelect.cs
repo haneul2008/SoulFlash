@@ -103,10 +103,10 @@ public class UpgradeUiSelect : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
         BlinkColor(Color.green, 0.1f, false);
 
-        _image.DOFade(0, 0.3f);
+        _tween = _image.DOFade(0, 0.3f);
 
         Image image = transform.Find("Sprite").GetComponent<Image>();
-        image.DOFade(0, 0.3f);
+        _tween = image.DOFade(0, 0.3f);
 
         foreach(var obj in _activeObj)
         {

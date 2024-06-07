@@ -20,7 +20,7 @@ public class CameraConfiner : MonoBehaviour
     }
     public void SetConfiner(bool value)
     {
-        _bossNameUI.SetNameAndPlay(_bossName);
+        if(value) _bossNameUI.SetNameAndPlay(_bossName);
 
         _cam.Follow = value ? null : _cameraPos;
 

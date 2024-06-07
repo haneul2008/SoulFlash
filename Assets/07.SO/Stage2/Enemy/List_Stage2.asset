@@ -10,12 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 26c4fc2a52831cf428babfd39a67827b, type: 3}
-  m_Name: List
+  m_Name: List_Stage2
   m_EditorClassIdentifier: 
   list:
-  - {fileID: 11400000, guid: 6b5707d8bb0d14c46baed31acf973578, type: 2}
-  - {fileID: 11400000, guid: 6991eaedda9444d4bb2a1fd6cc8536ff, type: 2}
-  - {fileID: 11400000, guid: 78fe39560c9b7f642a7b5db3134bdc65, type: 2}
   - {fileID: 11400000, guid: fdb4fc3ecf60541429d81a8c5736d467, type: 2}
-  - {fileID: 11400000, guid: 6c4c9022a8481434b8f6d53fa41aeb2f, type: 2}
-  - {fileID: 11400000, guid: f083915c4c801d8489bd209805b00003, type: 2}
+  - {fileID: 11400000, guid: 6b5707d8bb0d14c46baed31acf973578, type: 2}
+  - {fileID: 11400000, guid: d06d1aa2a0455d141adce67c7216ed0b, type: 2}

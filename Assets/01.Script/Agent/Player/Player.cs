@@ -22,6 +22,9 @@ public class Player : Agent
     private bool _canDoubleJump;
     public bool CanStateChageable { get; set; } = true;
     [HideInInspector] public bool animationEndTrigger;
+
+    private CameraConfiner _cameraConfiner;
+    private GameObject _light;
     #region Component
     private SpriteMask _spriteNask;
     private SpriteRenderer _spriteRenderer;
@@ -43,21 +46,27 @@ public class Player : Agent
         DontDestroyOnLoad(gameObject);
 
         SceneManager.sceneLoaded += HandleSetPlayer;
+
+        _cameraConfiner = GameManager.instance.virtualCam.GetComponent<CameraConfiner>();
+        _light = transform.Find("PlayerLight").gameObject;
     }
 
     private void HandleSetPlayer(Scene scene, LoadSceneMode mode)
     {
+        transform.position = new Vector3(0, -3.5f, 0);
+
         _spriteRenderer.color = new Color(1, 1, 1, 0);
         _smoke.PlayAnimation(true);
 
         HealthCompo.ResetHealth(Mathf.RoundToInt(HealthCompo.MaxHealth * GameManager.instance.hpMultiplier));
 
-        GameObject light = transform.Find("PlayerLight").gameObject;
-        light.SetActive(true);
+        _light.SetActive(true);
 
         MovementCompo.rbCompo.gravityScale = 1;
+
+        _cameraConfiner.SetConfiner(false);
     }
-    
+
     private void OnDisable()
     {
         PlayerInput.JumpEvent -= HandleJumpKeyEvent;
