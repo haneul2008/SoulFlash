@@ -99,6 +99,10 @@ public class UpgradeUiSelect : MonoBehaviour, IPointerEnterHandler, IPointerExit
             case UpgradeType.GroundESkillCooldown:
                 GameManager.instance.groundCooldownMutiplier += _upgradeData.increaseValue;
                 break;
+
+            case UpgradeType.soulTpHpIncrease:
+                GameManager.instance.soulTpHpIncreaseAdder += _upgradeData.increaseValue;
+                break;
         }
 
         BlinkColor(Color.green, 0.1f, false);

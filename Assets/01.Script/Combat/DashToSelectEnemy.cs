@@ -152,7 +152,9 @@ public class DashToSelectEnemy : MonoBehaviour
 
                 _player.CanStateChageable = true;
 
-                _player.HealthCompo.ResetHealth(_player.HealthCompo.CurrentHealth + _hpIncreaseAmout, false);
+                _player.HealthCompo.ResetHealth(Mathf.RoundToInt(_player.HealthCompo.CurrentHealth 
+                    + _hpIncreaseAmout + GameManager.instance.soulTpHpIncreaseAdder), false);
+
                 _player.HealthCompo.OnHitAction?.Invoke();
 
                 StartCoroutine("CanTakeAttackCoroutine");

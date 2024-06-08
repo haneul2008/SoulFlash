@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cb9631527d963054395c0da1aad651fe, type: 3}
-  m_Name: rare_2
+  m_Name: rare_3
   m_EditorClassIdentifier: 
-  sprite: {fileID: 8490674775716690970, guid: fd6216e01e5ea69499ee47f12f0a6b3d, type: 3}
-  spriteSize: {x: 1.5, y: 0.9, z: 1}
+  sprite: {fileID: 4239673928118382801, guid: fd6216e01e5ea69499ee47f12f0a6b3d, type: 3}
+  spriteSize: {x: 1, y: 0.8, z: 1}
   color: {r: 0.42745098, g: 0.7294118, b: 0.9490196, a: 1}
-  title: "\uC11C\uB450\uB978 \uACF5\uACA9"
-  desc: "\uC9C0\uC0C1 E\uC2A4\uD0AC\uC758 \uCFE8\uD0C0\uC784\uC774 1\uCD08 \uAC10\uC18C\uD569\uB2C8\uB2E4."
-  price: 4
-  upgradeType: 8
-  increaseValue: -0.2
+  title: "\uD655\uC2E4\uD55C \uB9C8\uBB34\uB9AC"
+  desc: "\uC9C0\uC0C1 E\uC2A4\uD0AC\uC758 \uACF5\uACA9\uB825\uC774 35% \uC99D\uAC00\uD569\uB2C8\uB2E4."
+  price: 5
+  upgradeType: 2
+  increaseValue: 0.35

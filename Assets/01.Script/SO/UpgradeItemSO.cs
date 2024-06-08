@@ -12,7 +12,8 @@ public enum UpgradeType
     SoulCollect,
     MoveSpeed,
     AirESkillCooldown,
-    GroundESkillCooldown
+    GroundESkillCooldown,
+    soulTpHpIncrease
 }
 [CreateAssetMenu(menuName = "SO/Upgrade/Item")]
 public class UpgradeItemSO : ScriptableObject

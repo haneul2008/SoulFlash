@@ -40,6 +40,11 @@ public class UpgradeUi : MonoBehaviour
     {
         _rectTrm = GetComponent<RectTransform>();
     }
+    private void Start()
+    {
+        _delay = 0;
+        SetUpgrade();
+    }
     private void OnDisable()
     {
         if (_tween != null) 
