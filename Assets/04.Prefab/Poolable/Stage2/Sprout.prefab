@@ -412,10 +412,10 @@ MonoBehaviour:
   _crystalSpawnY: 1
   dontCheckDetect: 0
   detectRadius: 4
-  attackRadius: 2.5
+  attackRadius: 2
   attackCooldown: 3
   knokbackPower: 10
-  attackDamage: 45
+  attackDamage: 35
   contactFilter:
     useTriggers: 0
     useLayerMask: 1

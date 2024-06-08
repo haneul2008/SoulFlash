@@ -11,6 +11,7 @@ public class Health : MonoBehaviour
     public Action OnHitAction;
 
     [field: SerializeField] public int MaxHealth { get; private set; }
+    [SerializeField] private bool _isPlayer = false;
 
     public bool IsCanTakeHp { get; private set; } = true;
 
@@ -23,10 +24,12 @@ public class Health : MonoBehaviour
         ResetHealth(MaxHealth);
     }
 
-    public void ResetHealth(int hp)
+    public void ResetHealth(int hp, bool isCanTakegHp = true)
     {
-        CurrentHealth = hp;
-        IsCanTakeHp = true;
+        float multiplier = _isPlayer ? GameManager.instance.hpMultiplier : 1;
+        CurrentHealth = Mathf.Clamp(hp, 0, Mathf.RoundToInt(MaxHealth * multiplier));
+
+        IsCanTakeHp = isCanTakegHp;
     }
     public void TakeDamage(int amount, Vector2 normal, Vector2 point, float knockbackPower, float hpRetakeTime)
     {

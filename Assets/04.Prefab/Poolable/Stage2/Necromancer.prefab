@@ -521,12 +521,13 @@ MonoBehaviour:
         m_CallState: 2
   _crystalSpawn: 1
   _crystalSpawnTime: 0
+  _crystalSpawnY: 0
   dontCheckDetect: 0
   detectRadius: 8
   attackRadius: 4
   attackCooldown: 5
   knokbackPower: 12
-  attackDamage: 38
+  attackDamage: 25
   contactFilter:
     useTriggers: 0
     useLayerMask: 1
@@ -666,11 +667,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1171889212727373735, guid: c01e950612cd1414a8cf0402f42484bc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.76
+      value: -1.42
       objectReference: {fileID: 0}
     - target: {fileID: 1171889212727373735, guid: c01e950612cd1414a8cf0402f42484bc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.39
+      value: 0.61
       objectReference: {fileID: 0}
     - target: {fileID: 1171889212727373735, guid: c01e950612cd1414a8cf0402f42484bc, type: 3}
       propertyPath: m_LocalPosition.z
@@ -706,7 +707,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8646251637663854938, guid: c01e950612cd1414a8cf0402f42484bc, type: 3}
       propertyPath: damageRadius
-      value: 2
+      value: 2.7
       objectReference: {fileID: 0}
     - target: {fileID: 8646251637663854938, guid: c01e950612cd1414a8cf0402f42484bc, type: 3}
       propertyPath: filter.layerMask.m_Bits

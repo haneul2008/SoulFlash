@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class BossSpawnTrigger : MonoBehaviour
 {
-    [SerializeField] private GameObject _bossPrefab;
+    [SerializeField] private GameObject _boss;
     [SerializeField] private Vector2 _bossPos;
     [SerializeField] private BossHpUi _bossHpUi;
+    [SerializeField] private bool _isBossInstantiate = true;
     private bool _isTrigger;
     private void Update()
     {
@@ -14,7 +15,19 @@ public class BossSpawnTrigger : MonoBehaviour
         {
             _isTrigger = true;
 
-            GameObject boss = Instantiate(_bossPrefab, _bossPos, Quaternion.identity);
+            GameObject boss;
+
+            if(_isBossInstantiate)
+            {
+                boss = Instantiate(_boss, _bossPos, Quaternion.identity);
+            }
+            else
+            {
+                boss = _boss;
+                Boss bossScript = _boss.GetComponent<Boss>();
+                bossScript.StartAction?.Invoke();
+            }
+
 
             Health bossHp = boss.GetComponent<Health>();
             _bossHpUi.Init(bossHp);

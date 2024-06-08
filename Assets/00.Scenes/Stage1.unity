@@ -2771,17 +2771,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &606262440 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 161928796814752486, guid: e54be994e73ea344db68fe3d16b8117b, type: 3}
-  m_PrefabInstance: {fileID: 6506185004152942919}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0bda82a6cec44e4c99c428e55ebdcc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &618506949
 GameObject:
   m_ObjectHideFlags: 0
@@ -4289,7 +4278,6 @@ MonoBehaviour:
   _moveDuration: 1
   _startY: 700
   _finishY: 400
-  _playerSmoke: {fileID: 1201457420}
   _upgradeUi: {fileID: 510577739}
 --- !u!1 &959687849
 GameObject:
@@ -4387,12 +4375,12 @@ RectTransform:
   m_Children:
   - {fileID: 110030489}
   - {fileID: 833520468}
-  - {fileID: 2014879068}
   - {fileID: 771565076}
   - {fileID: 921014181}
   - {fileID: 1960987536}
   - {fileID: 510577738}
   - {fileID: 1428288801}
+  - {fileID: 2014879068}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -5223,17 +5211,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2277598993020107153, guid: 660ecc9f9bc1b7b44a744de415cc4569, type: 3}
   m_PrefabInstance: {fileID: 854659089}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1201457420 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 227804200567151607, guid: 38b226731203e204f8d30399aeb5cc18, type: 3}
-  m_PrefabInstance: {fileID: 2546227383863325821}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8bfb6703b510504d9b8cb1e6b7c0d74, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1218995215
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6359,10 +6336,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f58cb537273fdf649a053d2ffb2c8f3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bossPrefab: {fileID: 7637268388258766997, guid: abf64caade86e14438c767fe39f6ea35, type: 3}
+  _boss: {fileID: 7637268388258766997, guid: abf64caade86e14438c767fe39f6ea35, type: 3}
   _bossPos: {x: 175, y: 7.5}
-  _cameraConfiner: {fileID: 606262440}
   _bossHpUi: {fileID: 921014184}
+  _isBossInstantiate: 1
 --- !u!1 &1389499583
 GameObject:
   m_ObjectHideFlags: 0
@@ -17198,7 +17175,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2014879067}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 8, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
@@ -17228,6 +17205,7 @@ MonoBehaviour:
   _startDelay: 1
   _moveDuration: 0.7
   _nameDelay: 0.7
+  _bossName: Death Bringer
   _nameText: {fileID: 26742419}
   _bossHpUi: {fileID: 921014184}
 --- !u!114 &2014879070
@@ -17749,22 +17727,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 6082454039296437183, guid: 38b226731203e204f8d30399aeb5cc18, type: 3}
-      propertyPath: OnHitEvent.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6082454039296437183, guid: 38b226731203e204f8d30399aeb5cc18, type: 3}
-      propertyPath: OnHitEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 110030490}
-    - target: {fileID: 6912897166821145054, guid: 38b226731203e204f8d30399aeb5cc18, type: 3}
-      propertyPath: _cam
-      value: 
-      objectReference: {fileID: 606262436}
-    - target: {fileID: 6912897166821145054, guid: 38b226731203e204f8d30399aeb5cc18, type: 3}
-      propertyPath: _mouseDeteter
-      value: 
-      objectReference: {fileID: 1079004739}
     - target: {fileID: 8289194180900575344, guid: 38b226731203e204f8d30399aeb5cc18, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

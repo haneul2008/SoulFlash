@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,7 +17,9 @@ public enum BossEnum
 }
 public abstract class Boss : Enemy
 {
-    public UnityEvent OnAppearEvent;
+    public Action StartAction;
+    public event Action NowAttackAction;
+
     public UnityEvent OnPattern0Event;
     public UnityEvent OnPattern1Event;
     public UnityEvent OnPattern2Event;
@@ -26,6 +29,7 @@ public abstract class Boss : Enemy
     public List<Enemy> spawnEnemyList = new List<Enemy>();
 
     public bool isAppear;
+    [HideInInspector] public bool dontFlip;
     public override void AnimationEndTrigger()
     {
     }
@@ -39,6 +43,12 @@ public abstract class Boss : Enemy
                 enemy.SetDeadState();
             }
         }
+    }
+    public override void Attack(bool castDamage = true)
+    {
+        base.Attack(castDamage);
+
+        NowAttackAction?.Invoke();
     }
     public void SetPatternIndex(int index)
     {

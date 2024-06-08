@@ -27,6 +27,8 @@ public class GameManager : MonoSingleton<GameManager>
 
     public float airCooldownMutiplier = 1; //공중 E쿨타임 감소 계수
     public float groundCooldownMutiplier = 1; //지상 E쿨타임 감소 계수
+
+    public float soulTpHpIncreaseMultiplier = 1; //적에게 순간이동 시 hp회복량
     #endregion
     private void Awake()
     {

@@ -17,7 +17,8 @@ public class DashToSelectEnemy : MonoBehaviour
     [SerializeField] private Sprite _defaultSprite;
     [SerializeField] private float _dashTime;
     [SerializeField] private float _canDashTime;
-    [SerializeField] private float _canTakeAttackTime; //대쉬가 끝난 후 몇초간 넉백과 체력을 무시할지
+    [SerializeField] private float _canTakeAttackTime; //대쉬가 끝난 후 몇초간 넉백과 체력 감소를 무시할지
+    [SerializeField] private int _hpIncreaseAmout; //적에게 순간이동후 회복되는 양
     public Collider2D NowEnemyCollider { get; private set; }
 
     private CinemachineVirtualCamera _cam;
@@ -150,6 +151,9 @@ public class DashToSelectEnemy : MonoBehaviour
                 _player.MovementCompo.canMove = true;
 
                 _player.CanStateChageable = true;
+
+                _player.HealthCompo.ResetHealth(_player.HealthCompo.CurrentHealth + _hpIncreaseAmout, false);
+                _player.HealthCompo.OnHitAction?.Invoke();
 
                 StartCoroutine("CanTakeAttackCoroutine");
             });

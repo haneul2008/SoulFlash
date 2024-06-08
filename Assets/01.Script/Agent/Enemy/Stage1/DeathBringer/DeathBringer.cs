@@ -35,7 +35,7 @@ public class DeathBringer : Boss
         {
             isAppear = false;
             StartCoroutine("AppearToIdle");
-            OnAppearEvent?.Invoke();
+            OnAppearToIdleEvent?.Invoke();
         }
 
         if (targetTrm != null && IsDead == false)

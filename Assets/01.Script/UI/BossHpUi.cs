@@ -10,9 +10,9 @@ public class BossHpUi : MonoBehaviour
     [SerializeField] private float _moveDuration;
     [SerializeField] private float _startY;
     [SerializeField] private float _finishY;
-    [SerializeField] private PlayerSmoke _playerSmoke;
     [SerializeField] private UpgradeUi _upgradeUi;
 
+    private PlayerSmoke _playerSmoke;
     private Health _hp;
     private bool _init;
     private Tween _tween;
@@ -20,6 +20,8 @@ public class BossHpUi : MonoBehaviour
     {
         _init = false;
         _hpBarRectTrm.localScale = Vector3.one;
+
+        _playerSmoke = GameManager.instance.Player.GetComponentInChildren<PlayerSmoke>();
     }
     private void OnDisable()
     {

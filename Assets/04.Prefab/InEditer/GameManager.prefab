@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6768152765892828541}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 16.878471, y: -2.8050992, z: -0.013432607}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -45,13 +45,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Player>k__BackingField: {fileID: 0}
+  mouseDetecter: {fileID: 0}
+  virtualCam: {fileID: 0}
   soulCount: 0
   normalDamageMultiplier: 1
   airDamageMultiplier: 1
   groundDamageMultiplier: 1
   normalAckSpeedMultiplier: 1
   hpMultiplier: 1
-  soulRandomNum: 1
+  soulRandomNum: 0
   moveSpeedMutiplier: 1
   airCooldownMutiplier: 1
   groundCooldownMutiplier: 1

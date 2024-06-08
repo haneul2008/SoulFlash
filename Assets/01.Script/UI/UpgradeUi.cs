@@ -91,11 +91,11 @@ public class UpgradeUi : MonoBehaviour
 
         yield return new WaitForSeconds(_delay);
 
-        _rectTrm.DOAnchorPosY(0, _tweenDelay);
+        _tween = _rectTrm.DOAnchorPosY(0, _tweenDelay);
     }
     public void Finish()
     {
-        _rectTrm.DOAnchorPosY(_finishY, _tweenDelay);
+        _tween = _rectTrm.DOAnchorPosY(_finishY, _tweenDelay);
 
         _setScene.SetNextScene();
 

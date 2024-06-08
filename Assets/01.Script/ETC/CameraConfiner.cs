@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using System;
 
 public class CameraConfiner : MonoBehaviour
 {
+    public Action OnSetConfinerAction;
+
     [SerializeField] private Transform _cameraPos;
     [SerializeField] private float _clampValue;
-    [SerializeField] private BossNameUI _bossNameUI;
-    [SerializeField] private string _bossName;
     public float PlayerClamp { get; private set; }
 
     private CinemachineVirtualCamera _cam;
@@ -20,7 +21,7 @@ public class CameraConfiner : MonoBehaviour
     }
     public void SetConfiner(bool value)
     {
-        if(value) _bossNameUI.SetNameAndPlay(_bossName);
+        if (value) OnSetConfinerAction?.Invoke();
 
         _cam.Follow = value ? null : _cameraPos;
 

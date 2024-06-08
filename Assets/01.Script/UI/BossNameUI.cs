@@ -11,6 +11,7 @@ public class BossNameUI : MonoBehaviour
     [SerializeField] float _startDelay;
     [SerializeField] float _moveDuration;
     [SerializeField] float _nameDelay;
+    [SerializeField] string _bossName;
     [SerializeField] private TMP_Text _nameText;
     [SerializeField] private BossHpUi _bossHpUi;
 
@@ -20,10 +21,15 @@ public class BossNameUI : MonoBehaviour
     private void Awake()
     {
         _rectTransform = GetComponent<RectTransform>();
+
+        CameraConfiner cameraConfiner = GameManager.instance.virtualCam.GetComponent<CameraConfiner>();
+        cameraConfiner.OnSetConfinerAction += SetNameAndPlay;
+
+        GameManager.instance.OnDestroySingleton -= SetNameAndPlay;
     }
-    public void SetNameAndPlay(string name)
+    public void SetNameAndPlay()
     {
-        _nameText.text = name;
+        _nameText.text = _bossName;
 
         _coroutine = StartCoroutine(WaitDelayCoroutine(_startDelay, _finishY, true));
     }

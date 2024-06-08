@@ -17,6 +17,6 @@ MonoBehaviour:
   color: {r: 1, g: 0.1415093, b: 0.9835495, a: 1}
   title: "\uC601\uD63C\uC218\uC9D1\uAC00"
   desc: "5%\uD655\uB960\uB85C \uC601\uD63C\uC744 \uB450\uBC30\uB85C \uC218\uC9D1\uD569\uB2C8\uB2E4."
-  price: 8
+  price: 6
   upgradeType: 5
   increaseValue: 5

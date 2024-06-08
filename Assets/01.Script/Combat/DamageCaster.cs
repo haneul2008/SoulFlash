@@ -3,6 +3,9 @@ using UnityEngine;
 public class DamageCaster : MonoBehaviour
 {
     [SerializeField] private string _poolName;
+    [SerializeField] private bool _useBox;
+    [SerializeField] private Vector2 _boxSize;
+    [SerializeField] private GameObject _parent;
 
     public ContactFilter2D filter;
     public float damageRadius;
@@ -17,7 +20,15 @@ public class DamageCaster : MonoBehaviour
     }
     public bool CastDamage(int damage, float knockbackPower, float hpRetakeTime, bool useHitDir = true, bool enemy = false)
     {
-        int cnt = Physics2D.OverlapCircle(transform.position, damageRadius, filter, _colliders);
+        int cnt = 0;
+        if(_useBox)
+        {
+            cnt = Physics2D.OverlapBox(transform.position, _boxSize, _parent.transform.rotation.eulerAngles.z, filter, _colliders);
+        }
+        else
+        {
+            cnt = Physics2D.OverlapCircle(transform.position, damageRadius, filter, _colliders);
+        }
 
         for (int i = 0; i < cnt; i++)
         {
@@ -62,6 +73,8 @@ public class DamageCaster : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, damageRadius);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireCube(transform.position, _boxSize);
         Gizmos.color = Color.white;
     }
 #endif

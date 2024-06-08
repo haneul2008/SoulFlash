@@ -21,6 +21,8 @@ public abstract class Enemy : Agent
     [SerializeField] private float _crystalSpawnY;
     public bool dontCheckDetect;
 
+    [SerializeField] private bool _dontCastDamage;
+
     [Header("Attack Setting")]
     public float detectRadius;
     public float attackRadius, attackCooldown, knokbackPower;
@@ -77,7 +79,7 @@ public abstract class Enemy : Agent
     
     public virtual void Attack(bool castDamage = true)
     {
-        if (!castDamage) return;
+        if (!castDamage || _dontCastDamage) return;
             DamageCasterCompo.CastDamage(attackDamage, knokbackPower, 0.1f, false, true);
     }
 #if UNITY_EDITOR
