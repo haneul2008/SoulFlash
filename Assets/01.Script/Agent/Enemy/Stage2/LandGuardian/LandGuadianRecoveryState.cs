@@ -18,8 +18,6 @@ public class LandGuadianRecoveryState : BossState
 
         _boss.MovementCompo.StopImmediately();
 
-        _boss.HealthCompo.CanTakeHp(false);
-
         _boss.CanStateChageable = false;
 
         _boss.MovementCompo.canMove = false;
@@ -36,10 +34,10 @@ public class LandGuadianRecoveryState : BossState
 
         _boss.lastAttackTime = Time.time;
 
-        _boss.HealthCompo.CanTakeHp(true);
-
         _boss.MovementCompo.canKnockback = true;
         _boss.MovementCompo.canMove = true;
+
+        _boss.HealthCompo.CanTakeHp(true);
 
         _boss.SetPatternIndex(0);
         _boss.attackRadius = 4.5f;
@@ -55,10 +53,11 @@ public class LandGuadianRecoveryState : BossState
 
         _recoveryAmount += 0.1f;
 
-        if(_recoveryAmount >= 1)
+        if(_recoveryAmount >= 0.4f)
         {
             _recoveryAmount = 0;
-            _boss.HealthCompo.ResetHealth(_boss.HealthCompo.CurrentHealth + 1);
+            _boss.HealthCompo.ResetHealth(_boss.HealthCompo.CurrentHealth + 1, false);
+            _boss.HealthCompo.OnHitAction?.Invoke();
         }
 
         if(_endTriggerCalled)
@@ -75,5 +74,7 @@ public class LandGuadianRecoveryState : BossState
     private void Recovery()
     {
         _canRecovery = true;
+
+        _boss.OnPattern2Event?.Invoke();
     }
 }

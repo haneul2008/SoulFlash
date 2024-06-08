@@ -157,7 +157,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -5}
+  m_AnchoredPosition: {x: 0, y: -9}
   m_SizeDelta: {x: 77.0219, y: 13.3745}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &26742419
@@ -182,8 +182,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Death Bringer
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: fd326cbe2d10528489b4fdf8bccd07e1, type: 2}
-  m_sharedMaterial: {fileID: 1914826917237099458, guid: fd326cbe2d10528489b4fdf8bccd07e1, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b2538ca7b3128124fa7106a4e2036b42, type: 2}
+  m_sharedMaterial: {fileID: 1673856427774697370, guid: b2538ca7b3128124fa7106a4e2036b42, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

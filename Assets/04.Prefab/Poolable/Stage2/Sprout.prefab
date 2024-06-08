@@ -364,6 +364,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   <MaxHealth>k__BackingField: 200
+  _isPlayer: 0
 --- !u!114 &1737826459118237463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -411,9 +412,10 @@ MonoBehaviour:
   _crystalSpawnTime: 0
   _crystalSpawnY: 1
   dontCheckDetect: 0
+  _dontCastDamage: 0
   detectRadius: 4
   attackRadius: 2
-  attackCooldown: 3
+  attackCooldown: 5
   knokbackPower: 10
   attackDamage: 35
   contactFilter:

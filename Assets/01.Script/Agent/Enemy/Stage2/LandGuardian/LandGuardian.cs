@@ -14,6 +14,7 @@ public class LandGuardian : Boss
         stateMachine.AddState(BossEnum.Pattern0, new LandGuardianMeleeState(this, stateMachine, "Melee"));
         stateMachine.AddState(BossEnum.Pattern1, new LandGuardianLaserCastState(this, stateMachine, "LaserCast"));
         stateMachine.AddState(BossEnum.Pattern2, new LandGuadianRecoveryState(this, stateMachine, "Recovery"));
+        stateMachine.AddState(BossEnum.Dead, new LandGuardianDeadState(this, stateMachine, "Dead"));
 
         lastAttackTime = -999f;
 
@@ -29,8 +30,6 @@ public class LandGuardian : Boss
     }
     private void Update()
     {
-        print(CanStateChageable);
-
         if (!isAppear) return;
 
         stateMachine.CurrentState.UpdateState();
@@ -52,6 +51,7 @@ public class LandGuardian : Boss
         base.SetDeadState();
 
         gameObject.layer = _deadLayer;
+        CanStateChageable = true;
         stateMachine.ChangeState(BossEnum.Dead);
     }
 }

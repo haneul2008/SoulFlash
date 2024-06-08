@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LandGuatdianLaser : MonoBehaviour
+public class LandGuardianLaser : MonoBehaviour
 {
     [SerializeField] private int _damage;
     [SerializeField] private float _hpRetakeTime;
     [SerializeField] private float _laserRadius;
     [SerializeField] private float _rotateTime;
     [SerializeField] private Transform _bossTrm;
+    [SerializeField] private float _angleLimit;
 
     private Transform _targetTrm;
     private DamageCaster _damageCaster;
@@ -37,13 +38,15 @@ public class LandGuatdianLaser : MonoBehaviour
 
     private void Rotate()
     {   
-        if (_targetTrm == null || Vector2.Distance(transform.position, _targetTrm.position) > _laserRadius) return;
+        if (_targetTrm == null) return;
 
         Vector2 dir = _targetTrm.position - transform.position;
         float z = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 
+        z = Mathf.Clamp(-Mathf.Abs(z), -180 + _angleLimit, -_angleLimit);
+
         transform.rotation = Quaternion.Lerp(transform.rotation, 
-            Quaternion.Euler(0, 0, z) * Quaternion.Euler(0, 0, 180f), Time.deltaTime * _rotateTime);
+            Quaternion.Euler(0, 0, z) * Quaternion.Euler(0, 0, 180), Time.deltaTime * _rotateTime);
     }
 
     private void CastDamage()

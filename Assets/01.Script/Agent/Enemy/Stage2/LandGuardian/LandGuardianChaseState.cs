@@ -7,6 +7,7 @@ public class LandGuardianChaseState : BossState
     public LandGuardianChaseState(Boss boss, BossStateMachine stateMachine, string animBoolName) : base(boss, stateMachine, animBoolName)
     {
     }
+
     public override void UpdateState()
     {
         base.UpdateState();

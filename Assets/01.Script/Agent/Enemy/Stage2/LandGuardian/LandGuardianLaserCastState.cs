@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class LandGuardianLaserCastState : BossState
 {
+    private int _recoveryCount;
+
     public LandGuardianLaserCastState(Boss boss, BossStateMachine stateMachine, string animBoolName) : base(boss, stateMachine, animBoolName)
     {
     }
+
     public override void Enter()
     {
         base.Enter();
@@ -20,7 +23,7 @@ public class LandGuardianLaserCastState : BossState
         _boss.MovementCompo.canMove = false;
         _boss.MovementCompo.canKnockback = false;
 
-        _boss.dontFlip = true;
+        _recoveryCount++;
     }
 
     public override void Exit()
@@ -36,10 +39,12 @@ public class LandGuardianLaserCastState : BossState
 
         _boss.dontFlip = false;
 
-        if (Random.Range(1, 4) == 1)
+        if (_recoveryCount >= 2)
         {
             _boss.SetPatternIndex(2);
             _boss.attackRadius = 100;
+
+            _recoveryCount = 0;
         }
         else
         {
@@ -64,5 +69,6 @@ public class LandGuardianLaserCastState : BossState
     private void Attack()
     {
         _boss.OnPattern1Event?.Invoke();
+        _boss.dontFlip = true;
     }
 }

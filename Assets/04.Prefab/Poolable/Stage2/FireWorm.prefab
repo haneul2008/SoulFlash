@@ -516,11 +516,12 @@ MonoBehaviour:
   _crystalSpawnTime: 0
   _crystalSpawnY: 1
   dontCheckDetect: 0
+  _dontCastDamage: 0
   detectRadius: 7
   attackRadius: 4.5
-  attackCooldown: 5
+  attackCooldown: 4
   knokbackPower: 10
-  attackDamage: 30
+  attackDamage: 25
   contactFilter:
     useTriggers: 0
     useLayerMask: 1
@@ -647,6 +648,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   <MaxHealth>k__BackingField: 100
+  _isPlayer: 0
 --- !u!1001 &935774500419971243
 PrefabInstance:
   m_ObjectHideFlags: 0

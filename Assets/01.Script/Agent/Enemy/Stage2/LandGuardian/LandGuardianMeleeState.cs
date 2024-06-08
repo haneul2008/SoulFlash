@@ -14,6 +14,8 @@ public class LandGuardianMeleeState : BossState
 
         _boss.NowAttackAction += Attack;
 
+        _boss.MovementCompo.StopImmediately();
+
         _boss.CanStateChageable = false;
 
         _boss.MovementCompo.canMove = false;

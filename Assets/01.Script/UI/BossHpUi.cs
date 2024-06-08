@@ -21,7 +21,7 @@ public class BossHpUi : MonoBehaviour
         _init = false;
         _hpBarRectTrm.localScale = Vector3.one;
 
-        _playerSmoke = GameManager.instance.Player.GetComponentInChildren<PlayerSmoke>();
+        _playerSmoke = GameManager.instance.Player.transform.Find("SpawnSmoke").GetComponent<PlayerSmoke>();
     }
     private void OnDisable()
     {
