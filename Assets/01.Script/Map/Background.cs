@@ -8,6 +8,7 @@ public class Background : MonoBehaviour
 
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _moveX;
+    [SerializeField] private bool _followPlayer;
 
     private void OnEnable()
     {
@@ -29,9 +30,16 @@ public class Background : MonoBehaviour
     {
         PlayerX.Value = GameManager.instance.Player.transform.position.x;
 
-        if (GameManager.instance.Player.transform.position.x > transform.position.x + _moveX)
-            transform.position = new Vector3(transform.position.x + _moveX * 2, transform.position.y, 0);
-        else if(GameManager.instance.Player.transform.position.x < transform.position.x - _moveX)
-            transform.position = new Vector3(transform.position.x - _moveX * 2, transform.position.y, 0);
+        if(_followPlayer)
+        {
+            transform.position = new Vector3(PlayerX.Value, transform.position.y, 0);
+        }
+        else
+        {
+            if (GameManager.instance.Player.transform.position.x > transform.position.x + _moveX)
+                transform.position = new Vector3(transform.position.x + _moveX * 2, transform.position.y, 0);
+            else if (GameManager.instance.Player.transform.position.x < transform.position.x - _moveX)
+                transform.position = new Vector3(transform.position.x - _moveX * 2, transform.position.y, 0);
+        }
     }
 }

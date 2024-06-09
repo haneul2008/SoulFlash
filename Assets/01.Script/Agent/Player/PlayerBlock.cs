@@ -52,8 +52,8 @@ public class PlayerBlock : AnimationPlayer
     }
     private void EndBlock()
     {
-        if(_isBlock) _currentTime = 0;
-        if(!_isBlock && _currentTime < _cooltime) return;
+        if(!_isBlock || _currentTime < _cooltime) return;
+        _currentTime = 0;
 
         EndAnimation();
 

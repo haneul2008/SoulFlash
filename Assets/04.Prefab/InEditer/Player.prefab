@@ -457,7 +457,7 @@ MonoBehaviour:
   _parameterName: roll
   _isTriggerAnim: 0
   _isHaveMoveAnim: 1
-  _rollSpeed: 6
+  _rollSpeed: 12
   _rollTime: 0.4
   _coolTime: 3
 --- !u!114 &1550044794422671946
@@ -555,7 +555,7 @@ MonoBehaviour:
   _damageCasterPos: {x: 1.65, y: -3.5}
   _attackTime: 0.8
   _damageCasterRadius: 0.95
-  _damageCastTime: 0.8
+  _damageCastTime: 0.85
   _cooltime: 5
   _particle: {fileID: 229270765058247170}
   _particleStartTime: 0.9
@@ -965,6 +965,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _poolName: DamageCaster
+  _useBox: 0
+  _boxSize: {x: 0, y: 0}
+  _parent: {fileID: 0}
   filter:
     useTriggers: 0
     useLayerMask: 1

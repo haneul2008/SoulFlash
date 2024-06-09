@@ -47,6 +47,9 @@ public class PlayerRolls : AnimationPlayer
 
         _dir = _player.PlayerInput.Movement.x;
         _player.MovementCompo.canMove = false;
+
+        _player.MovementCompo.StopImmediately();
+
         _roll = true;
 
         PlayAnimation();
@@ -59,7 +62,7 @@ public class PlayerRolls : AnimationPlayer
     private void FixedUpdate()
     {
         if (!_roll) return;
-        transform.position += new Vector3(_dir, 0, 0) * _rollSpeed * Time.deltaTime;
+        _player.MovementCompo.rbCompo.velocity = new Vector3(_dir, 0, 0) * _rollSpeed;
     }
     private void RollEnd()
     {

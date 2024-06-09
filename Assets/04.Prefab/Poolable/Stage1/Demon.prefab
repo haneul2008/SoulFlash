@@ -172,7 +172,7 @@ CapsuleCollider2D:
   m_GameObject: {fileID: 2980589629409641451}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 438627c4eb9cb4b498ae8385be3d089e, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -195,8 +195,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.3802601, y: -0.2726395}
-  m_Size: {x: 1.2605202, y: 2.0905585}
+  m_Offset: {x: -0.3802601, y: -0.47283518}
+  m_Size: {x: 1.2605202, y: 2.4909499}
   m_Direction: 0
 --- !u!50 &8806615857751985998
 Rigidbody2D:
@@ -282,7 +282,9 @@ MonoBehaviour:
         m_CallState: 2
   _crystalSpawn: 1
   _crystalSpawnTime: 1
-  dontCheckDetect: 0
+  _crystalSpawnY: 0
+  dontCheckDetect: 1
+  _dontCastDamage: 0
   detectRadius: 8
   attackRadius: 2
   attackCooldown: 5
@@ -321,6 +323,7 @@ MonoBehaviour:
   _isTriggerAnim: 0
   _isHaveMoveAnim: 0
   _groundCheckerTrm: {fileID: 4356203427722963031}
+  _isPlayer: 0
   moveSpeed: 3
   jumpPower: 6
   extraGravity: 30
@@ -401,6 +404,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   <MaxHealth>k__BackingField: 80
+  _isPlayer: 0
 --- !u!1 &4021797300412935792
 GameObject:
   m_ObjectHideFlags: 0
@@ -446,6 +450,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _poolName: DamageCaster
+  _useBox: 0
+  _boxSize: {x: 0, y: 0}
+  _parent: {fileID: 0}
   filter:
     useTriggers: 0
     useLayerMask: 1

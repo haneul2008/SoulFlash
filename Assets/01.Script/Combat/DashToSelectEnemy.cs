@@ -8,7 +8,7 @@ using System;
 public class DashToSelectEnemy : MonoBehaviour
 {
     public UnityEvent OnDashFinishEvent;
-    public Action OnDashFinishAction;
+    public Action<bool> OnDashFinishAction;
 
     NotifyValue<Collider2D> EnemyCollider = new NotifyValue<Collider2D>();
 
@@ -98,7 +98,7 @@ public class DashToSelectEnemy : MonoBehaviour
 
         if (!_isSeleting) yield break;
 
-        ResetValue(false, true);
+        ResetValue(false, true, false);
         _player.CanStateChageable = true;
         StartCoroutine("CanTakeAttackCoroutine");
     }
@@ -133,7 +133,7 @@ public class DashToSelectEnemy : MonoBehaviour
     {
         if (NowEnemyCollider == null || !_isSeleting) return;
 
-        ResetValue(false, false);
+        ResetValue(false, false, true);
 
         float distance = Vector2.Distance(transform.position, NowEnemyCollider.gameObject.transform.position);
         transform.DOMove(NowEnemyCollider.gameObject.transform.position, _dashTime / distance)
@@ -160,7 +160,7 @@ public class DashToSelectEnemy : MonoBehaviour
                 StartCoroutine("CanTakeAttackCoroutine");
             });
     }
-    private void ResetValue(bool isSelecting, bool canMove)
+    private void ResetValue(bool isSelecting, bool canMove, bool isDash)
     {
         Time.timeScale = 1f;
         _isSeleting = isSelecting;
@@ -172,7 +172,7 @@ public class DashToSelectEnemy : MonoBehaviour
         _cam.m_Lens.OrthographicSize = 5f;
 
         OnDashFinishEvent?.Invoke();
-        OnDashFinishAction?.Invoke();
+        OnDashFinishAction?.Invoke(isDash);
 
         _actionTrigger = false;
 

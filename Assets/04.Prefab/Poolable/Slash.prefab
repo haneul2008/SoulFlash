@@ -53,7 +53,7 @@ MonoBehaviour:
   _poolName: Slash
   _damage: 8
   _knockbackPower: 2
-  _hpRetakeTime: 0.15
+  _hpRetakeTime: 0.2
 --- !u!50 &2643261731509392150
 Rigidbody2D:
   serializedVersion: 4

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.EventSystems;
 public class Crystal : MonoBehaviour, IPoolable
 {
     [SerializeField] private string _poolName;
@@ -20,6 +21,7 @@ public class Crystal : MonoBehaviour, IPoolable
     public bool _init;
     private int _enemyDeadLayer;
     private int _enemyLayer;
+    private bool _isClick;
     public void ResetItem()
     {
         gameObject.layer = _enemyDeadLayer;
@@ -63,10 +65,10 @@ public class Crystal : MonoBehaviour, IPoolable
             StopCoroutine(_corou);
         }
     }
-    private void DestroyCrystal()
+    private void DestroyCrystal(bool isSelecting)
     {
         if(!_init) return;
-        if (_dashToSelectEnemy.NowEnemyCollider == _collider)
+        if (_dashToSelectEnemy.NowEnemyCollider == _collider && isSelecting)
             PushCrystal();
     }
     private IEnumerator PushCoroutine()

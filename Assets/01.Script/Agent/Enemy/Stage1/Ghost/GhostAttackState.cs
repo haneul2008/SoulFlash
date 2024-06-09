@@ -12,6 +12,8 @@ public class GhostAttackState : EnemyState
     {
         base.Enter();
 
+        _enemy.MovementCompo.StopImmediately();
+
         _enemy.MovementCompo.canMove = false;
         _enemy.MovementCompo.canKnockback = false;
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using TMPro;
+using Unity.VisualScripting;
 
 public class BossNameUI : MonoBehaviour
 {
@@ -18,14 +19,13 @@ public class BossNameUI : MonoBehaviour
     private RectTransform _rectTransform;
     private Tween _tween;
     private Coroutine _coroutine;
+    private CameraConfiner _cameraConfiner;
     private void Awake()
     {
         _rectTransform = GetComponent<RectTransform>();
 
-        CameraConfiner cameraConfiner = GameManager.instance.virtualCam.GetComponent<CameraConfiner>();
-        cameraConfiner.OnSetConfinerAction += SetNameAndPlay;
-
-        GameManager.instance.OnDestroySingleton -= SetNameAndPlay;
+        _cameraConfiner = GameManager.instance.virtualCam.GetComponent<CameraConfiner>();
+        _cameraConfiner.OnSetConfinerAction += SetNameAndPlay;
     }
     public void SetNameAndPlay()
     {
@@ -52,7 +52,9 @@ public class BossNameUI : MonoBehaviour
     }
     private void OnDisable()
     {
-        if(_coroutine != null)
+        _cameraConfiner.OnSetConfinerAction -= SetNameAndPlay;
+
+        if (_coroutine != null)
             StopCoroutine(_coroutine);
 
         if(_tween != null)

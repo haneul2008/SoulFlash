@@ -552,7 +552,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f89cfaa002fd4d48ad45f21d066811f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _nextSceneName: Stage2
+  _nextSceneName: Stage3
   _delay: 1
 --- !u!1 &110030488
 GameObject:
@@ -1691,8 +1691,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: StageName
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b2538ca7b3128124fa7106a4e2036b42, type: 2}
-  m_sharedMaterial: {fileID: 1673856427774697370, guid: b2538ca7b3128124fa7106a4e2036b42, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e33dfe43da39d264fb227b61e21a1848, type: 2}
+  m_sharedMaterial: {fileID: 3661006450072503172, guid: e33dfe43da39d264fb227b61e21a1848, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1722,7 +1722,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -2116,7 +2116,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2859463220487728555, guid: fed35961f5a56884b81317acda694a05, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3267094268038567337, guid: fed35961f5a56884b81317acda694a05, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2542,6 +2542,7 @@ MonoBehaviour:
     _value: 0
   _moveSpeed: 16
   _moveX: 23
+  _followPlayer: 0
 --- !u!212 &407036873
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3464,7 +3465,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6768152765892828541, guid: 2df5ae1b2e546b741863f890ea075603, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3840,14 +3841,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 654866736}
     m_Modifications:
-    - target: {fileID: 4469643385591124348, guid: e28b965a2a3e1f54da9148321cf31e07, type: 3}
-      propertyPath: FinalDeadEvent.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4469643385591124348, guid: e28b965a2a3e1f54da9148321cf31e07, type: 3}
-      propertyPath: FinalDeadEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6510397168191659544, guid: e28b965a2a3e1f54da9148321cf31e07, type: 3}
       propertyPath: m_LocalPosition.x
       value: 130.22
@@ -12818,7 +12811,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9148929059714251992, guid: e54be994e73ea344db68fe3d16b8117b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13761,6 +13754,7 @@ MonoBehaviour:
     _value: 0
   _moveSpeed: 16
   _moveX: 23
+  _followPlayer: 0
 --- !u!1 &1307417431
 GameObject:
   m_ObjectHideFlags: 0
@@ -13972,6 +13966,7 @@ MonoBehaviour:
     _value: 0
   _moveSpeed: 24
   _moveX: 23
+  _followPlayer: 0
 --- !u!1001 &1344086061
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14250,6 +14245,7 @@ MonoBehaviour:
     _value: 0
   _moveSpeed: 8
   _moveX: 23
+  _followPlayer: 0
 --- !u!212 &1361082705
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -14756,7 +14752,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4315659807960780537, guid: 38b226731203e204f8d30399aeb5cc18, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5052968677244237219, guid: 38b226731203e204f8d30399aeb5cc18, type: 3}
       propertyPath: _damageCastTime
@@ -15159,6 +15155,7 @@ MonoBehaviour:
     _value: 0
   _moveSpeed: 8
   _moveX: 23
+  _followPlayer: 0
 --- !u!4 &1591279368 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8817692842454598374, guid: 5df82007a0c192b4da92e179c3b31b37, type: 3}
@@ -15579,6 +15576,7 @@ MonoBehaviour:
     _value: 0
   _moveSpeed: 24
   _moveX: 23
+  _followPlayer: 0
 --- !u!212 &1756027445
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -25647,7 +25645,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1675864256110401806, guid: 40396ad36ffb5c0439c30c0f6ae06846, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2916151243119091146, guid: 40396ad36ffb5c0439c30c0f6ae06846, type: 3}
       propertyPath: m_LocalPosition.x

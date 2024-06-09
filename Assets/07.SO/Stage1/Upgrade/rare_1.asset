@@ -18,5 +18,5 @@ MonoBehaviour:
   title: "\uC2E0\uC18D\uD55C \uC0AC\uB0E5\uAFBC"
   desc: "\uC774\uB3D9\uC18D\uB3C4\uAC00 20% \uC99D\uAC00\uD569\uB2C8\uB2E4."
   price: 3
-  upgradeType: 4
+  upgradeType: 6
   increaseValue: 0.2
