@@ -29,7 +29,6 @@ public abstract class Boss : Enemy
     public List<Enemy> spawnEnemyList = new List<Enemy>();
 
     public bool isAppear;
-    [HideInInspector] public bool dontFlip;
     public override void AnimationEndTrigger()
     {
     }

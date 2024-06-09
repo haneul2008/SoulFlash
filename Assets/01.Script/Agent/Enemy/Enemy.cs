@@ -31,6 +31,7 @@ public abstract class Enemy : Agent
 
     [HideInInspector] public float lastAttackTime;
     [HideInInspector] public Transform targetTrm;
+    [HideInInspector] public bool dontFlip;
 
     protected int _enemyLayer;
     protected int _deadLayer;
@@ -38,6 +39,7 @@ public abstract class Enemy : Agent
     public DamageCaster DamageCasterCompo { get; protected set; }
 
     private Collider2D[] _colliders;
+
     protected override void Awake()
     {
         base.Awake();
