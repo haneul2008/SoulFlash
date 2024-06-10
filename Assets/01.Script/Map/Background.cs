@@ -28,7 +28,7 @@ public class Background : MonoBehaviour
     }
     private void SetPosition()
     {
-        PlayerX.Value = GameManager.instance.Player.transform.position.x;
+        PlayerX.Value = Camera.main.transform.position.x;
 
         if(_followPlayer)
         {

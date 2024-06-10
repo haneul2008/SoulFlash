@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Pool
 {
-    //Stack FIFO => First In First Out
+    //Stack LIFO => Last In First Out
     private Stack<IPoolable> _pool;
     private Transform _parentTrm;
     private IPoolable _poolable; //Ǯ

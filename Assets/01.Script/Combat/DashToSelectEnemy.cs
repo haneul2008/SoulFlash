@@ -15,7 +15,7 @@ public class DashToSelectEnemy : MonoBehaviour
     [Header("Setting")]
     [SerializeField] private Player _player;
     [SerializeField] private Sprite _defaultSprite;
-    [SerializeField] private float _dashTime;
+    [field: SerializeField] public float DashTime { get; private set; }
     [SerializeField] private float _canDashTime;
     [SerializeField] private float _canTakeAttackTime; //대쉬가 끝난 후 몇초간 넉백과 체력 감소를 무시할지
     [SerializeField] private int _hpIncreaseAmout; //적에게 순간이동후 회복되는 양
@@ -136,7 +136,7 @@ public class DashToSelectEnemy : MonoBehaviour
         ResetValue(false, false, true);
 
         float distance = Vector2.Distance(transform.position, NowEnemyCollider.gameObject.transform.position);
-        transform.DOMove(NowEnemyCollider.gameObject.transform.position, _dashTime / distance)
+        transform.DOMove(NowEnemyCollider.gameObject.transform.position, DashTime / distance)
             .OnComplete(() =>
             {
                 int addValue = 0;

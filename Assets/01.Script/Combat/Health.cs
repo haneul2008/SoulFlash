@@ -61,4 +61,9 @@ public class Health : MonoBehaviour
         yield return new WaitForSeconds(time);
         IsCanTakeHp = value;
     }
+    public void SetMaxHealth(int hp)
+    {
+        MaxHealth = hp;
+    }
+
 }

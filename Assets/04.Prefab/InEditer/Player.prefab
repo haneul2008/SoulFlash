@@ -233,7 +233,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8289194180900575344}
-  - component: {fileID: 1963670648661201050}
+  - component: {fileID: 4860616511981542594}
   - component: {fileID: 3993966784712451812}
   - component: {fileID: 3334691442168687200}
   - component: {fileID: 113612662177824077}
@@ -278,7 +278,7 @@ Transform:
   - {fileID: 6086181069226229250}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!70 &1963670648661201050
+--- !u!70 &4860616511981542594
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -310,8 +310,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.000000029802322}
-  m_Size: {x: 0.5, y: 0.866052}
+  m_Offset: {x: -0.00089374185, y: 0.005551815}
+  m_Size: {x: 0.41957176, y: 0.7930951}
   m_Direction: 0
 --- !u!50 &3993966784712451812
 Rigidbody2D:
@@ -624,7 +624,7 @@ MonoBehaviour:
         m_CallState: 2
   _player: {fileID: 3334691442168687200}
   _defaultSprite: {fileID: -8309906393961026782, guid: 31dcf3173cb5ed54faceb493382d9018, type: 3}
-  _dashTime: 0.6
+  <DashTime>k__BackingField: 0.6
   _canDashTime: 1
   _canTakeAttackTime: 1
   _hpIncreaseAmout: 10
@@ -757,7 +757,7 @@ MonoBehaviour:
     m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
-  m_PointLightInnerRadius: 0.5
+  m_PointLightInnerRadius: 0.2
   m_PointLightOuterRadius: 1
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
@@ -845,7 +845,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 1
   m_Sprite: {fileID: -8309906393961026782, guid: 31dcf3173cb5ed54faceb493382d9018, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

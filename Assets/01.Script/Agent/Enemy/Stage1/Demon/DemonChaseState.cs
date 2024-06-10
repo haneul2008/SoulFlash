@@ -23,7 +23,7 @@ public class DemonChaseState : EnemyState
         _enemy.MovementCompo.SetMovement(Mathf.Sign(dir.x));
 
         if (distance < _enemy.attackRadius &&
-            _enemy.lastAttackTime + _enemy.attackCooldown < Time.time)
+            _enemy.lastAttackTime + _enemy.attackCooldown < Time.time && _enemy.MovementCompo.isGround.Value)
         {
             _stateMachine.ChangeState(EnemyEnum.Attack);
             return;

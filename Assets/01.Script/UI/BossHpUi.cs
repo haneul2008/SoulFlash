@@ -16,6 +16,7 @@ public class BossHpUi : MonoBehaviour
     private Health _hp;
     private bool _init;
     private Tween _tween;
+    private bool _isReSetUi;
     private void OnEnable()
     {
         _init = false;
@@ -35,9 +36,15 @@ public class BossHpUi : MonoBehaviour
         _hp.OnHitAction += SetUI;
         _init = true;
     }
+    public void ResetUi(bool value)
+    {
+        _isReSetUi = value;
+    }
     public void SetUI()
     {
         _hpBarRectTrm.localScale = new Vector3(Mathf.Clamp(_hp.CurrentHealth / (float)_hp.MaxHealth, 0, 1), 1, 1);
+
+        if (_isReSetUi) return;
 
         if (_hpBarRectTrm.localScale.x == 0)
         {

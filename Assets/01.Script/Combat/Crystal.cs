@@ -1,12 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using DG.Tweening;
+using System.Collections;
+using UnityEngine;
 using UnityEngine.EventSystems;
-public class Crystal : MonoBehaviour, IPoolable
+public class Crystal : MonoBehaviour, IPoolable, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private string _poolName;
     [SerializeField] private float _pushTime;
+    [SerializeField] private bool _noPush;
 
     private DashToSelectEnemy _dashToSelectEnemy;
     private Collider2D _collider;
@@ -22,6 +22,10 @@ public class Crystal : MonoBehaviour, IPoolable
     private int _enemyDeadLayer;
     private int _enemyLayer;
     private bool _isClick;
+    private Material _material;
+
+    private readonly int _isHitHash = Shader.PropertyToID("_IsHit");
+
     public void ResetItem()
     {
         gameObject.layer = _enemyDeadLayer;
@@ -39,6 +43,8 @@ public class Crystal : MonoBehaviour, IPoolable
 
         _enemyDeadLayer = LayerMask.NameToLayer("DeathEnemy");
         _enemyLayer = LayerMask.NameToLayer("Enemy");
+
+        _material = _renderer.material;
     }
     public void SetCrystalSpawnTime(float delay)
     {
@@ -55,19 +61,19 @@ public class Crystal : MonoBehaviour, IPoolable
         gameObject.layer = _enemyLayer;
 
         _renderer.DOFade(1, 0.5f);
-        _corou = StartCoroutine(PushCoroutine());
+        if(!_noPush) _corou = StartCoroutine(PushCoroutine());
     }
     private void OnDestroy()
     {
         _dashToSelectEnemy.OnDashFinishAction -= DestroyCrystal;
-        if(_corou != null)
+        if (_corou != null)
         {
             StopCoroutine(_corou);
         }
     }
     private void DestroyCrystal(bool isSelecting)
     {
-        if(!_init) return;
+        if (!_init) return;
         if (_dashToSelectEnemy.NowEnemyCollider == _collider && isSelecting)
             PushCrystal();
     }
@@ -80,5 +86,31 @@ public class Crystal : MonoBehaviour, IPoolable
     {
         _renderer.DOFade(0, 0.5f);
         PoolManager.instance.Push(this);
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (!_init) return;
+
+        DashToSelectEnemy dashToSelectEnemy = GameManager.instance.Player.GetComponent<DashToSelectEnemy>();
+
+        float distance = Vector2.Distance(GameManager.instance.Player.transform.position, transform.position);
+        GameManager.instance.Player.transform.DOMove(transform.position, dashToSelectEnemy.DashTime / distance)
+            .OnComplete(()=>
+            {
+                PoolManager.instance.Push(this);
+            });
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (!_init) return;
+        _material.SetInt(_isHitHash, 1);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (!_init) return;
+        _material.SetInt(_isHitHash, 0);
     }
 }

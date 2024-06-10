@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 public class PlayerRolls : AnimationPlayer
 {
@@ -62,7 +63,7 @@ public class PlayerRolls : AnimationPlayer
     private void FixedUpdate()
     {
         if (!_roll) return;
-        _player.MovementCompo.rbCompo.velocity = new Vector3(_dir, 0, 0) * _rollSpeed;
+        _player.MovementCompo.rbCompo.velocity = new Vector3(_dir * _rollSpeed, _player.MovementCompo.rbCompo.velocity.y, 0);
     }
     private void RollEnd()
     {

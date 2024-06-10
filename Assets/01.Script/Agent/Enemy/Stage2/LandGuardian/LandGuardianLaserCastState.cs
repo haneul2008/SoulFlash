@@ -20,6 +20,8 @@ public class LandGuardianLaserCastState : BossState
 
         _boss.CanStateChageable = false;
 
+        _boss.HealthCompo.CanTakeHp(false);
+
         _boss.MovementCompo.canMove = false;
         _boss.MovementCompo.canKnockback = false;
 
@@ -36,6 +38,8 @@ public class LandGuardianLaserCastState : BossState
 
         _boss.MovementCompo.canKnockback = true;
         _boss.MovementCompo.canMove = true;
+
+        _boss.HealthCompo.CanTakeHp(true);
 
         _boss.dontFlip = false;
 

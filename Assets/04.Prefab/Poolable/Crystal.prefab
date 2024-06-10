@@ -132,10 +132,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6305544992148549073}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.68, y: -2.5, z: 0.020453155}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 24.24, y: 5.39, z: 0.020453155}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
-  m_ConstrainProportionsScale: 1
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6366876324148262427}
   - {fileID: 4201969232300431536}
@@ -155,6 +155,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _poolName: Crystal
   _pushTime: 60
+  _noPush: 0
+  _init: 0
 --- !u!70 &3269573163237322417
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -260,7 +262,7 @@ MonoBehaviour:
     m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
-  m_PointLightInnerRadius: 0.5
+  m_PointLightInnerRadius: 0.1
   m_PointLightOuterRadius: 2
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
