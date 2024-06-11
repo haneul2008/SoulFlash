@@ -2520,7 +2520,7 @@ Transform:
   m_GameObject: {fileID: 407036870}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 30.7, y: 1.5, z: 0}
+  m_LocalPosition: {x: 30.6, y: 1.5, z: 0}
   m_LocalScale: {x: 6, y: 6, z: 1.3333334}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -2541,7 +2541,7 @@ MonoBehaviour:
   PlayerX:
     _value: 0
   _moveSpeed: 16
-  _moveX: 30.7
+  _moveX: 30.6
   _followPlayer: 0
 --- !u!212 &407036873
 SpriteRenderer:
@@ -13752,7 +13752,7 @@ MonoBehaviour:
   PlayerX:
     _value: 0
   _moveSpeed: 16
-  _moveX: 30.7
+  _moveX: 30.6
   _followPlayer: 0
 --- !u!1 &1307417431
 GameObject:
@@ -13964,7 +13964,7 @@ MonoBehaviour:
   PlayerX:
     _value: 0
   _moveSpeed: 24
-  _moveX: 30.7
+  _moveX: 30.6
   _followPlayer: 0
 --- !u!1001 &1344086061
 PrefabInstance:
@@ -14222,7 +14222,7 @@ Transform:
   m_GameObject: {fileID: 1361082702}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 30.7, y: 1.5, z: 0}
+  m_LocalPosition: {x: 30.6, y: 1.5, z: 0}
   m_LocalScale: {x: 6, y: 6, z: 1.3333334}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -14243,7 +14243,7 @@ MonoBehaviour:
   PlayerX:
     _value: 0
   _moveSpeed: 8
-  _moveX: 30.7
+  _moveX: 30.6
   _followPlayer: 0
 --- !u!212 &1361082705
 SpriteRenderer:
@@ -15272,7 +15272,7 @@ MonoBehaviour:
   PlayerX:
     _value: 0
   _moveSpeed: 8
-  _moveX: 30.7
+  _moveX: 30.6
   _followPlayer: 0
 --- !u!4 &1591279368 stripped
 Transform:
@@ -15672,7 +15672,7 @@ Transform:
   m_GameObject: {fileID: 1756027442}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 30.7, y: 0, z: 0}
+  m_LocalPosition: {x: 30.6, y: 0, z: 0}
   m_LocalScale: {x: 6, y: 6, z: 1.3333334}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -15693,7 +15693,7 @@ MonoBehaviour:
   PlayerX:
     _value: 0
   _moveSpeed: 24
-  _moveX: 30.7
+  _moveX: 30.6
   _followPlayer: 0
 --- !u!212 &1756027445
 SpriteRenderer:
@@ -15876,13 +15876,14 @@ GameObject:
   - component: {fileID: 1811171867}
   - component: {fileID: 1811171869}
   - component: {fileID: 1811171868}
+  - component: {fileID: 1811171870}
   m_Layer: 5
   m_Name: Fade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1811171867
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15940,6 +15941,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1811171866}
   m_CullTransparentMesh: 1
+--- !u!114 &1811171870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1811171866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3b1ba8dc20afb04ab8367a8fc3c08fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1819527540
 GameObject:
   m_ObjectHideFlags: 0

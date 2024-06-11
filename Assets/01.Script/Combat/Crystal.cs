@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -93,12 +94,13 @@ public class Crystal : MonoBehaviour, IPoolable, IPointerClickHandler, IPointerE
         if (!_init) return;
 
         DashToSelectEnemy dashToSelectEnemy = GameManager.instance.Player.GetComponent<DashToSelectEnemy>();
-
+        
         float distance = Vector2.Distance(GameManager.instance.Player.transform.position, transform.position);
-        GameManager.instance.Player.transform.DOMove(transform.position, dashToSelectEnemy.DashTime / distance)
+        GameManager.instance.Player.transform.DOMove(transform.position, Mathf.Clamp(dashToSelectEnemy.DashTime / distance, 0, 0.5f))
             .OnComplete(()=>
             {
-                PoolManager.instance.Push(this);
+                if(_noPush) Destroy(gameObject);
+                else PoolManager.instance.Push(this);
             });
     }
 

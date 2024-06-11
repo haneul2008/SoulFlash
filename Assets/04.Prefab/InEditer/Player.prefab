@@ -363,6 +363,7 @@ MonoBehaviour:
   _hpRetakeTime: 0.05
   _damageCasterRadius: 0.6
   _smoke: {fileID: 227804200567151607}
+  _deadColliderSize: {x: 0.42, y: 0.54}
   <PlayerInput>k__BackingField: {fileID: 11400000, guid: 2c4800c11dcdcc246be659ad495eabf0, type: 2}
   animationEndTrigger: 0
 --- !u!114 &113612662177824077
@@ -424,7 +425,19 @@ MonoBehaviour:
         m_CallState: 2
   OnDeadEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3334691442168687200}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: PlayerDead
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   <MaxHealth>k__BackingField: 500
   _isPlayer: 1
 --- !u!114 &7672088898529019427

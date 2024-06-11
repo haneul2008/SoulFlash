@@ -361,7 +361,7 @@ MonoBehaviour:
   attackRadius: 3
   attackCooldown: 6
   knokbackPower: 12
-  attackDamage: 40
+  attackDamage: 25
   contactFilter:
     useTriggers: 0
     useLayerMask: 1

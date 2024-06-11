@@ -48,7 +48,7 @@ public class UpgradeUiSelect : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if(_isSelected) return;
+        if (_isSelected) return;
 
         if (GameManager.instance.soulCount < _upgradeData.price)
         {
@@ -112,11 +112,14 @@ public class UpgradeUiSelect : MonoBehaviour, IPointerEnterHandler, IPointerExit
         Image image = transform.Find("Sprite").GetComponent<Image>();
         _tween = image.DOFade(0, 0.3f);
 
-        foreach(var obj in _activeObj)
+        foreach (var obj in _activeObj)
         {
             obj.SetActive(false);
         }
+
+        GameManager.instance.AddUpgradeItem(_upgradeData);
     }
+
     private void BlinkColor(Color color, float delay, bool pingPong = true)
     {
         _tween = _image.DOColor(color, delay)

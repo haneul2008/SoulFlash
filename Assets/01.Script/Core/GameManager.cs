@@ -11,8 +11,12 @@ public class GameManager : MonoSingleton<GameManager>
     public Action OnEnemyDeadAction;
     public MouseDetecter mouseDetecter;
     public CinemachineVirtualCamera virtualCam;
+    public List<UpgradeItemSO> NowUpgradeList { get; private set; } = new List<UpgradeItemSO>();
 
     public int soulCount;
+
+    public int enemyDeadCount;
+    public int soulCollectCount;
 
     #region 업그레이드 계수
     public float normalDamageMultiplier = 1; //평타 데미지 계수
@@ -44,5 +48,10 @@ public class GameManager : MonoSingleton<GameManager>
     {
         if (Input.GetKeyDown(KeyCode.P))
             SceneManager.LoadScene("Stage2");
+    }
+
+    public void AddUpgradeItem(UpgradeItemSO upgradeItem)
+    {
+        NowUpgradeList.Add(upgradeItem);
     }
 }

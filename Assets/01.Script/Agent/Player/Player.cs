@@ -1,13 +1,14 @@
 using DG.Tweening;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
-using static UnityEditor.Experimental.GraphView.GraphView;
 public class Player : Agent
 {
+    public event Action OnPlayerDeadAction;
+
     public UnityEvent JumpEvent;
     [SerializeField] private DamageCaster _damageCaster;
     [SerializeField] private Vector2 _damageCasterPos;
@@ -16,6 +17,7 @@ public class Player : Agent
     [SerializeField] private float _hpRetakeTime;
     [SerializeField] private float _damageCasterRadius;
     [SerializeField] private PlayerSmoke _smoke;
+    [SerializeField] private Vector2 _deadColliderSize;
 
     [field: SerializeField] public InputReader PlayerInput { get; private set; }
 
@@ -71,7 +73,7 @@ public class Player : Agent
     {
         PlayerInput.JumpEvent -= HandleJumpKeyEvent;
 
-        if(_smoke.Tween != null)
+        if (_smoke.Tween != null)
             _smoke.Tween.Kill();
     }
     private void Flip()
@@ -94,6 +96,12 @@ public class Player : Agent
 
     private void Update()
     {
+        if (IsDead)
+        {
+            if (CanStateChageable) CanStateChageable = false;
+            return;
+        }
+
         MovementCompo.SetMovement(PlayerInput.Movement.x);
 
         Flip();
@@ -131,10 +139,38 @@ public class Player : Agent
         _damageCaster.damageRadius = _damageCasterRadius;
 
         _damageCaster.CastDamage(Mathf.RoundToInt(_damage * GameManager.instance.normalDamageMultiplier)
-            , _knockbackPower, _hpRetakeTime, false); 
+            , _knockbackPower, _hpRetakeTime, false);
     }
     public void AnimationEndTrigger()
     {
         animationEndTrigger = true;
+    }
+
+    public void PlayerDead(bool value)
+    {
+        if(IsDead) return;
+
+        MovementCompo.StopImmediately();
+
+        MovementCompo.OnKnockbackAction?.Invoke();
+
+        IsDead = value;
+        CanStateChageable = !value;
+
+        HealthCompo.CanTakeHp(!value);
+        MovementCompo.canMove = !value;
+        MovementCompo.canKnockback = !value;
+
+        if (value)
+            Time.timeScale = 0.5f;
+
+        AnimatorCompo.SetBool("death", true);
+
+        SizeChanger sizeChanger = new SizeChanger();
+
+        CapsuleCollider2D collider = GetComponent<CapsuleCollider2D>();
+        collider.size = sizeChanger.ChangeSize(collider.size, _deadColliderSize);
+
+        OnPlayerDeadAction?.Invoke();
     }
 }

@@ -51,7 +51,7 @@ public class BossHpUi : MonoBehaviour
             SetMoveUi(false);
             StartCoroutine(_playerSmoke.WaitDelayCoroutine(false));
 
-            _upgradeUi.SetUpgrade();
+            if(_upgradeUi != null) _upgradeUi.SetUpgrade();
         }
     }
     public void SetMoveUi(bool isGoFinish)

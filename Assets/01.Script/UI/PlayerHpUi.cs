@@ -34,8 +34,10 @@ public class PlayerHpUi : MonoBehaviour
     {
         _currentHp = _playerHp.CurrentHealth;
 
-        _hpBarTrm.localScale = new Vector2(_currentHp / (_playerHp.MaxHealth * GameManager.instance.hpMultiplier), 1);
-        _hpText.text = $"{_currentHp} / {_playerHp.MaxHealth * GameManager.instance.hpMultiplier}";
+        _hpBarTrm.localScale = new Vector2(Mathf.Clamp(_currentHp / (_playerHp.MaxHealth * GameManager.instance.hpMultiplier), 0, 1), 1);
+
+        _hpText.text = $"{Mathf.Clamp(_currentHp, 0, _playerHp.MaxHealth * GameManager.instance.hpMultiplier)}" +
+            $" / {_playerHp.MaxHealth * GameManager.instance.hpMultiplier}";
 
         StartCoroutine("DelayBlink");
     }

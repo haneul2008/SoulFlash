@@ -63,6 +63,14 @@ public abstract class Enemy : Agent
         IsDead = value;
         CanStateChageable = !value;
         dontCheckDetect = false;
+
+        MovementCompo.rbCompo.gravityScale = value? 0 : 1;
+
+        Collider2D collider2D = GetComponent<Collider2D>();
+        collider2D.enabled = !value;
+
+        if(value && !isSpawnAgent)
+            GameManager.instance.enemyDeadCount++;
     }
     public void SpawnCrystal()
     {
