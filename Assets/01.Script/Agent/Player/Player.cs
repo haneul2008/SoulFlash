@@ -148,7 +148,7 @@ public class Player : Agent
 
     public void PlayerDead(bool value)
     {
-        if(IsDead) return;
+        if(IsDead && value) return;
 
         MovementCompo.StopImmediately();
 
@@ -169,7 +169,14 @@ public class Player : Agent
         SizeChanger sizeChanger = new SizeChanger();
 
         CapsuleCollider2D collider = GetComponent<CapsuleCollider2D>();
-        collider.size = sizeChanger.ChangeSize(collider.size, _deadColliderSize);
+        if (value)
+        {
+            collider.size = sizeChanger.ChangeSize(collider.size, _deadColliderSize);
+        }
+        else if (!value && collider.size == _deadColliderSize)
+        {
+            collider.size = sizeChanger.GetSaveSize();
+        }
 
         OnPlayerDeadAction?.Invoke();
     }

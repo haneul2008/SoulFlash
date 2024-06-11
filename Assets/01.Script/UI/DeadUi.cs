@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class DeadUi : MonoBehaviour
@@ -52,7 +53,13 @@ public class DeadUi : MonoBehaviour
 
         _tween = _rectTrm.DOAnchorPosY(_finishY, _delay);
     }
+    public void Restart()
+    {
+        SceneManager.LoadScene("Lobby");
 
+        Player player = GameManager.instance.Player.GetComponent<Player>();
+        player.PlayerDead(false);
+    }
     public void Quit()
     {
         Application.Quit();

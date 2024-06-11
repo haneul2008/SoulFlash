@@ -26,6 +26,12 @@ public class Fade : MonoBehaviour
         if (_tween != null)
             _tween.Kill();
     }
+    public void SetFade(bool fadeIn)
+    {
+        if(fadeIn) FadeIn();
+        else FadeOut();
+    }
+
     private void FadeIn()
     {
         gameObject.SetActive(true);

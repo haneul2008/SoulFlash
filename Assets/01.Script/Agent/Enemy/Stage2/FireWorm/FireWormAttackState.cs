@@ -15,6 +15,8 @@ public class FireWormAttackState : EnemyState
 
         _enemy.MovementCompo.canMove = false;
         _enemy.MovementCompo.canKnockback = false;
+
+        _enemy.dontFlip = true;
     }
     public override void Exit()
     {
@@ -22,6 +24,8 @@ public class FireWormAttackState : EnemyState
 
         _enemy.MovementCompo.canKnockback = true;
         _enemy.MovementCompo.canMove = true;
+
+        _enemy.dontFlip = false;
 
         base.Exit();
     }

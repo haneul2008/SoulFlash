@@ -22,6 +22,7 @@ public class HellKeeperDeadState : BossState
         if (_endTriggerCalled)
         {
             _endTriggerCalled = false;
+            _boss.FinalDeadEvent?.Invoke(); 
         }
     }
 }

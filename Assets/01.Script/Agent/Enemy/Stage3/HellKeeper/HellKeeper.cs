@@ -20,6 +20,7 @@ public class HellKeeper : Boss
     public float AttackSpeed { get; private set; } = 1;
     public Animator AnimationCompo { get; private set; }
     private int _appearCount;
+    private bool _isAppearing;
     protected override void Awake()
     {
         base.Awake();
@@ -84,6 +85,10 @@ public class HellKeeper : Boss
 
     public void ReAppear()
     {
+        if(_isAppearing) return;
+
+        _isAppearing = true;
+
         _appearCount++;
 
         if (_appearCount == 2)
@@ -96,17 +101,20 @@ public class HellKeeper : Boss
             SetDeadState();
             return;
         }
+
+        HealthCompo.SetMaxHealth(_appearHealth[_appearCount]);
+        HealthCompo.ResetHealth(_appearHealth[_appearCount]);
+
         attackDamage = _appearDamages[_appearCount];
         SpriteRendererCompo.color = _appearColors[_appearCount];
 
         MovementCompo.moveSpeed = _appearMoveSpeeds[_appearCount];
         AttackSpeed = _appearAttackSpeeds[_appearCount];
 
-        HealthCompo.SetMaxHealth(_appearHealth[_appearCount]);
-        HealthCompo.ResetHealth(_appearHealth[_appearCount]);
-
         _bossHpUi.SetUI();
 
         stateMachine.ChangeState(BossEnum.Appear);
+
+        _isAppearing = false;
     }
 }

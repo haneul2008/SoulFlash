@@ -29,7 +29,7 @@ public class FireWormEnemy : Enemy
 
         if (targetTrm != null && IsDead == false)
         {
-            if (Vector2.Distance(new Vector2(targetTrm.position.x, 0), new Vector2(transform.position.x, 0)) > 0.1f)
+            if (Vector2.Distance(new Vector2(targetTrm.position.x, 0), new Vector2(transform.position.x, 0)) > 0.1f && !dontFlip)
                 HandleSpriteFlip(targetTrm.position, true);
         }
     }

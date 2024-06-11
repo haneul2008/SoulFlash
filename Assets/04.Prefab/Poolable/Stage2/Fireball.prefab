@@ -210,7 +210,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1171889212727373735, guid: c01e950612cd1414a8cf0402f42484bc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.048000004
+      value: -0.076
       objectReference: {fileID: 0}
     - target: {fileID: 1171889212727373735, guid: c01e950612cd1414a8cf0402f42484bc, type: 3}
       propertyPath: m_LocalPosition.y
@@ -250,7 +250,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8646251637663854938, guid: c01e950612cd1414a8cf0402f42484bc, type: 3}
       propertyPath: damageRadius
-      value: 0.4
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 8646251637663854938, guid: c01e950612cd1414a8cf0402f42484bc, type: 3}
       propertyPath: filter.layerMask.m_Bits

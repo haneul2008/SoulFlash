@@ -16,6 +16,7 @@ public class HellKeeperAppearState : BossState
         _boss.HealthCompo.CanTakeHp(false);
 
         _boss.isAppear = true;
+        _boss.dontFlip = true;
     }
 
     public override void Exit()
@@ -24,6 +25,8 @@ public class HellKeeperAppearState : BossState
 
         _boss.MovementCompo.canKnockback = true;
         _boss.HealthCompo.CanTakeHp(true);
+
+        _boss.dontFlip = false;
     }
 
     public override void UpdateState()

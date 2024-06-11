@@ -24,6 +24,7 @@ public class Crystal : MonoBehaviour, IPoolable, IPointerClickHandler, IPointerE
     private int _enemyLayer;
     private bool _isClick;
     private Material _material;
+    private bool _enemyDied;
 
     private readonly int _isHitHash = Shader.PropertyToID("_IsHit");
 
@@ -31,6 +32,7 @@ public class Crystal : MonoBehaviour, IPoolable, IPointerClickHandler, IPointerE
     {
         gameObject.layer = _enemyDeadLayer;
         _init = false;
+        _enemyDied = false;
     }
 
     private void Awake()
@@ -46,7 +48,22 @@ public class Crystal : MonoBehaviour, IPoolable, IPointerClickHandler, IPointerE
         _enemyLayer = LayerMask.NameToLayer("Enemy");
 
         _material = _renderer.material;
+
+        GameManager.instance.OnEnemyDeadAction += EnemyDied;
+        _dashToSelectEnemy.OnDashFinishAction += FinishDash;
+        GameManager.instance.OnDestroySingleton += UnSubscribe;
     }
+
+    private void FinishDash(bool enemyDied)
+    {
+        _enemyDied = false;   
+    }
+
+    private void EnemyDied()
+    {
+        _enemyDied = true;
+    }
+
     public void SetCrystalSpawnTime(float delay)
     {
         _corou = StartCoroutine(SpawnCrystalCoroutine(delay));
@@ -64,9 +81,14 @@ public class Crystal : MonoBehaviour, IPoolable, IPointerClickHandler, IPointerE
         _renderer.DOFade(1, 0.5f);
         if(!_noPush) _corou = StartCoroutine(PushCoroutine());
     }
-    private void OnDestroy()
+    private void UnSubscribe()
     {
         _dashToSelectEnemy.OnDashFinishAction -= DestroyCrystal;
+        GameManager.instance.OnEnemyDeadAction -= EnemyDied;
+        _dashToSelectEnemy.OnDashFinishAction -= FinishDash;
+    }
+    private void OnDestroy()
+    {
         if (_corou != null)
         {
             StopCoroutine(_corou);
@@ -91,7 +113,7 @@ public class Crystal : MonoBehaviour, IPoolable, IPointerClickHandler, IPointerE
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (!_init) return;
+        if (!_init || _enemyDied) return;
 
         DashToSelectEnemy dashToSelectEnemy = GameManager.instance.Player.GetComponent<DashToSelectEnemy>();
         

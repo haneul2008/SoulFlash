@@ -31,7 +31,6 @@ public class PlayerHeavyAttack : AnimationPlayer
     private Player _player;
     private float _currentTime;
     private bool _attack;
-    private bool _cooltimeTrigger;
     private Coroutine _particleCorou;
     private Tween _particleTween;
     public override void Initialize(Agent agent)
@@ -55,7 +54,8 @@ public class PlayerHeavyAttack : AnimationPlayer
     }
     private void Update()
     {
-        if (_cooltimeTrigger) return;
+        if (_attack && !_player.MovementCompo.isGround.Value) EndAttack();
+
         _currentTime += Time.deltaTime;
     }
     private void HandleHeavyAttack()
@@ -82,7 +82,6 @@ public class PlayerHeavyAttack : AnimationPlayer
     private void EndAttack()
     {
         EndAnimation();
-
         _player.CanStateChageable = true;
         _player.MovementCompo.canMove = true;
         _damageCaster.damageRadius = 0;
@@ -93,8 +92,6 @@ public class PlayerHeavyAttack : AnimationPlayer
     }
     private IEnumerator DamageCastCoroutine(float dir)
     {
-        _cooltimeTrigger = false;
-
         yield return new WaitForSeconds(_damageCastTime);
 
         if (!_attack) yield break;

@@ -20,10 +20,10 @@ public class DashToSelectEnemy : MonoBehaviour
     [SerializeField] private float _canTakeAttackTime; //대쉬가 끝난 후 몇초간 넉백과 체력 감소를 무시할지
     [SerializeField] private int _hpIncreaseAmout; //적에게 순간이동후 회복되는 양
     public Collider2D NowEnemyCollider { get; private set; }
+    public bool IsSelecting { get; private set; }
 
     private CinemachineVirtualCamera _cam;
     private MouseDetecter _mouseDeteter;
-    private bool _isSeleting;
     private bool _isFalseBlink;
     private Collider2D[] _enemyDetectCollider;
     private SpriteRenderer _enemyRenderer;
@@ -57,7 +57,7 @@ public class DashToSelectEnemy : MonoBehaviour
 
     private void Update()
     {
-        if (!_isSeleting) return;
+        if (!IsSelecting) return;
 
         ToDoEnemy();
         DecreaseCameraSize();
@@ -86,7 +86,7 @@ public class DashToSelectEnemy : MonoBehaviour
 
         Time.timeScale = 0.2f;
 
-        _isSeleting = true;
+        IsSelecting = true;
         _player.CanStateChageable = false;
 
         StartCoroutine(CanDashTimeCoroutine());
@@ -96,7 +96,7 @@ public class DashToSelectEnemy : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(_canDashTime);
 
-        if (!_isSeleting) yield break;
+        if (!IsSelecting) yield break;
 
         ResetValue(false, true, false);
         _player.CanStateChageable = true;
@@ -131,7 +131,7 @@ public class DashToSelectEnemy : MonoBehaviour
     }
     private void DashToEnemy()
     {
-        if (NowEnemyCollider == null || !_isSeleting) return;
+        if (NowEnemyCollider == null || !IsSelecting) return;
 
         ResetValue(false, false, true);
 
@@ -164,7 +164,7 @@ public class DashToSelectEnemy : MonoBehaviour
     private void ResetValue(bool isSelecting, bool canMove, bool isDash)
     {
         Time.timeScale = 1f;
-        _isSeleting = isSelecting;
+        IsSelecting = isSelecting;
         _player.MovementCompo.canMove = canMove;
 
         _player.HealthCompo.CanTakeHp(false);

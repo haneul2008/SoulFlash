@@ -565,9 +565,9 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   _damageCaster: {fileID: 3998105408624119488}
-  _damageCasterPos: {x: 1.65, y: -3.5}
+  _damageCasterPos: {x: 1.4, y: -3.5}
   _attackTime: 0.8
-  _damageCasterRadius: 0.95
+  _damageCasterRadius: 1.4
   _damageCastTime: 0.85
   _cooltime: 5
   _particle: {fileID: 229270765058247170}
