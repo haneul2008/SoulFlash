@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class PlayerAttack : AnimationPlayer
 {
+    public event Action OnAttackAction;
+
     [Header("Setting")]
     [SerializeField] private float _attackTime;
     [SerializeField] private float _cooltime;
@@ -41,7 +44,7 @@ public class PlayerAttack : AnimationPlayer
     private void HandleAttack()
     {
         //if (EventSystem.current.IsPointerOverGameObject()) return;
-        if (!_player.MovementCompo.isGround.Value) return;
+        if (!_player.MovementCompo.isGround.Value || !_player.canAttack) return;
         if (!_player.CanStateChageable || _currentTime < _cooltime) return;
 
         _currentTime = 0;
@@ -53,6 +56,8 @@ public class PlayerAttack : AnimationPlayer
         _anim.speed = 1 * GameManager.instance.normalAckSpeedMultiplier;
 
         PlayAnimation();
+
+        OnAttackAction?.Invoke();
     }
     private void EndAttack()
     {

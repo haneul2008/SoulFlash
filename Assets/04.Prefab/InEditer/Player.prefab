@@ -353,6 +353,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isSpawnAgent: 0
+  _dontSetVisual: 0
+  dontFlip: 0
   JumpEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -366,6 +368,13 @@ MonoBehaviour:
   _deadColliderSize: {x: 0.42, y: 0.54}
   <PlayerInput>k__BackingField: {fileID: 11400000, guid: 2c4800c11dcdcc246be659ad495eabf0, type: 2}
   animationEndTrigger: 0
+  canJump: 1
+  canAirDash: 1
+  canRoll: 1
+  canAttack: 1
+  canHeavyAttack: 1
+  canAirAttack: 1
+  canBlock: 1
 --- !u!114 &113612662177824077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -592,7 +601,7 @@ MonoBehaviour:
   _isTriggerAnim: 0
   _isHaveMoveAnim: 1
   _cooltime: 3
-  _blockTime: 0.5
+  _blockTime: 1
 --- !u!114 &8731995025009134045
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -638,9 +647,9 @@ MonoBehaviour:
   _player: {fileID: 3334691442168687200}
   _defaultSprite: {fileID: -8309906393961026782, guid: 31dcf3173cb5ed54faceb493382d9018, type: 3}
   <DashTime>k__BackingField: 0.6
-  _canDashTime: 1
   _canTakeAttackTime: 1
   _hpIncreaseAmout: 10
+  _canDashTime: 1.5
 --- !u!1 &4640626962104936680
 GameObject:
   m_ObjectHideFlags: 0

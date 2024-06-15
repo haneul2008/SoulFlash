@@ -8,7 +8,8 @@ using UnityEngine.Events;
 public class PlayerHeavyAttack : AnimationPlayer
 {
     public UnityEvent OnHeavyAttackEvent;
-    public Action<int> OnEndHeavyAttackAction;
+    public event Action<int> OnEndHeavyAttackAction;
+    public event Action OnHeavyAttackAction;
 
     [Header("Setting")]
     [SerializeField] private DamageCaster _damageCaster;
@@ -60,10 +61,11 @@ public class PlayerHeavyAttack : AnimationPlayer
     }
     private void HandleHeavyAttack()
     {
-        if (!_player.MovementCompo.isGround.Value) return;
+        if (!_player.MovementCompo.isGround.Value || !_player.canHeavyAttack) return;
         if (!_player.CanStateChageable || _currentTime < _cooltime * GameManager.instance.groundCooldownMutiplier) return;
 
         OnEndHeavyAttackAction?.Invoke(Mathf.RoundToInt(_cooltime * GameManager.instance.groundCooldownMutiplier));
+        OnHeavyAttackAction?.Invoke();
 
         _attack = true;
         _currentTime = 0;

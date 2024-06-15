@@ -48,7 +48,7 @@ public class PlayerAirDash : AnimationPlayer
     }
     private void HandleDash()
     {
-        if (!_player.CanStateChageable) return;
+        if (!_player.CanStateChageable || !_player.canAirDash) return;
         if (_player.MovementCompo.isGround.Value || _currentTime < _coolTime) return;
 
         _dash = true;

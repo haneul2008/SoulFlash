@@ -31,7 +31,6 @@ public abstract class Enemy : Agent
 
     [HideInInspector] public float lastAttackTime;
     [HideInInspector] public Transform targetTrm;
-    [HideInInspector] public bool dontFlip;
 
     protected int _enemyLayer;
     protected int _deadLayer;
@@ -60,6 +59,8 @@ public abstract class Enemy : Agent
 
     public void SetDead(bool value)
     {
+        if (value) GameManager.instance.OnEnemyDeadAction?.Invoke();
+
         IsDead = value;
         CanStateChageable = !value;
         dontCheckDetect = false;

@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoSingleton<GameManager>
 {
     [field : SerializeField] public GameObject Player { get; private set; }
+    public Action OnEnemyFinalDeadAction;
     public Action OnEnemyDeadAction;
     public MouseDetecter mouseDetecter;
     public CinemachineVirtualCamera virtualCam;

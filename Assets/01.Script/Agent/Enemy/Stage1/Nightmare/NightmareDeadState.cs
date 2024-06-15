@@ -29,6 +29,6 @@ public class NightmareDeadState : EnemyState
     private void PlayFinalDead()
     {
         _enemy.FinalDeadEvent?.Invoke();
-        GameManager.instance.OnEnemyDeadAction?.Invoke();
+        GameManager.instance.OnEnemyFinalDeadAction?.Invoke();
     }
 }

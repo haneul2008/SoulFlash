@@ -15,7 +15,7 @@ public class NecromancerDeadState : EnemyState
 
         _enemy.MovementCompo.canKnockback = false;
 
-        GameManager.instance.OnEnemyDeadAction?.Invoke();
+        GameManager.instance.OnEnemyFinalDeadAction?.Invoke();
     }
 
     public override void UpdateState()

@@ -25,6 +25,17 @@ public class Player : Agent
     public bool CanStateChageable { get; set; } = true;
     [HideInInspector] public bool animationEndTrigger;
 
+    #region ClampSkill
+    //x[HideInInspector] 
+    public bool canJump = true;
+    [HideInInspector] public bool canAirDash = true;
+    [HideInInspector] public bool canRoll = true;
+    [HideInInspector] public bool canAttack = true;
+    [HideInInspector] public bool canHeavyAttack = true;
+    [HideInInspector] public bool canAirAttack = true;
+    [HideInInspector] public bool canBlock = true;
+    #endregion
+
     private CameraConfiner _cameraConfiner;
     private GameObject _light;
     #region Component
@@ -78,14 +89,18 @@ public class Player : Agent
     }
     private void Flip()
     {
-        if (!MovementCompo.canMove) return;
+        if (!MovementCompo.canMove || dontFlip) return;
+
         if (Mathf.Abs(PlayerInput.Movement.x) > 0.1f)
         {
             float rotationY = PlayerInput.Movement.x > 0.1f ? 0 : -180f;
             transform.eulerAngles = new Vector3(0, rotationY, 0);
         }
         else
-            HandleSpriteFlip(PlayerInput.MousePosition);
+        {
+            Vector2 mousePos = Input.mousePosition;
+            HandleSpriteFlip(Camera.main.ScreenToWorldPoint(mousePos));
+        }
     }
 
     private void InitPlayerActions()
@@ -110,6 +125,8 @@ public class Player : Agent
 
     private void HandleJumpKeyEvent()
     {
+        if (!canJump) return;
+
         if (MovementCompo.isGround.Value)
         {
             JumpProcess(true);
@@ -121,7 +138,7 @@ public class Player : Agent
     }
     private void JumpProcess(bool canDoubleJump)
     {
-        if (!CanStateChageable) return;
+        if (!CanStateChageable || !canJump) return;
         _canDoubleJump = canDoubleJump;
         JumpEvent?.Invoke();
         MovementCompo.Jump();

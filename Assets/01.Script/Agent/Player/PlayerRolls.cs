@@ -38,7 +38,7 @@ public class PlayerRolls : AnimationPlayer
 
     private void Roll()
     {
-        if (!_player.MovementCompo.isGround.Value) return;
+        if (!_player.MovementCompo.isGround.Value || !_player.canRoll) return;
         if (_currentTime < _coolTime) return;
         if (!_player.CanStateChageable) return;
 

@@ -44,6 +44,6 @@ public class GhostDeadState : EnemyState
         }
 
         if (_isSpawnAgent) return;
-        GameManager.instance.OnEnemyDeadAction?.Invoke();
+        GameManager.instance.OnEnemyFinalDeadAction?.Invoke();
     }
 }

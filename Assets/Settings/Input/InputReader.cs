@@ -15,7 +15,6 @@ public class InputReader : ScriptableObject, IPlayerActions
     public event Action OnFKeyPressed;
     public event Action OnFKeyWasUp;
     public Vector2 Movement { get; private set; }
-    public Vector2 MousePosition { get; private set; }
     private void OnEnable()
     {
         if (_controls == null)
@@ -38,7 +37,6 @@ public class InputReader : ScriptableObject, IPlayerActions
     public void OnMousePosition(InputAction.CallbackContext context)
     {
         Vector2 mousePos = context.ReadValue<Vector2>();
-        MousePosition = Camera.main.ScreenToWorldPoint(mousePos);
     }
 
     public void OnRolls(InputAction.CallbackContext context)

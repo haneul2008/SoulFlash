@@ -7,7 +7,8 @@ using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class PlayerAirAttack : AnimationPlayer
 {
-    public Action<int> OnEndAirAttackAction;
+    public event Action<int> OnEndAirAttackAction;
+    public event Action OnAirAttackAction;
 
     [Header("Setting")]
     [SerializeField] private float _slashSpawnX;
@@ -44,12 +45,14 @@ public class PlayerAirAttack : AnimationPlayer
 
     private void AirAttack()
     {
-        if (!_player.CanStateChageable) return;
+        if (!_player.CanStateChageable || !_player.canAirAttack) return;
         if (!InAir || _currentTime < _cooltime * GameManager.instance.airCooldownMutiplier) return;
 
         _currentTime = 0;
 
         _attack = true;
+
+        OnAirAttackAction?.Invoke();
 
         float dir = transform.rotation.eulerAngles.y == 0f ? 1 : -1;
 

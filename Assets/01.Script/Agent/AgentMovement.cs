@@ -46,6 +46,8 @@ public class AgentMovement : AnimationPlayer
 
     public void SetMovement(float xMove)
     {
+        if (_isPlayer && _agent.dontFlip) return;
+
         _xMove = xMove;
 
         if (Mathf.Abs(_xMove) > 0.1f)

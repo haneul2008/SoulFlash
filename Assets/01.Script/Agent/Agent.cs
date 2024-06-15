@@ -13,12 +13,20 @@ public abstract class Agent : MonoBehaviour
 
     public bool isSpawnAgent;
     protected float _timeInAir;
+
+    [SerializeField] private bool _dontSetVisual;
+
+    [HideInInspector] public bool dontFlip;
     protected virtual void Awake()
     {
         MovementCompo = GetComponent<AgentMovement>();
         MovementCompo.Initalize(this);
-        AnimatorCompo = transform.Find("Visual").GetComponent<Animator>();
-        SpriteRendererCompo = transform.Find("Visual").GetComponent<SpriteRenderer>();
+
+        if(!_dontSetVisual)
+        {
+            AnimatorCompo = transform.Find("Visual").GetComponent<Animator>();
+            SpriteRendererCompo = transform.Find("Visual").GetComponent<SpriteRenderer>();
+        }
 
         HealthCompo = GetComponent<Health>();
         HealthCompo.Initialize(this);

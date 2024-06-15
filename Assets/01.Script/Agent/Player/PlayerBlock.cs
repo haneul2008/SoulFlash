@@ -9,11 +9,12 @@ public class PlayerBlock : AnimationPlayer
     public Action<int> OnEndBlockAction;
 
     [SerializeField] private float _cooltime;
-    [SerializeField] private float _blockTime;
+    [SerializeField] private float _blockTime = 1.5f;
 
     private Player _player;
     private float _currentTime;
     private bool _isBlock;
+    private float _currentBlockTime;
     public override void Initialize(Agent agent)
     {
         base.Initialize(agent);
@@ -32,12 +33,16 @@ public class PlayerBlock : AnimationPlayer
     }
     private void Update()
     {
-        if (_isBlock) return;
+        if (_isBlock)
+        {
+            if(_currentBlockTime + _blockTime < Time.time) EndBlock();
+            return;
+        }
         _currentTime += Time.deltaTime;
     }
     private void Block()
     {
-        if (!_player.MovementCompo.isGround.Value) return;
+        if (!_player.MovementCompo.isGround.Value || !_player.canBlock) return;
         if (!_player.CanStateChageable || _currentTime < _cooltime) return;
 
         _isBlock = true;
@@ -47,6 +52,8 @@ public class PlayerBlock : AnimationPlayer
         _player.CanStateChageable = false;
         _player.MovementCompo.canMove = false;
         _player.MovementCompo.rbCompo.velocity = Vector2.zero;
+
+        _currentBlockTime = Time.time;
 
         PlayAnimation();
     }
