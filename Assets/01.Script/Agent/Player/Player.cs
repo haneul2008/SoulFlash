@@ -166,6 +166,12 @@ public class Player : Agent
     public void PlayerDead(bool value)
     {
         if(IsDead && value) return;
+        if(SceneManager.GetActiveScene().name == "Tutorial")
+        {
+            HealthCompo.ResetHealth(HealthCompo.MaxHealth);
+            HealthCompo.OnHitAction?.Invoke();
+            return;
+        }
 
         MovementCompo.StopImmediately();
 
@@ -196,5 +202,16 @@ public class Player : Agent
         }
 
         OnPlayerDeadAction?.Invoke();
+    }
+
+    public void SetCanUseSkill(bool attack, bool airDash, bool roll, bool jump, bool heavyAttack, bool airAttack, bool block)
+    {
+        canAttack = attack;
+        canAirDash = airDash;
+        canRoll = roll;
+        canJump = jump;
+        canHeavyAttack = heavyAttack;
+        canAirAttack = airAttack;
+        canBlock = block;
     }
 }

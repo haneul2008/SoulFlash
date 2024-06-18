@@ -41,6 +41,11 @@ public class HellKeeper : Boss
         AnimationCompo = transform.Find("Visual").GetComponent<Animator>();
     }
 
+    private void Start()
+    {
+        HealthCompo.CanTakeHp(false);
+    }
+
     private void Appear()
     {
         stateMachine.Initialize(BossEnum.Appear, this);

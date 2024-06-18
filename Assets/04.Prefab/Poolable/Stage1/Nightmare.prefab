@@ -682,6 +682,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isSpawnAgent: 0
+  _dontSetVisual: 0
+  dontFlip: 0
   OnAppearToIdleEvent:
     m_PersistentCalls:
       m_Calls:
@@ -745,7 +747,7 @@ MonoBehaviour:
   attackRadius: 2
   attackCooldown: 0.8
   knokbackPower: 15
-  attackDamage: 10
+  attackDamage: 7
   contactFilter:
     useTriggers: 0
     useLayerMask: 1

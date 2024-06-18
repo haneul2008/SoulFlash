@@ -3,15 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class TutorialGuideUi : MonoBehaviour
 {
     [SerializeField] private List<string> _guideDescList = new List<string>();
+    [SerializeField] private List<string> _guideDesc2List = new List<string>();
     [SerializeField] private List<Vector2> _guideCellPosList = new List<Vector2>();
     [SerializeField] private List<Vector2> _guideCellSizeList = new List<Vector2>();
+    [SerializeField] private List<UnityEvent> _events = new List<UnityEvent>();
+
     [SerializeField] private RectTransform _cellRectTrm;
     [SerializeField] private TMP_Text _descText;
+    [SerializeField] private TMP_Text _descText2;
     [SerializeField] private float _delay;
 
     private Image _image;
@@ -30,28 +35,36 @@ public class TutorialGuideUi : MonoBehaviour
 
         _player = GameManager.instance.Player.GetComponent<Player>();
 
-        _player.canJump = false;
-        _player.canAirDash = false;
-        _player.canRoll = false;
-        _player.canAirAttack = false;
-        _player.canHeavyAttack = false;
-        _player.canBlock = false;
-        _player.canAttack = false;
+        _player.SetCanUseSkill(false, false, false, false, false, false, false);
     }
     private void OnDisable()
     {
         if(_tween != null)
             _tween.Kill();
     }
-    public void SetGuideUi()
+    public void SetGuideUi(Vector2 offset ,Transform cellTargetTrm = null)
     {
         _player.dontFlip = true;
 
-        _cellRectTrm.anchoredPosition = _guideCellPosList[_guideIndex];
+        if(cellTargetTrm != null)
+        {
+            Vector2 screenTargetPos = Camera.main.WorldToScreenPoint(cellTargetTrm.position);
+
+            _cellRectTrm.position = screenTargetPos + offset;
+        }
+        else
+        {
+            _cellRectTrm.anchoredPosition = _guideCellPosList[_guideIndex];
+        }
+
         _cellRectTrm.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, _guideCellSizeList[_guideIndex].x);
         _cellRectTrm.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, _guideCellSizeList[_guideIndex].y);
 
         _descText.text = _guideDescList[_guideIndex];
+
+        _descText2.text = _guideDesc2List[_guideIndex];
+
+        _events[_guideIndex].Invoke();
 
         gameObject.SetActive(true);
         _tween = _image.DOFade(_saveAlpha, _delay)
@@ -67,7 +80,7 @@ public class TutorialGuideUi : MonoBehaviour
     {
         if (!_uiActiving) return;
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             _uiActiving = false;
 

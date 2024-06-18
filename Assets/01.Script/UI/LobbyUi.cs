@@ -49,6 +49,7 @@ public class LobbyUi : MonoBehaviour
         if (fadeIn) return;
 
         SceneManager.LoadScene("Stage1");
+        GameManager.instance.GameStartTime = Time.time;
     }
     public void Quit()
     {

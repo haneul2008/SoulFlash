@@ -12,6 +12,8 @@ public class DeathBringerAttackState : BossState
     {
         base.Enter();
 
+        _boss.HealthCompo.CanTakeHp(false);
+
         _boss.MovementCompo.StopImmediately(false);
 
         _boss.CanStateChageable = false;
@@ -28,6 +30,8 @@ public class DeathBringerAttackState : BossState
 
         _boss.SetPatternIndex(1);
         _boss.attackRadius = 10;
+
+        _boss.HealthCompo.CanTakeHp(true);
 
         base.Exit();
     }

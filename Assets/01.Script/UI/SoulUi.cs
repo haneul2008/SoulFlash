@@ -1,11 +1,15 @@
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class SoulUi : MonoBehaviour
 {
+    public event Action OnSoulUiAction;
+
     private NotifyValue<int> SoulCount = new NotifyValue<int>();
 
     [SerializeField] private RectTransform _myRectTrm;
@@ -37,7 +41,10 @@ public class SoulUi : MonoBehaviour
     {
         _currentSoul = GameManager.instance.soulCount;
 
-        if (isGoFinish) MoveUi(_finishY, _moveDuration, isGoFinish);
+        if (isGoFinish)
+        {
+            MoveUi(_finishY, _moveDuration, isGoFinish);
+        }
         else MoveUi(_startY, _moveDuration, isGoFinish);
     }
     private void MoveUi(float y, float speed, bool isGoFinish)
@@ -48,6 +55,7 @@ public class SoulUi : MonoBehaviour
             {
                 _coroutine = StartCoroutine(WaitUi());
                 _countText.text = _currentSoul.ToString();
+                OnSoulUiAction?.Invoke();
             }
         });
     }

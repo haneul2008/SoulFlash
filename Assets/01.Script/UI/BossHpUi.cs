@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System;
 
 public class BossHpUi : MonoBehaviour
 {
+    public event Action OnBossHpAction;
+
     [SerializeField] private RectTransform _hpBarRectTrm;
     [SerializeField] private RectTransform _myRectTrm;
     [SerializeField] private float _moveDuration;
@@ -56,11 +59,17 @@ public class BossHpUi : MonoBehaviour
     }
     public void SetMoveUi(bool isGoFinish)
     {
-        if(isGoFinish) MoveUi(_finishY ,_moveDuration);
-        else MoveUi(_startY ,_moveDuration);
+        if (isGoFinish) MoveUi(_finishY, _moveDuration, true);
+        else MoveUi(_startY, _moveDuration, false);
     }
-    private void MoveUi(float y, float speed)
+    private void MoveUi(float y, float speed, bool isGoFinish)
     {
-        _tween = _myRectTrm.DOAnchorPosY(y, speed);
+        _tween = _myRectTrm.DOAnchorPosY(y, speed)
+            .OnComplete(() =>
+            {
+                if (!isGoFinish) return;
+
+                OnBossHpAction?.Invoke();
+            });
     }
 }

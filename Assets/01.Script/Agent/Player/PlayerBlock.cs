@@ -13,7 +13,7 @@ public class PlayerBlock : AnimationPlayer
 
     private Player _player;
     private float _currentTime;
-    private bool _isBlock;
+    public bool IsBlock { get; private set; }
     private float _currentBlockTime;
     public override void Initialize(Agent agent)
     {
@@ -33,7 +33,7 @@ public class PlayerBlock : AnimationPlayer
     }
     private void Update()
     {
-        if (_isBlock)
+        if (IsBlock)
         {
             if(_currentBlockTime + _blockTime < Time.time) EndBlock();
             return;
@@ -45,7 +45,7 @@ public class PlayerBlock : AnimationPlayer
         if (!_player.MovementCompo.isGround.Value || !_player.canBlock) return;
         if (!_player.CanStateChageable || _currentTime < _cooltime) return;
 
-        _isBlock = true;
+        IsBlock = true;
 
         _player.HealthCompo.CanTakeHp(false);
 
@@ -59,7 +59,7 @@ public class PlayerBlock : AnimationPlayer
     }
     private void EndBlock()
     {
-        if(!_isBlock || _currentTime < _cooltime) return;
+        if(!IsBlock || _currentTime < _cooltime) return;
         _currentTime = 0;
 
         EndAnimation();
@@ -71,6 +71,6 @@ public class PlayerBlock : AnimationPlayer
 
         OnEndBlockAction.Invoke(Mathf.RoundToInt(_cooltime * GameManager.instance.airCooldownMutiplier));
 
-        _isBlock = false;
+        IsBlock = false;
     }
 }

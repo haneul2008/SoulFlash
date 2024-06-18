@@ -20,6 +20,11 @@ public class LandGuardian : Boss
 
         StartAction += Initialize;
     }
+
+    private void Start()
+    {
+        HealthCompo.CanTakeHp(false);
+    }
     private void OnDisable()
     {
         StartAction -= Initialize;

@@ -27,6 +27,8 @@ public class LandGuardianAppearState : BossState
 
             _boss.targetTrm = GameManager.instance.Player.transform;
             _stateMachine.ChangeState(BossEnum.Chase);
+
+            _boss.HealthCompo.CanTakeHp(true);
         }
     }
 }

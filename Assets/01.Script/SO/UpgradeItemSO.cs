@@ -24,6 +24,7 @@ public class UpgradeItemSO : ScriptableObject
     public string title;
     public string desc;
     public int price;
+    public bool passiveUpgrade;
 
     public UpgradeType upgradeType;
     public float increaseValue;

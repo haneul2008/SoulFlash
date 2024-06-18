@@ -649,7 +649,7 @@ MonoBehaviour:
   <DashTime>k__BackingField: 0.6
   _canTakeAttackTime: 1
   _hpIncreaseAmout: 10
-  _canDashTime: 1.5
+  canDashTime: 1.5
 --- !u!1 &4640626962104936680
 GameObject:
   m_ObjectHideFlags: 0

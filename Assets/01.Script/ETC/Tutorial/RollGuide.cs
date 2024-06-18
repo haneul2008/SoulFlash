@@ -7,6 +7,7 @@ public class RollGuide : MonoBehaviour
 {
     [SerializeField] private Transform _startTrm;
     [SerializeField] private Transform _finishTrm;
+    [SerializeField] private SkillLockUi _skillLockUi;
 
     private Player _player;
     private bool _end;
@@ -28,12 +29,16 @@ public class RollGuide : MonoBehaviour
         {
             _player.canJump = false;
             _player.canRoll = true;
+            _skillLockUi.SetUnlockUi(1, 0, true);
+
             _player.canAirDash = false;
+            _skillLockUi.SetUnlockUi(1, 1, false);
         }
         else if (_finishTrm.position.x < GameManager.instance.Player.transform.position.x)
         {
             _player.canJump = true;
             _player.canAirDash = true;
+            _skillLockUi.SetUnlockUi(1, 1, true);
 
             _end = true;
         }

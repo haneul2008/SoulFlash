@@ -15,6 +15,7 @@ public enum UnlockType
 public class PlayerSkillUnlock : MonoBehaviour
 {
     [SerializeField] private UnlockType _unlockType;
+    [SerializeField] private SkillLockUi _skillLockUi;
     private bool _isUnlocked;
     private Player _player;
     private void Awake()
@@ -35,6 +36,7 @@ public class PlayerSkillUnlock : MonoBehaviour
 
                 case UnlockType.Dash:
                     _player.canAirDash = true;
+                    _skillLockUi.SetUnlockUi(1, 1, true);
                     break;
 
                 case UnlockType.Attack:

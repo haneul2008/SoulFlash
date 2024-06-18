@@ -8,7 +8,6 @@ public class TutorialWolfIdleState : EnemyState
 {
     private Collider2D _player;
     private TutorialWolfEnemy _tutorialWolf;
-    private bool _isAttacked;
     public TutorialWolfIdleState(Enemy enemy, EnemyStateMachine stateMachine, string animBoolName) : base(enemy, stateMachine, animBoolName)
     {
     }
@@ -44,8 +43,6 @@ public class TutorialWolfIdleState : EnemyState
     }
     private void ChangeAttackState()
     {
-        if(_isAttacked) return;
-
         _enemy.targetTrm = GameManager.instance.Player.transform;
 
         Vector2 dir = new Vector2((_enemy.targetTrm.position - _enemy.transform.position).x, 0);
@@ -54,7 +51,5 @@ public class TutorialWolfIdleState : EnemyState
         if (distance < _enemy.attackRadius &&
             _enemy.lastAttackTime + _enemy.attackCooldown < Time.time && _enemy.MovementCompo.isGround.Value)
         _stateMachine.ChangeState(EnemyEnum.Attack);
-
-        _isAttacked = true;
     }
 }

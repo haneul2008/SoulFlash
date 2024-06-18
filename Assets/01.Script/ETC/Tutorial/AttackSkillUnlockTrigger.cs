@@ -7,6 +7,8 @@ public class AttackSkillUnlockTrigger : MonoBehaviour
 {
     [SerializeField] private UnlockType _unlockType;
     [SerializeField] private float _delay;
+    [SerializeField] private SkillLockUi _skillLockUi;
+
     private AttackSkillUnlocker _unlocker;
     private Player _player;
     private Health _dummyHealth;
@@ -22,8 +24,12 @@ public class AttackSkillUnlockTrigger : MonoBehaviour
     private void AttackClamp(bool attck, bool heavyAttack, bool airAttack)
     {
         _player.canAttack = attck;
+
         _player.canHeavyAttack = heavyAttack;
+        _skillLockUi.SetUnlockUi(1, 2, heavyAttack);
+
         _player.canAirAttack = airAttack;
+        _skillLockUi.SetUnlockUi(1, 3, airAttack);
     }
     public void Init(AttackSkillUnlocker unlocker, Health dummyHealth)
     {

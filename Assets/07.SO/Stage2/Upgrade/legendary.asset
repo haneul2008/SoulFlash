@@ -19,4 +19,4 @@ MonoBehaviour:
   desc: "\uC77C\uBC18\uACF5\uACA9\uC758 \uACF5\uACA9\uB825\uC774 100% \uC99D\uAC00\uD569\uB2C8\uB2E4."
   price: 15
   upgradeType: 0
-  increaseValue: 2
+  increaseValue: 1

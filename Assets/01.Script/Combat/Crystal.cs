@@ -2,9 +2,12 @@ using DG.Tweening;
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 public class Crystal : MonoBehaviour, IPoolable, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
+    public UnityEvent OnCrystalTpEvent;
+
     [SerializeField] private string _poolName;
     [SerializeField] private float _pushTime;
     [SerializeField] private bool _noPush;
@@ -98,7 +101,10 @@ public class Crystal : MonoBehaviour, IPoolable, IPointerClickHandler, IPointerE
     {
         if (!_init) return;
         if (_dashToSelectEnemy.NowEnemyCollider == _collider && isSelecting)
+        {
+            OnCrystalTpEvent?.Invoke();
             PushCrystal();
+        }
     }
     private IEnumerator PushCoroutine()
     {
@@ -121,6 +127,8 @@ public class Crystal : MonoBehaviour, IPoolable, IPointerClickHandler, IPointerE
         GameManager.instance.Player.transform.DOMove(transform.position, Mathf.Clamp(dashToSelectEnemy.DashTime / distance, 0, 0.5f))
             .OnComplete(()=>
             {
+                OnCrystalTpEvent?.Invoke();
+
                 if(_noPush) Destroy(gameObject);
                 else PoolManager.instance.Push(this);
             });

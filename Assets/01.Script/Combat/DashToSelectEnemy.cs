@@ -21,7 +21,7 @@ public class DashToSelectEnemy : MonoBehaviour
     public Collider2D NowEnemyCollider { get; private set; }
     public bool IsSelecting { get; private set; }
 
-    public float _canDashTime;
+    public float canDashTime;
 
     private CinemachineVirtualCamera _cam;
     private MouseDetecter _mouseDeteter;
@@ -66,7 +66,7 @@ public class DashToSelectEnemy : MonoBehaviour
 
     private void DecreaseCameraSize()
     {
-        _cam.m_Lens.OrthographicSize -= 0.002f;
+        _cam.m_Lens.OrthographicSize = Mathf.Clamp(_cam.m_Lens.OrthographicSize -= 0.001f, 4.5f, 5);
     }
 
     private void HandleSelectEnemy()
@@ -95,12 +95,11 @@ public class DashToSelectEnemy : MonoBehaviour
 
     private IEnumerator CanDashTimeCoroutine()
     {
-        yield return new WaitForSecondsRealtime(_canDashTime);
+        yield return new WaitForSecondsRealtime(canDashTime);
 
         if (!IsSelecting) yield break;
 
         ResetValue(false, true, false);
-        _player.CanStateChageable = true;
         StartCoroutine("CanTakeAttackCoroutine");
     }
 
@@ -136,6 +135,8 @@ public class DashToSelectEnemy : MonoBehaviour
 
         ResetValue(false, false, true);
 
+        _player.canAttack = false;
+
         float distance = Vector2.Distance(transform.position, NowEnemyCollider.gameObject.transform.position);
         transform.DOMove(NowEnemyCollider.gameObject.transform.position, Mathf.Clamp(DashTime / distance, 0, 0.5f))
             .OnComplete(() =>
@@ -150,9 +151,6 @@ public class DashToSelectEnemy : MonoBehaviour
                 GameManager.instance.soulCount += 1 + addValue;
                 GameManager.instance.soulCollectCount += 1 + addValue;
 
-                _player.MovementCompo.canMove = true;
-
-                _player.CanStateChageable = true;
 
                 _player.HealthCompo.ResetHealth(Mathf.RoundToInt(_player.HealthCompo.CurrentHealth 
                     + _hpIncreaseAmout + GameManager.instance.soulTpHpIncreaseAdder), false);
@@ -183,7 +181,15 @@ public class DashToSelectEnemy : MonoBehaviour
     }
     private IEnumerator CanTakeAttackCoroutine()
     {
-        yield return new WaitForSeconds(_canTakeAttackTime);
+        yield return new WaitForSeconds(0.1f);
+
+        _player.CanStateChageable = true;
+
+        _player.MovementCompo.canMove = true;
+
+        _player.canAttack = true;
+
+        yield return new WaitForSeconds(_canTakeAttackTime - 0.1f);
 
         _player.HealthCompo.CanTakeHp(true);
         _player.MovementCompo.canKnockback = true;

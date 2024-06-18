@@ -13,6 +13,7 @@ public class GameManager : MonoSingleton<GameManager>
     public MouseDetecter mouseDetecter;
     public CinemachineVirtualCamera virtualCam;
     public List<UpgradeItemSO> NowUpgradeList { get; private set; } = new List<UpgradeItemSO>();
+    public float GameStartTime { get; set; }
 
     public int soulCount;
 
@@ -21,12 +22,18 @@ public class GameManager : MonoSingleton<GameManager>
 
     #region 업그레이드 계수
     public float normalDamageMultiplier = 1; //평타 데미지 계수
+
     public float airDamageMultiplier = 1; //공중 E데미지 계수
+    public float passiveAirDamage = 0; //패시브 계수 저장
+
     public float groundDamageMultiplier = 1; //지상 E데미지 계수
+    public float passiveGroundDamage = 0; //패시브 계수 저장
 
     public float normalAckSpeedMultiplier = 1; //평타 공속 계수
 
     public float hpMultiplier = 1; //체력 계수
+    public float passiveHpDamage = 0; //패시브 계수 저장
+
     public float soulRandomNum = 1; //영혼 수집 계수
     public float moveSpeedMutiplier = 1; //이속 계수
 
@@ -34,6 +41,8 @@ public class GameManager : MonoSingleton<GameManager>
     public float groundCooldownMutiplier = 1; //지상 E쿨타임 감소 계수
 
     public float soulTpHpIncreaseAdder = 0; //적에게 순간이동 시 hp회복량
+
+
     #endregion
     private void Awake()
     {

@@ -48,7 +48,7 @@ public class UpgradeUiSelect : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (_isSelected) return;
+        if (_isSelected || !_upgradeUi.IsSetted) return;
 
         if (GameManager.instance.soulCount < _upgradeData.price)
         {
@@ -60,7 +60,7 @@ public class UpgradeUiSelect : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
         GameManager.instance.soulCount -= _upgradeData.price;
 
-        _upgradeUi.SetSelectCount();
+        _upgradeUi.SetSelectCount(_upgradeData);
 
         switch (_upgradeData.upgradeType)
         {
@@ -69,11 +69,27 @@ public class UpgradeUiSelect : MonoBehaviour, IPointerEnterHandler, IPointerExit
                 break;
 
             case UpgradeType.AirESkillDamage:
-                GameManager.instance.airDamageMultiplier += _upgradeData.increaseValue;
+                if(_upgradeData.passiveUpgrade)
+                {
+                    GameManager.instance.passiveAirDamage += _upgradeData.increaseValue;
+                    GameManager.instance.airDamageMultiplier += GameManager.instance.passiveAirDamage;
+                }
+                else
+                {
+                    GameManager.instance.airDamageMultiplier += _upgradeData.increaseValue;
+                }
                 break;
 
             case UpgradeType.GroundESkilDamage:
-                GameManager.instance.groundDamageMultiplier += _upgradeData.increaseValue;
+                if (_upgradeData.passiveUpgrade)
+                {
+                    GameManager.instance.passiveGroundDamage += _upgradeData.increaseValue;
+                    GameManager.instance.groundDamageMultiplier += GameManager.instance.passiveGroundDamage;
+                }
+                else
+                {
+                    GameManager.instance.groundDamageMultiplier += _upgradeData.increaseValue;
+                }
                 break;
 
             case UpgradeType.AttackSpeed:
@@ -81,7 +97,15 @@ public class UpgradeUiSelect : MonoBehaviour, IPointerEnterHandler, IPointerExit
                 break;
 
             case UpgradeType.HpIncrease:
-                GameManager.instance.hpMultiplier += _upgradeData.increaseValue;
+                if (_upgradeData.passiveUpgrade)
+                {
+                    GameManager.instance.passiveHpDamage += _upgradeData.increaseValue;
+                    GameManager.instance.hpMultiplier += GameManager.instance.passiveHpDamage;
+                }
+                else
+                {
+                     GameManager.instance.hpMultiplier += _upgradeData.increaseValue;
+                }
                 break;
 
             case UpgradeType.SoulCollect:
@@ -117,6 +141,7 @@ public class UpgradeUiSelect : MonoBehaviour, IPointerEnterHandler, IPointerExit
             obj.SetActive(false);
         }
 
+        if (_upgradeData.passiveUpgrade) return;
         GameManager.instance.AddUpgradeItem(_upgradeData);
     }
 

@@ -15,6 +15,7 @@ public class DeadUi : MonoBehaviour
     [SerializeField] private TMP_Text _playerStateText;
     [SerializeField] private TMP_Text _soulCollectText;
     [SerializeField] private TMP_Text _enemyDeadText;
+    [SerializeField] private TMP_Text _timeText;
     [SerializeField] private Fade _fade;
 
     private RectTransform _rectTrm;
@@ -43,7 +44,15 @@ public class DeadUi : MonoBehaviour
         _enemyDeadText.text = GameManager.instance.enemyDeadCount.ToString();
         _soulCollectText.text = GameManager.instance.soulCollectCount.ToString();
 
-        for(int i = 0; i < GameManager.instance.NowUpgradeList.Count; i++)
+        float time = Mathf.Round(Time.time - GameManager.instance.GameStartTime);
+        int min = Mathf.FloorToInt(time);
+
+        if (min / 60 == 0)
+            _timeText.text = $"{min % 60 + (time - min)}초";
+        else
+            _timeText.text = $"{min / 60}분 {min % 60 + (time - min)}초";
+
+        for (int i = 0; i < GameManager.instance.NowUpgradeList.Count; i++)
         {
             DeadUpgradeUi deadUpgradeUi = Instantiate(_deadUpgradeUi, _deadUpgradeTrm).GetComponent<DeadUpgradeUi>();
             deadUpgradeUi.SetUi(GameManager.instance.NowUpgradeList[i]);
@@ -59,6 +68,28 @@ public class DeadUi : MonoBehaviour
 
         Player player = GameManager.instance.Player.GetComponent<Player>();
         player.PlayerDead(false);
+
+        #region ResetMultiplier
+        GameManager.instance.normalDamageMultiplier = 1; //평타 데미지 계수
+        GameManager.instance.airDamageMultiplier = 1 + GameManager.instance.passiveAirDamage; //공중 E데미지 계수
+        GameManager.instance.groundDamageMultiplier = 1 + GameManager.instance.passiveGroundDamage; //지상 E데미지 계수
+
+        GameManager.instance.normalAckSpeedMultiplier = 1; //평타 공속 계수
+
+        GameManager.instance.hpMultiplier = 1 + GameManager.instance.passiveHpDamage; //체력 계수
+        GameManager.instance.soulRandomNum = 1; //영혼 수집 계수
+        GameManager.instance.moveSpeedMutiplier = 1; //이속 계수
+
+        GameManager.instance.airCooldownMutiplier = 1; //공중 E쿨타임 감소 계수
+        GameManager.instance.groundCooldownMutiplier = 1; //지상 E쿨타임 감소 계수
+
+        GameManager.instance.soulTpHpIncreaseAdder = 0; //적에게 순간이동 시 hp회복량
+
+        GameManager.instance.soulCount = 0;
+        GameManager.instance.soulCollectCount = 0;
+
+        GameManager.instance.enemyDeadCount = 0;
+        #endregion
     }
     public void Quit()
     {

@@ -6,7 +6,7 @@ using System;
 
 public class CameraConfiner : MonoBehaviour
 {
-    public Action OnSetConfinerAction;
+    public event Action OnSetConfinerAction;
 
     [SerializeField] private Transform _cameraPos;
     [SerializeField] private float _clampValue;

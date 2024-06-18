@@ -16,7 +16,7 @@ MonoBehaviour:
   spriteSize: {x: 1, y: 1, z: 1}
   color: {r: 1, g: 0.9629275, b: 0.3754716, a: 1}
   title: "\uC601\uD63C \uC0AC\uB0E5\uAFBC"
-  desc: "15%\uD655\uB960\uB85C \uC601\uD63C\uC744 \uB450\uBC30\uB85C \uC218\uC9D1\uD569\uB2C8\uB2E4."
+  desc: "35%\uD655\uB960\uB85C \uC601\uD63C\uC744 \uB450\uBC30\uB85C \uC218\uC9D1\uD569\uB2C8\uB2E4."
   price: 8
   upgradeType: 5
-  increaseValue: 15
+  increaseValue: 35

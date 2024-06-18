@@ -20,6 +20,8 @@ public struct Upgrade
 }
 public class UpgradeUi : MonoBehaviour
 {
+    public event Action OnUpgradeUiAction;
+
     [SerializeField] private UpgradeList _upgradeList;
     [SerializeField] private List<Upgrade> _upgradeImages;
     [SerializeField] private TMP_Text _soulCount;
@@ -31,18 +33,20 @@ public class UpgradeUi : MonoBehaviour
     [SerializeField] private Image _fade;
 
     public int SelectCount { get; private set; }
+    public bool IsSetted { get; private set; }
 
     private List<UpgradeItemSO> _upgradeItems = new List<UpgradeItemSO>();
     private List<int> _indexSaveList = new List<int>();
     private RectTransform _rectTrm;
     private Tween _tween;
+    private int _minSoul = int.MaxValue;
     private void Awake()
     {
         _rectTrm = GetComponent<RectTransform>();
     }
     private void OnDisable()
     {
-        if (_tween != null) 
+        if (_tween != null)
             _tween.Kill();
     }
     public void SetUpgrade()
@@ -87,14 +91,26 @@ public class UpgradeUi : MonoBehaviour
             _upgradeImages[i].price.text = _upgradeItems[i].price.ToString();
 
             _soulCount.text = GameManager.instance.soulCount.ToString();
+
+            if (_upgradeItems[i].price < _minSoul)
+            {
+                _minSoul = _upgradeItems[i].price;
+            }
         }
 
         yield return new WaitForSeconds(_delay);
 
-        _tween = _rectTrm.DOAnchorPosY(0, _tweenDelay);
+        _tween = _rectTrm.DOAnchorPosY(0, _tweenDelay)
+            .OnComplete(() =>
+            {
+                OnUpgradeUiAction?.Invoke();
+                IsSetted = true;
+            });
     }
     public void Finish()
     {
+        IsSetted = false;
+
         _tween = _rectTrm.DOAnchorPosY(_finishY, _tweenDelay);
 
         _setScene.SetNextScene();
@@ -102,11 +118,21 @@ public class UpgradeUi : MonoBehaviour
         _fade.gameObject.SetActive(true);
         _tween = _fade.DOFade(1, 0.5f);
     }
-    public void SetSelectCount()
+    public void SetSelectCount(UpgradeItemSO data)
     {
         SelectCount++;
 
+        for (int i = 0; i < _upgradeImages.Count; i++)
+        {
+            if (_upgradeItems[i].price < _minSoul)
+            {
+                if (_upgradeItems[i].price != data.price)
+                    _minSoul = _upgradeItems[i].price;
+            }
+        }
+
         _soulCount.text = GameManager.instance.soulCount.ToString();
-        if(SelectCount == _upgradeImages.Count) Finish();
+        if (SelectCount == _upgradeImages.Count) Finish();
+        else if (GameManager.instance.soulCount < _minSoul) Finish();
     }
 }

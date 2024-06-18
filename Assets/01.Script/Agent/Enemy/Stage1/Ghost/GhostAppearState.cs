@@ -11,6 +11,17 @@ public class GhostAppearState : EnemyState
         _endTriggerCalled = false;
         base.Enter();
         _enemy.SpriteRendererCompo.DOFade(1, 0.2f);
+
+        _enemy.HealthCompo.CanTakeHp(false);
+        _enemy.MovementCompo.canKnockback = false;
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+
+        _enemy.HealthCompo.CanTakeHp(true);
+        _enemy.MovementCompo.canKnockback = true;
     }
 
     public override void UpdateState()

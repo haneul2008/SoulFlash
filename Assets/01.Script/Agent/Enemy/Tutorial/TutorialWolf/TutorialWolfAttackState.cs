@@ -18,17 +18,26 @@ public class TutorialWolfAttackState : EnemyState
 
         _enemy.MovementCompo.StopImmediately(false);
 
+        _enemy.dontFlip = true;
+        _enemy.HealthCompo.CanTakeHp(false);
+        _enemy.MovementCompo.canKnockback = false;
+
         Vector2 dir = _enemy.targetTrm.position - _enemy.transform.position;
         dir.y = _attackJumpPower;
         dir.x *= 0.5f;
 
         _enemy.MovementCompo.JumpTo(dir);
+
     }
 
     public override void Exit()
     {
         _enemy.lastAttackTime = Time.time;
         _tutorialWolf.StopPlayer(false);
+
+        _enemy.dontFlip = false;
+        _enemy.HealthCompo.CanTakeHp(true);
+        _enemy.MovementCompo.canKnockback = true;
 
         base.Exit();
     }

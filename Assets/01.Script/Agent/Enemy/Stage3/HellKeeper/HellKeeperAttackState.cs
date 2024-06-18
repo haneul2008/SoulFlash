@@ -20,6 +20,8 @@ public class HellKeeperAttackState : BossState
         _boss.MovementCompo.canMove = false;
         _boss.MovementCompo.canKnockback = false;
 
+        _boss.HealthCompo.CanTakeHp(false);
+
         _boss.dontFlip = true;
 
         if(_anim == null)
@@ -36,6 +38,8 @@ public class HellKeeperAttackState : BossState
 
         _boss.MovementCompo.canKnockback = true;
         _boss.MovementCompo.canMove = true;
+
+        _boss.HealthCompo.CanTakeHp(true);
 
         _boss.SetPatternIndex(0);
 
