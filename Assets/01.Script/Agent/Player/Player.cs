@@ -38,6 +38,7 @@ public class Player : Agent
 
     private CameraConfiner _cameraConfiner;
     private GameObject _light;
+    private SizeChanger _deadSizeChanger = new SizeChanger();
     #region Component
     private SpriteMask _spriteNask;
     private SpriteRenderer _spriteRenderer;
@@ -189,16 +190,14 @@ public class Player : Agent
 
         AnimatorCompo.SetBool("death", true);
 
-        SizeChanger sizeChanger = new SizeChanger();
-
         CapsuleCollider2D collider = GetComponent<CapsuleCollider2D>();
         if (value)
         {
-            collider.size = sizeChanger.ChangeSize(collider.size, _deadColliderSize);
+            collider.size = _deadSizeChanger.ChangeSize(collider.size, _deadColliderSize);
         }
         else if (!value && collider.size == _deadColliderSize)
         {
-            collider.size = sizeChanger.GetSaveSize();
+            collider.size = _deadSizeChanger.GetSaveSize();
         }
 
         OnPlayerDeadAction?.Invoke();

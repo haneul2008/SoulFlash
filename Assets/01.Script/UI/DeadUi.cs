@@ -45,12 +45,13 @@ public class DeadUi : MonoBehaviour
         _soulCollectText.text = GameManager.instance.soulCollectCount.ToString();
 
         float time = Mathf.Round(Time.time - GameManager.instance.GameStartTime);
-        int min = Mathf.FloorToInt(time);
+        int min = Mathf.FloorToInt(time) / 60;
+        int sec = Mathf.FloorToInt(time) % 60;
 
-        if (min / 60 == 0)
-            _timeText.text = $"{min % 60 + (time - min)}초";
+        if (min == 0)
+            _timeText.text = $"{sec}초";
         else
-            _timeText.text = $"{min / 60}분 {min % 60 + (time - min)}초";
+            _timeText.text = $"{min}분 {sec}초";
 
         for (int i = 0; i < GameManager.instance.NowUpgradeList.Count; i++)
         {
@@ -59,6 +60,8 @@ public class DeadUi : MonoBehaviour
         }
 
         Time.timeScale = 1f;
+
+        GameManager.instance.Record(playerHeath.CurrentHealth > 0, min, sec);
 
         _tween = _rectTrm.DOAnchorPosY(_finishY, _delay);
     }
@@ -76,7 +79,7 @@ public class DeadUi : MonoBehaviour
 
         GameManager.instance.normalAckSpeedMultiplier = 1; //평타 공속 계수
 
-        GameManager.instance.hpMultiplier = 1 + GameManager.instance.passiveHpDamage; //체력 계수
+        GameManager.instance.hpMultiplier = 1 + GameManager.instance.passiveHpInc; //체력 계수
         GameManager.instance.soulRandomNum = 1; //영혼 수집 계수
         GameManager.instance.moveSpeedMutiplier = 1; //이속 계수
 

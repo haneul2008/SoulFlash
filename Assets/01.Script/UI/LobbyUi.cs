@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,7 @@ public class LobbyUi : MonoBehaviour
     [SerializeField] private float _lowerY;
     [SerializeField] private float _delay;
     [SerializeField] private Fade _fade;
+    [SerializeField] private RecordsPannel _recordsPannel;
 
     private Tween _tween;
 
@@ -22,8 +24,20 @@ public class LobbyUi : MonoBehaviour
     private void Start()
     {
         UiMove(true);
+
+        if (!GameManager.instance.recordSetted)
+        {
+            GameManager.instance.recordSetted = true;
+            _recordsPannel.SetUi();
+        }
+
+        if (GameManager.instance.CurrentRecord != null)
+        {
+            _recordsPannel.InsertUi(GameManager.instance.CurrentRecord.Value);
+            GameManager.instance.CurrentRecord = null;
+        }
     }
-    private void OnDisable()
+        private void OnDisable()
     {
         if (_tween != null)
             _tween.Kill();

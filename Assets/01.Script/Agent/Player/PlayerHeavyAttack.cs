@@ -56,7 +56,7 @@ public class PlayerHeavyAttack : AnimationPlayer
     private void Update()
     {
         if (_attack && !_player.MovementCompo.isGround.Value) EndAttack();
-
+        if(_attack) _player.MovementCompo.StopImmediately();
         _currentTime += Time.deltaTime;
     }
     private void HandleHeavyAttack()
@@ -72,7 +72,6 @@ public class PlayerHeavyAttack : AnimationPlayer
 
         _player.CanStateChageable = false;
         _player.MovementCompo.canMove = false;
-        _player.MovementCompo.rbCompo.velocity = Vector2.zero;
 
         PlayAnimation();
 

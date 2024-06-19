@@ -13,6 +13,10 @@ public class GameManager : MonoSingleton<GameManager>
     public MouseDetecter mouseDetecter;
     public CinemachineVirtualCamera virtualCam;
     public List<UpgradeItemSO> NowUpgradeList { get; private set; } = new List<UpgradeItemSO>();
+    public List<Record> Records { get; private set; } = new List<Record>();
+    public Nullable<Record> CurrentRecord { get; set; }
+    public bool recordSetted;
+    public bool isTutorialClear;
     public float GameStartTime { get; set; }
 
     public int soulCount;
@@ -32,7 +36,7 @@ public class GameManager : MonoSingleton<GameManager>
     public float normalAckSpeedMultiplier = 1; //평타 공속 계수
 
     public float hpMultiplier = 1; //체력 계수
-    public float passiveHpDamage = 0; //패시브 계수 저장
+    public float passiveHpInc = 0; //패시브 계수 저장
 
     public float soulRandomNum = 1; //영혼 수집 계수
     public float moveSpeedMutiplier = 1; //이속 계수
@@ -54,14 +58,36 @@ public class GameManager : MonoSingleton<GameManager>
         DontDestroyOnLoad(gameObject);
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.P))
-            SceneManager.LoadScene("Stage2");
-    }
-
     public void AddUpgradeItem(UpgradeItemSO upgradeItem)
     {
         NowUpgradeList.Add(upgradeItem);
+    }
+
+    public void Record(bool gameClear, int min, int sec)
+    {
+        Record record;
+
+        record.year = DateTime.Now.Year;
+        record.month = DateTime.Now.Month;
+        record.day = DateTime.Now.Day;
+
+        record.clear = gameClear;
+
+        record.min = min;
+        record.sec = sec;
+
+        record.items = new List<UpgradeItemSO>();
+        foreach (UpgradeItemSO item in NowUpgradeList)
+        {
+            record.items.Add(item);
+        }
+
+        record.collectedSouls = soulCollectCount;
+
+        record.killedEnemies = enemyDeadCount;
+
+        Records.Add(record);
+        CurrentRecord = record;
+        DataManager.instance.JsonSave();
     }
 }

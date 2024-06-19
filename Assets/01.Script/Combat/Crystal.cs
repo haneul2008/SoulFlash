@@ -124,7 +124,7 @@ public class Crystal : MonoBehaviour, IPoolable, IPointerClickHandler, IPointerE
         DashToSelectEnemy dashToSelectEnemy = GameManager.instance.Player.GetComponent<DashToSelectEnemy>();
         
         float distance = Vector2.Distance(GameManager.instance.Player.transform.position, transform.position);
-        GameManager.instance.Player.transform.DOMove(transform.position, Mathf.Clamp(dashToSelectEnemy.DashTime / distance, 0, 0.5f))
+        GameManager.instance.Player.transform.DOMove(transform.position, Mathf.Clamp(dashToSelectEnemy.DashTime / distance, 0, 0.3f))
             .OnComplete(()=>
             {
                 OnCrystalTpEvent?.Invoke();

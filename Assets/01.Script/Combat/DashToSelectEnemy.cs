@@ -4,6 +4,7 @@ using Cinemachine;
 using System.Collections;
 using UnityEngine.Events;
 using System;
+using Unity.VisualScripting;
 
 public class DashToSelectEnemy : MonoBehaviour
 {
@@ -30,6 +31,7 @@ public class DashToSelectEnemy : MonoBehaviour
     private SpriteRenderer _enemyRenderer;
     private Material _enemyMat;
     private bool _actionTrigger;
+    private Coroutine _coroutine;
 
     private readonly int _isHitHash = Shader.PropertyToID("_IsHit");
     private void Awake()
@@ -90,7 +92,7 @@ public class DashToSelectEnemy : MonoBehaviour
         IsSelecting = true;
         _player.CanStateChageable = false;
 
-        StartCoroutine(CanDashTimeCoroutine());
+        _coroutine = StartCoroutine(CanDashTimeCoroutine());
     }
 
     private IEnumerator CanDashTimeCoroutine()
@@ -107,7 +109,7 @@ public class DashToSelectEnemy : MonoBehaviour
     {
         NowEnemyCollider = _mouseDeteter.DetectEnemy();
 
-            if (!_isFalseBlink && _enemyMat != null && NowEnemyCollider == null)
+        if (!_isFalseBlink && _enemyMat != null && NowEnemyCollider == null)
         {
             _isFalseBlink = true;
             _enemyMat.SetInt(_isHitHash, 0);
@@ -138,7 +140,7 @@ public class DashToSelectEnemy : MonoBehaviour
         _player.canAttack = false;
 
         float distance = Vector2.Distance(transform.position, NowEnemyCollider.gameObject.transform.position);
-        transform.DOMove(NowEnemyCollider.gameObject.transform.position, Mathf.Clamp(DashTime / distance, 0, 0.5f))
+        transform.DOMove(NowEnemyCollider.gameObject.transform.position, Mathf.Clamp(DashTime / distance, 0, 0.3f))
             .OnComplete(() =>
             {
                 int addValue = 0;
@@ -156,6 +158,9 @@ public class DashToSelectEnemy : MonoBehaviour
                     + _hpIncreaseAmout + GameManager.instance.soulTpHpIncreaseAdder), false);
 
                 _player.HealthCompo.OnHitAction?.Invoke();
+
+                if(_coroutine != null)
+                    StopCoroutine(_coroutine);
 
                 StartCoroutine("CanTakeAttackCoroutine");
             });

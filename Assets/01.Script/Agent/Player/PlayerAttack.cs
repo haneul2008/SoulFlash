@@ -43,7 +43,7 @@ public class PlayerAttack : AnimationPlayer
     }
     private void HandleAttack()
     {
-        //if (EventSystem.current.IsPointerOverGameObject()) return;
+        if (EventSystem.current.IsPointerOverGameObject()) return;
         if (!_player.MovementCompo.isGround.Value || !_player.canAttack) return;
         if (!_player.CanStateChageable || _currentTime < _cooltime) return;
 

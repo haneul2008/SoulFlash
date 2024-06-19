@@ -99,8 +99,8 @@ public class UpgradeUiSelect : MonoBehaviour, IPointerEnterHandler, IPointerExit
             case UpgradeType.HpIncrease:
                 if (_upgradeData.passiveUpgrade)
                 {
-                    GameManager.instance.passiveHpDamage += _upgradeData.increaseValue;
-                    GameManager.instance.hpMultiplier += GameManager.instance.passiveHpDamage;
+                    GameManager.instance.passiveHpInc += _upgradeData.increaseValue;
+                    GameManager.instance.hpMultiplier += GameManager.instance.passiveHpInc;
                 }
                 else
                 {
