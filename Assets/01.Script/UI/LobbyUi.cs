@@ -24,18 +24,7 @@ public class LobbyUi : MonoBehaviour
     private void Start()
     {
         UiMove(true);
-
-        if (!GameManager.instance.recordSetted)
-        {
-            GameManager.instance.recordSetted = true;
-            _recordsPannel.SetUi();
-        }
-
-        if (GameManager.instance.CurrentRecord != null)
-        {
-            _recordsPannel.InsertUi(GameManager.instance.CurrentRecord.Value);
-            GameManager.instance.CurrentRecord = null;
-        }
+        _recordsPannel.SetUi();
     }
         private void OnDisable()
     {

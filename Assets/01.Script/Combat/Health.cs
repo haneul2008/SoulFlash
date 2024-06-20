@@ -26,7 +26,7 @@ public class Health : MonoBehaviour
 
     public void ResetHealth(int hp, bool isCanTakegHp = true)
     {
-        float multiplier = _isPlayer ? GameManager.instance.hpMultiplier : 1;
+        float multiplier = _isPlayer ? GameManager.instance.hpMultiplier + GameManager.instance.passiveHpInc : 1;
         CurrentHealth = Mathf.Clamp(hp, 0, Mathf.RoundToInt(MaxHealth * multiplier));
 
         IsCanTakeHp = isCanTakegHp;

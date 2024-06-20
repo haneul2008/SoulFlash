@@ -21,6 +21,8 @@ public class SetScene : MonoBehaviour
         if (_isTutorial)
         {
             GameManager.instance.isTutorialClear = true;
+            GameManager.instance.enemyDeadCount = 0;
+            GameManager.instance.soulCollectCount = 0;
             DataManager.instance.JsonSave();
         }
 

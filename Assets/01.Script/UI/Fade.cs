@@ -19,12 +19,14 @@ public class Fade : MonoBehaviour
 
         gameObject.SetActive(false);
     }
+    private void OnDisable()
+    {
+        if (_tween != null)
+            _tween.Kill();
+    }
     private void OnDestroy()
     {
         _player.OnPlayerDeadAction -= FadeOut;
-
-        if (_tween != null)
-            _tween.Kill();
     }
     public void SetFade(bool fadeIn)
     {
@@ -41,8 +43,8 @@ public class Fade : MonoBehaviour
         _tween = _image.DOFade(0, 0.5f)
         .OnComplete(() =>
         {
-            gameObject.SetActive(false);
             OnFadeEvent?.Invoke(true);
+            gameObject.SetActive(false);
         });
     }
     private void FadeOut()

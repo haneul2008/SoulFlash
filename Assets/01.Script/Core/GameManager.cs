@@ -13,9 +13,7 @@ public class GameManager : MonoSingleton<GameManager>
     public MouseDetecter mouseDetecter;
     public CinemachineVirtualCamera virtualCam;
     public List<UpgradeItemSO> NowUpgradeList { get; private set; } = new List<UpgradeItemSO>();
-    public List<Record> Records { get; private set; } = new List<Record>();
-    public Nullable<Record> CurrentRecord { get; set; }
-    public bool recordSetted;
+    public Queue<Record> Records { get; private set; } = new Queue<Record>();
     public bool isTutorialClear;
     public float GameStartTime { get; set; }
 
@@ -76,18 +74,44 @@ public class GameManager : MonoSingleton<GameManager>
         record.min = min;
         record.sec = sec;
 
-        record.items = new List<UpgradeItemSO>();
+        record.items = new List<UpgradeRecord>();
         foreach (UpgradeItemSO item in NowUpgradeList)
         {
-            record.items.Add(item);
+            UpgradeRecord upgradeRecord;
+
+            Texture2D spriteTexture = item.sprite.texture;
+
+            if (!item.sprite.texture.isReadable)
+            {
+                // 새로운 읽기/쓰기 가능한 텍스처 생성
+                Texture2D readableTexture = new Texture2D(spriteTexture.width, spriteTexture.height, spriteTexture.format, false);
+                Graphics.CopyTexture(spriteTexture, readableTexture);
+                spriteTexture = readableTexture;
+            }
+
+            byte[] spriteBytes = spriteTexture.EncodeToPNG();
+            upgradeRecord.spriteData = Convert.ToBase64String(spriteBytes);
+
+            upgradeRecord.spriteRect = item.sprite.rect;
+            upgradeRecord.pivot = item.sprite.pivot;
+
+            upgradeRecord.spriteSize = item.spriteSize;
+            upgradeRecord.color = item.color;
+            upgradeRecord.title = item.title;
+
+            record.items.Add(upgradeRecord);
         }
 
         record.collectedSouls = soulCollectCount;
 
         record.killedEnemies = enemyDeadCount;
 
-        Records.Add(record);
-        CurrentRecord = record;
+        Records.Enqueue(record);
+        if(Records.Count > 3)
+        {
+            Records.Dequeue();
+        }
+
         DataManager.instance.JsonSave();
     }
 }

@@ -4,6 +4,19 @@ using System.Collections.Generic;
 using System;
 
 [System.Serializable]
+public struct UpgradeRecord
+{
+    public string spriteData;
+    public Rect spriteRect;
+    public Vector2 pivot;
+
+    public Vector3 spriteSize;
+
+    public Color color;
+
+    public string title;
+}
+[System.Serializable]
 public struct Record
 {
     public bool clear;
@@ -12,7 +25,7 @@ public struct Record
     public int month;
     public int day;
 
-    public List<UpgradeItemSO> items;
+    public List<UpgradeRecord> items;
     public int collectedSouls;
     public int killedEnemies;
 
@@ -48,6 +61,9 @@ public class DataManager : MonoSingleton<DataManager>
         else
         {
             string loadJson = File.ReadAllText(path);
+
+            print(loadJson);
+
             saveData = JsonUtility.FromJson<SaveData>(loadJson);
 
             if(saveData != null)
@@ -56,7 +72,7 @@ public class DataManager : MonoSingleton<DataManager>
 
                 for(int i = 0; i < saveData.Records.Count; i++)
                 {
-                    GameManager.instance.Records.Add(saveData.Records[i]);
+                    GameManager.instance.Records.Enqueue(saveData.Records[i]);
                 }
 
                 GameManager.instance.isTutorialClear = saveData.isTutorialClear;
@@ -124,8 +140,6 @@ public class DataManager : MonoSingleton<DataManager>
 
         string json = JsonUtility.ToJson(saveData, true);
 
-        print(json);
-
         File.WriteAllText(path, json);
     }
 
@@ -139,5 +153,16 @@ public class DataManager : MonoSingleton<DataManager>
         else upgrade = UpgradeType.None;
 
         return upgrade;
+    }
+
+    public Sprite LoadSprites(UpgradeRecord upgradeRecord)
+    {
+        byte[] spriteBytes = Convert.FromBase64String(upgradeRecord.spriteData);
+        Texture2D texture = new Texture2D(2, 2);
+        texture.LoadImage(spriteBytes);
+
+        Sprite sprite = Sprite.Create(texture, upgradeRecord.spriteRect, upgradeRecord.pivot);
+
+        return sprite;
     }
 }

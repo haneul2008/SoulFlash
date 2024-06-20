@@ -24,6 +24,7 @@ public class FireWormChaseState : EnemyState
         if (distance < _enemy.attackRadius &&
             _enemy.lastAttackTime + _enemy.attackCooldown < Time.time && _enemy.MovementCompo.isGround.Value)
         {
+            _enemy.HandleSpriteFlip(_enemy.targetTrm.position, true);
             _stateMachine.ChangeState(EnemyEnum.Attack);
             return;
         }

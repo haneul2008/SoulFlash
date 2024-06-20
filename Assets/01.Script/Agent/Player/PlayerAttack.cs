@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class PlayerAttack : AnimationPlayer
 {
@@ -43,7 +44,8 @@ public class PlayerAttack : AnimationPlayer
     }
     private void HandleAttack()
     {
-        if (EventSystem.current.IsPointerOverGameObject()) return;
+        if (EventSystem.current.IsPointerOverGameObject() && SceneManager.GetActiveScene().name == "Lobby") return;
+
         if (!_player.MovementCompo.isGround.Value || !_player.canAttack) return;
         if (!_player.CanStateChageable || _currentTime < _cooltime) return;
 

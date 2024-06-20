@@ -15,6 +15,8 @@ public class PlayerHpUi : MonoBehaviour
 
     private Image _image;
 
+    private float _multiplier;
+
     private void Awake()
     {
         _image = GetComponent<Image>();
@@ -28,16 +30,19 @@ public class PlayerHpUi : MonoBehaviour
     }
     private void Start()
     {
-        _hpText.text = $"{_playerHp.CurrentHealth} / {_playerHp.MaxHealth * GameManager.instance.hpMultiplier}";
+        _multiplier = GameManager.instance.hpMultiplier + GameManager.instance.passiveHpInc;
+        _hpText.text = $"{_playerHp.CurrentHealth} / {_playerHp.MaxHealth * _multiplier}";
     }
     public void SetCurrentHp()
     {
         _currentHp = _playerHp.CurrentHealth;
 
-        _hpBarTrm.localScale = new Vector2(Mathf.Clamp(_currentHp / (_playerHp.MaxHealth * GameManager.instance.hpMultiplier), 0, 1), 1);
+        _multiplier = GameManager.instance.hpMultiplier + GameManager.instance.passiveHpInc;
 
-        _hpText.text = $"{Mathf.Clamp(_currentHp, 0, _playerHp.MaxHealth * GameManager.instance.hpMultiplier)}" +
-            $" / {_playerHp.MaxHealth * GameManager.instance.hpMultiplier}";
+        _hpBarTrm.localScale = new Vector2(Mathf.Clamp(_currentHp / (_playerHp.MaxHealth * _multiplier), 0, 1), 1);
+
+        _hpText.text = $"{Mathf.Clamp(_currentHp, 0, _playerHp.MaxHealth * _multiplier)}" +
+            $" / {_playerHp.MaxHealth * _multiplier}";
 
         StartCoroutine("DelayBlink");
     }

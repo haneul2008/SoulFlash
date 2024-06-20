@@ -39,7 +39,11 @@ public class PlayerAirAttack : AnimationPlayer
     }
     private void Update()
     {
-        if (_attack) return;
+        if (_attack)
+        {
+            _player.MovementCompo.StopImmediately(true);
+            return;
+        }
         _currentTime += Time.deltaTime;
     }
 

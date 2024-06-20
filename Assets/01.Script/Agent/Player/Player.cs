@@ -72,7 +72,9 @@ public class Player : Agent
         _spriteRenderer.color = new Color(1, 1, 1, 0);
         _smoke.PlayAnimation(true);
 
-        HealthCompo.ResetHealth(Mathf.RoundToInt(HealthCompo.MaxHealth * GameManager.instance.hpMultiplier));
+        float hpMultiplier = GameManager.instance.hpMultiplier + GameManager.instance.passiveHpInc;
+
+        HealthCompo.ResetHealth(Mathf.RoundToInt(HealthCompo.MaxHealth * hpMultiplier));
 
         _light.SetActive(true);
 
@@ -188,7 +190,7 @@ public class Player : Agent
         if (value)
             Time.timeScale = 0.5f;
 
-        AnimatorCompo.SetBool("death", true);
+        AnimatorCompo.SetBool("death", value);
 
         CapsuleCollider2D collider = GetComponent<CapsuleCollider2D>();
         if (value)

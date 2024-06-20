@@ -100,7 +100,9 @@ public class PlayerHeavyAttack : AnimationPlayer
         _damageCaster.gameObject.transform.position = new Vector3(transform.position.x + dir * _damageCasterPos.x, transform.position.y);
         _damageCaster.damageRadius = _damageCasterRadius;
 
-        _damageCaster.CastDamage(Mathf.RoundToInt(_damage * GameManager.instance.groundDamageMultiplier)
+        float multiplier = GameManager.instance.groundDamageMultiplier + GameManager.instance.passiveGroundDamage;
+
+        _damageCaster.CastDamage(Mathf.RoundToInt(_damage * multiplier)
             , _knockbackPower, _hpRetakeTime, false);
 
         OnHeavyAttackEvent?.Invoke();

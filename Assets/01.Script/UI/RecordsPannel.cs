@@ -18,7 +18,7 @@ public class RecordsPannel : MonoBehaviour
             _upgradeRecordsQueue.Enqueue(recordObj);
         }
     }
-    public void InsertUi(Record record)
+   /* public void InsertUi(Record record)
     {
         GameObject upgradeUi = Instantiate(_recordObject, transform);
         _upgradeRecordsQueue.Enqueue(upgradeUi);
@@ -29,5 +29,5 @@ public class RecordsPannel : MonoBehaviour
         }
 
         upgradeUi.GetComponent<RecordObjectUi>().SetUi(record);
-    }
+    }*/
 }

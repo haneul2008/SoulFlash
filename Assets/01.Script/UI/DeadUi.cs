@@ -61,9 +61,9 @@ public class DeadUi : MonoBehaviour
 
         Time.timeScale = 1f;
 
-        GameManager.instance.Record(playerHeath.CurrentHealth > 0, min, sec);
-
         _tween = _rectTrm.DOAnchorPosY(_finishY, _delay);
+
+        GameManager.instance.Record(playerHeath.CurrentHealth > 0, min, sec);
     }
     public void Restart()
     {

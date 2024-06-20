@@ -28,9 +28,10 @@ public class RecordObjectUi : MonoBehaviour
         _time.text = $"Time {min} {record.sec}√ ";
         _date.text = $"{record.year}-{record.month}-{record.day}";
 
-        for(int i = 0; i < record.items.Count; i++)
+        foreach(UpgradeRecord item in record.items)
         {
-            Instantiate(_upgradeUi, _upgradePannel).SetUi(record.items[i]);
+            print(item);
+            Instantiate(_upgradeUi, _upgradePannel).SetUi(item);
         }
     }
 }
