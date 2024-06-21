@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 9135081307638076690}
   - component: {fileID: 7307086151933511504}
   - component: {fileID: 2643261731509392150}
-  m_Layer: 0
+  - component: {fileID: 5054820217796372530}
+  m_Layer: 12
   m_Name: Slash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,7 +54,7 @@ MonoBehaviour:
   _poolName: Slash
   _damage: 8
   _knockbackPower: 2
-  _hpRetakeTime: 0.2
+  _hpRetakeTime: 0.1
 --- !u!50 &2643261731509392150
 Rigidbody2D:
   serializedVersion: 4
@@ -81,6 +82,41 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!70 &5054820217796372530
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 207980933030908661}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.13104272, y: 0}
+  m_Size: {x: 0.76208544, y: 1}
+  m_Direction: 0
 --- !u!1 &1264130220488762695
 GameObject:
   m_ObjectHideFlags: 0
@@ -107,7 +143,7 @@ Transform:
   m_GameObject: {fileID: 1264130220488762695}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.178, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -143,7 +179,7 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
-  damageRadius: 0.4
+  damageRadius: 0.7
   detectCount: 1
   isDamageCast: 0
 --- !u!1 &2724493107077954941

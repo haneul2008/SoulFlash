@@ -20,24 +20,37 @@ public class Slash : MonoBehaviour, IPoolable
     public GameObject ObjectPrefab => gameObject;
     public float Dir { get; set; }
 
+    private Coroutine _corou;
+
     public void ResetItem()
     {
-        StartCoroutine(PushSlash());
+        _corou = StartCoroutine(PushSlash(_slashLifeTime));
     }
 
-    private IEnumerator PushSlash()
+    private IEnumerator PushSlash(float delay)
     {
-        yield return new WaitForSeconds(_slashLifeTime);
+        yield return new WaitForSeconds(delay);
         PoolManager.instance.Push(this);
+    }
+
+    private void OnDisable()
+    {
+        if(_corou != null)
+            StopCoroutine(_corou);
     }
 
     private void Update()
     {
         transform.position += new Vector3(Dir, 0, 0) * _slashSpeed * Time.deltaTime;
+    }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
         float multiplier = GameManager.instance.airDamageMultiplier + GameManager.instance.passiveAirDamage;
 
         _damageCaster.CastDamage(Mathf.RoundToInt(_damage * multiplier)
             , _knockbackPower, _hpRetakeTime, false);
+
+        _corou = StartCoroutine(PushSlash(0));
     }
 }

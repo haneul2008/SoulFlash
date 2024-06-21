@@ -76,6 +76,8 @@ public class TutorialWolfEnemy : Enemy
 
     public override void SetDeadState()
     {
+        CanStateChageable = true;
+
         gameObject.layer = _deadLayer;
         stateMachine.ChangeState(EnemyEnum.Dead);
 

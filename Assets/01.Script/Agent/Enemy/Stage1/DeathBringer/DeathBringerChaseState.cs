@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class DeathBringerChaseState : BossState
 {
@@ -14,7 +11,7 @@ public class DeathBringerChaseState : BossState
     {
         base.Enter();
 
-        if(_confiner == null)
+        if (_confiner == null)
             _confiner = GameManager.instance.virtualCam.GetComponent<CameraConfiner>();
     }
 
@@ -32,13 +29,13 @@ public class DeathBringerChaseState : BossState
 
         _boss.MovementCompo.SetMovement(Mathf.Sign(dir.x));
 
-        _boss.transform.position = new Vector2(Mathf.Clamp(_boss.transform.position.x, Camera.main.transform.position.x - 
+        _boss.transform.position = new Vector2(Mathf.Clamp(_boss.transform.position.x, Camera.main.transform.position.x -
             _confiner.PlayerClamp, Camera.main.transform.position.x + _confiner.PlayerClamp), _boss.transform.position.y);
 
         if (distance < _boss.attackRadius &&
             _boss.lastAttackTime + _boss.PatternCooltime[_boss.NowPattern] < Time.time)
-        { 
-            if(_boss.NowPattern == 0)
+        {
+            if (_boss.NowPattern == 0)
                 _stateMachine.ChangeState(BossEnum.Pattern0);
 
             else if (_boss.NowPattern == 1)

@@ -1,7 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class AttackSkillUnlockTrigger : MonoBehaviour
 {
@@ -14,7 +12,7 @@ public class AttackSkillUnlockTrigger : MonoBehaviour
     private Health _dummyHealth;
     private void OnDisable()
     {
-        if(_unlockType == UnlockType.AirAttack)
+        if (_unlockType == UnlockType.AirAttack)
         {
             AttackClamp(true, true, true);
         }

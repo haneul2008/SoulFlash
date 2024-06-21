@@ -35,6 +35,8 @@ public abstract class Boss : Enemy
 
     public override void SetDeadState()
     {
+        CanStateChageable = true;
+
         if(spawnEnemyList.Count > 0)
         {
             foreach(Enemy enemy in spawnEnemyList)

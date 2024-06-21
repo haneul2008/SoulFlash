@@ -609,7 +609,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3146316291074512731}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: 
+        m_MethodName: SetActive
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -621,7 +621,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 4469643385591124348}
         m_TargetAssemblyTypeName: NecromancerEnemy, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: SetDeadState
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

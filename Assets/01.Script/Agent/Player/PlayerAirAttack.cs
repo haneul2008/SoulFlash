@@ -1,9 +1,6 @@
 using System;
 using System.Collections;
-using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
-using UnityEngine.Events;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class PlayerAirAttack : AnimationPlayer
 {
@@ -67,14 +64,14 @@ public class PlayerAirAttack : AnimationPlayer
         PlayAnimation();
         Invoke("EndAttack", _attackTime);
 
-        if(GameManager.instance.AttackMode == AttackMode.Mouse) 
+        if (GameManager.instance.AttackMode == AttackMode.Mouse)
             _player.HandleSpriteFlip(Camera.main.ScreenToWorldPoint(Input.mousePosition));
 
         _slashSpawnCorou = StartCoroutine(SpawnSlash(_player.PlayerDir));
     }
     private IEnumerator SpawnSlash(float dir)
     {
-        for(int i = 0; i < _slashSpawnTime.Length; i++)
+        for (int i = 0; i < _slashSpawnTime.Length; i++)
         {
             yield return new WaitForSeconds(_slashSpawnTime[i]);
 

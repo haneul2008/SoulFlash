@@ -61,6 +61,8 @@ public class TutorialFrog : Boss
 
     public override void SetDeadState()
     {
+        CanStateChageable = true;
+
         gameObject.layer = _deadLayer;
         stateMachine.ChangeState(BossEnum.Dead);
     }
