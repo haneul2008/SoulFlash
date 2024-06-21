@@ -58,8 +58,6 @@ public class PlayerAirAttack : AnimationPlayer
 
         OnAirAttackAction?.Invoke();
 
-        float dir = transform.rotation.eulerAngles.y == 0f ? 1 : -1;
-
         _player.MovementCompo.canMove = false;
         _player.CanStateChageable = false;
 
@@ -69,7 +67,10 @@ public class PlayerAirAttack : AnimationPlayer
         PlayAnimation();
         Invoke("EndAttack", _attackTime);
 
-        _slashSpawnCorou = StartCoroutine(SpawnSlash(dir));
+        if(GameManager.instance.AttackMode == AttackMode.Mouse) 
+            _player.HandleSpriteFlip(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+
+        _slashSpawnCorou = StartCoroutine(SpawnSlash(_player.PlayerDir));
     }
     private IEnumerator SpawnSlash(float dir)
     {

@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RecordsPannel : MonoBehaviour
 {
     [SerializeField] private GameObject _recordObject;
     [SerializeField] private GameObject _scrollbar;
+    [SerializeField] private ScrollRect _scrollRect;
 
     private Queue<GameObject> _upgradeRecordsQueue = new Queue<GameObject>();
 
@@ -20,6 +22,7 @@ public class RecordsPannel : MonoBehaviour
         }
 
         _scrollbar.SetActive(GameManager.instance.Records.Count > 2);
+        _scrollRect.enabled = GameManager.instance.Records.Count > 2;
     }
     /* public void InsertUi(Record record)
      {

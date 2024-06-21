@@ -411,7 +411,7 @@ PolygonCollider2D:
   m_GameObject: {fileID: 9040849325266043664}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 438627c4eb9cb4b498ae8385be3d089e, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -494,6 +494,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isSpawnAgent: 0
+  _dontSetVisual: 0
+  dontFlip: 0
   OnAppearToIdleEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -613,7 +615,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8727736708649221175}
         m_TargetAssemblyTypeName: FireWormEnemy, Assembly-CSharp
-        m_MethodName: SetDeadState
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -625,7 +627,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 4126858333372326381}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
+        m_MethodName: 
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

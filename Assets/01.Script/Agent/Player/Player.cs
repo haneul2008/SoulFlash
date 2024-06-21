@@ -23,6 +23,7 @@ public class Player : Agent
 
     private bool _canDoubleJump;
     public bool CanStateChageable { get; set; } = true;
+    public float PlayerDir { get; private set; } = 1;
     [HideInInspector] public bool animationEndTrigger;
 
     #region ClampSkill
@@ -96,13 +97,19 @@ public class Player : Agent
 
         if (Mathf.Abs(PlayerInput.Movement.x) > 0.1f)
         {
+            SetDir(AttackMode.Mix, PlayerInput.Movement.x > 0.1f);
+            SetDir(AttackMode.Keyboard, PlayerInput.Movement.x > 0.1f);
+
             float rotationY = PlayerInput.Movement.x > 0.1f ? 0 : -180f;
             transform.eulerAngles = new Vector3(0, rotationY, 0);
         }
         else
         {
             Vector2 mousePos = Input.mousePosition;
-            HandleSpriteFlip(Camera.main.ScreenToWorldPoint(mousePos));
+
+            SetDir(AttackMode.Mix, Camera.main.ScreenToWorldPoint(mousePos).x > transform.position.x);
+
+            if(GameManager.instance.AttackMode != AttackMode.Keyboard) HandleSpriteFlip(Camera.main.ScreenToWorldPoint(mousePos));
         }
     }
 
@@ -121,6 +128,7 @@ public class Player : Agent
         }
 
         MovementCompo.SetMovement(PlayerInput.Movement.x);
+        SetDir(AttackMode.Mouse, Camera.main.ScreenToWorldPoint(Input.mousePosition).x > transform.position.x);
 
         Flip();
         _airAttack.SetAirState(!MovementCompo.isGround.Value);
@@ -214,5 +222,12 @@ public class Player : Agent
         canHeavyAttack = heavyAttack;
         canAirAttack = airAttack;
         canBlock = block;
+    }
+
+    private void SetDir(AttackMode attackMode, bool standard)
+    {
+        if (GameManager.instance.AttackMode != attackMode) return;
+
+        PlayerDir = standard ? 1 : -1;
     }
 }

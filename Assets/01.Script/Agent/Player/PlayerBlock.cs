@@ -35,7 +35,12 @@ public class PlayerBlock : AnimationPlayer
     {
         if (IsBlock)
         {
-            if(_currentBlockTime + _blockTime < Time.time) EndBlock();
+            _player.CanStateChageable = false;
+            _player.MovementCompo.canMove = false;
+
+            _player.MovementCompo.StopImmediately();
+
+            if (_currentBlockTime + _blockTime < Time.time) EndBlock();
             return;
         }
         _currentTime += Time.deltaTime;
@@ -43,17 +48,18 @@ public class PlayerBlock : AnimationPlayer
     private void Block()
     {
         if (!_player.MovementCompo.isGround.Value || !_player.canBlock) return;
-        if (!_player.CanStateChageable || _currentTime < _cooltime) return;
+        if (_currentTime < _cooltime) return;
 
         IsBlock = true;
 
+        _player.MovementCompo.OnKnockbackAction?.Invoke();
+
         _player.HealthCompo.CanTakeHp(false);
 
-        _player.CanStateChageable = false;
-        _player.MovementCompo.canMove = false;
-        _player.MovementCompo.rbCompo.velocity = Vector2.zero;
-
         _currentBlockTime = Time.time;
+
+        if (GameManager.instance.AttackMode == AttackMode.Mouse)
+            _player.HandleSpriteFlip(Camera.main.ScreenToWorldPoint(Input.mousePosition));
 
         PlayAnimation();
     }

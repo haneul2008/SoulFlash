@@ -61,7 +61,10 @@ public class PlayerAirDash : AnimationPlayer
 
         _collider.size = _sizeChanger.ChangeSize(_collider.size, new Vector2(0.85f, 0.7f));
 
-        _dir = _player.PlayerInput.Movement.x;
+        if (GameManager.instance.AttackMode == AttackMode.Mouse)
+            _player.HandleSpriteFlip(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+
+        _dir = _player.PlayerDir;
 
         PlayAnimation();
         Invoke("DashEnd", _dashTime);

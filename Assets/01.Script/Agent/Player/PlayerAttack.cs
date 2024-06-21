@@ -57,6 +57,9 @@ public class PlayerAttack : AnimationPlayer
 
         _anim.speed = 1 * GameManager.instance.normalAckSpeedMultiplier;
 
+        if (GameManager.instance.AttackMode == AttackMode.Mouse)
+            _player.HandleSpriteFlip(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+
         PlayAnimation();
 
         OnAttackAction?.Invoke();

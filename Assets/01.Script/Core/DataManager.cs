@@ -63,8 +63,6 @@ public class DataManager : MonoSingleton<DataManager>
         {
             string loadJson = File.ReadAllText(path);
 
-            print(loadJson);
-
             saveData = JsonUtility.FromJson<SaveData>(loadJson);
 
             if(saveData != null)

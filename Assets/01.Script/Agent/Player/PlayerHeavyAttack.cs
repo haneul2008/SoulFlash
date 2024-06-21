@@ -75,10 +75,11 @@ public class PlayerHeavyAttack : AnimationPlayer
 
         PlayAnimation();
 
-        float dir = transform.rotation.eulerAngles.y == 0f ? 1 : -1;
+        if (GameManager.instance.AttackMode == AttackMode.Mouse)
+            _player.HandleSpriteFlip(Camera.main.ScreenToWorldPoint(Input.mousePosition));
 
-        StartCoroutine(DamageCastCoroutine(dir));
-        _particleCorou = StartCoroutine(ParticleCoroutine(dir));
+        StartCoroutine(DamageCastCoroutine(_player.PlayerDir));
+        _particleCorou = StartCoroutine(ParticleCoroutine(_player.PlayerDir));
     }
     private void EndAttack()
     {

@@ -32,6 +32,9 @@ public class PlayerSmoke : MonoBehaviour
         _player.MovementCompo.canMove = false;
         _player.CanStateChageable = false;
 
+        _player.AnimatorCompo.SetBool("run", false);
+        _player.dontFlip = true;
+
         gameObject.SetActive(true);
         Tween = _renderer.DOFade(1, 0.2f);
 
@@ -42,6 +45,8 @@ public class PlayerSmoke : MonoBehaviour
         int endValue = _isSpawn ? 1 : 0;
 
         _anim.SetBool(_smokeHash, false);
+
+        _player.dontFlip = false;
 
         Tween = _renderer.DOFade(0, 0.2f)
         .OnComplete(()=>
