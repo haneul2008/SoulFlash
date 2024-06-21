@@ -8,13 +8,17 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoSingleton<GameManager>
 {
     [field : SerializeField] public GameObject Player { get; private set; }
+
     public Action OnEnemyFinalDeadAction;
     public Action OnEnemyDeadAction;
+    public Action OnSkillGuideSwitchAction;
+
     public MouseDetecter mouseDetecter;
     public CinemachineVirtualCamera virtualCam;
     public List<UpgradeItemSO> NowUpgradeList { get; private set; } = new List<UpgradeItemSO>();
     public Queue<Record> Records { get; private set; } = new Queue<Record>();
     public AttackMode AttackMode { get; set; } = AttackMode.Mix;
+    public bool SkillGuideText { get; set; } = true;
     public bool isTutorialClear;
     public float GameStartTime { get; set; }
 

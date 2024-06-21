@@ -17,15 +17,21 @@ public class PlayerSkillCootimeUI : MonoBehaviour
     [SerializeField] private TMP_Text _cooltimeText;
     [SerializeField] private SkillType _skilltype;
     private Image _image;
+    private GameObject _guideText;
 
     private AnimationPlayer _animationPlayer;
     private void Awake()
     {
         _image = GetComponent<Image>();
         _image.color = Color.white;
+        _guideText = transform.Find("KeyBinding").gameObject;
+
+        GameManager.instance.OnSkillGuideSwitchAction += SwitchSkillGuideText;
     }
     private void Start()
     {
+        SwitchSkillGuideText();
+
         switch (_skilltype)
         {
             case SkillType.AirDash:
@@ -66,6 +72,8 @@ public class PlayerSkillCootimeUI : MonoBehaviour
     }
     private void OnDisable()
     {
+        GameManager.instance.OnSkillGuideSwitchAction -= SwitchSkillGuideText;
+
         switch (_skilltype)
         {
             case SkillType.AirDash:
@@ -112,5 +120,9 @@ public class PlayerSkillCootimeUI : MonoBehaviour
         }
         _cooltimeText.text = "";
         _image.color = Color.white;
+    }
+    private void SwitchSkillGuideText()
+    {
+        _guideText.SetActive(GameManager.instance.SkillGuideText);
     }
 }

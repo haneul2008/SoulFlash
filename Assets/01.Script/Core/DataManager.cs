@@ -40,6 +40,7 @@ public class SaveData
     public UpgradeType passiveType;
     public float passiveIncValue;
     public AttackMode attackMode;
+    public bool skillGuideText;
 }
 public class DataManager : MonoSingleton<DataManager>
 {
@@ -75,6 +76,7 @@ public class DataManager : MonoSingleton<DataManager>
                 }
 
                 GameManager.instance.AttackMode = saveData.attackMode;
+                GameManager.instance.SkillGuideText = saveData.skillGuideText;
 
                 GameManager.instance.isTutorialClear = saveData.isTutorialClear;
 
@@ -106,6 +108,7 @@ public class DataManager : MonoSingleton<DataManager>
         SaveData saveData = new SaveData();
 
         saveData.attackMode = GameManager.instance.AttackMode;
+        saveData.skillGuideText = GameManager.instance.SkillGuideText;
 
         saveData.isTutorialClear = GameManager.instance.isTutorialClear;
 

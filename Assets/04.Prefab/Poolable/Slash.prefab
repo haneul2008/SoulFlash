@@ -52,7 +52,7 @@ MonoBehaviour:
   _slashSpeed: 20
   _slashLifeTime: 0.5
   _poolName: Slash
-  _damage: 8
+  _damage: 10
   _knockbackPower: 2
   _hpRetakeTime: 0.1
 --- !u!50 &2643261731509392150

@@ -62,13 +62,14 @@ public class GhostEnemy : Enemy, IPoolable
 
         if(isSpawnAgent)
         {
-            GameObject sword = _hpBarTrm.Find("sword").gameObject;
-            GameObject crystal = _hpBarTrm.Find("crystal").gameObject;
-
-            if(sword != null)
-                Destroy(sword);
-            if(crystal != null)
-                Destroy(crystal);
+            if (dontCheckDetect)
+            {
+                _hpBarTrm.Find("sword").gameObject.SetActive(false);
+            }
+            if (_crystalSpawn)
+            {
+                _hpBarTrm.Find("crystal").gameObject.SetActive(false);
+            }
         }
     }
     public override void Attack(bool castDamage = true)
