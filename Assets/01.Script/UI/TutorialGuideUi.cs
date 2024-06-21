@@ -80,7 +80,7 @@ public class TutorialGuideUi : MonoBehaviour
     {
         if (!_uiActiving) return;
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
             _uiActiving = false;
 

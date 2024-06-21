@@ -31,7 +31,7 @@ public class PlayerHpUi : MonoBehaviour
     private void Start()
     {
         _multiplier = GameManager.instance.hpMultiplier + GameManager.instance.passiveHpInc;
-        _hpText.text = $"{_playerHp.CurrentHealth} / {_playerHp.MaxHealth * _multiplier}";
+        _hpText.text = $"{_playerHp.CurrentHealth} / {Mathf.RoundToInt(_playerHp.MaxHealth * _multiplier)}";
     }
     public void SetCurrentHp()
     {

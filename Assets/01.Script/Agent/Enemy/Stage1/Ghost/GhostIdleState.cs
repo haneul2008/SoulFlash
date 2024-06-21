@@ -40,6 +40,7 @@ public class GhostIdleState : EnemyState
     }
     private void ChangeChaseState()
     {
+        if (_enemy.dontCheckDetect) _enemy.detectRadius = 150;
         _enemy.targetTrm = GameManager.instance.Player.transform;
         _stateMachine.ChangeState(EnemyEnum.Chase);
     }

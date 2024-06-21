@@ -49,6 +49,7 @@ public class AgentSpawnFeedback : Feedback
             Enemy enemy = agent.gameObject.GetComponent<Enemy>();
             if (enemy != null)
             {
+                enemy.dontCheckDetect = false;
                 _boss.spawnEnemyList.Add(enemy);
             }
         }

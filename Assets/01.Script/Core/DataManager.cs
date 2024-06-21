@@ -39,6 +39,7 @@ public class SaveData
     public bool isTutorialClear;
     public UpgradeType passiveType;
     public float passiveIncValue;
+    public AttackMode attackMode;
 }
 public class DataManager : MonoSingleton<DataManager>
 {
@@ -75,6 +76,8 @@ public class DataManager : MonoSingleton<DataManager>
                     GameManager.instance.Records.Enqueue(saveData.Records[i]);
                 }
 
+                GameManager.instance.AttackMode = saveData.attackMode;
+
                 GameManager.instance.isTutorialClear = saveData.isTutorialClear;
 
                 if(saveData.passiveType != UpgradeType.None)
@@ -103,6 +106,8 @@ public class DataManager : MonoSingleton<DataManager>
         path = Application.persistentDataPath + "/" + "GameData.json";
 
         SaveData saveData = new SaveData();
+
+        saveData.attackMode = GameManager.instance.AttackMode;
 
         saveData.isTutorialClear = GameManager.instance.isTutorialClear;
 

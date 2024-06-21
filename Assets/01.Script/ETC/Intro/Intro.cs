@@ -13,19 +13,14 @@ public class Intro : MonoBehaviour
 
     private void Start()
     {
+        GameManager.instance.AttackMode = AttackMode.Mix;
+
         DataManager.instance.SetLoad();
 
         _tween = _fade.DOFade(1, 0.8f)
             .OnComplete(() =>
             {
-                if (GameManager.instance.isTutorialClear)
-                {
-                    SceneManager.LoadScene("Lobby");
-                }
-                else
-                {
-                    SceneManager.LoadScene("Tutorial");
-                }
+                SceneManager.LoadScene("Lobby");
             });
     }
 

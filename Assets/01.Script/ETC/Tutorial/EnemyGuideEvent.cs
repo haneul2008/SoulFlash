@@ -24,7 +24,12 @@ public class EnemyGuideEvent : MonoBehaviour
 
         _player = GameManager.instance.Player.GetComponent<Player>();
     }
-    
+
+    private void OnDestroy()
+    {
+        _enemyTp.canDashTime = _saveCanTpTime;
+    }
+
     public void SetGuide()
     {
         _tpGuideObject.SetActive(true);

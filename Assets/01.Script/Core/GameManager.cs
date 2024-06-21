@@ -14,6 +14,7 @@ public class GameManager : MonoSingleton<GameManager>
     public CinemachineVirtualCamera virtualCam;
     public List<UpgradeItemSO> NowUpgradeList { get; private set; } = new List<UpgradeItemSO>();
     public Queue<Record> Records { get; private set; } = new Queue<Record>();
+    public AttackMode AttackMode { get; set; } = AttackMode.Mix;
     public bool isTutorialClear;
     public float GameStartTime { get; set; }
 
@@ -107,7 +108,7 @@ public class GameManager : MonoSingleton<GameManager>
         record.killedEnemies = enemyDeadCount;
 
         Records.Enqueue(record);
-        if(Records.Count > 3)
+        if(Records.Count > 7)
         {
             Records.Dequeue();
         }

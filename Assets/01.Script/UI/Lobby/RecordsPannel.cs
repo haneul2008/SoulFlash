@@ -5,6 +5,7 @@ using UnityEngine;
 public class RecordsPannel : MonoBehaviour
 {
     [SerializeField] private GameObject _recordObject;
+    [SerializeField] private GameObject _scrollbar;
 
     private Queue<GameObject> _upgradeRecordsQueue = new Queue<GameObject>();
 
@@ -17,17 +18,19 @@ public class RecordsPannel : MonoBehaviour
             recordObj.GetComponent<RecordObjectUi>().SetUi(record);
             _upgradeRecordsQueue.Enqueue(recordObj);
         }
+
+        _scrollbar.SetActive(GameManager.instance.Records.Count > 2);
     }
-   /* public void InsertUi(Record record)
-    {
-        GameObject upgradeUi = Instantiate(_recordObject, transform);
-        _upgradeRecordsQueue.Enqueue(upgradeUi);
+    /* public void InsertUi(Record record)
+     {
+         GameObject upgradeUi = Instantiate(_recordObject, transform);
+         _upgradeRecordsQueue.Enqueue(upgradeUi);
 
-        if(_upgradeRecordsQueue.Count > 3)
-        {
-            Destroy(_upgradeRecordsQueue.Dequeue());
-        }
+         if(_upgradeRecordsQueue.Count > 3)
+         {
+             Destroy(_upgradeRecordsQueue.Dequeue());
+         }
 
-        upgradeUi.GetComponent<RecordObjectUi>().SetUi(record);
-    }*/
+         upgradeUi.GetComponent<RecordObjectUi>().SetUi(record);
+     }*/
 }

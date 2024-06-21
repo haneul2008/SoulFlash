@@ -26,7 +26,7 @@ public class LobbyUi : MonoBehaviour
         UiMove(true);
         _recordsPannel.SetUi();
     }
-        private void OnDisable()
+    private void OnDisable()
     {
         if (_tween != null)
             _tween.Kill();
@@ -51,8 +51,15 @@ public class LobbyUi : MonoBehaviour
     {
         if (fadeIn) return;
 
-        SceneManager.LoadScene("Stage1");
-        GameManager.instance.GameStartTime = Time.time;
+        if (GameManager.instance.isTutorialClear)
+        {
+            SceneManager.LoadScene("Stage1");
+            GameManager.instance.GameStartTime = Time.time;
+        }
+        else
+        {
+            SceneManager.LoadScene("Tutorial");
+        }
     }
     public void Quit()
     {

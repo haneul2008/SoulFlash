@@ -312,6 +312,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isSpawnAgent: 0
+  _dontSetVisual: 0
+  dontFlip: 0
   OnAppearToIdleEvent:
     m_PersistentCalls:
       m_Calls:
@@ -382,6 +384,7 @@ MonoBehaviour:
   targetTrm: {fileID: 0}
   _attackObj: {fileID: 2427772830766522022}
   _damageCaster: {fileID: 5974896589243387068}
+  _hpBarTrm: {fileID: 7331697966350878242}
   _poolName: Ghost
 --- !u!114 &5710639674437753166
 MonoBehaviour:

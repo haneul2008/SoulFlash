@@ -6,6 +6,7 @@ public class GhostEnemy : Enemy, IPoolable
 {
     [SerializeField] private GameObject _attackObj;
     [SerializeField] private GameObject _damageCaster;
+    [SerializeField] private Transform _hpBarTrm;
     [SerializeField] private string _poolName;
     public string PoolName => _poolName;
 
@@ -58,6 +59,17 @@ public class GhostEnemy : Enemy, IPoolable
         lastAttackTime = -9999f;
 
         gameObject.layer = _enemyLayer;
+
+        if(isSpawnAgent)
+        {
+            GameObject sword = _hpBarTrm.Find("sword").gameObject;
+            GameObject crystal = _hpBarTrm.Find("crystal").gameObject;
+
+            if(sword != null)
+                Destroy(sword);
+            if(crystal != null)
+                Destroy(crystal);
+        }
     }
     public override void Attack(bool castDamage = true)
     {
