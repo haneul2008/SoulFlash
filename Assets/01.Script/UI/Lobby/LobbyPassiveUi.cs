@@ -12,6 +12,8 @@ public class LobbyPassiveUi : MonoBehaviour
 
     private void Awake()
     {
+        gameObject.SetActive(GameManager.instance.isTutorialClear);
+
         PassiveCheckAndSetUi(GameManager.instance.passiveAirDamage, _passiveSprites[0], new Vector3(1, 0.7f, 1));
         PassiveCheckAndSetUi(GameManager.instance.passiveGroundDamage, _passiveSprites[1], new Vector3(1, 0.8f, 1));
         PassiveCheckAndSetUi(GameManager.instance.passiveHpInc, _passiveSprites[2], Vector3.one);
@@ -19,7 +21,7 @@ public class LobbyPassiveUi : MonoBehaviour
 
     private void PassiveCheckAndSetUi(float value, Sprite icon, Vector3 size)
     {
-        if(value == 0) return;
+        if(Mathf.Approximately(value, 0)) return;
 
         _icon.sprite = icon;
         RectTransform rectTrm = _icon.GetComponent<RectTransform>();

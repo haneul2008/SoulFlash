@@ -22,6 +22,7 @@ public abstract class Enemy : Agent
     public bool dontCheckDetect;
 
     [SerializeField] private bool _dontCastDamage;
+    public Sound attackSound;
 
     [Header("Attack Setting")]
     public float detectRadius;

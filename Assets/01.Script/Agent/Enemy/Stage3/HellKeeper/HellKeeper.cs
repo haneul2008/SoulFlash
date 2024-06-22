@@ -10,17 +10,21 @@ public class HellKeeper : Boss
     [SerializeField] private ParticleSystem _particle;
     [SerializeField] private float _appearDelay;
     [SerializeField] private BossHpUi _bossHpUi;
+    [SerializeField] private SkillLockUi _skillLockUi;
 
     [SerializeField] private List<Color> _appearColors;
     [SerializeField] private List<float> _appearMoveSpeeds;
     [SerializeField] private List<int> _appearHealth;
     [SerializeField] private List<int> _appearDamages;
     [SerializeField] private List<float> _appearAttackSpeeds;
+    [SerializeField] private Sound _deadSound;
 
     public float AttackSpeed { get; private set; } = 1;
     public Animator AnimationCompo { get; private set; }
     private int _appearCount;
     private bool _isAppearing;
+    private Player _player;
+
     protected override void Awake()
     {
         base.Awake();
@@ -39,6 +43,8 @@ public class HellKeeper : Boss
         StartAction += Appear;
 
         AnimationCompo = transform.Find("Visual").GetComponent<Animator>();
+
+        _player = GameManager.instance.Player.GetComponent<Player>();
     }
 
     private void Start()
@@ -49,6 +55,9 @@ public class HellKeeper : Boss
     private void Appear()
     {
         stateMachine.Initialize(BossEnum.Appear, this);
+
+        _skillLockUi.SetUnlockUi(1, 4, false);
+        _player.canBlock = false;
     }
 
     private void Update()
@@ -74,6 +83,8 @@ public class HellKeeper : Boss
 
         gameObject.layer = _deadLayer;
         stateMachine.ChangeState(BossEnum.Dead);
+
+        SoundManager.instance.AddAudioAndPlay(_deadSound);
     }
     public override void Attack(bool castDamage = true)
     {

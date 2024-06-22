@@ -11,9 +11,13 @@ public class DemonAttackState : EnemyState
         base.Enter();
 
         _enemy.MovementCompo.StopImmediately(false);
+        _enemy.HandleSpriteFlip(_enemy.targetTrm.position, true);
 
         _enemy.MovementCompo.canMove = false;
         _enemy.MovementCompo.canKnockback = false;
+        _enemy.dontFlip = true;
+
+        SoundManager.instance.AddAudioAndPlay(_enemy.attackSound);
     }
     public override void Exit()
     {
@@ -21,6 +25,7 @@ public class DemonAttackState : EnemyState
 
         _enemy.MovementCompo.canKnockback = true;
         _enemy.MovementCompo.canMove = true;
+        _enemy.dontFlip = false;
 
         base.Exit();
     }

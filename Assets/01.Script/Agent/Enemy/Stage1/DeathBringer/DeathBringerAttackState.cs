@@ -12,14 +12,12 @@ public class DeathBringerAttackState : BossState
     {
         base.Enter();
 
-        _boss.HealthCompo.CanTakeHp(false);
-
         _boss.MovementCompo.StopImmediately(false);
-
-        _boss.CanStateChageable = false;
 
         _boss.MovementCompo.canMove = false;
         _boss.MovementCompo.canKnockback = false;
+
+        SoundManager.instance.AddAudioAndPlay(_boss.PatternSound[0]);
     }
     public override void Exit()
     {
@@ -42,7 +40,6 @@ public class DeathBringerAttackState : BossState
         if (_endTriggerCalled)
         {
             _endTriggerCalled = false;
-            _boss.CanStateChageable = true;
             _stateMachine.ChangeState(BossEnum.Chase);
         }
     }

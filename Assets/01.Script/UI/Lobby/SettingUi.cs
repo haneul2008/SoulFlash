@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 public enum AttackMode
 {
@@ -12,6 +12,9 @@ public enum AttackMode
 }
 public class SettingUi : MonoBehaviour
 {
+    [Header("Sound")]
+    [SerializeField] private Slider _soundSlider;
+
     [Header("AttackMode")]
     [SerializeField] private TMP_Text _attackModeText;
     [SerializeField] private TMP_Text _attackModeDescText;
@@ -24,9 +27,14 @@ public class SettingUi : MonoBehaviour
     private void Awake()
     {
         _attackMode = (int)GameManager.instance.AttackMode;
+        _soundSlider.value = GameManager.instance.SoundVolume;
 
         SetAttackMode();
         SetSkillGuideText();
+    }
+    private void Update()
+    {
+        GameManager.instance.SoundVolume = _soundSlider.value;
     }
 
     public void ChangeAttackMode()
@@ -71,8 +79,6 @@ public class SettingUi : MonoBehaviour
         GameManager.instance.SkillGuideText = !GameManager.instance.SkillGuideText;
 
         SetSkillGuideText();
-
-        GameManager.instance.OnSkillGuideSwitchAction?.Invoke();
 
         DataManager.instance.JsonSave();
     }

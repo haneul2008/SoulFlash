@@ -64,6 +64,8 @@ public class PlayerHeavyAttack : AnimationPlayer
         if (!_player.MovementCompo.isGround.Value || !_player.canHeavyAttack) return;
         if (!_player.CanStateChageable || _currentTime < _cooltime * GameManager.instance.groundCooldownMutiplier) return;
 
+        float dir = _player.PlayerDir;
+
         OnEndHeavyAttackAction?.Invoke(Mathf.RoundToInt(_cooltime * GameManager.instance.groundCooldownMutiplier));
         OnHeavyAttackAction?.Invoke();
 
@@ -78,8 +80,8 @@ public class PlayerHeavyAttack : AnimationPlayer
         if (GameManager.instance.AttackMode == AttackMode.Mouse)
             _player.HandleSpriteFlip(Camera.main.ScreenToWorldPoint(Input.mousePosition));
 
-        StartCoroutine(DamageCastCoroutine(_player.PlayerDir));
-        _particleCorou = StartCoroutine(ParticleCoroutine(_player.PlayerDir));
+        StartCoroutine(DamageCastCoroutine(dir));
+        _particleCorou = StartCoroutine(ParticleCoroutine(dir));
     }
     private void EndAttack()
     {

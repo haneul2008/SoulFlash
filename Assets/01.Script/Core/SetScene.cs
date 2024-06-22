@@ -1,17 +1,27 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class SetScene : MonoBehaviour
 {
+    public UnityEvent OnSceneLoadEvent;
+
     [SerializeField] private string _nextSceneName;
     [SerializeField] private float _delay;
     [SerializeField] private bool _isTutorial;
+
+    private void Awake()
+    {
+        OnSceneLoadEvent?.Invoke();
+    }
 
     public void SetNextScene()
     {
         StartCoroutine("LoadNextScene");
     }
+
     private IEnumerator LoadNextScene()
     {
         yield return new WaitForSeconds(_delay);

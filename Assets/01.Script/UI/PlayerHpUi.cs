@@ -42,7 +42,7 @@ public class PlayerHpUi : MonoBehaviour
         _hpBarTrm.localScale = new Vector2(Mathf.Clamp(_currentHp / (_playerHp.MaxHealth * _multiplier), 0, 1), 1);
 
         _hpText.text = $"{Mathf.Clamp(_currentHp, 0, _playerHp.MaxHealth * _multiplier)}" +
-            $" / {_playerHp.MaxHealth * _multiplier}";
+            $" / {Mathf.RoundToInt(_playerHp.MaxHealth * _multiplier)}";
 
         StartCoroutine("DelayBlink");
     }

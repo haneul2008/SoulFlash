@@ -32,10 +32,15 @@ public class AgentMovement : AnimationPlayer
     protected Coroutine _kbCoroutine;
 
     private Agent _owner;
+    private Player _player;
+    public bool IsKnockback { get; private set; }
     public void Initalize(Agent agent)
     {
         _owner = agent;
         rbCompo = GetComponent<Rigidbody2D>();
+
+        if(!_isPlayer) return;
+        _player = _owner.GetComponent<Player>();
     }
 
     public void JumpTo(Vector2 force)
@@ -79,6 +84,15 @@ public class AgentMovement : AnimationPlayer
     private void Update()
     {
         CalculateInAirTime();
+        KnockBackCheck();
+    }
+
+    private void KnockBackCheck()
+    {
+        if (!IsKnockback) return;
+        if (!_isPlayer) return;
+
+        _player.CanStateChageable = false;
     }
 
     private void FixedUpdate()
@@ -128,14 +142,10 @@ public class AgentMovement : AnimationPlayer
     {
         if (!canKnockback) return;
 
+        IsKnockback = true;
+
         OnKnockbackAction?.Invoke();
         canMove = false;
-
-        Player player = GetComponent<Player>();
-        if (player != null)
-        {
-            player.CanStateChageable = false;
-        }
 
         StopImmediately();
 
@@ -153,6 +163,11 @@ public class AgentMovement : AnimationPlayer
         yield return new WaitForSeconds(knockbackTime);
         rbCompo.velocity = Vector2.zero;
         canMove = true;
+
+        IsKnockback = false;
+
+        if (!_isPlayer) yield break;
+        _player.CanStateChageable = true;
     }
     public void ClearKnockback()
     {

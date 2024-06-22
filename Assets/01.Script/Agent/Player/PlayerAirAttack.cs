@@ -13,12 +13,14 @@ public class PlayerAirAttack : AnimationPlayer
     [SerializeField] private float _cooltime;
     [SerializeField] private float[] _slashSpawnTime;
     [SerializeField] private float[] _slashRotationX;
+    [SerializeField] private Sound _sound;
 
     public bool InAir { get; private set; }
     private Player _player;
     private float _currentTime;
     private bool _attack;
     private Coroutine _slashSpawnCorou;
+
     public override void Initialize(Agent agent)
     {
         base.Initialize(agent);
@@ -77,6 +79,8 @@ public class PlayerAirAttack : AnimationPlayer
 
             Slash slash = PoolManager.instance.Pop("Slash") as Slash;
             slash.gameObject.transform.position = new Vector3(dir * _slashSpawnX + transform.position.x, transform.position.y, 0);
+
+            SoundManager.instance.AddAudioAndPlay(_sound);
 
             float rotationY = dir == 1f ? 0 : 180;
             slash.gameObject.transform.rotation = Quaternion.Euler(_slashRotationX[i], rotationY, 0);

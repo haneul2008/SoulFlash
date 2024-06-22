@@ -31,6 +31,8 @@ public class NightmareAttackState : EnemyState
                 _enemy.Attack(false);
                 _enemy.lastAttackTime = Time.time;
                 _stateMachine.ChangeState(EnemyEnum.Chase);
+
+                SoundManager.instance.AddAudioAndPlay(_enemy.attackSound);
             }
             else
             {

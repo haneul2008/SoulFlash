@@ -19,6 +19,7 @@ public class DashToSelectEnemy : MonoBehaviour
     [field: SerializeField] public float DashTime { get; private set; }
     [SerializeField] private float _canTakeAttackTime; //대쉬가 끝난 후 몇초간 넉백과 체력 감소를 무시할지
     [SerializeField] private int _hpIncreaseAmout; //적에게 순간이동후 회복되는 양
+    [SerializeField] private Sound _selectingSound;
     public Collider2D NowEnemyCollider { get; private set; }
     public bool IsSelecting { get; private set; }
 
@@ -32,7 +33,6 @@ public class DashToSelectEnemy : MonoBehaviour
     private Material _enemyMat;
     private bool _actionTrigger;
     private Coroutine _coroutine;
-
     private readonly int _isHitHash = Shader.PropertyToID("_IsHit");
     private void Awake()
     {
@@ -93,6 +93,8 @@ public class DashToSelectEnemy : MonoBehaviour
         _player.CanStateChageable = false;
 
         _coroutine = StartCoroutine(CanDashTimeCoroutine());
+
+        SoundManager.instance.AddAudioAndPlay(_selectingSound);
     }
 
     private IEnumerator CanDashTimeCoroutine()

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public abstract class Agent : MonoBehaviour
@@ -13,6 +14,8 @@ public abstract class Agent : MonoBehaviour
 
     public bool isSpawnAgent;
     protected float _timeInAir;
+
+    public Action OnFlipEvent;
 
     [SerializeField] private bool _dontSetVisual;
 
@@ -41,12 +44,15 @@ public abstract class Agent : MonoBehaviour
     }
     public void HandleSpriteFlip(Vector3 targetPosition, bool flip = false)
     {
+        bool isFacing = IsFacingRight();
         if (targetPosition.x < transform.position.x)
         {
             if(flip)
                 transform.eulerAngles = Vector3.zero;
             else
                 transform.eulerAngles = new Vector3(0, -180f, 0);
+
+            OnFlipEvent?.Invoke();
         }
         else if (targetPosition.x > transform.position.x)
         {
@@ -54,6 +60,8 @@ public abstract class Agent : MonoBehaviour
                 transform.eulerAngles = Vector3.zero;
             else
                 transform.eulerAngles = new Vector3(0, -180f, 0);
+
+            OnFlipEvent?.Invoke();
         }
     }
     #endregion

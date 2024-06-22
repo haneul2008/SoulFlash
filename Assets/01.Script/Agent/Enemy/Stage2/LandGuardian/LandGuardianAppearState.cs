@@ -13,6 +13,7 @@ public class LandGuardianAppearState : BossState
         base.Enter();
 
         _boss.isAppear = true;
+        _boss.OnAppearToIdleEvent?.Invoke();
     }
 
     public override void UpdateState()
@@ -22,8 +23,6 @@ public class LandGuardianAppearState : BossState
         if (_endTriggerCalled)
         {
             _endTriggerCalled = false;
-
-            _boss.OnAppearToIdleEvent?.Invoke();
 
             _boss.targetTrm = GameManager.instance.Player.transform;
             _stateMachine.ChangeState(BossEnum.Chase);

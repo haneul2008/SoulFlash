@@ -50,6 +50,8 @@ public class UpgradeUiSelect : MonoBehaviour, IPointerEnterHandler, IPointerExit
     {
         if (_isSelected || !_upgradeUi.IsSetted) return;
 
+        SoundManager.instance.UiClickSound();
+
         if (GameManager.instance.soulCount < _upgradeData.price)
         {
             BlinkColor(Color.red, 0.1f);
@@ -72,7 +74,6 @@ public class UpgradeUiSelect : MonoBehaviour, IPointerEnterHandler, IPointerExit
                 if(_upgradeData.passiveUpgrade)
                 {
                     GameManager.instance.passiveAirDamage += _upgradeData.increaseValue;
-                    GameManager.instance.airDamageMultiplier += GameManager.instance.passiveAirDamage;
                 }
                 else
                 {
@@ -84,7 +85,6 @@ public class UpgradeUiSelect : MonoBehaviour, IPointerEnterHandler, IPointerExit
                 if (_upgradeData.passiveUpgrade)
                 {
                     GameManager.instance.passiveGroundDamage += _upgradeData.increaseValue;
-                    GameManager.instance.groundDamageMultiplier += GameManager.instance.passiveGroundDamage;
                 }
                 else
                 {
@@ -100,7 +100,6 @@ public class UpgradeUiSelect : MonoBehaviour, IPointerEnterHandler, IPointerExit
                 if (_upgradeData.passiveUpgrade)
                 {
                     GameManager.instance.passiveHpInc += _upgradeData.increaseValue;
-                    GameManager.instance.hpMultiplier += GameManager.instance.passiveHpInc;
                 }
                 else
                 {

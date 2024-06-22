@@ -47,7 +47,7 @@ public class PlayerBlock : AnimationPlayer
     }
     private void Block()
     {
-        if (!_player.MovementCompo.isGround.Value || !_player.canBlock) return;
+        if (!_player.MovementCompo.isGround.Value || !_player.canBlock || _player.MovementCompo.IsKnockback) return;
         if (_currentTime < _cooltime) return;
 
         IsBlock = true;
@@ -75,7 +75,7 @@ public class PlayerBlock : AnimationPlayer
         _player.CanStateChageable = true;
         _player.MovementCompo.canMove = true;
 
-        OnEndBlockAction.Invoke(Mathf.RoundToInt(_cooltime * GameManager.instance.airCooldownMutiplier));
+        OnEndBlockAction?.Invoke(Mathf.RoundToInt(_cooltime * GameManager.instance.airCooldownMutiplier));
 
         IsBlock = false;
     }

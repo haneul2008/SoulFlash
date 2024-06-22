@@ -16,8 +16,6 @@ public class LandGuardianMeleeState : BossState
 
         _boss.MovementCompo.StopImmediately();
 
-        _boss.CanStateChageable = false;
-
         _boss.MovementCompo.canMove = false;
         _boss.MovementCompo.canKnockback = false;
     }
@@ -45,7 +43,6 @@ public class LandGuardianMeleeState : BossState
         {
             _endTriggerCalled = false;
 
-            _boss.CanStateChageable = true;
             _stateMachine.ChangeState(BossEnum.Chase);
         }
     }

@@ -627,6 +627,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeea1aaa253c60f4f9d0d71801c4f687, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnSwitchSkillGuide:
+    _value: 0
   _cooltimeText: {fileID: 1569114353}
   _skilltype: 4
 --- !u!1 &59050186
@@ -3409,18 +3411,30 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2383177085233324152, guid: 1e6a897dcafd40343bdbeade23f08402, type: 3}
       propertyPath: OnCrystalTpEvent.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2383177085233324152, guid: 1e6a897dcafd40343bdbeade23f08402, type: 3}
       propertyPath: OnCrystalTpEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2383177085233324152, guid: 1e6a897dcafd40343bdbeade23f08402, type: 3}
+      propertyPath: OnCrystalTpEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2383177085233324152, guid: 1e6a897dcafd40343bdbeade23f08402, type: 3}
       propertyPath: OnCrystalTpEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1445839948}
     - target: {fileID: 2383177085233324152, guid: 1e6a897dcafd40343bdbeade23f08402, type: 3}
+      propertyPath: OnCrystalTpEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 333344031}
+    - target: {fileID: 2383177085233324152, guid: 1e6a897dcafd40343bdbeade23f08402, type: 3}
       propertyPath: OnCrystalTpEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2383177085233324152, guid: 1e6a897dcafd40343bdbeade23f08402, type: 3}
+      propertyPath: OnCrystalTpEvent.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2383177085233324152, guid: 1e6a897dcafd40343bdbeade23f08402, type: 3}
@@ -3428,11 +3442,23 @@ PrefabInstance:
       value: SetActive
       objectReference: {fileID: 0}
     - target: {fileID: 2383177085233324152, guid: 1e6a897dcafd40343bdbeade23f08402, type: 3}
+      propertyPath: OnCrystalTpEvent.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: PlayFeedBack
+      objectReference: {fileID: 0}
+    - target: {fileID: 2383177085233324152, guid: 1e6a897dcafd40343bdbeade23f08402, type: 3}
       propertyPath: OnCrystalTpEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: UnityEngine.GameObject, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2383177085233324152, guid: 1e6a897dcafd40343bdbeade23f08402, type: 3}
+      propertyPath: OnCrystalTpEvent.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: FeedbackPlayer, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2383177085233324152, guid: 1e6a897dcafd40343bdbeade23f08402, type: 3}
       propertyPath: OnCrystalTpEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2383177085233324152, guid: 1e6a897dcafd40343bdbeade23f08402, type: 3}
+      propertyPath: OnCrystalTpEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 5280849900913081852, guid: 1e6a897dcafd40343bdbeade23f08402, type: 3}
@@ -3502,6 +3528,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6305544992148549073, guid: 1e6a897dcafd40343bdbeade23f08402, type: 3}
   m_PrefabInstance: {fileID: 333344028}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &333344031 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1482763577233392997, guid: 1e6a897dcafd40343bdbeade23f08402, type: 3}
+  m_PrefabInstance: {fileID: 333344028}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 337f8a1a2ae3d4c40b0e364e57d9cfe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &359884406
 GameObject:
   m_ObjectHideFlags: 0
@@ -3998,6 +4035,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f89cfaa002fd4d48ad45f21d066811f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnSceneLoadEvent:
+    m_PersistentCalls:
+      m_Calls: []
   _nextSceneName: Lobby
   _delay: 1
   _isTutorial: 1
@@ -5270,6 +5310,12 @@ MonoBehaviour:
   _tweenDelay: 0.7
   _setScene: {fileID: 406397931}
   _fade: {fileID: 1428288802}
+  _sound:
+    clip: {fileID: 8300000, guid: e0bab816a2b4059478c7087ec70061ea, type: 3}
+    volumeMultiplier: 1
+    type: 0
+    pitch: 0.8
+    loop: 0
 --- !u!1 &514707253
 GameObject:
   m_ObjectHideFlags: 0
@@ -5950,6 +5996,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeea1aaa253c60f4f9d0d71801c4f687, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnSwitchSkillGuide:
+    _value: 0
   _cooltimeText: {fileID: 815273122}
   _skilltype: 1
 --- !u!1 &571466118
@@ -8917,6 +8965,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeea1aaa253c60f4f9d0d71801c4f687, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnSwitchSkillGuide:
+    _value: 0
   _cooltimeText: {fileID: 702356858}
   _skilltype: 0
 --- !u!1 &891387482
@@ -11639,6 +11689,7 @@ GameObject:
   - component: {fileID: 1124518461}
   - component: {fileID: 1124518460}
   - component: {fileID: 1124518459}
+  - component: {fileID: 1124518463}
   m_Layer: 7
   m_Name: HitFeedback
   m_TagString: Untagged
@@ -11753,6 +11804,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 337f8a1a2ae3d4c40b0e364e57d9cfe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1124518463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1124518457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0df0e95d43b4b194ab462877b1418515, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sound:
+    clip: {fileID: 8300000, guid: ede4945326a8fdf46a4fbdb54cd0105a, type: 3}
+    volumeMultiplier: 0.05
+    type: 0
+    pitch: 1
+    loop: 0
+  _startDelay: 0
 --- !u!1 &1144670905
 GameObject:
   m_ObjectHideFlags: 0
@@ -12503,6 +12573,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeea1aaa253c60f4f9d0d71801c4f687, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnSwitchSkillGuide:
+    _value: 0
   _cooltimeText: {fileID: 1944595934}
   _skilltype: 2
 --- !u!1001 &1278484532
@@ -16542,6 +16614,67 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &1641091610
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1209778019771897980, guid: 040881c8a51930141b26b248f9d8d166, type: 3}
+      propertyPath: m_Name
+      value: SoundManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 1209778019771897980, guid: 040881c8a51930141b26b248f9d8d166, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4881416887121993662, guid: 040881c8a51930141b26b248f9d8d166, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 16.878471
+      objectReference: {fileID: 0}
+    - target: {fileID: 4881416887121993662, guid: 040881c8a51930141b26b248f9d8d166, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.8050992
+      objectReference: {fileID: 0}
+    - target: {fileID: 4881416887121993662, guid: 040881c8a51930141b26b248f9d8d166, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.013432607
+      objectReference: {fileID: 0}
+    - target: {fileID: 4881416887121993662, guid: 040881c8a51930141b26b248f9d8d166, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4881416887121993662, guid: 040881c8a51930141b26b248f9d8d166, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4881416887121993662, guid: 040881c8a51930141b26b248f9d8d166, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4881416887121993662, guid: 040881c8a51930141b26b248f9d8d166, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4881416887121993662, guid: 040881c8a51930141b26b248f9d8d166, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4881416887121993662, guid: 040881c8a51930141b26b248f9d8d166, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4881416887121993662, guid: 040881c8a51930141b26b248f9d8d166, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 040881c8a51930141b26b248f9d8d166, type: 3}
 --- !u!1 &1652123204
 GameObject:
   m_ObjectHideFlags: 0
@@ -17342,6 +17475,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeea1aaa253c60f4f9d0d71801c4f687, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnSwitchSkillGuide:
+    _value: 0
   _cooltimeText: {fileID: 1235585519}
   _skilltype: 3
 --- !u!1 &1696681782
@@ -18018,6 +18153,12 @@ MonoBehaviour:
   _crystalSpawnY: 0
   dontCheckDetect: 0
   _dontCastDamage: 0
+  attackSound:
+    clip: {fileID: 8300000, guid: 77f5c674952359e4a9d5beb3b03bdf87, type: 3}
+    volumeMultiplier: 0.8
+    type: 0
+    pitch: 1
+    loop: 0
   detectRadius: 0
   attackRadius: 2
   attackCooldown: 0
@@ -18053,6 +18194,7 @@ MonoBehaviour:
       m_Calls: []
   <PatternCooltime>k__BackingField:
   - 4.5
+  <PatternSound>k__BackingField: []
   spawnEnemyList: []
   isAppear: 0
 --- !u!70 &1757345494
@@ -20188,18 +20330,30 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2383177085233324152, guid: 1e6a897dcafd40343bdbeade23f08402, type: 3}
       propertyPath: OnCrystalTpEvent.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2383177085233324152, guid: 1e6a897dcafd40343bdbeade23f08402, type: 3}
       propertyPath: OnCrystalTpEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2383177085233324152, guid: 1e6a897dcafd40343bdbeade23f08402, type: 3}
+      propertyPath: OnCrystalTpEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2383177085233324152, guid: 1e6a897dcafd40343bdbeade23f08402, type: 3}
       propertyPath: OnCrystalTpEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1939542117}
     - target: {fileID: 2383177085233324152, guid: 1e6a897dcafd40343bdbeade23f08402, type: 3}
+      propertyPath: OnCrystalTpEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1944425711}
+    - target: {fileID: 2383177085233324152, guid: 1e6a897dcafd40343bdbeade23f08402, type: 3}
       propertyPath: OnCrystalTpEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2383177085233324152, guid: 1e6a897dcafd40343bdbeade23f08402, type: 3}
+      propertyPath: OnCrystalTpEvent.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2383177085233324152, guid: 1e6a897dcafd40343bdbeade23f08402, type: 3}
@@ -20207,11 +20361,23 @@ PrefabInstance:
       value: SetActive
       objectReference: {fileID: 0}
     - target: {fileID: 2383177085233324152, guid: 1e6a897dcafd40343bdbeade23f08402, type: 3}
+      propertyPath: OnCrystalTpEvent.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: PlayFeedBack
+      objectReference: {fileID: 0}
+    - target: {fileID: 2383177085233324152, guid: 1e6a897dcafd40343bdbeade23f08402, type: 3}
       propertyPath: OnCrystalTpEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: UnityEngine.GameObject, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2383177085233324152, guid: 1e6a897dcafd40343bdbeade23f08402, type: 3}
+      propertyPath: OnCrystalTpEvent.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: FeedbackPlayer, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2383177085233324152, guid: 1e6a897dcafd40343bdbeade23f08402, type: 3}
       propertyPath: OnCrystalTpEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2383177085233324152, guid: 1e6a897dcafd40343bdbeade23f08402, type: 3}
+      propertyPath: OnCrystalTpEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 5280849900913081852, guid: 1e6a897dcafd40343bdbeade23f08402, type: 3}
@@ -20272,6 +20438,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5280849900913081852, guid: 1e6a897dcafd40343bdbeade23f08402, type: 3}
   m_PrefabInstance: {fileID: 1944425709}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1944425711 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1482763577233392997, guid: 1e6a897dcafd40343bdbeade23f08402, type: 3}
+  m_PrefabInstance: {fileID: 1944425709}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 337f8a1a2ae3d4c40b0e364e57d9cfe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1944595932
 GameObject:
   m_ObjectHideFlags: 0
@@ -29285,9 +29462,10 @@ SceneRoots:
   - {fileID: 6506185004152942919}
   - {fileID: 1968089664}
   - {fileID: 571253029640602579}
+  - {fileID: 1198944732150650673}
+  - {fileID: 1641091610}
   - {fileID: 1351466816}
   - {fileID: 1484561400}
-  - {fileID: 1198944732150650673}
   - {fileID: 959687853}
   - {fileID: 1449171876}
   - {fileID: 1389104454}

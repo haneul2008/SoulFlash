@@ -10,6 +10,7 @@ public class LandGuardianLaser : MonoBehaviour
     [SerializeField] private float _rotateTime;
     [SerializeField] private Transform _bossTrm;
     [SerializeField] private float _angleLimit;
+    [SerializeField] private Sound _sound;
 
     private Transform _targetTrm;
     private DamageCaster _damageCaster;
@@ -59,6 +60,7 @@ public class LandGuardianLaser : MonoBehaviour
     public void CastTrigger()
     {
         _canCastDamage = true;
+        SoundManager.instance.AddAudioAndPlay(_sound);
     }
 
     public void EndAttack()

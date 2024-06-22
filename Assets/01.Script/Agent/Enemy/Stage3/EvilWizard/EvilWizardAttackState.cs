@@ -17,6 +17,8 @@ public class EvilWizardAttackState : EnemyState
         _enemy.MovementCompo.canKnockback = false;
 
         _enemy.dontFlip = true;
+
+        SoundManager.instance.AddAudioAndPlay(_enemy.attackSound);
     }
     public override void Exit()
     {

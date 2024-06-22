@@ -25,6 +25,7 @@ public abstract class Boss : Enemy
     public UnityEvent OnPattern2Event;
     public UnityEvent OnPattern3Event;
     [field: SerializeField] public List<float> PatternCooltime { get; private set; }
+    [field: SerializeField] public List<Sound> PatternSound { get; private set; }
     public int NowPattern { get; private set; }
     public List<Enemy> spawnEnemyList = new List<Enemy>();
 

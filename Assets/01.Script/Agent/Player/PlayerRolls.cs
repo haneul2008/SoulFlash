@@ -11,6 +11,7 @@ public class PlayerRolls : AnimationPlayer
     [SerializeField] private float _rollSpeed;
     [SerializeField] private float _rollTime;
     [SerializeField] private float _coolTime;
+    [SerializeField] private Sound _rollSound;
 
     private Player _player;
     private bool _roll;
@@ -18,6 +19,7 @@ public class PlayerRolls : AnimationPlayer
     private float _currentTime = 999f;
     private CapsuleCollider2D _collider;
     private SizeChanger _sizeChanger;
+
     public override void Initialize(Agent agent)
     {
         base.Initialize(agent);
@@ -57,6 +59,7 @@ public class PlayerRolls : AnimationPlayer
         _roll = true;
 
         PlayAnimation();
+        SoundManager.instance.AddAudioAndPlay(_rollSound);
         Invoke("RollEnd", _rollTime);
     }
     private void Update()

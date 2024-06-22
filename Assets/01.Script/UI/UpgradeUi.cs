@@ -31,6 +31,7 @@ public class UpgradeUi : MonoBehaviour
     [SerializeField] private float _tweenDelay;
     [SerializeField] private SetScene _setScene;
     [SerializeField] private Image _fade;
+    [SerializeField] private Sound _sound;
 
     public int SelectCount { get; private set; }
     public bool IsSetted { get; private set; }
@@ -100,6 +101,8 @@ public class UpgradeUi : MonoBehaviour
 
         yield return new WaitForSeconds(_delay);
 
+        SoundManager.instance.AddAudioAndPlay(_sound);
+
         _tween = _rectTrm.DOAnchorPosY(0, _tweenDelay)
             .OnComplete(() =>
             {
@@ -110,6 +113,8 @@ public class UpgradeUi : MonoBehaviour
     public void Finish()
     {
         IsSetted = false;
+
+        SoundManager.instance.AddAudioAndPlay(_sound);
 
         _tween = _rectTrm.DOAnchorPosY(_finishY, _tweenDelay);
 

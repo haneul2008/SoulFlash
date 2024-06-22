@@ -17,6 +17,8 @@ public class HellKeeperAppearState : BossState
 
         _boss.isAppear = true;
         _boss.dontFlip = true;
+
+        _boss.OnAppearToIdleEvent?.Invoke();
     }
 
     public override void Exit()
@@ -36,8 +38,6 @@ public class HellKeeperAppearState : BossState
         if (_endTriggerCalled)
         {
             _endTriggerCalled = false;
-
-            _boss.OnAppearToIdleEvent?.Invoke();
 
             _boss.targetTrm = GameManager.instance.Player.transform;
             _stateMachine.ChangeState(BossEnum.Chase);

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4822837436498858894}
   - component: {fileID: 7602338281909901210}
   - component: {fileID: 4612414002788030900}
+  - component: {fileID: 4516489063907910821}
   m_Layer: 7
   m_Name: HitFeedback
   m_TagString: Untagged
@@ -127,6 +128,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _impulsePower: 0.1
+--- !u!114 &4516489063907910821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2873862596265548496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0df0e95d43b4b194ab462877b1418515, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sound:
+    clip: {fileID: 8300000, guid: ede4945326a8fdf46a4fbdb54cd0105a, type: 3}
+    volumeMultiplier: 0.05
+    type: 0
+    pitch: 1
+    loop: 0
+  _startDelay: 0
 --- !u!1 &4842520602141754946
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,6 +301,12 @@ MonoBehaviour:
   _crystalSpawnY: 0
   dontCheckDetect: 0
   _dontCastDamage: 1
+  attackSound:
+    clip: {fileID: 8300000, guid: 2e83a31049d2d144b9303b52a0c38d72, type: 3}
+    volumeMultiplier: 0.6
+    type: 0
+    pitch: 1.4
+    loop: 0
   detectRadius: 10
   attackRadius: 6
   attackCooldown: 4

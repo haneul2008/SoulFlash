@@ -11,7 +11,6 @@ public class GameManager : MonoSingleton<GameManager>
 
     public Action OnEnemyFinalDeadAction;
     public Action OnEnemyDeadAction;
-    public Action OnSkillGuideSwitchAction;
 
     public MouseDetecter mouseDetecter;
     public CinemachineVirtualCamera virtualCam;
@@ -19,6 +18,8 @@ public class GameManager : MonoSingleton<GameManager>
     public Queue<Record> Records { get; private set; } = new Queue<Record>();
     public AttackMode AttackMode { get; set; } = AttackMode.Mix;
     public bool SkillGuideText { get; set; } = true;
+    public float SoundVolume { get; set; } = 1;
+
     public bool isTutorialClear;
     public float GameStartTime { get; set; }
 

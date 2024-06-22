@@ -1,8 +1,12 @@
+using System.Collections;
 using UnityEngine;
 
 public class LandGuardian : Boss
 {
     public BossStateMachine stateMachine;
+
+    [SerializeField] private Sound _deadSound;
+
     protected override void Awake()
     {
         base.Awake();
@@ -58,5 +62,7 @@ public class LandGuardian : Boss
         gameObject.layer = _deadLayer;
         CanStateChageable = true;
         stateMachine.ChangeState(BossEnum.Dead);
+
+        SoundManager.instance.AddAudioAndPlay(_deadSound);
     }
 }

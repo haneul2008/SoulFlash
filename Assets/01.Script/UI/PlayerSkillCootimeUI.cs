@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public enum SkillType
@@ -14,6 +15,8 @@ public enum SkillType
 }
 public class PlayerSkillCootimeUI : MonoBehaviour
 {
+    public NotifyValue<bool> OnSwitchSkillGuide = new NotifyValue<bool>();
+
     [SerializeField] private TMP_Text _cooltimeText;
     [SerializeField] private SkillType _skilltype;
     private Image _image;
@@ -26,11 +29,11 @@ public class PlayerSkillCootimeUI : MonoBehaviour
         _image.color = Color.white;
         _guideText = transform.Find("KeyBinding").gameObject;
 
-        GameManager.instance.OnSkillGuideSwitchAction += SwitchSkillGuideText;
+        OnSwitchSkillGuide.OnValueChanged += SwitchSkillGuideText;
     }
     private void Start()
     {
-        SwitchSkillGuideText();
+        SwitchSkillGuideText(true, true);
 
         switch (_skilltype)
         {
@@ -72,7 +75,7 @@ public class PlayerSkillCootimeUI : MonoBehaviour
     }
     private void OnDisable()
     {
-        GameManager.instance.OnSkillGuideSwitchAction -= SwitchSkillGuideText;
+        OnSwitchSkillGuide.OnValueChanged -= SwitchSkillGuideText;
 
         switch (_skilltype)
         {
@@ -102,6 +105,12 @@ public class PlayerSkillCootimeUI : MonoBehaviour
                 break;
         }
     }
+    private void Update()
+    {
+        if (SceneManager.GetActiveScene().name != "Lobby") return;
+
+        OnSwitchSkillGuide.Value = GameManager.instance.SkillGuideText;
+    }
     public void StartText(int cooltime)
     {
         _image.color = new Color(165, 0, 0);
@@ -121,7 +130,7 @@ public class PlayerSkillCootimeUI : MonoBehaviour
         _cooltimeText.text = "";
         _image.color = Color.white;
     }
-    private void SwitchSkillGuideText()
+    private void SwitchSkillGuideText(bool prev, bool next)
     {
         _guideText.SetActive(GameManager.instance.SkillGuideText);
     }

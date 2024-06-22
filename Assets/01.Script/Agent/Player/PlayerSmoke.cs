@@ -2,9 +2,12 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerSmoke : MonoBehaviour
 {
+    public UnityEvent OnSmokeEvent;
+
     [SerializeField] private Player _player;
     [SerializeField] private SpriteRenderer _playerRenderer;
     [SerializeField] private float _delay;
@@ -39,6 +42,8 @@ public class PlayerSmoke : MonoBehaviour
         Tween = _renderer.DOFade(1, 0.2f);
 
         _anim.SetBool(_smokeHash, true);
+
+        OnSmokeEvent?.Invoke();
     }
     public void AnimationEnd()
     {

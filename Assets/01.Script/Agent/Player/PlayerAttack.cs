@@ -11,10 +11,12 @@ public class PlayerAttack : AnimationPlayer
     [Header("Setting")]
     [SerializeField] private float _attackTime;
     [SerializeField] private float _cooltime;
+    [SerializeField] private Sound _sound;
 
     private Player _player;
     private Collider2D[] _colliders;
     private float _currentTime;
+    private bool _isAttack;
     public override void Initialize(Agent agent)
     {
         base.Initialize(agent);
@@ -23,10 +25,10 @@ public class PlayerAttack : AnimationPlayer
 
         _player.PlayerInput.OnLeftMousePressed += HandleAttack;
         _player.MovementCompo.OnKnockbackAction += EndAttack;
-
         _colliders = new Collider2D[1];
         _currentTime = 9999;
     }
+
     private void OnDisable()
     {
         _player.PlayerInput.OnLeftMousePressed -= HandleAttack;
@@ -55,6 +57,8 @@ public class PlayerAttack : AnimationPlayer
         _player.MovementCompo.canMove = false;
         _player.MovementCompo.rbCompo.velocity = Vector2.zero;
 
+        _isAttack = true;
+
         _anim.speed = 1 * GameManager.instance.normalAckSpeedMultiplier;
 
         if (GameManager.instance.AttackMode == AttackMode.Mouse)
@@ -63,10 +67,23 @@ public class PlayerAttack : AnimationPlayer
         PlayAnimation();
 
         OnAttackAction?.Invoke();
+
+        StartCoroutine("SoundPlay");
     }
+
+    private IEnumerator SoundPlay()
+    {
+        yield return new WaitForSeconds(0.09f);
+
+        if (!_isAttack) yield break;
+        SoundManager.instance.AddAudioAndPlay(_sound);
+    }
+
     private void EndAttack()
     {
         EndAnimation();
+
+        _isAttack = false;
 
         _anim.speed = 1;
         _player.CanStateChageable = true;

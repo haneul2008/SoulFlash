@@ -15,6 +15,8 @@ public class SproutAttackState : EnemyState
 
         _enemy.MovementCompo.canMove = false;
         _enemy.MovementCompo.canKnockback = false;
+
+        SoundManager.instance.AddAudioAndPlay(_enemy.attackSound);
     }
     public override void Exit()
     {

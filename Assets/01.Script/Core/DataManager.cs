@@ -41,6 +41,7 @@ public class SaveData
     public float passiveIncValue;
     public AttackMode attackMode;
     public bool skillGuideText;
+    public float soundVolume;
 }
 public class DataManager : MonoSingleton<DataManager>
 {
@@ -77,6 +78,7 @@ public class DataManager : MonoSingleton<DataManager>
 
                 GameManager.instance.AttackMode = saveData.attackMode;
                 GameManager.instance.SkillGuideText = saveData.skillGuideText;
+                GameManager.instance.SoundVolume = saveData.soundVolume;
 
                 GameManager.instance.isTutorialClear = saveData.isTutorialClear;
 
@@ -109,6 +111,7 @@ public class DataManager : MonoSingleton<DataManager>
 
         saveData.attackMode = GameManager.instance.AttackMode;
         saveData.skillGuideText = GameManager.instance.SkillGuideText;
+        saveData.soundVolume = GameManager.instance.SoundVolume;
 
         saveData.isTutorialClear = GameManager.instance.isTutorialClear;
 

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1093359433428804719}
   - component: {fileID: 6545106924005179352}
   - component: {fileID: 730620017455667711}
+  - component: {fileID: 2817002078831828208}
   m_Layer: 7
   m_Name: HitFeedback
   m_TagString: Untagged
@@ -127,6 +128,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _impulsePower: 0.2
+--- !u!114 &2817002078831828208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 175811395764197575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0df0e95d43b4b194ab462877b1418515, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sound:
+    clip: {fileID: 8300000, guid: ede4945326a8fdf46a4fbdb54cd0105a, type: 3}
+    volumeMultiplier: 0.05
+    type: 0
+    pitch: 1
+    loop: 0
+  _startDelay: 0
 --- !u!1 &1420213078960883732
 GameObject:
   m_ObjectHideFlags: 0
@@ -459,6 +479,7 @@ GameObject:
   - component: {fileID: 4189677369815912769}
   - component: {fileID: 9212384356882355653}
   - component: {fileID: 8730014678579817636}
+  - component: {fileID: 4497453915751217097}
   m_Layer: 7
   m_Name: AppearFeedback
   m_TagString: Untagged
@@ -559,6 +580,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _impulsePower: 1
+--- !u!114 &4497453915751217097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6670993067139764307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0df0e95d43b4b194ab462877b1418515, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sound:
+    clip: {fileID: 8300000, guid: 70907e24704b66743ba5c361b11f4079, type: 3}
+    volumeMultiplier: 0.6
+    type: 0
+    pitch: 1
+    loop: 0
+  _startDelay: 0
 --- !u!1 &7254048633919413863
 GameObject:
   m_ObjectHideFlags: 0
@@ -5402,6 +5442,7 @@ GameObject:
   - component: {fileID: 6372625105334996336}
   - component: {fileID: 5862231847908491081}
   - component: {fileID: 4458441629922024140}
+  - component: {fileID: 5877996381077466447}
   m_Layer: 7
   m_Name: DeadFeedback
   m_TagString: Untagged
@@ -5523,6 +5564,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _impulsePower: 0.5
+--- !u!114 &5877996381077466447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7271003190659394150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0df0e95d43b4b194ab462877b1418515, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sound:
+    clip: {fileID: 8300000, guid: 6037a2c163703314c952718344595e12, type: 3}
+    volumeMultiplier: 0.6
+    type: 0
+    pitch: 2
+    loop: 0
+  _startDelay: 0
 --- !u!1 &7637268388258766997
 GameObject:
   m_ObjectHideFlags: 0
@@ -5729,6 +5789,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isSpawnAgent: 0
+  _dontSetVisual: 0
+  dontFlip: 0
   OnAppearToIdleEvent:
     m_PersistentCalls:
       m_Calls:
@@ -5752,6 +5814,12 @@ MonoBehaviour:
   _crystalSpawnY: 0
   dontCheckDetect: 0
   _dontCastDamage: 0
+  attackSound:
+    clip: {fileID: 0}
+    volumeMultiplier: 0
+    type: 0
+    pitch: 0
+    loop: 0
   detectRadius: 10
   attackRadius: 4.5
   attackCooldown: 0
@@ -5800,9 +5868,19 @@ MonoBehaviour:
   <PatternCooltime>k__BackingField:
   - 5
   - 10
+  <PatternSound>k__BackingField:
+  - clip: {fileID: 8300000, guid: 9ba3ce487c2d4564b873b5470d39d1d8, type: 3}
+    volumeMultiplier: 1
+    type: 0
+    pitch: 0.8
+    loop: 0
+  - clip: {fileID: 8300000, guid: af85f103d87cac1479d625cda0df2e3e, type: 3}
+    volumeMultiplier: 1
+    type: 0
+    pitch: 0.8
+    loop: 0
   spawnEnemyList: []
   isAppear: 0
-  dontFlip: 0
   OnAttackEvent:
     m_PersistentCalls:
       m_Calls: []

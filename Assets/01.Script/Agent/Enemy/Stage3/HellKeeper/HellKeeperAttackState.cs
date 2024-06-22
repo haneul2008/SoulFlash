@@ -15,12 +15,8 @@ public class HellKeeperAttackState : BossState
 
         _boss.MovementCompo.StopImmediately(false);
 
-        _boss.CanStateChageable = false;
-
         _boss.MovementCompo.canMove = false;
         _boss.MovementCompo.canKnockback = false;
-
-        _boss.HealthCompo.CanTakeHp(false);
 
         _boss.dontFlip = true;
 
@@ -31,6 +27,8 @@ public class HellKeeperAttackState : BossState
         }
 
         _anim.speed = _hellKeeper.AttackSpeed;
+
+        SoundManager.instance.AddAudioAndPlay(_boss.PatternSound[0]);
     }
     public override void Exit()
     {
@@ -54,7 +52,6 @@ public class HellKeeperAttackState : BossState
         if (_endTriggerCalled)
         {
             _endTriggerCalled = false;
-            _boss.CanStateChageable = true;
 
             _anim.speed = 1;
 

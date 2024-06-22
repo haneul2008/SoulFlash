@@ -18,14 +18,14 @@ public class LandGuardianLaserCastState : BossState
 
         _boss.MovementCompo.StopImmediately();
 
-        _boss.CanStateChageable = false;
-
         _boss.HealthCompo.CanTakeHp(false);
 
         _boss.MovementCompo.canMove = false;
         _boss.MovementCompo.canKnockback = false;
 
         _recoveryCount++;
+
+        SoundManager.instance.AddAudioAndPlay(_boss.PatternSound[1]);
     }
 
     public override void Exit()
@@ -40,8 +40,6 @@ public class LandGuardianLaserCastState : BossState
         _boss.MovementCompo.canMove = true;
 
         _boss.HealthCompo.CanTakeHp(true);
-
-        _boss.dontFlip = false;
 
         if (_recoveryCount >= 2)
         {
@@ -65,7 +63,6 @@ public class LandGuardianLaserCastState : BossState
         {
             _endTriggerCalled = false;
 
-            _boss.CanStateChageable = true;
             _stateMachine.ChangeState(BossEnum.Chase);
         }
     }
@@ -73,6 +70,5 @@ public class LandGuardianLaserCastState : BossState
     private void Attack()
     {
         _boss.OnPattern1Event?.Invoke();
-        _boss.dontFlip = true;
     }
 }

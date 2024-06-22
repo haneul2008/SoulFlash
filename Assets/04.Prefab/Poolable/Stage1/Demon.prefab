@@ -238,6 +238,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isSpawnAgent: 0
+  _dontSetVisual: 0
+  dontFlip: 0
   OnAppearToIdleEvent:
     m_PersistentCalls:
       m_Calls:
@@ -285,6 +287,12 @@ MonoBehaviour:
   _crystalSpawnY: 0
   dontCheckDetect: 1
   _dontCastDamage: 0
+  attackSound:
+    clip: {fileID: 8300000, guid: 18fc28975bed5404ca60c52313376e90, type: 3}
+    volumeMultiplier: 0.5
+    type: 0
+    pitch: 1
+    loop: 0
   detectRadius: 8
   attackRadius: 2
   attackCooldown: 5
@@ -306,7 +314,6 @@ MonoBehaviour:
     maxNormalAngle: 0
   lastAttackTime: 0
   targetTrm: {fileID: 0}
-  dontFlip: 0
   _poolName: Demon
 --- !u!114 &7658674498140945048
 MonoBehaviour:
@@ -581,6 +588,7 @@ GameObject:
   - component: {fileID: 1209505124235287233}
   - component: {fileID: 5761094532447475025}
   - component: {fileID: 8926110994148244992}
+  - component: {fileID: 541678618680779090}
   m_Layer: 0
   m_Name: HitFeedback
   m_TagString: Untagged
@@ -695,6 +703,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _impulsePower: 0.05
+--- !u!114 &541678618680779090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6115006937756689960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0df0e95d43b4b194ab462877b1418515, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sound:
+    clip: {fileID: 8300000, guid: ede4945326a8fdf46a4fbdb54cd0105a, type: 3}
+    volumeMultiplier: 0.05
+    type: 0
+    pitch: 1
+    loop: 0
+  _startDelay: 0
 --- !u!1 &6135723672426058742
 GameObject:
   m_ObjectHideFlags: 0

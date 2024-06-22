@@ -12,6 +12,7 @@ public class PlayerAirDash : AnimationPlayer
     [SerializeField] private float _dashSpeed;
     [SerializeField] private float _dashTime;
     [SerializeField] private float _coolTime;
+    [SerializeField] private Sound _dashSound;
 
     private Player _player;
     private float _currentTime;
@@ -19,6 +20,7 @@ public class PlayerAirDash : AnimationPlayer
     private SizeChanger _sizeChanger;
     private float _dir;
     private bool _dash;
+
     private void Awake()
     {
         _player = GetComponent<Player>();
@@ -67,8 +69,10 @@ public class PlayerAirDash : AnimationPlayer
         _dir = _player.PlayerDir;
 
         PlayAnimation();
+        SoundManager.instance.AddAudioAndPlay(_dashSound);
         Invoke("DashEnd", _dashTime);
     }
+
     private void DashEnd()
     {
         if (_dash)

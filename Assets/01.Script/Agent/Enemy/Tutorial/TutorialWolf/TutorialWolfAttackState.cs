@@ -28,6 +28,7 @@ public class TutorialWolfAttackState : EnemyState
 
         _enemy.MovementCompo.JumpTo(dir);
 
+        SoundManager.instance.AddAudioAndPlay(_enemy.attackSound);
     }
 
     public override void Exit()

@@ -15,11 +15,12 @@ public class DeathBringerSpellCastState : BossState
 
         _boss.MovementCompo.StopImmediately(false);
 
-        _boss.CanStateChageable = false;
         _boss.HealthCompo.CanTakeHp(false);
 
         _boss.MovementCompo.canMove = false;
         _boss.MovementCompo.canKnockback = false;
+
+        SoundManager.instance.AddAudioAndPlay(_boss.PatternSound[1]);
     }
     public override void Exit()
     {
@@ -41,7 +42,6 @@ public class DeathBringerSpellCastState : BossState
         if (_endTriggerCalled)
         {
             _endTriggerCalled = false;
-            _boss.CanStateChageable = true;
             _stateMachine.ChangeState(BossEnum.Chase);
         }
     }

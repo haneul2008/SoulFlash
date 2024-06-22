@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class LobbyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class LobbyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     [SerializeField] private Vector2 _startScale;
     [SerializeField] private Vector2 _finishScale;
@@ -30,5 +30,10 @@ public class LobbyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public void OnPointerExit(PointerEventData eventData)
     {
         _tween = _rectTrm.DOScale(_startScale, _delay);
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        SoundManager.instance.UiClickSound();
     }
 }

@@ -59,6 +59,13 @@ public class TutorialFrog : Boss
         stateMachine.CurrentState.AnimationEndTrigger();
     }
 
+    public override void Attack(bool castDamage = true)
+    {
+        base.Attack(castDamage);
+
+        SoundManager.instance.AddAudioAndPlay(attackSound);
+    }
+
     public override void SetDeadState()
     {
         CanStateChageable = true;

@@ -18,10 +18,10 @@ public class LandGuadianRecoveryState : BossState
 
         _boss.MovementCompo.StopImmediately();
 
-        _boss.CanStateChageable = false;
-
         _boss.MovementCompo.canMove = false;
         _boss.MovementCompo.canKnockback = false;
+
+        _boss.OnPattern3Event?.Invoke();
 
         _boss.dontFlip = true;
     }
@@ -64,8 +64,6 @@ public class LandGuadianRecoveryState : BossState
         {
             _endTriggerCalled = false;
             _canRecovery = false;
-
-            _boss.CanStateChageable = true;
 
             _stateMachine.ChangeState(BossEnum.Chase);
         }

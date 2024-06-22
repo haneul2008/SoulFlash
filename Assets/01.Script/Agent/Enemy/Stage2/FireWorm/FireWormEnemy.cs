@@ -49,6 +49,8 @@ public class FireWormEnemy : Enemy
     {
         base.Attack(castDamage);
 
+        SoundManager.instance.AddAudioAndPlay(attackSound);
+
         FireWormFireball fireball = PoolManager.instance.Pop("Fireball") as FireWormFireball;
 
         float dir = transform.rotation.eulerAngles.y == 0 ? -1 : 1;
