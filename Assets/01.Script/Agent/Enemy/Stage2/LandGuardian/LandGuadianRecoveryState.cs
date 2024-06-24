@@ -6,6 +6,8 @@ public class LandGuadianRecoveryState : BossState
 {
     private bool _canRecovery;
     private float _recoveryAmount;
+
+    int _saveHp;
     public LandGuadianRecoveryState(Boss boss, BossStateMachine stateMachine, string animBoolName) : base(boss, stateMachine, animBoolName)
     {
     }
@@ -24,6 +26,8 @@ public class LandGuadianRecoveryState : BossState
         _boss.OnPattern3Event?.Invoke();
 
         _boss.dontFlip = true;
+
+        _saveHp = _boss.HealthCompo.CurrentHealth;
     }
 
     public override void Exit()
@@ -51,9 +55,9 @@ public class LandGuadianRecoveryState : BossState
 
         if (!_canRecovery) return;
 
-        _recoveryAmount += 0.1f;
+        _recoveryAmount += Time.deltaTime * 100f;
 
-        if(_recoveryAmount >= 0.4f)
+        if(_recoveryAmount >= 0.1f && _boss.HealthCompo.CurrentHealth < _saveHp + 100)
         {
             _recoveryAmount = 0;
             _boss.HealthCompo.ResetHealth(_boss.HealthCompo.CurrentHealth + 1, false);

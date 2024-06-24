@@ -33,7 +33,7 @@ public class BossSpawnTrigger : MonoBehaviour
             _bossHpUi.Init(bossHp);
             
             CameraConfiner cameraConfiner = GameManager.instance.virtualCam.GetComponent<CameraConfiner>();
-            cameraConfiner.SetConfiner(true);
+            cameraConfiner.SetConfiner(true, true);
         }
     }
 }

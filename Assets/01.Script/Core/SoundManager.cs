@@ -23,6 +23,7 @@ public class SoundManager : MonoSingleton<SoundManager>
     [SerializeField] private Sound _uiClockSound;
 
     private List<AudioType> _audioTypes = new List<AudioType>();
+    private Sound _nowBgm;
 
     private void Awake()
     {
@@ -35,19 +36,14 @@ public class SoundManager : MonoSingleton<SoundManager>
     {
         if(sound.type == AudioType.BGM)
         {
-            for (int i = 0; i < _audioSource.Count; i++)
-            {
-                if (_audioTypes[i] != AudioType.BGM) continue;
+            PlayClip(sound, _audioSource[0]);
+            _audioTypes[0] = sound.type;
 
-                PlayClip(sound, _audioSource[i]);
-                _audioTypes[i] = sound.type;
-
-                return;
-            }
+            return;
         }
         else
         {
-            for (int i = 0; i < _audioSource.Count; i++)
+            for (int i = 1; i < _audioSource.Count; i++)
             {
                 if (_audioSource[i].isPlaying) continue;
 
@@ -59,6 +55,8 @@ public class SoundManager : MonoSingleton<SoundManager>
         }
        
         AudioSource addAudioSource = gameObject.AddComponent<AudioSource>();
+        addAudioSource.dopplerLevel = 0;
+        addAudioSource.playOnAwake = false;
 
         _audioSource.Add(addAudioSource);
         _audioTypes.Add(sound.type);
@@ -75,6 +73,7 @@ public class SoundManager : MonoSingleton<SoundManager>
         if (sound.type == AudioType.BGM)
         {
             CheckTypeAndPlay(sound, audioSource, true);
+            _nowBgm = sound;
         }
         else
         {
@@ -97,6 +96,11 @@ public class SoundManager : MonoSingleton<SoundManager>
             audioSource.Stop();
             audioSource.clip = null;
         }
+    }
+
+    public void SetBgmVoulme()
+    {
+        _audioSource[0].volume = GameManager.instance.SoundVolume * _nowBgm.volumeMultiplier;
     }
 
     public void UiClickSound()

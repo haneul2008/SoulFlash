@@ -480,6 +480,7 @@ GameObject:
   - component: {fileID: 9212384356882355653}
   - component: {fileID: 8730014678579817636}
   - component: {fileID: 4497453915751217097}
+  - component: {fileID: 6949542590639285432}
   m_Layer: 7
   m_Name: AppearFeedback
   m_TagString: Untagged
@@ -599,6 +600,25 @@ MonoBehaviour:
     pitch: 1
     loop: 0
   _startDelay: 0
+--- !u!114 &6949542590639285432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6670993067139764307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0df0e95d43b4b194ab462877b1418515, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sound:
+    clip: {fileID: 8300000, guid: f94865af1188ba646b9e72597a2d7258, type: 3}
+    volumeMultiplier: 0.25
+    type: 1
+    pitch: 1
+    loop: 0
+  _startDelay: 0.3
 --- !u!1 &7254048633919413863
 GameObject:
   m_ObjectHideFlags: 0
@@ -5443,6 +5463,7 @@ GameObject:
   - component: {fileID: 5862231847908491081}
   - component: {fileID: 4458441629922024140}
   - component: {fileID: 5877996381077466447}
+  - component: {fileID: 4769354074995303262}
   m_Layer: 7
   m_Name: DeadFeedback
   m_TagString: Untagged
@@ -5581,6 +5602,25 @@ MonoBehaviour:
     volumeMultiplier: 0.6
     type: 0
     pitch: 2
+    loop: 0
+  _startDelay: 0
+--- !u!114 &4769354074995303262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7271003190659394150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0df0e95d43b4b194ab462877b1418515, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sound:
+    clip: {fileID: 8300000, guid: 92b56180b3d923e429215163e5bbc376, type: 3}
+    volumeMultiplier: 0.2
+    type: 1
+    pitch: 1
     loop: 0
   _startDelay: 0
 --- !u!1 &7637268388258766997

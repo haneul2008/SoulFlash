@@ -64,6 +64,7 @@ public class DataManager : MonoSingleton<DataManager>
         else
         {
             string loadJson = File.ReadAllText(path);
+            print(loadJson);
 
             saveData = JsonUtility.FromJson<SaveData>(loadJson);
 
@@ -167,11 +168,10 @@ public class DataManager : MonoSingleton<DataManager>
     public Sprite LoadSprites(UpgradeRecord upgradeRecord)
     {
         byte[] spriteBytes = Convert.FromBase64String(upgradeRecord.spriteData);
-        Texture2D texture = new Texture2D(2, 2);
+        Texture2D texture = new Texture2D(100, 400);
         texture.LoadImage(spriteBytes);
 
         Sprite sprite = Sprite.Create(texture, upgradeRecord.spriteRect, upgradeRecord.pivot);
-
         return sprite;
     }
 }

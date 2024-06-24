@@ -11,10 +11,12 @@ public class SetScene : MonoBehaviour
     [SerializeField] private string _nextSceneName;
     [SerializeField] private float _delay;
     [SerializeField] private bool _isTutorial;
+    [SerializeField] private Sound _bgm;
 
     private void Awake()
     {
         OnSceneLoadEvent?.Invoke();
+        SoundManager.instance.AddAudioAndPlay(_bgm);
     }
 
     public void SetNextScene()

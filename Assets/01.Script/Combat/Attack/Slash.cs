@@ -46,6 +46,8 @@ public class Slash : MonoBehaviour, IPoolable
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.CompareTag("Crystal")) return;
+
         float multiplier = GameManager.instance.airDamageMultiplier + GameManager.instance.passiveAirDamage;
 
         _damageCaster.CastDamage(Mathf.RoundToInt(_damage * multiplier)

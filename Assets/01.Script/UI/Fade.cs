@@ -44,6 +44,7 @@ public class Fade : MonoBehaviour
         .OnComplete(() =>
         {
             OnFadeEvent?.Invoke(true);
+
             gameObject.SetActive(false);
         });
     }

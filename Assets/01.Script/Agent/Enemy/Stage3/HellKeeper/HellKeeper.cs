@@ -18,6 +18,7 @@ public class HellKeeper : Boss
     [SerializeField] private List<int> _appearDamages;
     [SerializeField] private List<float> _appearAttackSpeeds;
     [SerializeField] private Sound _deadSound;
+    [SerializeField] private Sound _bossBgm;
 
     public float AttackSpeed { get; private set; } = 1;
     public Animator AnimationCompo { get; private set; }
@@ -58,6 +59,8 @@ public class HellKeeper : Boss
 
         _skillLockUi.SetUnlockUi(1, 4, false);
         _player.canBlock = false;
+
+        SoundManager.instance.AddAudioAndPlay(_bossBgm);
     }
 
     private void Update()

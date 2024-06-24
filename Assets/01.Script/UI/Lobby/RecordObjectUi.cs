@@ -30,7 +30,6 @@ public class RecordObjectUi : MonoBehaviour
 
         foreach(UpgradeRecord item in record.items)
         {
-            print(item);
             Instantiate(_upgradeUi, _upgradePannel).SetUi(item);
         }
     }

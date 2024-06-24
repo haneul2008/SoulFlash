@@ -71,15 +71,14 @@ public class DeadUi : MonoBehaviour
 
         Player player = GameManager.instance.Player.GetComponent<Player>();
         player.PlayerDead(false);
-
         #region ResetMultiplier
         GameManager.instance.normalDamageMultiplier = 1; //평타 데미지 계수
-        GameManager.instance.airDamageMultiplier = 1 + GameManager.instance.passiveAirDamage; //공중 E데미지 계수
-        GameManager.instance.groundDamageMultiplier = 1 + GameManager.instance.passiveGroundDamage; //지상 E데미지 계수
+        GameManager.instance.airDamageMultiplier = 1; //공중 E데미지 계수
+        GameManager.instance.groundDamageMultiplier = 1; //지상 E데미지 계수
 
         GameManager.instance.normalAckSpeedMultiplier = 1; //평타 공속 계수
 
-        GameManager.instance.hpMultiplier = 1 + GameManager.instance.passiveHpInc; //체력 계수
+        GameManager.instance.hpMultiplier = 1; //체력 계수
         GameManager.instance.soulRandomNum = 1; //영혼 수집 계수
         GameManager.instance.moveSpeedMutiplier = 1; //이속 계수
 

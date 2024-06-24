@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -28,10 +29,22 @@ public class SettingUi : MonoBehaviour
     {
         _attackMode = (int)GameManager.instance.AttackMode;
         _soundSlider.value = GameManager.instance.SoundVolume;
+        _soundSlider.onValueChanged.AddListener(HandleSoundSliderEvent);
 
         SetAttackMode();
         SetSkillGuideText();
     }
+
+    private void OnDestroy()
+    {
+        _soundSlider.onValueChanged.RemoveListener(HandleSoundSliderEvent);
+    }
+
+    private void HandleSoundSliderEvent(float arg0)
+    {
+        SoundManager.instance.SetBgmVoulme();
+    }
+
     private void Update()
     {
         GameManager.instance.SoundVolume = _soundSlider.value;

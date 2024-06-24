@@ -18,6 +18,7 @@ public class Player : Agent
     [SerializeField] private float _damageCasterRadius;
     [SerializeField] private PlayerSmoke _smoke;
     [SerializeField] private Vector2 _deadColliderSize;
+    [SerializeField] private Sound _deadSound;
 
     [field: SerializeField] public InputReader PlayerInput { get; private set; }
 
@@ -75,7 +76,8 @@ public class Player : Agent
 
         float hpMultiplier = GameManager.instance.hpMultiplier + GameManager.instance.passiveHpInc;
 
-        HealthCompo.ResetHealth(Mathf.RoundToInt(HealthCompo.MaxHealth * hpMultiplier));
+        int resetHp = scene.name == "Lobby" ? HealthCompo.MaxHealth : Mathf.RoundToInt(HealthCompo.MaxHealth * hpMultiplier);
+        HealthCompo.ResetHealth(resetHp);
 
         _light.SetActive(true);
 
@@ -196,7 +198,10 @@ public class Player : Agent
         MovementCompo.canKnockback = !value;
 
         if (value)
+        {
             Time.timeScale = 0.5f;
+            SoundManager.instance.AddAudioAndPlay(_deadSound);
+        }
 
         AnimatorCompo.SetBool("death", value);
 

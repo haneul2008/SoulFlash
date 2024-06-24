@@ -8,7 +8,11 @@ public class SoundPlayFeedback : Feedback
     [SerializeField] private float _startDelay = 0;
     public override void PlayFeedBack()
     {
-        if(Mathf.Approximately(_startDelay, 0)) SoundManager.instance.AddAudioAndPlay(_sound);
+        if (Mathf.Approximately(_startDelay, 0))
+        {
+            SoundManager.instance.AddAudioAndPlay(_sound);
+            return;
+        }
 
         StartCoroutine("WaitDelayCoroutine");
     }

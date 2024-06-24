@@ -19,9 +19,9 @@ public class CameraConfiner : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
     }
-    public void SetConfiner(bool value)
+    public void SetConfiner(bool value, bool invoke = false)
     {
-        if (value) OnSetConfinerAction?.Invoke();
+        if (invoke) OnSetConfinerAction?.Invoke();
 
         _cam.Follow = value ? null : _cameraPos;
 

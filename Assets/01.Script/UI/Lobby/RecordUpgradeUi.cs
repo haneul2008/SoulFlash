@@ -15,10 +15,6 @@ public class RecordUpgradeUi : MonoBehaviour
     private RectTransform _iconRectTrm;
     public void SetUi(UpgradeRecord data)
     {
-        byte[] spriteBytes = Convert.FromBase64String(data.spriteData);
-        Texture2D texture = new Texture2D(100, 400);
-        texture.LoadImage(spriteBytes);
-
         _icon.sprite = DataManager.instance.LoadSprites(data);
 
         if (_iconRectTrm == null) _iconRectTrm = _icon.GetComponent<RectTransform>();
