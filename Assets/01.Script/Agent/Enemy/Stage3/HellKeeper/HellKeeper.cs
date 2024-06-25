@@ -88,6 +88,8 @@ public class HellKeeper : Boss
         stateMachine.ChangeState(BossEnum.Dead);
 
         SoundManager.instance.AddAudioAndPlay(_deadSound);
+        _skillLockUi.SetUnlockUi(1, 4, true);
+        _player.canBlock = true;
     }
     public override void Attack(bool castDamage = true)
     {

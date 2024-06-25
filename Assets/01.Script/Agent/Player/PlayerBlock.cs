@@ -10,6 +10,7 @@ public class PlayerBlock : AnimationPlayer
 
     [SerializeField] private float _cooltime;
     [SerializeField] private float _blockTime = 1.5f;
+    [SerializeField] private Sound _blockSound;
 
     private Player _player;
     private float _currentTime;
@@ -35,7 +36,7 @@ public class PlayerBlock : AnimationPlayer
     {
         if (IsBlock)
         {
-            _player.CanStateChageable = false;
+            _player.CanStateChangable = false;
             _player.MovementCompo.canMove = false;
 
             _player.MovementCompo.StopImmediately();
@@ -72,11 +73,23 @@ public class PlayerBlock : AnimationPlayer
 
         _player.HealthCompo.CanTakeHp(true);
 
-        _player.CanStateChageable = true;
+        _player.CanStateChangable = true;
         _player.MovementCompo.canMove = true;
 
         OnEndBlockAction?.Invoke(Mathf.RoundToInt(_cooltime * GameManager.instance.airCooldownMutiplier));
 
         IsBlock = false;
+    }
+
+    public void BlockedDamage()
+    {
+        SoundManager.instance.AddAudioAndPlay(_blockSound);
+
+        EffectPlayer blockParticle = PoolManager.instance.Pop("BlockParticle") as EffectPlayer;
+
+        float x = transform.eulerAngles.y == 0 ? 0.5f : -0.5f;
+        Vector3 effectPos = new Vector3(transform.position.x + x, transform.position.y, 0);
+
+        blockParticle.SetPositionAndPlay(effectPos);
     }
 }

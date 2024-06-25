@@ -58,6 +58,10 @@ public class DeathBringer : Boss
     {
         base.SetDeadState();
 
+        Player player = GameManager.instance.Player.GetComponent<Player>();
+        player.HealthCompo.CanTakeHp(false);
+        player.MovementCompo.canKnockback = false;
+
         gameObject.layer = _deadLayer;
         _particle.Play();
         stateMachine.ChangeState(BossEnum.Dead);

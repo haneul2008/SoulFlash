@@ -88,7 +88,7 @@ public class TutorialWolfEnemy : Enemy
     {
         if (!IsBlockGuide && (!_playerStop || _playerStoped)) return;
 
-        if(!IsBlockGuide) _player.CanStateChageable = !stop;
+        if(!IsBlockGuide) _player.CanStateChangable = !stop;
         _player.AnimatorCompo.SetBool("run", !stop);
 
         _player.MovementCompo.canMove = !stop;
@@ -101,7 +101,7 @@ public class TutorialWolfEnemy : Enemy
 
     public void Blocked()
     {
-        _player.CanStateChageable = true;
+        _player.CanStateChangable = true;
 
         _player.MovementCompo.canMove = true;
 

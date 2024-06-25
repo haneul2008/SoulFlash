@@ -27,7 +27,7 @@ public class PlayerKnockbackAnimation : AnimationPlayer
     }
     private void EndKnockback()
     {
-        _player.CanStateChageable = true;
+        _player.CanStateChangable = true;
         EndAnimation();
     }
 }

@@ -95,4 +95,10 @@ public class SettingUi : MonoBehaviour
 
         DataManager.instance.JsonSave();
     }
+
+    public void Quit()
+    {
+        SoundManager.instance.UiClickSound();
+        Application.Quit();
+    }
 }

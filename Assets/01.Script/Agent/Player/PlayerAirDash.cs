@@ -50,13 +50,13 @@ public class PlayerAirDash : AnimationPlayer
     }
     private void HandleDash()
     {
-        if (!_player.CanStateChageable || !_player.canAirDash) return;
+        if (!_player.CanStateChangable || !_player.canAirDash) return;
         if (_player.MovementCompo.isGround.Value || _currentTime < _coolTime) return;
 
         _dash = true;
 
         _player.MovementCompo.canMove = false;
-        _player.CanStateChageable = false;
+        _player.CanStateChangable = false;
 
         _player.MovementCompo.rbCompo.velocity = Vector2.zero;
         _player.MovementCompo.rbCompo.gravityScale = 0;
@@ -88,7 +88,7 @@ public class PlayerAirDash : AnimationPlayer
         _sizeChanger.GetSaveSize();
 
         _player.MovementCompo.canMove = true;
-        _player.CanStateChageable = true;
+        _player.CanStateChangable = true;
         _player.MovementCompo.rbCompo.gravityScale = 1;
     }
 }

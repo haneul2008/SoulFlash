@@ -112,6 +112,8 @@ public class UpgradeUi : MonoBehaviour
     }
     public void Finish()
     {
+        if (!IsSetted) return;
+
         IsSetted = false;
 
         SoundManager.instance.AddAudioAndPlay(_sound);

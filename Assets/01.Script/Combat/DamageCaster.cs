@@ -6,6 +6,7 @@ public class DamageCaster : MonoBehaviour
     [SerializeField] private bool _useBox;
     [SerializeField] private Vector2 _boxSize;
     [SerializeField] private GameObject _parent;
+    [SerializeField] private bool _isPlayer;
 
     public ContactFilter2D filter;
     public float damageRadius;
@@ -13,10 +14,14 @@ public class DamageCaster : MonoBehaviour
     public bool isDamageCast;
 
     private Collider2D[] _colliders;
+    private Player _player;
+    private PlayerBlock _playerBlock;
 
     private void Awake()
     {
         _colliders = new Collider2D[detectCount];
+        _player = GameManager.instance.Player.GetComponent<Player>();
+        _playerBlock = GameManager.instance.Player.GetComponent<PlayerBlock>();
     }
     public bool CastDamage(int damage, float knockbackPower, float hpRetakeTime, bool useHitDir = true, bool enemy = false)
     {
@@ -59,6 +64,11 @@ public class DamageCaster : MonoBehaviour
 
                     knockbackDir = direction;
                     hitPoint = Vector3.zero;
+                }
+
+                if(!_isPlayer && _playerBlock.IsBlock)
+                {
+                    _playerBlock.BlockedDamage();
                 }
 
                 isDamageCast = true;

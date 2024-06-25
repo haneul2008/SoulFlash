@@ -17,8 +17,8 @@ public class DashToSelectEnemy : MonoBehaviour
     [SerializeField] private Player _player;
     [SerializeField] private Sprite _defaultSprite;
     [field: SerializeField] public float DashTime { get; private set; }
-    [SerializeField] private float _canTakeAttackTime; //´ë½¬°¡ ³¡³­ ÈÄ ¸îÃÊ°£ ³Ë¹é°ú Ã¼·Â °¨¼Ò¸¦ ¹«½ÃÇÒÁö
-    [SerializeField] private int _hpIncreaseAmout; //Àû¿¡°Ô ¼ø°£ÀÌµ¿ÈÄ È¸º¹µÇ´Â ¾ç
+    [SerializeField] private float _canTakeAttackTime; //ëŒ€ì‰¬ê°€ ëë‚œ í›„ ëª‡ì´ˆê°„ ë„‰ë°±ê³¼ ì²´ë ¥ ê°ì†Œë¥¼ ë¬´ì‹œí• ì§€
+    [SerializeField] private int _hpIncreaseAmout; //ì ì—ê²Œ ìˆœê°„ì´ë™í›„ íšŒë³µë˜ëŠ” ì–‘
     [SerializeField] private Sound _selectingSound;
     public Collider2D NowEnemyCollider { get; private set; }
     public bool IsSelecting { get; private set; }
@@ -90,7 +90,7 @@ public class DashToSelectEnemy : MonoBehaviour
         Time.timeScale = 0.2f;
 
         IsSelecting = true;
-        _player.CanStateChageable = false;
+        _player.CanStateChangable = false;
 
         _coroutine = StartCoroutine(CanDashTimeCoroutine());
 
@@ -190,7 +190,7 @@ public class DashToSelectEnemy : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
 
-        _player.CanStateChageable = true;
+        _player.CanStateChangable = true;
 
         _player.MovementCompo.canMove = true;
 

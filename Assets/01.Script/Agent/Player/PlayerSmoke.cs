@@ -33,7 +33,7 @@ public class PlayerSmoke : MonoBehaviour
         _player.MovementCompo.StopImmediately(true);
 
         _player.MovementCompo.canMove = false;
-        _player.CanStateChageable = false;
+        _player.CanStateChangable = false;
 
         _player.AnimatorCompo.SetBool("run", false);
         _player.dontFlip = true;
@@ -65,7 +65,7 @@ public class PlayerSmoke : MonoBehaviour
             if (_isSpawn)
             {
                 _player.MovementCompo.canMove = true;
-                _player.CanStateChageable = true;
+                _player.CanStateChangable = true;
             }
 
             Tween = _playerRenderer.DOFade(endValue, 0.3f);

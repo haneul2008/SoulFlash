@@ -92,7 +92,7 @@ public class AgentMovement : AnimationPlayer
         if (!IsKnockback) return;
         if (!_isPlayer) return;
 
-        _player.CanStateChageable = false;
+        _player.CanStateChangable = false;
     }
 
     private void FixedUpdate()
@@ -167,7 +167,7 @@ public class AgentMovement : AnimationPlayer
         IsKnockback = false;
 
         if (!_isPlayer) yield break;
-        _player.CanStateChageable = true;
+        _player.CanStateChangable = true;
     }
     public void ClearKnockback()
     {

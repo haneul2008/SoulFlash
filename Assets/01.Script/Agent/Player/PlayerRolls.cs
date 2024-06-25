@@ -42,9 +42,9 @@ public class PlayerRolls : AnimationPlayer
     {
         if (!_player.MovementCompo.isGround.Value || !_player.canRoll) return;
         if (_currentTime < _coolTime) return;
-        if (!_player.CanStateChageable) return;
+        if (!_player.CanStateChangable) return;
 
-        _player.CanStateChageable = false;
+        _player.CanStateChangable = false;
 
         _collider.size = _sizeChanger.ChangeSize(_collider.size, new Vector2(0.7f, 0.7f));
 
@@ -86,6 +86,6 @@ public class PlayerRolls : AnimationPlayer
         _player.MovementCompo.StopImmediately();
         _player.MovementCompo.canMove = true;
 
-        _player.CanStateChageable = true;
+        _player.CanStateChangable = true;
     }
 }

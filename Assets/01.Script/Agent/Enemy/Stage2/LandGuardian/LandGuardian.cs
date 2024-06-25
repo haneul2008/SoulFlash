@@ -6,7 +6,9 @@ public class LandGuardian : Boss
     public BossStateMachine stateMachine;
 
     [SerializeField] private Sound _deadSound;
+    [SerializeField] private SkillLockUi _lockUi;
 
+    private Player _player;
     protected override void Awake()
     {
         base.Awake();
@@ -23,6 +25,8 @@ public class LandGuardian : Boss
         lastAttackTime = -999f;
 
         StartAction += Initialize;
+
+        _player = GameManager.instance.Player.GetComponent<Player>();
     }
 
     private void Start()
@@ -36,6 +40,8 @@ public class LandGuardian : Boss
     private void Initialize()
     {
         stateMachine.Initialize(BossEnum.Appear, this);
+        _player.canBlock = false;
+        _lockUi.SetUnlockUi(1, 4, false);
     }
     private void Update()
     {
@@ -64,5 +70,7 @@ public class LandGuardian : Boss
         stateMachine.ChangeState(BossEnum.Dead);
 
         SoundManager.instance.AddAudioAndPlay(_deadSound);
+        _lockUi.SetUnlockUi(1, 4, true);
+        _player.canBlock = true;
     }
 }

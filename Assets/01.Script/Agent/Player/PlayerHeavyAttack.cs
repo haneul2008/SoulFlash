@@ -62,7 +62,7 @@ public class PlayerHeavyAttack : AnimationPlayer
     private void HandleHeavyAttack()
     {
         if (!_player.MovementCompo.isGround.Value || !_player.canHeavyAttack) return;
-        if (!_player.CanStateChageable || _currentTime < _cooltime * GameManager.instance.groundCooldownMutiplier) return;
+        if (!_player.CanStateChangable || _currentTime < _cooltime * GameManager.instance.groundCooldownMutiplier) return;
 
         float dir = _player.PlayerDir;
 
@@ -72,7 +72,7 @@ public class PlayerHeavyAttack : AnimationPlayer
         _attack = true;
         _currentTime = 0;
 
-        _player.CanStateChageable = false;
+        _player.CanStateChangable = false;
         _player.MovementCompo.canMove = false;
 
         PlayAnimation();
@@ -86,7 +86,7 @@ public class PlayerHeavyAttack : AnimationPlayer
     private void EndAttack()
     {
         EndAnimation();
-        _player.CanStateChageable = true;
+        _player.CanStateChangable = true;
         _player.MovementCompo.canMove = true;
         _damageCaster.damageRadius = 0;
 

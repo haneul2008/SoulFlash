@@ -49,11 +49,11 @@ public class PlayerAttack : AnimationPlayer
         if (EventSystem.current.IsPointerOverGameObject() && SceneManager.GetActiveScene().name == "Lobby") return;
 
         if (!_player.MovementCompo.isGround.Value || !_player.canAttack) return;
-        if (!_player.CanStateChageable || _currentTime < _cooltime) return;
+        if (!_player.CanStateChangable || _currentTime < _cooltime) return;
 
         _currentTime = 0;
 
-        _player.CanStateChageable = false;
+        _player.CanStateChangable = false;
         _player.MovementCompo.canMove = false;
         _player.MovementCompo.rbCompo.velocity = Vector2.zero;
 
@@ -86,7 +86,7 @@ public class PlayerAttack : AnimationPlayer
         _isAttack = false;
 
         _anim.speed = 1;
-        _player.CanStateChageable = true;
+        _player.CanStateChangable = true;
         _player.MovementCompo.canMove = true;
     }
 }

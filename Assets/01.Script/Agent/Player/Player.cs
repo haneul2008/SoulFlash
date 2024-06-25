@@ -23,7 +23,7 @@ public class Player : Agent
     [field: SerializeField] public InputReader PlayerInput { get; private set; }
 
     private bool _canDoubleJump;
-    public bool CanStateChageable { get; set; } = true;
+    public bool CanStateChangable { get; set; } = true;
     public float PlayerDir { get; private set; } = 1;
     [HideInInspector] public bool animationEndTrigger;
 
@@ -42,10 +42,12 @@ public class Player : Agent
     private GameObject _light;
     private SizeChanger _deadSizeChanger = new SizeChanger();
     #region Component
-    private SpriteMask _spriteNask;
+    private SpriteMask _spriteMask;
     private SpriteRenderer _spriteRenderer;
     private PlayerJumpAnimation _jumpAnimation;
     private PlayerAirAttack _airAttack;
+    private static readonly int Death = Animator.StringToHash("death");
+
     #endregion
     protected override void Awake()
     {
@@ -84,6 +86,9 @@ public class Player : Agent
         MovementCompo.rbCompo.gravityScale = 1;
 
         _cameraConfiner.SetConfiner(false);
+
+        HealthCompo.CanTakeHp(true);
+        MovementCompo.canKnockback = true;
     }
 
     private void OnDisable()
@@ -125,7 +130,7 @@ public class Player : Agent
     {
         if (IsDead)
         {
-            if (CanStateChageable) CanStateChageable = false;
+            if (CanStateChangable) CanStateChangable = false;
             return;
         }
 
@@ -151,7 +156,7 @@ public class Player : Agent
     }
     private void JumpProcess(bool canDoubleJump)
     {
-        if (!CanStateChageable || !canJump) return;
+        if (!CanStateChangable || !canJump) return;
         _canDoubleJump = canDoubleJump;
         JumpEvent?.Invoke();
         MovementCompo.Jump();
@@ -191,7 +196,7 @@ public class Player : Agent
         MovementCompo.OnKnockbackAction?.Invoke();
 
         IsDead = value;
-        CanStateChageable = !value;
+        CanStateChangable = !value;
 
         HealthCompo.CanTakeHp(!value);
         MovementCompo.canMove = !value;
@@ -203,14 +208,14 @@ public class Player : Agent
             SoundManager.instance.AddAudioAndPlay(_deadSound);
         }
 
-        AnimatorCompo.SetBool("death", value);
+        AnimatorCompo.SetBool(Death, value);
 
         CapsuleCollider2D collider = GetComponent<CapsuleCollider2D>();
         if (value)
         {
             collider.size = _deadSizeChanger.ChangeSize(collider.size, _deadColliderSize);
         }
-        else if (!value && collider.size == _deadColliderSize)
+        else if (collider.size == _deadColliderSize)
         {
             collider.size = _deadSizeChanger.GetSaveSize();
         }

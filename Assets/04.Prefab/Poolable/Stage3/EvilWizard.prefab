@@ -367,9 +367,9 @@ MonoBehaviour:
     loop: 0
   detectRadius: 7
   attackRadius: 3
-  attackCooldown: 6
+  attackCooldown: 4
   knokbackPower: 12
-  attackDamage: 25
+  attackDamage: 16
   contactFilter:
     useTriggers: 0
     useLayerMask: 1
@@ -528,7 +528,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sound:
     clip: {fileID: 8300000, guid: ede4945326a8fdf46a4fbdb54cd0105a, type: 3}
-    volumeMultiplier: 0.05
+    volumeMultiplier: 0.1
     type: 0
     pitch: 1
     loop: 0

@@ -48,7 +48,7 @@ public class PlayerAirAttack : AnimationPlayer
 
     private void AirAttack()
     {
-        if (!_player.CanStateChageable || !_player.canAirAttack) return;
+        if (!_player.CanStateChangable || !_player.canAirAttack) return;
         if (!InAir || _currentTime < _cooltime * GameManager.instance.airCooldownMutiplier) return;
 
         _currentTime = 0;
@@ -58,7 +58,7 @@ public class PlayerAirAttack : AnimationPlayer
         OnAirAttackAction?.Invoke();
 
         _player.MovementCompo.canMove = false;
-        _player.CanStateChageable = false;
+        _player.CanStateChangable = false;
 
         _player.MovementCompo.rbCompo.velocity = Vector2.zero;
         _player.MovementCompo.rbCompo.gravityScale = 0;
@@ -95,7 +95,7 @@ public class PlayerAirAttack : AnimationPlayer
         EndAnimation();
 
         _player.MovementCompo.canMove = true;
-        _player.CanStateChageable = true;
+        _player.CanStateChangable = true;
         _player.MovementCompo.rbCompo.gravityScale = 1;
 
         OnEndAirAttackAction?.Invoke(Mathf.RoundToInt(_cooltime * GameManager.instance.airCooldownMutiplier));

@@ -191,7 +191,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sound:
     clip: {fileID: 8300000, guid: 8920fa4a11b5aa94bad234771a66cbbc, type: 3}
-    volumeMultiplier: 0.8
+    volumeMultiplier: 0.9
     type: 0
     pitch: 1
     loop: 0
@@ -750,6 +750,12 @@ MonoBehaviour:
   _isHaveMoveAnim: 1
   _cooltime: 3
   _blockTime: 1
+  _blockSound:
+    clip: {fileID: 8300000, guid: 0e0ad1919e4c59142b337073dea716db, type: 3}
+    volumeMultiplier: 0.4
+    type: 0
+    pitch: 3
+    loop: 0
 --- !u!114 &8731995025009134045
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1144,6 +1150,7 @@ MonoBehaviour:
   _useBox: 0
   _boxSize: {x: 0, y: 0}
   _parent: {fileID: 0}
+  _isPlayer: 1
   filter:
     useTriggers: 0
     useLayerMask: 1

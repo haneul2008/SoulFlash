@@ -107,8 +107,6 @@ public class PlayerSkillCootimeUI : MonoBehaviour
     }
     private void Update()
     {
-        if (SceneManager.GetActiveScene().name != "Lobby") return;
-
         OnSwitchSkillGuide.Value = GameManager.instance.SkillGuideText;
     }
     public void StartText(int cooltime)
