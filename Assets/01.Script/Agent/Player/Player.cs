@@ -81,6 +81,9 @@ public class Player : Agent
         int resetHp = scene.name == "Lobby" ? HealthCompo.MaxHealth : Mathf.RoundToInt(HealthCompo.MaxHealth * hpMultiplier);
         HealthCompo.ResetHealth(resetHp);
 
+        if(scene.name == "Lobby")
+            MovementCompo.canMove = true;
+
         _light.SetActive(true);
 
         MovementCompo.rbCompo.gravityScale = 1;

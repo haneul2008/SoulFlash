@@ -8,7 +8,7 @@ public class BossStateMachine
 
     public Dictionary<BossEnum, BossState> stateDictionary
         = new Dictionary<BossEnum, BossState>();
-
+    
     public Boss boss;
     public void Initialize(BossEnum startState, Boss enemy)
     {

@@ -106,7 +106,7 @@ public class DataManager : MonoSingleton<DataManager>
     public void JsonSave()
     {
         path = Application.persistentDataPath + "/" + "GameData.json";
-
+        
         SaveData saveData = new SaveData();
 
         saveData.attackMode = GameManager.instance.AttackMode;
@@ -168,9 +168,20 @@ public class DataManager : MonoSingleton<DataManager>
     {
         byte[] spriteBytes = Convert.FromBase64String(upgradeRecord.spriteData);
         Texture2D texture = new Texture2D(100, 400);
+        if (!texture.LoadImage(spriteBytes))
+        {
+            Debug.LogError("Failed to load image from sprite data.");
+            return null;
+        }
         texture.LoadImage(spriteBytes);
 
         Sprite sprite = Sprite.Create(texture, upgradeRecord.spriteRect, upgradeRecord.pivot);
         return sprite;
+    }
+
+    public void DeleteJson()
+    {
+        path = Application.persistentDataPath + "/" + "GameData.json";
+        File.Delete(path);
     }
 }

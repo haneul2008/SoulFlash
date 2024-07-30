@@ -96,6 +96,12 @@ public class SettingUi : MonoBehaviour
         DataManager.instance.JsonSave();
     }
 
+    public void DeleteData()
+    {
+        DataManager.instance.DeleteJson();
+        Application.Quit();
+    }
+
     public void Quit()
     {
         SoundManager.instance.UiClickSound();
